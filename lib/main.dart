@@ -5,6 +5,7 @@ import 'package:flutter_application_1/pages/mainpage.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/speechtotext.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
+import 'package:flutter_application_1/pages/voice.dart';
 
 
 void main() {
@@ -17,7 +18,7 @@ class StartPoint extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BDTM',
       theme: ThemeData.light(),
-     home: mainpage(),
+     home: voicex(),
      //  home: LoginPage(),
      //   home: testlog(title: "Login PAge"),
       // home: log(title: "k",),

@@ -1,20 +1,11 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/audio.dart';
-import 'package:flutter_application_1/pages/expl.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
-import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/soundrecourd.dart';
 import 'package:flutter_application_1/pages/soundtype.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
-import 'package:flutter_application_1/pages/voiceexpl.dart';
 import 'package:flutter_application_1/pages/voicetestbe.dart';
-import 'package:flutter_application_1/pages/widgets/person_record.dart';
-
-import 'manag.dart';
-import 'models/person.dart';
+import 'package:flutter_application_1/Components.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -38,7 +29,83 @@ class _voicexState extends State<voicex> {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
-  var soundList = [
+
+  Widget Stype (int x){
+    Widget as = Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+            ],
+          ),
+          SizedBox(height: 20,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+            ],
+          ),
+          SizedBox(height: 20,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+            ],
+          ),
+
+        ],
+      ),
+    );
+    Widget be = Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+            ],
+          ),
+          SizedBox(height: 20,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              SizedBox(width: 30,),
+              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+            ],
+          ),
+
+        ],
+      ),
+    );
+    //  as 1 = استيعابي
+    // 0 = بيئي be
+    if (x==1)return as;
+    else return be;
+  }
+  /*var soundList = [
     soundrecord(
       sounds: sound(
         word: 'افوكادو',
@@ -52,7 +119,7 @@ class _voicexState extends State<voicex> {
       sounds: sound(
         word: 'مطر',
         id: '3',
-        image: 'img/avocado.png',
+        image: 'img/btick.png',
         voice: 'audio/avoc.mp3',
         type: soundType.beae,
       ),
@@ -64,7 +131,7 @@ class _voicexState extends State<voicex> {
       .toList()
       : soundList
       .where((element) => element.sounds.type == soundType.asteabe)
-      .toList();
+      .toList();*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,227 +155,145 @@ class _voicexState extends State<voicex> {
               // ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children:  [
-                    Row(
-                      children: [
-                        const Spacer(),
-                        const Spacer(),
-                        const Text("التدريبات الصوتية",
-                            style: TextStyle(
-                                color: Colors.green,
-                                fontSize: 30,
-                                fontFamily: "DroidKufi",
-                                fontWeight: FontWeight.w700)),
-                        const Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return  betest();
-                            }));
-                          },
-                          style: ButtonStyle(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children:  [
+                      Row(
+                        children: [
+                          const Spacer(),
+                          const Spacer(),
+                          const Text("التدريبات الصوتية",
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 30,
+                                  fontFamily: "DroidKufi",
+                                  fontWeight: FontWeight.w700)),
+                          const Spacer(),
+                          TextButton( // زر بدأ الاختبار
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return  betest();
+                              }));
+                            },
+                            style: ButtonStyle(
 
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
 
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-
-                            minimumSize: MaterialStateProperty.all(const Size(120, 42)),
-                            textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 16)),
-                            backgroundColor: MaterialStateProperty.all(const Color(0xff467BDB)),
-                          ),
-                          child: const Text(
-                            'بدأ الاختبار',style: TextStyle(
-                            color: Colors.white,
-                          ),
-
-                          ),
-                        ),
-
-                      ],
-                    ),
-                    const SizedBox(height: 15,),
-                    Row(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _selectedType = 1;
-                              displayedList = soundList
-                                  .where((element) => element.sounds.type == soundType.asteabe)
-                                  .toList();
-                            });
-                          },
-                          style: ButtonStyle(
-
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            minimumSize: MaterialStateProperty.all(const Size(85, 42)),
-                            textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 16)),
-                            backgroundColor: MaterialStateProperty.all(
-                              _selectedType == 1 ? Colors.green : Colors.grey,
-                            ),
-                          ),
-                          child: Text(
-                            'الاستيعابية',
-                            style: _selectedType == 1
-                                ? selectedTypeTextStyle
-                                : unselectedTypeTextStyle,
-
-                          ),
-                        ),
-                        const SizedBox(width: 5),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _selectedType = 0;
-                              displayedList = soundList
-                                  .where((element) => element.sounds.type == soundType.beae)
-                                  .toList();
-                            });
-                          },
-                          style: ButtonStyle(
-
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            minimumSize: MaterialStateProperty.all(const Size(110, 42)),
-                            textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 16)),
-                            backgroundColor: MaterialStateProperty.all(
-                              _selectedType == 0 ? Colors.green : Colors.grey,
-                            ),
-                          ),
-                          child: Text(
-                            'البيئية',
-                            style: _selectedType == 0
-                                ? selectedTypeTextStyle
-                                : unselectedTypeTextStyle,
-
-                          ),
-                        ),
-
-                      ],
-                    ),
-                    const SizedBox(height: 20,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
-                        //  ListView(
-                        //   scrollDirection: Axis.horizontal,
-                        //   children: displayedList.map((e) => e).toList(),
-                        // ),
-                        // const SizedBox(width: 15,),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.green, width: 3.5),
-                              borderRadius: BorderRadius.circular(30)
-
-                          ),
-                          child: Container(
-                            child: GestureDetector(
-
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) =>  AlertDialog(
-                                      contentPadding: EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
-                                      content: Container(
-                                        width: MediaQuery.of(context).size.width/3.7,
-                                        height: MediaQuery.of(context).size.height/1.8,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.green, width: 3),
-                                                  borderRadius: BorderRadius.circular(30)),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(25),
-                                                child: Image.asset(
-                                                  'img/avocado.png',
-                                                  width: MediaQuery.of(context).size.width / 5,
-                                                  height: MediaQuery.of(context).size.height / 3.6,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
-                                            ),
-                                            const Text("افوكادو",
-                                                style: TextStyle(
-                                                    color: Colors.green,
-                                                    fontSize: 25,
-                                                    fontFamily: "DroidKufi",
-                                                    fontWeight: FontWeight.w700)),
-                                            SizedBox(height: 16,),
-                                            audio(),
-                                            SizedBox(height: 20,),
-
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.of(context, rootNavigator: true).pop('dialog');
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.green,
-                                                shape: const RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.all(Radius.circular(10))),
-                                                elevation: 2.0,
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 15, vertical: 5),
-                                              ),
-                                              child: const Text("العودة",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily: "DroidKufi",
-                                                    fontSize: 18.0,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      shape:RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20.0),side: BorderSide(color: Colors.black87,width: 2.5)),
-                                      // Border.all(color: Colors.black87,width: 3.5),
-
-
-
-                                    )
-
-                                );
-                              },
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(25),
-                                child: Image.asset(
-                                  'img/avocado.png',
-                                  width: MediaQuery.of(context).size.width / 7,
-                                  fit: BoxFit.fill,
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
 
+                              minimumSize: MaterialStateProperty.all(const Size(120, 42)),
+                              textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 16)),
+                              backgroundColor: MaterialStateProperty.all(const Color(0xff467BDB)),
+                            ),
+                            child: const Text(
+                              'بدأ الاختبار',style: TextStyle(
+                              color: Colors.white,
+                            ),
+
                             ),
                           ),
 
-                        ),
+                        ],
+                      ),
+                      const SizedBox(height: 15,),
+                      Row(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          TextButton( // زر الاستيعابية
+                            onPressed: () {
+                              setState(() {
+                                _selectedType = 1;
+                                /*displayedList = soundList
+                                    .where((element) => element.sounds.type == soundType.asteabe)
+                                    .toList();*/
+                              });
+                            },
+                            style: ButtonStyle(
 
-                      ],
-                    ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              minimumSize: MaterialStateProperty.all(const Size(85, 42)),
+                              textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 20)),
+                              backgroundColor: MaterialStateProperty.all(
+                                _selectedType == 1 ? Colors.green : Colors.grey,
+                              ),
+                            ),
+                            child: Text(
+                              'الاستيعابية',
+                              style: _selectedType == 1
+                                  ? selectedTypeTextStyle
+                                  : unselectedTypeTextStyle,
+
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                _selectedType = 0;
+                              /*  displayedList = soundList
+                                    .where((element) => element.sounds.type == soundType.beae)
+                                    .toList();*/
+                              });
+                            },
+                            style: ButtonStyle( // زر البيئية
+
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              minimumSize: MaterialStateProperty.all(const Size(110, 42)),
+                              textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 20)),
+                              backgroundColor: MaterialStateProperty.all(
+                                _selectedType == 0 ? Colors.green : Colors.grey,
+                              ),
+                            ),
+                            child: Text(
+                              'البيئية',
+                              style: _selectedType == 0
+                                  ? selectedTypeTextStyle
+                                  : unselectedTypeTextStyle,
+
+                            ),
+                          ),
+
+                        ],
+                      ),
+                      const SizedBox(height: 20,),
+                      Column(
+                        children:  [
+                          Stype(_selectedType),
+                          /*Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.green, width: 3.5),
+                                borderRadius: BorderRadius.circular(30)
+
+                            ),
+                            child: Container(
+                              child: soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", )
+                            ),
+
+                          ),
+                          */
+                        ],
+                      ),
 
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             )

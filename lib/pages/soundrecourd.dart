@@ -67,7 +67,7 @@ class _soundrecordState extends State<soundrecord> {
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                           SizedBox(height: 16,),
-                          audio(),
+                          audio(path: 'audio/avoc.mp3',),
                           SizedBox(height: 20,),
 
                           ElevatedButton(

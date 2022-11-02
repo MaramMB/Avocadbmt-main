@@ -90,7 +90,7 @@ class _betestState extends State<betest> {
                                  fontFamily: "DroidKufi",
                                  fontWeight: FontWeight.w700)),
                              const SizedBox(height: 35,),
-                              audio(),
+                              audio(path: 'audio/avoc.mp3'),
                              const SizedBox(height: 35,),
                               Row(
                                 children: [

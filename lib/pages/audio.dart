@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 // import 'package:wave_progress_bars/wave_progress_bars.dart';
 class audio extends StatefulWidget {
+    late String path;
+    audio( {required this.path} );
+
   @override
   _audioState createState() => _audioState();
 }
@@ -19,6 +22,7 @@ class _audioState extends State<audio>
   bool shopPause = false;
 
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -27,7 +31,7 @@ class _audioState extends State<audio>
     iconController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 700));
 
-    audioPlayer.open(Audio('audio/avoc.mp3'),autoStart: false,showNotification: true);
+    audioPlayer.open(Audio(widget.path),autoStart: false,showNotification: true);
 
   }
   @override
@@ -44,9 +48,9 @@ class _audioState extends State<audio>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InkWell(child: Icon(CupertinoIcons.backward_fill,color: Colors.green,),onTap: (){
+                /*InkWell(child: Icon(CupertinoIcons.backward_fill,color: Colors.green,),onTap: (){
                   audioPlayer.seekBy(Duration(seconds: -10));
-                },),
+                },),*/
                 SizedBox(width: 12,),
                 Container(
                   decoration: BoxDecoration(
@@ -68,11 +72,11 @@ class _audioState extends State<audio>
                 ),
                 SizedBox(width: 12,),
 
-                InkWell(child: Icon(CupertinoIcons.forward_fill,color: Colors.green,),onTap: (){
+               /* InkWell(child: Icon(CupertinoIcons.forward_fill,color: Colors.green,),onTap: (){
                   audioPlayer.seekBy(Duration(seconds: 10));
                   audioPlayer.seek(Duration(seconds: 10));
                   audioPlayer.next();
-                },),
+                },),*/
               ],
             ),
           ),
