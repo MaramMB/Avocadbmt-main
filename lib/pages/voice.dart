@@ -106,7 +106,7 @@ class _voicexState extends State<voicex> {
                           onPressed: () {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
-                              return const betest();
+                              return  betest();
                             }));
                           },
                           style: ButtonStyle(
@@ -228,7 +228,6 @@ class _voicexState extends State<voicex> {
                                     builder: (_) =>  AlertDialog(
                                       contentPadding: EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
                                       content: Container(
-
                                         width: MediaQuery.of(context).size.width/3.7,
                                         height: MediaQuery.of(context).size.height/1.8,
                                         child: Column(

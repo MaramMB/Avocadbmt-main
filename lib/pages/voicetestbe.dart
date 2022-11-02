@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:math';
 import 'package:flutter_application_1/pages/audio.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:getwidget/getwidget.dart';
@@ -19,13 +20,15 @@ double _progressValue = 0;
 bool isClicked = false;
 
 class betest extends StatefulWidget {
-  const betest({Key? key}) : super(key: key);
+   betest({Key? key}) : super(key: key);
 
   @override
+
   State<betest> createState() => _betestState();
 }
 
 class _betestState extends State<betest> {
+
   void initState() {
     super.initState();
     _loading = false;

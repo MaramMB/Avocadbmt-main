@@ -1,5 +1,7 @@
 import 'dart:html';
+import 'package:flutter_application_1/pages/firsttestdata.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:flutter_application_1/pages/testdetail.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -17,8 +19,11 @@ bool _loading = false;
 double _progressValue = 0;
 
 class sptest extends StatefulWidget {
-  const sptest({Key? key}) : super(key: key);
-
+  // sptest ({Key? key, required this.index, required this.testDataModel}) : super(key: key);
+  //  sptest({Key? key}) : super(key: key);
+  final List<FirstTest> testDataModel;
+  int index;
+  sptest({Key? key, required this.index, required this.testDataModel}) : super(key: key);
   @override
   State<sptest> createState() => _sptestState();
 }
@@ -29,6 +34,16 @@ class _sptestState extends State<sptest> {
     _loading = false;
     _progressValue = 0.0;
   }
+  static List<String> testword =['أسد','فأر','عصا','بطة','شباك','أرنب'];
+
+  static List<String> url = ['https://th.bing.com/th/id/OIP.iSebuYpfhQG14qgscrlV1QHaIg?w=186&h=213&c=7&r=0&o=5&dpr=1.5&pid=1.7',
+    'https://th.bing.com/th/id/R.4d72d9940dc967e6b7a53ab36dfbaf54?rik=Rq3566yQbsJ0%2bg&riu=http%3a%2f%2fsweetclipart.com%2fmultisite%2fsweetclipart%2ffiles%2fmouse_gray.png&ehk=MsRHbLxNwehMkTfFA%2faQ%2fDmSXirq6hn%2bvpIMn5v7IA0%3d&risl=&pid=ImgRaw&r=0',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Hapus_Mango.jpg/220px-Hapus_Mango.jpg',
+    'https://5.imimg.com/data5/VN/YP/MY-33296037/orange-600x600-500x500.jpg',
+    'https://5.imimg.com/data5/VN/YP/MY-33296037/orange-600x600-500x500.jpg',
+    'https://5.imimg.com/data5/GJ/MD/MY-35442270/fresh-pineapple-500x500.jpg'];
+
+  final List<FirstTest> testdata = List.generate(testword.length, (index) => FirstTest('${testword[index]}', '${url[index]}','${testword[index]} Description...'));
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +123,7 @@ class _sptestState extends State<sptest> {
                                                         .height /
                                                         3.65,
                                                     alignment: Alignment.center),
-                                                const Text("صاروخ",
+                                                 Text(widget.testDataModel[widget.index].name,
                                                     style: TextStyle(
                                                       fontFamily: "ArbFONTS",
                                                       fontWeight: FontWeight.w400,
@@ -131,7 +146,12 @@ class _sptestState extends State<sptest> {
                                                     setState(() {
                                                       _loading = !_loading;
                                                       _updateProgress();
-                                                    });
+                                                      if (widget.index !=
+                                                          widget.testDataModel
+                                                              .length - 1) {
+                                                        widget.index ++;
+                                                      }
+                                                    }  );
                                                   },
                                                   iconSize: 82,
                                                   icon: Image.asset(
@@ -144,6 +164,7 @@ class _sptestState extends State<sptest> {
                                                     setState(() {
                                                       _loading = !_loading;
                                                       _updateProgress();
+                                                      // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TestDetail(index: index,testDataModel: testdata,)));
                                                     });
                                                   },
                                                   iconSize: 82,

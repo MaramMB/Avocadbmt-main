@@ -14,17 +14,25 @@ class testlog extends StatefulWidget {
 }
 
 class _testlogState extends State<testlog> {
+  late TextEditingController emailInputController;
+  late TextEditingController pwdInputController;
   late String email;
   bool _visible = false;
-  final userController = TextEditingController();
-  final pwdController = TextEditingController();
+  // final userController = TextEditingController();
+  // final pwdController = TextEditingController();
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
+
 
   void _toggle(){
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+  initState() {
+    emailInputController = new TextEditingController();
+    pwdInputController = new TextEditingController();
+    super.initState();
   }
 
   // void validateLogin(){
@@ -35,6 +43,15 @@ class _testlogState extends State<testlog> {
   //     }
   //   }
   // }
+  String pwdValidator(String value) {
+    if (value.length < 8) {
+      return 'Password must be longer than 8 characters';
+    } else {
+      return "";
+    }
+  }
+
+
 
   Future userLogin() async {
     var url = "http://192.168.1.1/avocadbmt/login.php";
@@ -46,8 +63,8 @@ class _testlogState extends State<testlog> {
 
     // Getting username and password from Controller
     var data = {
-      'username': userController.text,
-      'password': pwdController.text,
+      'username': emailInputController.text,
+      'password': pwdInputController.text,
     };
 
     //Starting Web API Call.
@@ -154,7 +171,7 @@ class _testlogState extends State<testlog> {
                         Directionality(
                           textDirection: TextDirection.rtl,
                           child: TextFormField(
-                            controller: userController,
+                            controller: emailInputController,
                             textAlign: TextAlign.right,
                             decoration:  const InputDecoration(
                               fillColor: Colors.white,
@@ -213,58 +230,25 @@ class _testlogState extends State<testlog> {
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
                       textAlign: TextAlign.right,
-                      // keyboardType: TextInputType.text,
-                      // decoration: InputDecoration(
-                      //   labelText: "Password",
-                      //   labelStyle: TextStyle(fontSize: 14,color: Colors.grey.shade400),
-                      //   enabledBorder: OutlineInputBorder(
-                      //     borderRadius: BorderRadius.circular(10),
-                      //     borderSide: BorderSide(
-                      //       color: Colors.grey.shade300,
-                      //     ),
-                      //   ),
-                      //   focusedBorder: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: BorderSide(
-                      //         color: Colors.red,
-                      //       )
-                      //   ),
-                      //   suffixIcon: IconButton(
-                      //     icon: Icon(
-                      //       _obscureText ? Icons.visibility : Icons.visibility_off,
-                      //     ),
-                      //     onPressed: _toggle,
-                      //   ),
-                      // ),
-                      // validator: (password){
-                      //
-                      //   if (password!.isEmpty){
-                      //     return null;
-                      //   }
-                      //   else
-                      //     return 'Please Enter Password';
-                      // },
-                      // onSaved: (password)=> _password = password,
-                      textInputAction: TextInputAction.done,
                       obscureText: _obscureText,
-                      controller: pwdController,
-                      // obscureText: _passwordInVisible,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please Enter Password';
-                        }
-                        return null;
-                      },
+                      controller: pwdInputController,
+                      // validator: pwddValidator,
                       // validator: (value) {
                       //   if (value == null || value.isEmpty) {
-                      //     // addError(error: kPassNullError);
-                      //     return "يرجى ادخال كلمة المرور";
-                      //   } else if (value.length < 8) {
-                      //     // addError(error: kShortPassError);
-                      //     return "يرجى ادخال كلمة مرور اطول";
+                      //     return 'Please Enter Password';
                       //   }
                       //   return null;
                       // },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          // addError(error: kPassNullError);
+                          return "يرجى ادخال كلمة المرور";
+                        } else if (value.length < 8) {
+                          // addError(error: kShortPassError);
+                          return "يرجى ادخال كلمة مرور اطول";
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
 
                         fillColor: Colors.white,
@@ -330,9 +314,8 @@ class _testlogState extends State<testlog> {
                       onPressed: ()=>{
                         if (_formKey.currentState!.validate()) {
                       setState(() {
-                _visible = false;
-                }),
-                          // userLogin(),
+                           _visible = false;
+                                  }),
                       Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return const mainpage();
