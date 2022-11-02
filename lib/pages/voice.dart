@@ -38,7 +38,7 @@ class _voicexState extends State<voicex> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              soundsWidget(Name: 'مطر',Ipath: 'img/rain.gif', Spath: "audio/rain.mp3", ),
               SizedBox(width: 30,),
               soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
               SizedBox(width: 30,),
@@ -105,33 +105,7 @@ class _voicexState extends State<voicex> {
     if (x==1)return as;
     else return be;
   }
-  /*var soundList = [
-    soundrecord(
-      sounds: sound(
-        word: 'افوكادو',
-        id: '2',
-        image: 'img/avocado.png',
-        voice: 'audio/avoc.mp3',
-        type: soundType.asteabe,
-      ),
-    ),
-    soundrecord(
-      sounds: sound(
-        word: 'مطر',
-        id: '3',
-        image: 'img/btick.png',
-        voice: 'audio/avoc.mp3',
-        type: soundType.beae,
-      ),
-    ),
-  ];
-  late List<soundrecord> displayedList = _selectedType == 1
-      ? soundList
-      .where((element) => element.sounds.type == soundType.beae)
-      .toList()
-      : soundList
-      .where((element) => element.sounds.type == soundType.asteabe)
-      .toList();*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,9 +124,7 @@ class _voicexState extends State<voicex> {
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
-              // child: Stack(
-              //
-              // ),
+
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: SingleChildScrollView(
@@ -174,6 +146,7 @@ class _voicexState extends State<voicex> {
                             onPressed: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
+
                                 return  betest();
                               }));
                             },

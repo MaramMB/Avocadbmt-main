@@ -37,10 +37,10 @@ class _audioState extends State<audio>
   @override
   Widget build(BuildContext context) {
     return Container(
-          width: MediaQuery.of(context).size.width/5,
+          width: MediaQuery.of(context).size.width/15,
           decoration: BoxDecoration(
               // color: Colors.green,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.green,width: 1.5),
           ),
           child: Padding(
@@ -64,7 +64,7 @@ class _audioState extends State<audio>
                     child: AnimatedIcon(
                       icon: AnimatedIcons.play_pause,
                       progress: iconController,
-                      size: 35,
+                      size: 50,
                       color: Colors.white,
 
                     ),

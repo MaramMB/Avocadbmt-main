@@ -15,7 +15,16 @@ class soundsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 3,
+            blurRadius: 7,
+            offset: Offset(0, 5),
+          ),
+        ],
           border: Border.all(
               color: Color(0xFF83BE63), width: 3.5),
           borderRadius: BorderRadius.circular(30),),
@@ -53,7 +62,7 @@ class soundsWidget extends StatelessWidget {
                               fontWeight: FontWeight.w700)),
                       SizedBox(height: 16,),
                       audio(path: Spath),
-                      SizedBox(height: 50,),
+                      SizedBox(height: 30,),
 
                       ElevatedButton(
                         onPressed: () {
@@ -79,7 +88,7 @@ class soundsWidget extends StatelessWidget {
                   ),
                 ),
                 shape:RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),side: BorderSide(color: Colors.black87,width: 2.5)),
+                    borderRadius: BorderRadius.circular(30.0),side: BorderSide(color: Colors.black87,width: 4.5)),
                 // Border.all(color: Colors.black87,width: 3.5),
 
 

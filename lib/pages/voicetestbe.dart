@@ -2,6 +2,7 @@ import 'dart:html';
 import 'dart:math';
 import 'package:flutter_application_1/pages/audio.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:flutter_application_1/pages/voice.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -13,11 +14,44 @@ import 'manag.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-int _value = 1;
-int countr = 0;
+int index = 0;
 bool _loading = false;
 double _progressValue = 0;
 bool isClicked = false;
+bool isEnd=false;
+int totalScore=0;
+List<Map<String, Object>> be = const [
+  {
+    'audio': 'audio/rain.mp3',
+    'answers': [
+      {'image': 'img/rain.gif', 'score': true},
+      {'image': 'img/bcross.png', 'score': false},
+      {'image': 'img/avocado.png', 'score': false},
+
+    ],
+  },
+
+  {
+    'audio': 'audio/rain.mp3',
+    'answers': [
+      {'image': 'img/rain.gif', 'score': true},
+      {'image': 'img/bcross.png', 'score': false},
+      {'image': 'img/avocado.png', 'score': false},
+
+    ],
+  },
+
+  {
+    'audio': 'audio/rain.mp3',
+    'answers': [
+      {'image': 'img/rain.gif', 'score': true},
+      {'image': 'img/bcross.png', 'score': false},
+      {'image': 'img/avocado.png', 'score': false},
+
+    ],
+  },
+];
+
 
 class betest extends StatefulWidget {
    betest({Key? key}) : super(key: key);
@@ -33,6 +67,53 @@ class _betestState extends State<betest> {
     super.initState();
     _loading = false;
     _progressValue = 0.0;
+  }
+
+  //functions
+  void nextquestion()
+  {
+    if (index + 1 == be.length )
+    {
+      setState((){
+        isClicked = true;
+        isEnd = true;
+      });
+
+      // show dialog with the result **
+      showDialog(context: context, builder: (context)=> AlertDialog(
+        title: Container(
+          width: 100,
+          child: Center(
+            child: Text(
+              ' نتيجتك هي : $totalScore من ${be.length} ',
+                style: TextStyle(
+                color: Colors.green,
+                fontSize: 20,
+                fontFamily: "DroidKufi",
+                fontWeight: FontWeight.w700),
+            ),
+          ),
+        ) ,
+      )
+      );
+    }
+    else
+    {
+
+      index++;
+    }
+  }
+
+  void questionAnswered(bool? score)
+  {
+    setState((){
+      isClicked = true;
+      if (score!){
+        totalScore++;
+      }
+
+    });
+
   }
 
   @override
@@ -90,88 +171,44 @@ class _betestState extends State<betest> {
                                  fontFamily: "DroidKufi",
                                  fontWeight: FontWeight.w700)),
                              const SizedBox(height: 35,),
-                              audio(path: 'audio/avoc.mp3'),
+                              audio(path: be[index]['audio'] as String),
                              const SizedBox(height: 35,),
                               Row(
                                 children: [
                                   const SizedBox(width: 15,),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: isClicked? Colors.red : Colors.black87, width: 3.5),
-                                        borderRadius: BorderRadius.circular(30)
+                                  ...(be[index]['answers'] as List<Map<String, Object>>).map((answer) => Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 7),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: isClicked? answer['score'] as bool ? Colors.green : Colors.red : Colors.black, width: 3.5
+                                          ),
+                                          borderRadius: BorderRadius.circular(30),
 
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          isClicked = true;
-                                        });
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(25),
-                                        child: Image.asset(
-                                          'img/avocado.png',
-                                          width: MediaQuery.of(context).size.width / 7,
-                                          fit: BoxFit.fill,
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            if (isClicked || isEnd)
+                                              {return;}
+                                            questionAnswered(answer['score'] as bool);
+                                          });
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(25),
+                                          child: Image.asset(
+                                            answer['image'] as String,
+                                            width: MediaQuery.of(context).size.width / 7,
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
+
                                       ),
 
                                     ),
+                                  ),),
 
-                                  ),
-                                  const SizedBox(width: 15,),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: isClicked? Colors.green : Colors.black87, width: 3.5),
-                                        borderRadius: BorderRadius.circular(30)
 
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          isClicked = false;
-                                        });
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(25),
-                                        child: Image.asset(
-                                          'img/avocado.png',
-                                          width: MediaQuery.of(context).size.width / 7,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-
-                                    ),
-
-                                  ),
-                                  const SizedBox(width: 15,),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color:isClicked? Colors.red : Colors.black87 , width: 3.5),
-                                        borderRadius: BorderRadius.circular(30)
-
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          isClicked = true;
-                                        });
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(25),
-                                        child: Image.asset(
-                                          'img/avocado.png',
-                                          width: MediaQuery.of(context).size.width / 7,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-
-                                    ),
-
-                                  ),
 
                                 ],
                               ),
@@ -179,17 +216,31 @@ class _betestState extends State<betest> {
                               ElevatedButton(
                                 onPressed: () {
                                   setState(() {
-                                    _loading = !_loading;
-                                    _updateProgress();
+                                    if(isEnd)
+                                      {
+                                        setState((){
+                                          index =0;
+                                          totalScore=0;
+                                          isEnd=false;
+                                        });
+
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(builder: (context) {
+
+                                          return  voicex();
+                                        }));
+                                      }
+                                    else {
+                                      nextquestion();
+                                      isClicked = false;
+                                      _loading = !_loading;
+                                      _updateProgress();
+                                    }
                                   });
-                                  // Navigator.of(context)
-                                  //     .push(MaterialPageRoute(builder: (context) {
-                                  //   return const betest();
-                                  //
-                                  // }));
+
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
+                                  backgroundColor: isEnd ? Colors.blueAccent : Colors.green,
                                   shape: const RoundedRectangleBorder(
                                       borderRadius:
                                       BorderRadius.all(Radius.circular(10))),
@@ -197,7 +248,8 @@ class _betestState extends State<betest> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 25, vertical: 5),
                                 ),
-                                child: const Text("التالي",
+                                child:  Text(
+                                    isEnd ? "العودة الى التدريب" : 'التالي',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: "DroidKufi",
