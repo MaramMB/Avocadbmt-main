@@ -147,7 +147,7 @@ class _voicexState extends State<voicex> {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
 
-                                return  betest();
+                                return  betest(type: _selectedType);
                               }));
                             },
                             style: ButtonStyle(
@@ -182,9 +182,7 @@ class _voicexState extends State<voicex> {
                             onPressed: () {
                               setState(() {
                                 _selectedType = 1;
-                                /*displayedList = soundList
-                                    .where((element) => element.sounds.type == soundType.asteabe)
-                                    .toList();*/
+
                               });
                             },
                             style: ButtonStyle(
@@ -214,9 +212,7 @@ class _voicexState extends State<voicex> {
                             onPressed: () {
                               setState(() {
                                 _selectedType = 0;
-                              /*  displayedList = soundList
-                                    .where((element) => element.sounds.type == soundType.beae)
-                                    .toList();*/
+
                               });
                             },
                             style: ButtonStyle( // زر البيئية

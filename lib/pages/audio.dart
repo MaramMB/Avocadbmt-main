@@ -9,13 +9,12 @@ class audio extends StatefulWidget {
     audio( {required this.path} );
 
   @override
-  _audioState createState() => _audioState();
+  audioState createState() => audioState();
 }
 
-class _audioState extends State<audio>
+class audioState extends State<audio>
     with SingleTickerProviderStateMixin {
-  late AnimationController
-  iconController; // make sure u have flutter sdk > 2.12.0 (null safety)
+  late AnimationController iconController; // make sure u have flutter sdk > 2.12.0 (null safety)
 
   bool isAnimated = false;
   bool showPlay = true;
@@ -102,6 +101,9 @@ class _audioState extends State<audio>
    @override
   void dispose() {
     // TODO: implement dispose
+     iconController = AnimationController(
+         vsync: this, duration: const Duration(milliseconds: 700));
+     audioPlayer = AssetsAudioPlayer();
     iconController.dispose();
     audioPlayer.dispose();
     super.dispose();
