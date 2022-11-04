@@ -113,8 +113,12 @@ class _betestState extends State<betest> {
   //functions
   void nextquestion()
   {
+    audioPlayer.dispose();
+
     if (isClicked==false)
     {
+      audioPlayer.dispose();
+
       setState((){
       ShowMsg=true;
       });
@@ -125,6 +129,7 @@ class _betestState extends State<betest> {
       setState((){
         isClicked = true;
         isEnd = true;
+
 
       });
 
@@ -201,15 +206,16 @@ class _betestState extends State<betest> {
                               LinearPercentIndicator(
                                 width: MediaQuery.of(context).size.width / 2,
                                 // backgroundColor: Colors.grey,
-                                // progressColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                                animateFromLastPercent: true,
                                 percent: ((index as double)+1)/(testType.length),
                                  animation: true,
-                                lineHeight: 20.0,
+                                lineHeight: 18.0,
                                  animationDuration: 500,
                                 // percent: 0.8,
                                 center:
                                 Text((index+1).toString() , style: TextStyle(
-                                  color: Colors.black,fontWeight: FontWeight.w700,
+                                  color:  ((index as double)+1)/(testType.length) > 0.5 ? Colors.white : Colors.black
+                                  ,fontWeight: FontWeight.w500,
                                   fontSize: 15,
                                 ),),
                                 barRadius: const Radius.circular(15),
@@ -266,7 +272,7 @@ class _betestState extends State<betest> {
 
                                 ],
                               ),
-                              const SizedBox(height: 35,),
+                              const SizedBox(height: 50,),
                               ElevatedButton(
                                 onPressed: () {
                                   setState(() {
@@ -329,6 +335,12 @@ class _betestState extends State<betest> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    audioPlayer.dispose();
+    super.dispose();
   }
 
 

@@ -18,7 +18,7 @@ class StartPoint extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BDTM',
       theme: ThemeData.light(),
-     home: voicex(),
+     home: SpeechScreen(),
      //  home: LoginPage(),
      //   home: testlog(title: "Login PAge"),
       // home: log(title: "k",),

@@ -31,6 +31,7 @@ class soundsWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           showDialog(
+              barrierDismissible: false,
               context: context,
               builder: (_) =>  AlertDialog(
                 contentPadding: EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
@@ -66,7 +67,8 @@ class soundsWidget extends StatelessWidget {
 
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context, rootNavigator: true).pop('dialog');
+                          audioPlayer.dispose();
+                          Navigator.of(context, rootNavigator: true).pop();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
