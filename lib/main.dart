@@ -18,13 +18,8 @@ class StartPoint extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BDTM',
       theme: ThemeData.light(),
-     home: SpeechScreen(),
-     //  home: LoginPage(),
-     //   home: testlog(title: "Login PAge"),
-      // home: log(title: "k",),
-      // home: audio(),
-      // home: HomePage(uname: null,),
-      // home: sign(),
+     home: letterex(),
+
     );
   }
 }
