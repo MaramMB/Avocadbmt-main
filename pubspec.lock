@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.5+1"
+  avatar_glow:
+    dependency: "direct main"
+    description:
+      name: avatar_glow
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -247,6 +254,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.4"
+  highlight_text:
+    dependency: "direct main"
+    description:
+      name: highlight_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.0"
   http:
     dependency: "direct main"
     description:

@@ -15,11 +15,12 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int index = 0;
-bool _loading = false;
+bool ShowMsg = false;
 double _progressValue = 0;
 bool isClicked = false;
 bool isEnd=false;
 int totalScore=0;
+late List<Map<String, Object>> testType;
 List<Map<String, Object>> be = const [
   {
     'audio': 'audio/rain.mp3',
@@ -32,7 +33,38 @@ List<Map<String, Object>> be = const [
   },
 
   {
+    'audio': 'audio/avocado.mp3',
+    'answers': [
+      {'image': 'img/rain.gif', 'score': true},
+      {'image': 'img/bcross.png', 'score': false},
+      {'image': 'img/avocado.png', 'score': false},
+
+    ],
+  },
+
+  {
     'audio': 'audio/rain.mp3',
+    'answers': [
+      {'image': 'img/rain.gif', 'score': true},
+      {'image': 'img/bcross.png', 'score': false},
+      {'image': 'img/avocado.png', 'score': false},
+
+    ],
+  },
+];
+List<Map<String, Object>> as = const [
+  {
+    'audio': 'audio/rain.mp3',
+    'answers': [
+      {'image': 'img/bcross.png', 'score': false},
+      {'image': 'img/bcross.png', 'score': false},
+      {'image': 'img/avocado.png', 'score': true},
+
+    ],
+  },
+
+  {
+    'audio': 'audio/avocado.mp3',
     'answers': [
       {'image': 'img/rain.gif', 'score': true},
       {'image': 'img/bcross.png', 'score': false},
@@ -52,31 +84,53 @@ List<Map<String, Object>> be = const [
   },
 ];
 
-
 class betest extends StatefulWidget {
-   betest({Key? key}) : super(key: key);
+   late int type;
+   betest({required this.type}){
 
-  @override
+     if(type==1)
+     {
+       testType = be;
+     }
+     else
+     {
+       testType = as;
+     }
+   }
 
+   @override
   State<betest> createState() => _betestState();
 }
 
 class _betestState extends State<betest> {
 
+
   void initState() {
     super.initState();
-    _loading = false;
     _progressValue = 0.0;
   }
 
   //functions
   void nextquestion()
   {
-    if (index + 1 == be.length )
+    audioPlayer.dispose();
+
+    if (isClicked==false)
+    {
+      audioPlayer.dispose();
+
+      setState((){
+      ShowMsg=true;
+      });
+      return;
+    }
+    if (index + 1 == testType.length )
     {
       setState((){
         isClicked = true;
         isEnd = true;
+
+
       });
 
       // show dialog with the result **
@@ -85,7 +139,7 @@ class _betestState extends State<betest> {
           width: 100,
           child: Center(
             child: Text(
-              ' نتيجتك هي : $totalScore من ${be.length} ',
+              ' نتيجتك هي : $totalScore من ${testType.length} ',
                 style: TextStyle(
                 color: Colors.green,
                 fontSize: 20,
@@ -99,7 +153,7 @@ class _betestState extends State<betest> {
     }
     else
     {
-
+      ShowMsg=false;
       index++;
     }
   }
@@ -152,14 +206,18 @@ class _betestState extends State<betest> {
                               LinearPercentIndicator(
                                 width: MediaQuery.of(context).size.width / 2,
                                 // backgroundColor: Colors.grey,
-                                // progressColor: new AlwaysStoppedAnimation<Color>(Colors.red),
-                                percent: _progressValue,
-                                // animation: true,
-                                lineHeight: 20.0,
-                                // animationDuration: 2500,
+                                animateFromLastPercent: true,
+                                percent: ((index as double)+1)/(testType.length),
+                                 animation: true,
+                                lineHeight: 18.0,
+                                 animationDuration: 500,
                                 // percent: 0.8,
                                 center:
-                                Text("${(_progressValue * 84).round()}"),
+                                Text((index+1).toString() , style: TextStyle(
+                                  color:  ((index as double)+1)/(testType.length) > 0.5 ? Colors.white : Colors.black
+                                  ,fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                ),),
                                 barRadius: const Radius.circular(15),
                                 linearStrokeCap: LinearStrokeCap.roundAll,
                                 progressColor: Colors.green,
@@ -171,12 +229,12 @@ class _betestState extends State<betest> {
                                  fontFamily: "DroidKufi",
                                  fontWeight: FontWeight.w700)),
                              const SizedBox(height: 35,),
-                              audio(path: be[index]['audio'] as String),
+                              audio(path: testType[index]['audio'] as String),
                              const SizedBox(height: 35,),
                               Row(
                                 children: [
                                   const SizedBox(width: 15,),
-                                  ...(be[index]['answers'] as List<Map<String, Object>>).map((answer) => Padding(
+                                  ...(testType[index]['answers'] as List<Map<String, Object>>).map((answer) => Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 7),
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -188,7 +246,9 @@ class _betestState extends State<betest> {
                                       ),
                                       child: GestureDetector(
                                         onTap: () {
+
                                           setState(() {
+
                                             if (isClicked || isEnd)
                                               {return;}
                                             questionAnswered(answer['score'] as bool);
@@ -212,7 +272,7 @@ class _betestState extends State<betest> {
 
                                 ],
                               ),
-                              const SizedBox(height: 35,),
+                              const SizedBox(height: 50,),
                               ElevatedButton(
                                 onPressed: () {
                                   setState(() {
@@ -233,8 +293,6 @@ class _betestState extends State<betest> {
                                     else {
                                       nextquestion();
                                       isClicked = false;
-                                      _loading = !_loading;
-                                      _updateProgress();
                                     }
                                   });
 
@@ -256,6 +314,14 @@ class _betestState extends State<betest> {
                                       fontSize: 18.0,
                                     )),
                               ),
+                              SizedBox(height: 10,),
+                              Visibility(
+                                visible: ShowMsg ,
+                                  child: Text(" * قم بإختيار إجابة قبل الانتقال الى السؤال التالي " ,textDirection: TextDirection.rtl, style: TextStyle(
+                                    color: Colors.red[900],
+                                    fontFamily: "DroidKufi",
+
+                                  ),)),
                             ],
                           ),
                         ),
@@ -270,32 +336,13 @@ class _betestState extends State<betest> {
       ),
     );
   }
-
-  void downloadData() {
-    Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
-      setState(() {
-        if (_progressValue == 1) {
-          timer.cancel();
-        } else {
-          _progressValue = _progressValue + 0.0119047619;
-        }
-      });
-    });
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    audioPlayer.dispose();
+    super.dispose();
   }
 
-  void _updateProgress() {
-    const oneSec = const Duration(milliseconds: 100);
-    Timer.periodic(oneSec, (Timer t) {
-      setState(() {
-        _progressValue += 0.0119047619;
-        t.cancel();
-        // we "finish" downloading here
-        if (_progressValue.toStringAsFixed(1) == '1.0') {
-          _loading = false;
-          t.cancel();
-          return;
-        }
-      });
-    });
-  }
+
+
 }

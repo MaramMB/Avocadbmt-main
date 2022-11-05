@@ -10,14 +10,19 @@ import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
 
 import 'manag.dart';
-
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 class letterss extends StatefulWidget {
-  const letterss({Key? key}) : super(key: key);
-
+  late String L1,L2,L3,L4,title; // L = letter
+  letterss({
+    required this.L1,
+    required this.L2,
+    required this.L3,
+    required this.L4,
+    required this.title,
+  });
   @override
   State<letterss> createState() => _letterssState();
 }
@@ -55,8 +60,15 @@ class _letterssState extends State<letterss> {
                 child: Column(
                   children:  [
                     SizedBox(height: 20,),
-                    const Text("الحروف الحلقية",
+                     Text(widget.title,
                         style: TextStyle(
+                            shadows:[
+                              Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 5
+
+                              )
+                            ],
                             color: Colors.white,
                             fontSize: 30,
                             fontFamily: "DroidKufi",
@@ -64,114 +76,139 @@ class _letterssState extends State<letterss> {
                     SizedBox(height: 5,),
                     const Text("اختر الحرف الذي تريد التدرب عليه ",
                         style: TextStyle(
+                            shadows:[
+                              Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 5
+
+                              )
+                            ],
                             color: Colors.white,
                             fontSize: 25,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.w700)),
                     SizedBox(height: 60,),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const lettervideo();
-                            }));
-                          },
-                          child: Container(
-                            // width: MediaQuery.of(context).size.width / 10,
-                            // height: MediaQuery.of(context).size.height /5,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color:  const Color(0xFF357AB0),
-                            ),
-                            child: const Padding(
-                              padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                              child: Text("خ",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 90,
-                                      fontFamily: "ArbFONTS",
-                                      fontWeight: FontWeight.w700)),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const lettervideo();
-                            }));
-                          },
-                          child: Container(
-                            // width: MediaQuery.of(context).size.width / 10,
-                            // height: MediaQuery.of(context).size.height /5,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color:  const Color(0xFF357AB0),
-                            ),
-                            child: const Padding(
-                              padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                              child: Text("ح",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 90,
-                                      fontFamily: "ArbFONTS",
-                                      fontWeight: FontWeight.w700)),
+                        Visibility(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const lettervideo();
+                              }));
+                            },
+                            child: Container(
+                              // width: MediaQuery.of(context).size.width / 10,
+                              // height: MediaQuery.of(context).size.height /5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color:  const Color(0xFF357AB0),
+                              ),
+                              child:  Padding(
+                                padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                child: Text( widget.L4,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 70,
+                                        fontFamily: "DroidKufi",
+                                        fontWeight: FontWeight.w700)),
+                              ),
                             ),
                           ),
+                          visible: widget.L4==''? false : true,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const lettervideo();
-                            }));
-                          },
-                          child: Container(
-                            // width: MediaQuery.of(context).size.width / 10,
-                            // height: MediaQuery.of(context).size.height /5,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                            color:  const Color(0xFF357AB0),
-                            ),
-                            child: const Padding(
-                              padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                              child: Text("غ",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 90,
-                                      fontFamily: "ArbFONTS",
-                                      fontWeight: FontWeight.w700)),
+                        SizedBox(width: 10,),
+                        Visibility(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const lettervideo();
+                              }));
+                            },
+                            child: Container(
+                              // width: MediaQuery.of(context).size.width / 10,
+                              // height: MediaQuery.of(context).size.height /5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color:  const Color(0xFF357AB0),
+                              ),
+                              child:  Padding(
+                                padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                child: Text( widget.L3,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 70,
+                                        fontFamily: "DroidKufi",
+                                        fontWeight: FontWeight.w700)),
+                              ),
                             ),
                           ),
+                          visible: widget.L3==''? false : true,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const lettervideo();
-                            }));
-                          },
-                          child: Container(
-                            // width: MediaQuery.of(context).size.width / 10,
-                            // height: MediaQuery.of(context).size.height /5,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                            color:  const Color(0xFF357AB0),
-                            ),
-                            child: const Padding(
-                              padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                              child: Text("ع",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 90,
-                                      fontFamily: "ArbFONTS",
-                                      fontWeight: FontWeight.w700)),
+                        SizedBox(width: 10,),
+                        Visibility(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const lettervideo();
+                              }));
+                            },
+                            child: Container(
+                              // width: MediaQuery.of(context).size.width / 10,
+                              // height: MediaQuery.of(context).size.height /5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color:  const Color(0xFF357AB0),
+                              ),
+                              child:  Padding(
+                                padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                child: Text( widget.L2,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 70,
+                                        fontFamily: "DroidKufi",
+                                        fontWeight: FontWeight.w700)),
+                              ),
                             ),
                           ),
+                          visible: widget.L2==''? false : true,
                         ),
+                        SizedBox(width: 10,),
+                        Visibility(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const lettervideo();
+                              }));
+                            },
+                            child: Container(
+                              // width: MediaQuery.of(context).size.width / 10,
+                              // height: MediaQuery.of(context).size.height /5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color:  const Color(0xFF357AB0),
+                              ),
+                              child:  Padding(
+                                padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                child: Text( widget.L1,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 70,
+                                        fontFamily: "DroidKufi",
+                                        fontWeight: FontWeight.w700)),
+                              ),
+                            ),
+                          ),
+                          visible: widget.L1==''? false : true,
+                        ),
+
+
+
                       ],
                     ),
 

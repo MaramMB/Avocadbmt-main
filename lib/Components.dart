@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/audio.dart';
+import 'package:flutter_application_1/pages/laterss.dart';
 
 class soundsWidget extends StatelessWidget {
   late String Spath; //sound path
@@ -31,6 +32,7 @@ class soundsWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           showDialog(
+              barrierDismissible: false,
               context: context,
               builder: (_) =>  AlertDialog(
                 contentPadding: EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
@@ -66,7 +68,8 @@ class soundsWidget extends StatelessWidget {
 
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context, rootNavigator: true).pop('dialog');
+                          audioPlayer.dispose();
+                          Navigator.of(context, rootNavigator: true).pop();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
@@ -107,6 +110,125 @@ class soundsWidget extends StatelessWidget {
         ),
 
       ),
+    );
+  }
+}
+
+//       Letters Page
+
+class letter extends StatefulWidget {
+  late String L1,L2,L3,L4,title; // L = letter
+  letter({
+    required this.L1,
+    required this.L2,
+    required this.L3,
+    required this.L4,
+    required this.title,
+});
+  @override
+  State<letter> createState() => _letterState();
+}
+
+class _letterState extends State<letter> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: (){
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) {
+              return  letterss(L1: widget.L1,L2: widget.L2,L3: widget.L3,L4: widget.L4,title: widget.title,);
+            }));
+          },
+          child: Stack(
+            alignment: Alignment.center,
+
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width / 9.5,
+                height: MediaQuery.of(context).size.height /5.5,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+
+                    color: Colors.blueAccent,
+                    boxShadow:[
+
+                      BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          spreadRadius: 1,
+                          offset: Offset.zero
+                      ),
+                    ]
+
+                ),
+              ),
+              Row(
+                children: [
+
+
+                  Visibility(
+                    child: Text(widget.L4 +" ",
+                        style: TextStyle(
+
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontFamily: "DroidKufi",
+                            fontWeight: FontWeight.w700)),
+                    visible: widget.L4=='' ? false:true,
+                  ),
+                  Visibility(
+                    child: Text(widget.L3 +" ",
+                        style: TextStyle(
+
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontFamily: "DroidKufi",
+                            fontWeight: FontWeight.w700)),
+                    visible: widget.L3=='' ? false:true,
+                  ),
+                  Visibility(
+                    child: Text(widget.L2 +" ",
+                        style: TextStyle(
+
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontFamily: "DroidKufi",
+                            fontWeight: FontWeight.w700)),
+                    visible: widget.L2=='' ? false:true,
+                  ),
+                  Visibility(
+                    child: Text(widget.L1 +" ",
+                        style: TextStyle(
+
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontFamily: "DroidKufi",
+                            fontWeight: FontWeight.w700)),
+                    visible: widget.L1=='' ? false:true,
+                  ),
+
+
+                ],
+              ),
+            ],
+          ),
+        ),
+         Text(widget.title,
+            style: TextStyle(
+                shadows:[
+                  Shadow(
+                      color: Colors.black,
+                      blurRadius: 5
+
+                  )
+                ],
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: "DroidKufi",
+                fontWeight: FontWeight.w700)),
+      ],
     );
   }
 }
