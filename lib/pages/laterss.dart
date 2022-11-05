@@ -96,7 +96,7 @@ class _letterssState extends State<letterss> {
                             onTap: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const lettervideo();
+                                return  lettervideo(letter : widget.L4);
                               }));
                             },
                             child: Container(
@@ -125,7 +125,7 @@ class _letterssState extends State<letterss> {
                             onTap: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const lettervideo();
+                                return lettervideo(letter : widget.L3);
                               }));
                             },
                             child: Container(
@@ -154,7 +154,7 @@ class _letterssState extends State<letterss> {
                             onTap: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const lettervideo();
+                                return lettervideo(letter : widget.L2);
                               }));
                             },
                             child: Container(
@@ -183,7 +183,7 @@ class _letterssState extends State<letterss> {
                             onTap: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const lettervideo();
+                                return lettervideo(letter : widget.L1);
                               }));
                             },
                             child: Container(

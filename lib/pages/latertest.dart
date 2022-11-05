@@ -8,7 +8,6 @@ import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'manag.dart';
 
