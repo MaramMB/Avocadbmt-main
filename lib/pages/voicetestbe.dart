@@ -248,6 +248,7 @@ class _betestState extends State<betest> {
                                         onTap: () {
 
                                           setState(() {
+                                            (context as Element).reassemble();
 
                                             if (isClicked || isEnd)
                                               {return;}

@@ -228,7 +228,7 @@ class _lettervideoState extends State<lettervideo> {
           loop: false,
         ),
       )..onInit = (){
-        _controller.loadVideoByUrl(mediaContentUrl: "letters[Lindex]['video']");
+        _controller.loadVideo("letters[Lindex]['video']");
       };
   }
   @override
@@ -261,12 +261,26 @@ class _lettervideoState extends State<lettervideo> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children:   [
-                   Text('حرف ال'+letters[Lindex]['name']!,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontFamily: "DroidKufi",
-                          fontWeight: FontWeight.w700)),
+
+                   Row(
+                     children: [
+                       SizedBox(width: 50,),
+                       Spacer(),
+                       Text('حرف ال'+letters[Lindex]['name']!,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontFamily: "DroidKufi",
+                              fontWeight: FontWeight.w700)),
+                       Spacer(),
+                       GestureDetector(
+                           onTap: (){
+                             Navigator.pop(context);
+                           },
+                           child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
+                     ],
+                     mainAxisAlignment: MainAxisAlignment.center,
+                   ),
                   const SizedBox(height: 5,),
                   const Text("فيديو يوضح طريقة نطق الحرف",
                       style: TextStyle(
@@ -295,7 +309,7 @@ class _lettervideoState extends State<lettervideo> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return const lettertest();
+                        return  lettertest(letter: letters[Lindex]['letter']!,);
                       }));
                     },
                     style: ElevatedButton.styleFrom(

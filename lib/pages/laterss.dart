@@ -60,19 +60,25 @@ class _letterssState extends State<letterss> {
                 child: Column(
                   children:  [
                     SizedBox(height: 20,),
-                     Text(widget.title,
-                        style: TextStyle(
-                            shadows:[
-                              Shadow(
-                                  color: Colors.black,
-                                  blurRadius: 5
-
-                              )
-                            ],
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontFamily: "DroidKufi",
-                            fontWeight: FontWeight.w700)),
+                     Row(
+                       children: [
+                         SizedBox(width: 50,),
+                         Spacer(),
+                         Text(widget.title,
+                            style: TextStyle(
+                                shadows:[Shadow(color: Colors.black, blurRadius: 5)],
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontFamily: "DroidKufi",
+                                fontWeight: FontWeight.w700)),
+                         Spacer(),
+                         GestureDetector(
+                             onTap: (){
+                               Navigator.pop(context);
+                             },
+                             child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
+                       ],
+                     ),
                     SizedBox(height: 5,),
                     const Text("اختر الحرف الذي تريد التدرب عليه ",
                         style: TextStyle(
@@ -87,7 +93,7 @@ class _letterssState extends State<letterss> {
                             fontSize: 25,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.w700)),
-                    SizedBox(height: 60,),
+                   Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -211,6 +217,9 @@ class _letterssState extends State<letterss> {
 
                       ],
                     ),
+
+                    Spacer(flex: 2,),
+
 
                   ],
                 ),
