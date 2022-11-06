@@ -1,15 +1,6 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/expl.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/latervideo.dart';
-import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
-import 'package:flutter_application_1/pages/voiceexpl.dart';
-
-import 'manag.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
@@ -26,7 +17,6 @@ class letterss extends StatefulWidget {
   @override
   State<letterss> createState() => _letterssState();
 }
-
 class _letterssState extends State<letterss> {
   @override
   Widget build(BuildContext context) {
@@ -59,68 +49,38 @@ class _letterssState extends State<letterss> {
                 padding: const EdgeInsets.all(25.0),
                 child: Column(
                   children:  [
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                      Text(widget.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                             shadows:[
                               Shadow(
                                   color: Colors.black,
                                   blurRadius: 5
-
                               )
                             ],
                             color: Colors.white,
                             fontSize: 30,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.w700)),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     const Text("اختر الحرف الذي تريد التدرب عليه ",
                         style: TextStyle(
                             shadows:[
                               Shadow(
                                   color: Colors.black,
                                   blurRadius: 5
-
                               )
                             ],
                             color: Colors.white,
                             fontSize: 25,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.w700)),
-                    SizedBox(height: 60,),
+                    const SizedBox(height: 60,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Visibility(
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return const lettervideo();
-                              }));
-                            },
-                            child: Container(
-                              // width: MediaQuery.of(context).size.width / 10,
-                              // height: MediaQuery.of(context).size.height /5,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color:  const Color(0xFF357AB0),
-                              ),
-                              child:  Padding(
-                                padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                                child: Text( widget.L4,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 70,
-                                        fontFamily: "DroidKufi",
-                                        fontWeight: FontWeight.w700)),
-                              ),
-                            ),
-                          ),
                           visible: widget.L4==''? false : true,
-                        ),
-                        SizedBox(width: 10,),
-                        Visibility(
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context)
@@ -136,9 +96,9 @@ class _letterssState extends State<letterss> {
                                 color:  const Color(0xFF357AB0),
                               ),
                               child:  Padding(
-                                padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                                child: Text( widget.L3,
-                                    style: TextStyle(
+                                padding:const EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                child: Text( widget.L4,
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 70,
                                         fontFamily: "DroidKufi",
@@ -146,10 +106,10 @@ class _letterssState extends State<letterss> {
                               ),
                             ),
                           ),
+                        ),
+                        const SizedBox(width: 10,),
+                        Visibility(
                           visible: widget.L3==''? false : true,
-                        ),
-                        SizedBox(width: 10,),
-                        Visibility(
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context)
@@ -165,9 +125,9 @@ class _letterssState extends State<letterss> {
                                 color:  const Color(0xFF357AB0),
                               ),
                               child:  Padding(
-                                padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                                child: Text( widget.L2,
-                                    style: TextStyle(
+                                padding:const EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                child: Text( widget.L3,
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 70,
                                         fontFamily: "DroidKufi",
@@ -175,10 +135,10 @@ class _letterssState extends State<letterss> {
                               ),
                             ),
                           ),
+                        ),
+                        const SizedBox(width: 10,),
+                        Visibility(
                           visible: widget.L2==''? false : true,
-                        ),
-                        SizedBox(width: 10,),
-                        Visibility(
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context)
@@ -194,9 +154,9 @@ class _letterssState extends State<letterss> {
                                 color:  const Color(0xFF357AB0),
                               ),
                               child:  Padding(
-                                padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                                child: Text( widget.L1,
-                                    style: TextStyle(
+                                padding:const EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                child: Text( widget.L2,
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 70,
                                         fontFamily: "DroidKufi",
@@ -204,7 +164,35 @@ class _letterssState extends State<letterss> {
                               ),
                             ),
                           ),
+                        ),
+                        const SizedBox(width: 10,),
+                        Visibility(
                           visible: widget.L1==''? false : true,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const lettervideo();
+                              }));
+                            },
+                            child: Container(
+                              // width: MediaQuery.of(context).size.width / 10,
+                              // height: MediaQuery.of(context).size.height /5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color:  const Color(0xFF357AB0),
+                              ),
+                              child:  Padding(
+                                padding:const EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                child: Text( widget.L1,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 70,
+                                        fontFamily: "DroidKufi",
+                                        fontWeight: FontWeight.w700)),
+                              ),
+                            ),
+                          ),
                         ),
 
 

@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
-
-import 'mainpage.dart';
 import 'models/person.dart';
 import 'screens/add_account_form.dart';
 import 'widgets/person_record.dart';
-// import 'package:flutter_app_4/models/person.dart';
-// import 'package:flutter_app_4/screens/add_account_form.dart';
-// import 'package:flutter_app_4/widgets/person_record.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-int _value = 1;
-
-// void main() => runApp(const MyApp());
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -133,11 +123,9 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               const SelectionButton(),
           const SizedBox(height: 25,),
-
           buildTable(context),
         ]),
       ),
-
     );
   }
   // this container contains the person list and search bar and buttons
@@ -149,16 +137,13 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
-
         child: Padding(
           padding: const EdgeInsets.only(right: 25.0,top: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
-
             children: [
               const Text('ادارة الحسابات',
                 style: TextStyle(
-
                     color: Colors.green,fontSize: 25,fontFamily: "DroidKufi",fontWeight: FontWeight.w700)
               ),
               const Text('هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'

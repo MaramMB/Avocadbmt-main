@@ -1,28 +1,14 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/expl.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
-import 'package:flutter_application_1/pages/laterss.dart';
-import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
-import 'package:flutter_application_1/pages/voiceexpl.dart';
-
 import '../Components.dart';
-import 'manag.dart';
-
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-int _value = 1;
 class letterex extends StatefulWidget {
   const letterex({Key? key}) : super(key: key);
-
   @override
   State<letterex> createState() => _letterexState();
 }
-
 class _letterexState extends State<letterex> {
   @override
   Widget build(BuildContext context) {

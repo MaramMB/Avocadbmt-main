@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/logindb.dart';
 import 'package:http/http.dart' as http;
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
@@ -18,12 +19,8 @@ class _testlogState extends State<testlog> {
   late TextEditingController pwdInputController;
   late String email;
   bool _visible = false;
-  // final userController = TextEditingController();
-  // final pwdController = TextEditingController();
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
-
-
   void _toggle(){
     setState(() {
       _obscureText = !_obscureText;
@@ -34,6 +31,12 @@ class _testlogState extends State<testlog> {
     pwdInputController = new TextEditingController();
     super.initState();
   }
+  var userlist=[
+     useracc(email: "mmb@gmail.com", passward: "12345678", type: userType.manager),
+     useracc(email: "bara@gmail.com", passward: "12345678", type: userType.admin),
+     useracc(email: "tasneem@gmail.com", passward: "12345678", type: userType.teacher),
+     useracc(email: "donia@gmail.com", passward: "12345678", type: userType.student),
+  ];
 
   // void validateLogin(){
   //   if(_formKey.currentState.validate()){
@@ -316,16 +319,10 @@ class _testlogState extends State<testlog> {
                       setState(() {
                            _visible = false;
                                   }),
-                      Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const mainpage();
-                  })
-                  ),
+
                         }
                         else{
                           const Text("Not Found The Account"),
-
-
                   }
                       },
                       style: ElevatedButton.styleFrom(

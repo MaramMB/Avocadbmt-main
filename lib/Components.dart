@@ -23,11 +23,11 @@ class soundsWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 3,
             blurRadius: 7,
-            offset: Offset(0, 5),
+            offset: const Offset(0, 5),
           ),
         ],
           border: Border.all(
-              color: Color(0xFF83BE63), width: 3.5),
+              color: const Color(0xFF83BE63), width: 3.5),
           borderRadius: BorderRadius.circular(30),),
       child: GestureDetector(
         onTap: () {
@@ -35,7 +35,7 @@ class soundsWidget extends StatelessWidget {
               barrierDismissible: false,
               context: context,
               builder: (_) =>  AlertDialog(
-                contentPadding: EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
+                contentPadding: const EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
                 content: Container(
                   width: MediaQuery.of(context).size.width/3.2,
                   height: MediaQuery.of(context).size.height/1.6,
@@ -57,14 +57,14 @@ class soundsWidget extends StatelessWidget {
                         ),
                       ),
                        Text(Name,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.green,
                               fontSize: 25,
                               fontFamily: "DroidKufi",
                               fontWeight: FontWeight.w700)),
-                      SizedBox(height: 16,),
+                      const SizedBox(height: 16,),
                       audio(path: Spath),
-                      SizedBox(height: 30,),
+                      const SizedBox(height: 30,),
 
                       ElevatedButton(
                         onPressed: () {
@@ -91,10 +91,8 @@ class soundsWidget extends StatelessWidget {
                   ),
                 ),
                 shape:RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),side: BorderSide(color: Colors.black87,width: 4.5)),
+                    borderRadius: BorderRadius.circular(30.0),side: const BorderSide(color: Colors.black87,width: 4.5)),
                 // Border.all(color: Colors.black87,width: 3.5),
-
-
 
               )
 
@@ -150,10 +148,8 @@ class _letterState extends State<letter> {
                 height: MediaQuery.of(context).size.height /5.5,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-
                     color: Colors.blueAccent,
-                    boxShadow:[
-
+                    boxShadow:const [
                       BoxShadow(
                           color: Colors.black26,
                           blurRadius: 10,
@@ -161,67 +157,58 @@ class _letterState extends State<letter> {
                           offset: Offset.zero
                       ),
                     ]
-
                 ),
               ),
               Row(
                 children: [
-
-
                   Visibility(
-                    child: Text(widget.L4 +" ",
-                        style: TextStyle(
-
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontFamily: "DroidKufi",
-                            fontWeight: FontWeight.w700)),
                     visible: widget.L4=='' ? false:true,
-                  ),
-                  Visibility(
-                    child: Text(widget.L3 +" ",
-                        style: TextStyle(
-
+                    child: Text("${widget.L4} ",
+                        style:  const TextStyle(
                             color: Colors.white,
                             fontSize: 24,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.w700)),
+                  ),
+                  Visibility(
                     visible: widget.L3=='' ? false:true,
-                  ),
-                  Visibility(
-                    child: Text(widget.L2 +" ",
-                        style: TextStyle(
-
+                    child: Text("${widget.L3} ",
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.w700)),
+                  ),
+                  Visibility(
                     visible: widget.L2=='' ? false:true,
-                  ),
-                  Visibility(
-                    child: Text(widget.L1 +" ",
-                        style: TextStyle(
+                    child: Text("${widget.L2} ",
+                        style: const TextStyle(
 
                             color: Colors.white,
                             fontSize: 24,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.w700)),
-                    visible: widget.L1=='' ? false:true,
                   ),
-
-
+                  Visibility(
+                    visible: widget.L1=='' ? false:true,
+                    child: Text("${widget.L1} ",
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontFamily: "DroidKufi",
+                            fontWeight: FontWeight.w700)),
+                  ),
                 ],
               ),
             ],
           ),
         ),
          Text(widget.title,
-            style: TextStyle(
+            style: const TextStyle(
                 shadows:[
                   Shadow(
                       color: Colors.black,
                       blurRadius: 5
-
                   )
                 ],
                 color: Colors.white,
