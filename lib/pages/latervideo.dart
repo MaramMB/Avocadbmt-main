@@ -1,11 +1,6 @@
 import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/expl.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
-import 'package:flutter_application_1/pages/laterss.dart';
 import 'package:flutter_application_1/pages/latertest.dart';
-import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
