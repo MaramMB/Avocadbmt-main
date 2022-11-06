@@ -50,6 +50,8 @@ class _SelectionButtonState extends State<SelectionButton> {
                           bottomLeft: Radius.circular(25)))),
             ),
             onPressed: () {
+              (context as Element).reassemble();
+
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) {
                 return const mainpage();
@@ -76,6 +78,7 @@ class _SelectionButtonState extends State<SelectionButton> {
                             bottomRight: Radius.circular(0.1)))),
               ),
               onPressed: () {
+                (context as Element).reassemble();
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
                   return const dic();
@@ -140,6 +143,8 @@ class _SelectionButtonState extends State<SelectionButton> {
                       _value = value!;
                       switch(value) {
                         case 1: {
+                          (context as Element).reassemble();
+
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
                             return const latterexp();
@@ -149,6 +154,8 @@ class _SelectionButtonState extends State<SelectionButton> {
                         break;
 
                         case 2: {
+                          (context as Element).reassemble();
+
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
                             return const voiceexp();
@@ -157,6 +164,8 @@ class _SelectionButtonState extends State<SelectionButton> {
                         }
                         break;
                         case 3: {
+                          (context as Element).reassemble();
+
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
                             return const faceexp();
@@ -195,6 +204,8 @@ class _SelectionButtonState extends State<SelectionButton> {
 
               ),
               onPressed: () {
+                (context as Element).reassemble();
+
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
                   return const MyApp();
@@ -218,6 +229,8 @@ class _SelectionButtonState extends State<SelectionButton> {
                           bottomRight: Radius.circular(25)))),
             ),
             onPressed: () {
+              (context as Element).reassemble();
+
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) {
                 return const mainpage();
@@ -278,11 +291,15 @@ class _SelectionButtonState extends State<SelectionButton> {
               onSelected: (value) async {
                 // if value 1 show dialog
                 if (value == 1) {
+                  (context as Element).reassemble();
+
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return const personal();
                   }));
                 } else if (value == 2) {
+                  (context as Element).reassemble();
+
                   // await AuthClient.internal().signOut();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (c) => const HomePage(uname: "",)),
