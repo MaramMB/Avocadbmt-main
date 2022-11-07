@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/homepage.dart';
 import 'package:flutter_application_1/pages/latter.dart';
 import 'package:flutter_application_1/pages/mainpage.dart';
+import 'package:flutter_application_1/pages/signup.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/speechtotext.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
@@ -18,7 +19,7 @@ class StartPoint extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BDTM',
       theme: ThemeData.light(),
-     home: letterex(),
+     home: sign(),
 
     );
   }
