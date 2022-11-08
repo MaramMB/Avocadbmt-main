@@ -1,5 +1,10 @@
 <?php
 // include("../connect.php");
+Access-Control-Allow-Origin: *
+Origin: <origin>
+Access-Control-Request-Method: <method>
+
+
 $host="localhost";
 $user="root";
 $pass="";

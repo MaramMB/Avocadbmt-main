@@ -12,9 +12,9 @@ class sign extends StatefulWidget {
 class _signState extends State<sign> {
  List list=[];
    GetData() async{
-    String url="https://firebasestorage.googleapis.com/v0/b/https://bara111.000webhostapp.com/login.php";
+    String url="https://bara111.000webhostapp.com/login.php";
     Uri u = Uri.parse(url);
-    var res = await http.get(u,headers: {"Accept":"application/json"} ,);
+    var res = await http.get(u,headers: {"Accept":"application/json"});
     print(res.body);
     var response = json.decode(res.body);
 
@@ -51,6 +51,7 @@ class _signState extends State<sign> {
                   return ListTile(
                     title: Text(snap![index]['Email']),
                     subtitle: Text(snap[index]['Password']),
+
                   );
                 }
             );
