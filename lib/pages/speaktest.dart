@@ -18,17 +18,17 @@ int countr = 0;
 bool _loading = false;
 double _progressValue = 0;
 
-class sptest extends StatefulWidget {
+class sptestT extends StatefulWidget {
   // sptest ({Key? key, required this.index, required this.testDataModel}) : super(key: key);
   //  sptest({Key? key}) : super(key: key);
   final List<FirstTest> testDataModel;
   int index;
-  sptest({Key? key, required this.index, required this.testDataModel}) : super(key: key);
+  sptestT({Key? key, required this.index, required this.testDataModel}) : super(key: key);
   @override
-  State<sptest> createState() => _sptestState();
+  State<sptestT> createState() => _sptestTState();
 }
 
-class _sptestState extends State<sptest> {
+class _sptestTState extends State<sptestT> {
   void initState() {
     super.initState();
     _loading = false;

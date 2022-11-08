@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Characters/characters.dart';
 import 'package:flutter_application_1/pages/firsttestdata.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
@@ -109,13 +110,10 @@ class _expageState extends State<expage> {
                         Center(
                           child: ElevatedButton(
                             onPressed: () {
-                              // Navigator.of(context)
-                              //     .push(MaterialPageRoute(builder: (context) {
-                              //   return sptest();
-                              // }));
-                              
-                              // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TestDetail(index: index,testDataModel: testdata,)));
-                              // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>sptest(index: index,testDataModel: testdata,)));
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return sptest();
+                              }));
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,

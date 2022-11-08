@@ -28,7 +28,7 @@ List<Map<String, String>> letters = const [
   {
     'letter': 'ب',
     'word' : 'بطاطا',
-    'img' : 'https://img.freepik.com/premium-vector/bunch-potatoes-concept_118813-1664.jpg?w=2000',
+    'img' : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjglG7JgaQtWBY6DWrmnuuG3Z0JNW2oi3FUg&usqp=CAU',
 
   },
   {
@@ -264,110 +264,107 @@ class _lettertestState extends State<lettertest> {
               ),
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children:   [
+            child: Column(
+              children:   [
 
-                  Stack(
-                    alignment: Alignment.center,
-                      children: [
+                Stack(
+                  alignment: Alignment.center,
+                    children: [
 
-                    Container(
+                  Container(
 
-                      height: MediaQuery.of(context).size.height / 2.5,
-                      width: MediaQuery.of(context).size.width / 3.5,
-                      decoration:  BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.green, width: 5),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      ),
-                    ),
-                        Center(
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top:10.0),
-                                  child: Image.network(letters[Lindex]['img']!,
-                                      height: MediaQuery.of(context).size.height / 4,
-                                      alignment: Alignment.center
-                                  ),
-                                ),
-                                RichText(
-                                  text:  TextSpan(
-                                    text: widget.letter + isConnected ,
-                                    style: TextStyle(
-                                    fontFamily: "ArbFONTS",
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 45,
-                                  ),
-                                    children: <TextSpan>[
-                                      TextSpan(text: word.substring(1),
-                                        style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: "ArbFONTS",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 45,
-                                      )),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )),
-                  ]),
-                  AvatarGlow(
-                    animate: _isListening,
-                    glowColor: Colors.red,
-                    endRadius: 80.0,
-                    duration: const Duration(milliseconds: 2000),
-                    repeatPauseDuration: const Duration(milliseconds: 100),
-                    repeat: true,
-                    child: FloatingActionButton.large(
-                      backgroundColor: _isListening? Colors.red : Colors.green,
-                      onPressed: _listen,
-                      child: Icon(_isListening ? Icons.mic : Icons.mic_none , size: 50,),
+                    height: MediaQuery.of(context).size.height / 2.5,
+                    width: MediaQuery.of(context).size.width / 3.5,
+                    decoration:  BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.green, width: 5),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
                     ),
                   ),
-                   Text(Status,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          fontFamily: "DroidKufi",
-                          fontWeight: FontWeight.w700)),
-                  const SizedBox(height: 10,),
-                  Visibility(
-                    visible: isCorrect,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        (context as Element).reassemble();
-                        var count = 0;
-                        Navigator.popUntil(context, (route) {
-                          return count++ == 2;
-                        });
-                        setState(() {
-                          isCorrect = false;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(10))),
-                        elevation: 2.0,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 35, vertical: 12),
-                      ),
-                      child:  Text("التالي",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "DroidKufi",
-                            fontSize: 20.0,
+                      Center(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top:10.0),
+                                child: Image.network(letters[Lindex]['img']!,
+                                    height: MediaQuery.of(context).size.height / 4,
+                                    alignment: Alignment.center
+                                ),
+                              ),
+                              RichText(
+                                text:  TextSpan(
+                                  text: widget.letter + isConnected ,
+                                  style: TextStyle(
+                                  fontFamily: "ArbFONTS",
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 45,
+                                ),
+                                  children: <TextSpan>[
+                                    TextSpan(text: word.substring(1),
+                                      style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "ArbFONTS",
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 45,
+                                    )),
+                                  ],
+                                ),
+                              ),
+                            ],
                           )),
-                    ),
+                ]),
+                AvatarGlow(
+                  animate: _isListening,
+                  glowColor: Colors.red,
+                  endRadius: 80.0,
+                  duration: const Duration(milliseconds: 2000),
+                  repeatPauseDuration: const Duration(milliseconds: 100),
+                  repeat: true,
+                  child: FloatingActionButton.large(
+                    backgroundColor: _isListening? Colors.red : Colors.green,
+                    onPressed: _listen,
+                    child: Icon(_isListening ? Icons.mic : Icons.mic_none , size: 50,),
                   ),
-                ],
-              ),
+                ),
+                 Text(Status,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontFamily: "DroidKufi",
+                        fontWeight: FontWeight.w700)),
+                const SizedBox(height: 10,),
+                Visibility(
+                  visible: isCorrect,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      (context as Element).reassemble();
+                      var count = 0;
+                      Navigator.popUntil(context, (route) {
+                        return count++ == 2;
+                      });
+                      setState(() {
+                        isCorrect = false;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(10))),
+                      elevation: 2.0,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 35, vertical: 12),
+                    ),
+                    child:  Text("التالي",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "DroidKufi",
+                          fontSize: 20.0,
+                        )),
+                  ),
+                ),
+              ],
             ),
           )
 

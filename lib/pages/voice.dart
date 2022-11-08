@@ -11,6 +11,7 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+
 class voicex extends StatefulWidget {
   const voicex({Key? key}) : super(key: key);
 
@@ -30,7 +31,7 @@ class _voicexState extends State<voicex> {
     fontWeight: FontWeight.bold,
   );
 
-  Widget Stype (int x){
+  Widget Stype(int x) {
     Widget as = Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -38,36 +39,87 @@ class _voicexState extends State<voicex> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              soundsWidget(Name: 'مطر',Ipath: 'img/rain.gif', Spath: "audio/rain.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              soundsWidget(
+                Name: 'مطر',
+                Ipath: 'img/rain.gif',
+                Spath: "audio/rain.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
             ],
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
             ],
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
             ],
           ),
-
         ],
       ),
     );
@@ -78,32 +130,67 @@ class _voicexState extends State<voicex> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
             ],
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
-              SizedBox(width: 30,),
-              soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              soundsWidget(
+                Name: 'اسم',
+                Ipath: 'img/avocado.png',
+                Spath: "audio/avoc.mp3",
+              ),
             ],
           ),
-
         ],
       ),
     );
     //  as 1 = استيعابي
     // 0 = بيئي be
-    if (x==1)return as;
-    else return be;
+    if (x == 1)
+      return as;
+    else
+      return be;
   }
 
   @override
@@ -124,13 +211,12 @@ class _voicexState extends State<voicex> {
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
-
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children:  [
+                    children: [
                       Row(
                         children: [
                           const Spacer(),
@@ -142,59 +228,62 @@ class _voicexState extends State<voicex> {
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                           const Spacer(),
-                          TextButton( // زر بدأ الاختبار
+                          TextButton(
+                            // زر بدأ الاختبار
                             onPressed: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-
-                                return  betest(type: _selectedType);
+                                return betest(type: _selectedType);
                               }));
                             },
                             style: ButtonStyle(
-
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-
-                              minimumSize: MaterialStateProperty.all(const Size(120, 42)),
-                              textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 16)),
-                              backgroundColor: MaterialStateProperty.all(const Color(0xff467BDB)),
+                              minimumSize: MaterialStateProperty.all(
+                                  const Size(120, 42)),
+                              textStyle: MaterialStateProperty.all(
+                                  const TextStyle(
+                                      fontFamily: "DroidKufi", fontSize: 16)),
+                              backgroundColor: MaterialStateProperty.all(
+                                  const Color(0xff467BDB)),
                             ),
                             child: const Text(
-                              'بدأ الاختبار',style: TextStyle(
-                              color: Colors.white,
-                            ),
-
+                              'بدأ الاختبار',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-
                         ],
                       ),
-                      const SizedBox(height: 15,),
+                      const SizedBox(
+                        height: 15,
+                      ),
                       Row(
                         // crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children:  [
-                          TextButton( // زر الاستيعابية
+                        children: [
+                          TextButton(
+                            // زر الاستيعابية
                             onPressed: () {
                               setState(() {
                                 _selectedType = 1;
-
                               });
                             },
                             style: ButtonStyle(
-
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              minimumSize: MaterialStateProperty.all(const Size(85, 42)),
-                              textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 20)),
+                              minimumSize:
+                                  MaterialStateProperty.all(const Size(85, 42)),
+                              textStyle: MaterialStateProperty.all(
+                                  const TextStyle(
+                                      fontFamily: "DroidKufi", fontSize: 20)),
                               backgroundColor: MaterialStateProperty.all(
                                 _selectedType == 1 ? Colors.green : Colors.grey,
                               ),
@@ -204,7 +293,6 @@ class _voicexState extends State<voicex> {
                               style: _selectedType == 1
                                   ? selectedTypeTextStyle
                                   : unselectedTypeTextStyle,
-
                             ),
                           ),
                           const SizedBox(width: 5),
@@ -212,19 +300,21 @@ class _voicexState extends State<voicex> {
                             onPressed: () {
                               setState(() {
                                 _selectedType = 0;
-
                               });
                             },
-                            style: ButtonStyle( // زر البيئية
+                            style: ButtonStyle(
+                              // زر البيئية
 
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              minimumSize: MaterialStateProperty.all(const Size(110, 42)),
-                              textStyle: MaterialStateProperty.all(const TextStyle(fontFamily: "DroidKufi",fontSize: 20)),
+                              minimumSize: MaterialStateProperty.all(
+                                  const Size(110, 42)),
+                              textStyle: MaterialStateProperty.all(
+                                  const TextStyle(
+                                      fontFamily: "DroidKufi", fontSize: 20)),
                               backgroundColor: MaterialStateProperty.all(
                                 _selectedType == 0 ? Colors.green : Colors.grey,
                               ),
@@ -234,15 +324,15 @@ class _voicexState extends State<voicex> {
                               style: _selectedType == 0
                                   ? selectedTypeTextStyle
                                   : unselectedTypeTextStyle,
-
                             ),
                           ),
-
                         ],
                       ),
-                      const SizedBox(height: 20,),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Column(
-                        children:  [
+                        children: [
                           Stype(_selectedType),
                           /*Container(
                             decoration: BoxDecoration(
@@ -259,8 +349,6 @@ class _voicexState extends State<voicex> {
                           */
                         ],
                       ),
-
-
                     ],
                   ),
                 ),

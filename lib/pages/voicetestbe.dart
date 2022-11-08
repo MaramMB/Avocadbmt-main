@@ -182,7 +182,7 @@ class _betestState extends State<betest> {
               height: 30,
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 1.19,
+              height: MediaQuery.of(context).size.height / 1.15,
               width: MediaQuery.of(context).size.width / 1.8,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -273,7 +273,7 @@ class _betestState extends State<betest> {
 
                                 ],
                               ),
-                              const SizedBox(height: 50,),
+                              const SizedBox(height: 35,),
                               ElevatedButton(
                                 onPressed: () {
                                   setState(() {

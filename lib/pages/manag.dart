@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_account_form.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'models/person.dart';
-import 'screens/add_account_form.dart';
 import 'widgets/person_record.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);

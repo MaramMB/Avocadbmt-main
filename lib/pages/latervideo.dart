@@ -1,6 +1,11 @@
 import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/expl.dart';
+import 'package:flutter_application_1/pages/faceexpl.dart';
+import 'package:flutter_application_1/pages/laterss.dart';
 import 'package:flutter_application_1/pages/latertest.dart';
+import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
@@ -201,8 +206,8 @@ int search (String s){
 class lettervideo extends StatefulWidget {
   late String letter;
   lettervideo({
-   required this.letter,
-});
+    required this.letter,
+  });
   @override
 
   State<lettervideo> createState() => _lettervideoState();
@@ -214,17 +219,17 @@ class _lettervideoState extends State<lettervideo> {
   void initState() {
     super.initState();
     Lindex = search(widget.letter);
-      _controller = YoutubePlayerController(
+    _controller = YoutubePlayerController(
 
-        params: const YoutubePlayerParams(
-          showControls: true,
-          mute: false,
-          showFullscreenButton: true,
-          loop: false,
-        ),
-      )..onInit = (){
-        _controller.loadVideo("letters[Lindex]['video']");
-      };
+      params: const YoutubePlayerParams(
+        showControls: true,
+        mute: false,
+        showFullscreenButton: true,
+        loop: false,
+      ),
+    )..onInit = (){
+      _controller.loadVideo("letters[Lindex]['video']");
+    };
   }
   @override
   Widget build(BuildContext context) {
@@ -257,25 +262,25 @@ class _lettervideoState extends State<lettervideo> {
               child: Column(
                 children:   [
 
-                   Row(
-                     children: [
-                       SizedBox(width: 50,),
-                       Spacer(),
-                       Text('حرف ال'+letters[Lindex]['name']!,
+                  Row(
+                    children: [
+                      SizedBox(width: 50,),
+                      Spacer(),
+                      Text('حرف ال'+letters[Lindex]['name']!,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,
                               fontFamily: "DroidKufi",
                               fontWeight: FontWeight.w700)),
-                       Spacer(),
-                       GestureDetector(
-                           onTap: (){
-                             Navigator.pop(context);
-                           },
-                           child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
-                     ],
-                     mainAxisAlignment: MainAxisAlignment.center,
-                   ),
+                      Spacer(),
+                      GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
                   const SizedBox(height: 5,),
                   const Text("فيديو يوضح طريقة نطق الحرف",
                       style: TextStyle(
@@ -285,16 +290,16 @@ class _lettervideoState extends State<lettervideo> {
                           fontWeight: FontWeight.w700)),
                   const SizedBox(height: 10,),
                   Container(
-                    color: Colors.transparent,
-                    width: 640,
-                    height: 360,
+                    // color: Colors.green,
+                    width: 592,
+                    height: 300,
                     child: Center(
                       child: YoutubePlayerScaffold( controller: _controller,  aspectRatio: 4 / 3,
-                          builder: (BuildContext context, Widget player) {
-                        return Scaffold(
-                          body: player,
-                        );
-                      },
+                        builder: (BuildContext context, Widget player) {
+                          return Scaffold(
+                            body: player,
+                          );
+                        },
 
                       ),
                     ),
@@ -334,5 +339,4 @@ class _lettervideoState extends State<lettervideo> {
 
   }
 }
-
 

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/pages/Profile/profile.dart';
+import 'package:flutter_application_1/pages/Videos/videos.dart';
+import 'package:flutter_application_1/pages/Videos/videos28..dart';
 import 'package:flutter_application_1/pages/dic.dart';
-import 'package:oauth2_client/oauth2_client.dart';
-import 'package:oauth2_client/oauth2_helper.dart';
-
-import 'package:flutter_application_1/pages/expl.dart';
 import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/homepage.dart';
 import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/nexthomepage.dart';
-import 'package:flutter_application_1/pages/personal.dart';
+// import 'package:flutter_application_1/pages/personal.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
+import 'package:flutter_application_1/pages/training_face/training_face.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
 
 import 'mainpage.dart';
@@ -168,7 +168,7 @@ class _SelectionButtonState extends State<SelectionButton> {
 
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return const faceexp();
+                            return const TrainingFace();
 
                           }));
                         }
@@ -243,7 +243,6 @@ class _SelectionButtonState extends State<SelectionButton> {
           ),
           const Spacer(),
           Directionality(
-
             textDirection: TextDirection.ltr,
             child: PopupMenuButton(
 

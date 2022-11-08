@@ -38,6 +38,14 @@ class _testlogState extends State<testlog> {
      useracc(email: "donia@gmail.com", passward: "12345678", type: userType.student),
   ];
 
+  // void validateLogin(){
+  //   if(_formKey.currentState.validate()){
+  //     _formKey.currentState.save();
+  //     if(_emailID == _email && _password == _pass){
+  //       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+  //     }
+  //   }
+  // }
   String pwdValidator(String value) {
     if (value.length < 8) {
       return 'Password must be longer than 8 characters';
@@ -45,6 +53,9 @@ class _testlogState extends State<testlog> {
       return "";
     }
   }
+
+
+
   Future userLogin() async {
     var url = "http://192.168.1.1/avocadbmt/login.php";
     
@@ -308,7 +319,11 @@ class _testlogState extends State<testlog> {
                       setState(() {
                            _visible = false;
                                   }),
-
+                      Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return const mainpage();
+                  })
+                  ),
                         }
                         else{
                           const Text("Not Found The Account"),

@@ -37,7 +37,7 @@ class soundsWidget extends StatelessWidget {
               builder: (_) =>  AlertDialog(
                 contentPadding: const EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
                 content: Container(
-                  width: MediaQuery.of(context).size.width/3.2,
+                  width: MediaQuery.of(context).size.width/3.7,
                   height: MediaQuery.of(context).size.height/1.6,
                   child: Column(
                     children: [
@@ -62,9 +62,9 @@ class soundsWidget extends StatelessWidget {
                               fontSize: 25,
                               fontFamily: "DroidKufi",
                               fontWeight: FontWeight.w700)),
-                      const SizedBox(height: 16,),
+                      const SizedBox(height: 10,),
                       audio(path: Spath),
-                      const SizedBox(height: 30,),
+                      const SizedBox(height: 15,),
 
                       ElevatedButton(
                         onPressed: () {
@@ -91,7 +91,7 @@ class soundsWidget extends StatelessWidget {
                   ),
                 ),
                 shape:RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),side: const BorderSide(color: Colors.black87,width: 4.5)),
+                    borderRadius: BorderRadius.circular(30.0),side: const BorderSide(color: Colors.black87,width: 3.0)),
                 // Border.all(color: Colors.black87,width: 3.5),
 
               )

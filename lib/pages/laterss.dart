@@ -60,25 +60,25 @@ class _letterssState extends State<letterss> {
                 child: Column(
                   children:  [
                     SizedBox(height: 20,),
-                     Row(
-                       children: [
-                         SizedBox(width: 50,),
-                         Spacer(),
-                         Text(widget.title,
+                    Row(
+                      children: [
+                        SizedBox(width: 50,),
+                        Spacer(),
+                        Text(widget.title,
                             style: TextStyle(
                                 shadows:[Shadow(color: Colors.black, blurRadius: 5)],
                                 color: Colors.white,
                                 fontSize: 30,
                                 fontFamily: "DroidKufi",
                                 fontWeight: FontWeight.w700)),
-                         Spacer(),
-                         GestureDetector(
-                             onTap: (){
-                               Navigator.pop(context);
-                             },
-                             child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
-                       ],
-                     ),
+                        Spacer(),
+                        GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
+                      ],
+                    ),
                     SizedBox(height: 5,),
                     const Text("اختر الحرف الذي تريد التدرب عليه ",
                         style: TextStyle(
@@ -93,17 +93,16 @@ class _letterssState extends State<letterss> {
                             fontSize: 25,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.w700)),
-                   Spacer(),
+                    Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Visibility(
-                          visible: widget.L4==''? false : true,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return lettervideo(letter: '',);
+                                return  lettervideo(letter : widget.L4);
                               }));
                             },
                             child: Container(
@@ -124,15 +123,15 @@ class _letterssState extends State<letterss> {
                               ),
                             ),
                           ),
+                          visible: widget.L4==''? false : true,
                         ),
                         SizedBox(width: 10,),
                         Visibility(
-                          visible: widget.L3==''? false : true,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return lettervideo(letter: '',);
+                                return lettervideo(letter : widget.L3);
                               }));
                             },
                             child: Container(
@@ -153,15 +152,15 @@ class _letterssState extends State<letterss> {
                               ),
                             ),
                           ),
+                          visible: widget.L3==''? false : true,
                         ),
                         SizedBox(width: 10,),
                         Visibility(
-                          visible: widget.L2==''? false : true,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return lettervideo(letter: '',);
+                                return lettervideo(letter : widget.L2);
                               }));
                             },
                             child: Container(
@@ -182,15 +181,15 @@ class _letterssState extends State<letterss> {
                               ),
                             ),
                           ),
+                          visible: widget.L2==''? false : true,
                         ),
                         SizedBox(width: 10,),
                         Visibility(
-                          visible: widget.L1==''? false : true,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return  lettervideo(letter: '',);
+                                return lettervideo(letter : widget.L1);
                               }));
                             },
                             child: Container(
@@ -211,6 +210,7 @@ class _letterssState extends State<letterss> {
                               ),
                             ),
                           ),
+                          visible: widget.L1==''? false : true,
                         ),
 
 
