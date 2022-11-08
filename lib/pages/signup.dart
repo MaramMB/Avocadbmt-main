@@ -12,7 +12,7 @@ class sign extends StatefulWidget {
 class _signState extends State<sign> {
   List list=[];
   Future GetData() async{
-    var url="http://192.168.1.114/Avocadbmt-main/Avocadbmt-main/login.php";
+    var url="http://localhost:52850/avocad/login.php";
     var res=await http.get(Uri.parse(url));
     print(res);
     if(res.statusCode==200)
