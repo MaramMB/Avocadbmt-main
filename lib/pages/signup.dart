@@ -10,20 +10,16 @@ class sign extends StatefulWidget {
 }
 
 class _signState extends State<sign> {
-  List list=[];
-  Future GetData() async{
-    var url="http://localhost:52850/avocad/login.php";
-    var res=await http.get(Uri.parse(url));
-    print(res);
-    if(res.statusCode==200)
-      {
-        // var red =json.decode(res.body);
-        var red =json.decode(res.body);
-        setState(() {
-          list.addAll(red);
-        });
-        print(red);
-      }
+ List list=[];
+   GetData() async{
+    String url="https://firebasestorage.googleapis.com/v0/b/https://bara111.000webhostapp.com/login.php";
+    Uri u = Uri.parse(url);
+    var res = await http.get(u,headers: {"Accept":"application/json"} ,);
+    print(res.body);
+    var response = json.decode(res.body);
+
+
+    return response;
 
   }
   @override
@@ -36,20 +32,30 @@ class _signState extends State<sign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-          itemCount:list.length,
-          itemBuilder: (cts,i){
-            // print(list.length);
-        return const ListTile(
-        title:Text("User"),
-          subtitle: Text("user"),
-          leading: CircleAvatar(
-            radius: 30,
-            child: Text("MB"),
-          ),
-        );
-    }
-    )
+      body: FutureBuilder(
+        future: GetData(),
+          builder: ( BuildContext, snapshot)
+          {
+            List? snap = snapshot.data as List?;
+            if(snapshot.connectionState==ConnectionState.waiting)
+              {
+                return const Center(
+                  child: Text('error'),
+                );
+
+              }
+            return ListView.builder(
+                itemCount: snap?.length,
+                itemBuilder: (context,index)
+                {
+                  return ListTile(
+                    title: Text(snap![index]['Email']),
+                    subtitle: Text(snap[index]['Password']),
+                  );
+                }
+            );
+          }
+      ),
     );
   }
 }
