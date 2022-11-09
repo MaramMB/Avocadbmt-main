@@ -1,26 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/Profile/profile.dart';
-import 'package:flutter_application_1/pages/Videos/videos.dart';
-import 'package:flutter_application_1/pages/Videos/videos28..dart';
 import 'package:flutter_application_1/pages/dic.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/homepage.dart';
 import 'package:flutter_application_1/pages/latterexpl.dart';
-import 'package:flutter_application_1/pages/nexthomepage.dart';
-// import 'package:flutter_application_1/pages/personal.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/training_face/training_face.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
-
 import 'mainpage.dart';
 import 'manag.dart';
-
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 0;
-
 class SelectionButton extends StatefulWidget {
   const SelectionButton({super.key});
 
