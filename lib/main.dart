@@ -19,7 +19,7 @@ class StartPoint extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BDTM',
       theme: ThemeData.light(),
-     home:mainpage(),
+     home: sign(),
 
     );
   }

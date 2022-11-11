@@ -1,5 +1,9 @@
 import 'dart:html';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/expl.dart';
@@ -229,6 +233,35 @@ class lettertest extends StatefulWidget {
 }
 
 class _lettertestState extends State<lettertest> {
+  String phpurl = "http://192.168.1.106/spellRes.php";
+  bool dberror = false;
+  Future<void> sendData(String letter , String result) async {
+
+    var res = await http.post(Uri.parse(phpurl), body: {
+      "letter": letter,
+      "result": result,
+    }); //sending post request with header data
+
+    if (res.statusCode == 200) {
+      print(res.body); //print raw response on console
+      var data = json.decode(res.body); //decoding json to array
+      if(data["error"]){
+        setState(() {
+          dberror = true;
+        });
+      }else{
+
+
+      }
+
+    }else{
+      //there is error
+      setState(() {
+        dberror = true;
+
+      });
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -389,6 +422,7 @@ class _lettertestState extends State<lettertest> {
               if (_text==letters[Lindex]['word']){
                 print('Correct !');
                 setState(() {
+                  sendData(letters[Lindex]['letter']!,'true');
                   isCorrect=true;
                   Status = "عمل رائع !";
                 });
