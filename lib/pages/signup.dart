@@ -17,8 +17,6 @@ class _signState extends State<sign> {
     var res = await http.get(u,headers: {"Accept":"application/json"});
     print(res.body);
     var response = json.decode(res.body);
-
-
     return response;
 
   }
