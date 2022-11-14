@@ -22,7 +22,7 @@ class StartPoint extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BDTM',
       theme: ThemeData.light(),
-     home: letterex(),
+     home: voicex(),
 
     );
   }

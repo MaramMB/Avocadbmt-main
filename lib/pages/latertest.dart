@@ -246,9 +246,11 @@ class _lettertestState extends State<lettertest> {
       print(res.body); //print raw response on console
       var data = json.decode(res.body); //decoding json to array
       if(data["error"]){
-        setState(() {
-          dberror = true;
-        });
+        if (this.mounted) {
+          setState(() {
+            dberror = true;
+          });
+        }
       }else{
 
 
@@ -256,10 +258,11 @@ class _lettertestState extends State<lettertest> {
 
     }else{
       //there is error
-      setState(() {
-        dberror = true;
-
-      });
+      if (this.mounted){
+        setState(() {
+          dberror = true;
+        });
+      }
     }
   }
   @override
@@ -370,12 +373,11 @@ class _lettertestState extends State<lettertest> {
                 Visibility(
                   visible: isCorrect,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       (context as Element).reassemble();
-                      var count = 0;
-                      Navigator.popUntil(context, (route) {
-                        return count++ == 2;
-                      });
+                      var  count = 0;
+                      Navigator.popUntil(context, (route) {return count++ == 2;});
+
                       setState(() {
                         isCorrect = false;
                       });
@@ -421,8 +423,8 @@ class _lettertestState extends State<lettertest> {
               _text = val.recognizedWords;
               if (_text==letters[Lindex]['word']){
                 print('Correct !');
+                sendData(letters[Lindex]['letter']!,'true');
                 setState(() {
-                  sendData(letters[Lindex]['letter']!,'true');
                   isCorrect=true;
                   Status = "عمل رائع !";
                 });
@@ -450,11 +452,7 @@ class _lettertestState extends State<lettertest> {
       _speech.stop();
     }
   }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+
 
 }
 

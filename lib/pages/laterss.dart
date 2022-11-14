@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'dart:convert';
 
+import 'package:auto_reload/auto_reload.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -43,9 +44,15 @@ class _letterssState extends State<letterss> {
 
   }
 
-
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setState(() {
+    });
+  }
   initState()
   {
+  super.initState;
   }
   late final check=getData();
   @override
