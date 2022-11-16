@@ -12,7 +12,7 @@ $data = json_decode($json, true);
     $email = $data["email"];
     $phone = $data["phone"];
 
-	$query_std = "UPDATE students SET phone = '$phone' WHERE Id = $id";
+	$query_std = "UPDATE students SET phone = '$phone' WHERE id = $id";
 	
 	$query_user ="UPDATE usersacounts SET Email = '$email' WHERE Id_Num = $id";
 
