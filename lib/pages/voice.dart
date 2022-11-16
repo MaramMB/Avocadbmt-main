@@ -439,7 +439,7 @@ class _voicexState extends State<voicex> {
                             return soundsWidget(
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
-                              Spath: snapshot.data![index]['audio'], 
+                              Spath: snapshot.data![index]['audio'],
                             );
                           },),
 
