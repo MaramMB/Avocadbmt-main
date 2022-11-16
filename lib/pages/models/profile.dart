@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 import 'dart:html' as html;
 import 'package:http/http.dart' as http;
 import 'package:mime_type/mime_type.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/audio.dart';
 import 'package:flutter_application_1/pages/laterss.dart';
 
@@ -100,7 +101,7 @@ class soundsWidget extends StatelessWidget {
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(25),
-          child: Image.asset(
+          child: /*Image.memory(s),*/ Image.asset(
             Ipath,
             width: MediaQuery.of(context).size.width / 9,
             fit: BoxFit.fill,

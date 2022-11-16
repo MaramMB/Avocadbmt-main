@@ -1,8 +1,8 @@
-import 'dart:html';
 
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/soundrecourd.dart';
 import 'package:flutter_application_1/pages/soundtype.dart';
@@ -11,11 +11,15 @@ import 'package:flutter_application_1/Components.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+late var imageb;
+Widget www = Text('sss');
 bool isA=true;
 final SnameCont = TextEditingController();
 
@@ -27,6 +31,18 @@ class voicex extends StatefulWidget {
 }
 
 class _voicexState extends State<voicex> {
+  File? image;
+  addSound(String x , Uint8List img)async{
+    print (x);
+    var url = 'http://192.168.1.106/imageStore.php';
+    var response = await http.post(Uri.parse(url), body :{
+      'word': x,
+      'imageByte': img,
+    });
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      print(data.toString());}
+  }
   Future<List<dynamic>?> getData(int type) async{
     String x;
     if(type==1){
@@ -133,10 +149,10 @@ class _voicexState extends State<voicex> {
                                 crossAxisCount: 3,
                                 crossAxisSpacing: 20),
                             itemCount: length, itemBuilder: (context, index) {
-                            return soundsWidget(
+                            return soundsWidget(  
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
-                              Spath: snapshot.data![index]['audio'],
+                              Spath: snapshot.data![index]['audio'],  
                             );
                           },),
 
@@ -387,7 +403,7 @@ class _voicexState extends State<voicex> {
                             return soundsWidget(
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
-                              Spath: snapshot.data![index]['audio'],
+                              Spath: snapshot.data![index]['audio'],  
                             );
                           },),
 
@@ -423,7 +439,7 @@ class _voicexState extends State<voicex> {
                             return soundsWidget(
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
-                              Spath: snapshot.data![index]['audio'],
+                              Spath: snapshot.data![index]['audio'], 
                             );
                           },),
 
@@ -474,7 +490,7 @@ class _voicexState extends State<voicex> {
                             children: [
                               Row(
                                 children: [
-                                  FloatingActionButton(backgroundColor: Colors.green,
+                                  FloatingActionButton(backgroundColor: Colors.green, // زر اختيار الصورة
                                       child:Icon(Icons.add_outlined),onPressed: (){
                                     showDialog(barrierDismissible: false,context: context, builder: (_)=>AlertDialog(
                                       title: Container(
@@ -499,13 +515,27 @@ class _voicexState extends State<voicex> {
                                             ),
                                             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
                                            ,onPressed: () {
-                                              getHttp();
+                                              //getHttp();
+                                                  PickImage();
+
                                                 }, child: Row(
                                              children: [
                                                Icon(Icons.upload),
                                                Text('أختيار صورة'),
                                              ],
-                                           ))
+                                           )),
+                                            FloatingActionButton(onPressed: (){
+                                              showDialog(barrierDismissible: true,context: context, builder: (_)=>AlertDialog(
+                                               title: Image.memory(imageb),
+                                              ));
+                                            }),
+                                            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
+                                              addSound(SnameCont.text,imageb);
+
+                                            }
+                                            , child: Text('حفظ'),),
+
+
                                           ],
                                         ),
                                       ),
@@ -687,8 +717,35 @@ class _voicexState extends State<voicex> {
 
 
   }
+Future PickImage() async {
+    try {
+      final image =  await FilePicker.platform.pickFiles(type: FileType.any, allowMultiple: false);
+      if (image == null) return;
+      final imageTemp = image.files.first.bytes;
+     setState(() {
+       imageb=imageTemp;
+       www = Text('data');
+       print('sss');
+     });
 
-  void getHttp() async {
+      return imageTemp;
+
+      setState(() {
+        //this.image =  imageTemp;
+       // ConvertImage(imageTemp);
+      });
+    } on PlatformException catch (e){
+      print(e);
+    }
+}
+Future ConvertImage(File image) async {
+  Image.memory(await image.readAsBytes());
+
+  Uint8List imageBytes = await image.readAsBytes();
+    String base64 = base64Encode(imageBytes);
+    print(base64);
+  }
+ void getHttp() async {
 
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
