@@ -32,12 +32,13 @@ class voicex extends StatefulWidget {
 
 class _voicexState extends State<voicex> {
   File? image;
-  addSound(String x , String img)async{
+  addSound(String x , String img,String type)async{
     print (x);
     var url = 'http://192.168.1.106/imageStore.php';
     var response = await http.post(Uri.parse(url), body :{
       'word': x,
       'imageByte': img,
+      'type': type,
     });
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -205,15 +206,84 @@ class _voicexState extends State<voicex> {
                             children: [
                               Row(
                                 children: [
-                                  const Spacer(),
-                                  const Spacer(),
+                                  FloatingActionButton(backgroundColor: Colors.green, // زر اختيار الصورة
+                                      child:Icon(Icons.add_outlined),onPressed: (){
+                                        showDialog(barrierDismissible: false,context: context, builder: (_)=>AlertDialog(
+                                          title: Container(
+                                            child: Column(
+                                              children: [
+                                                TextField(
+
+                                                  style: TextStyle(
+                                                    fontFamily: "DroidKufi",
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                  controller: SnameCont,
+                                                  autofocus: false,
+                                                  maxLength: 20,
+                                                  decoration: InputDecoration(
+                                                    hintText: 'اسم الصوت',
+                                                    enabledBorder:OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Colors.green, width: 2),
+                                                    ),
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                ),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
+                                                    ,onPressed: () {
+                                                      //getHttp();
+                                                      PickImage();
+
+                                                    }, child: Row(
+                                                      children: [
+                                                        Icon(Icons.upload),
+                                                        Text('أختيار صورة'),
+
+                                                      ],
+                                                    )),
+                                                FloatingActionButton(child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
+
+                                                  showDialog(barrierDismissible: true,context: context, builder: (_) {
+                                                    if(imageb!= null){  return AlertDialog(
+                                                      title: Image.memory(base64Decode(imageb)),
+                                                    );}
+                                                    else return AlertDialog(title: Text('لا توجد صورة'),);
+
+                                                  });
+                                                }),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
+                                                  addSound(SnameCont.text,imageb,'A');
+
+                                                }
+                                                  , child: Text('حفظ'),),
+                                                SizedBox(height: 20,),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
+                                                  Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
+                                                    setState(() {
+
+                                                    });
+                                                  });
+
+                                                }
+                                                  , child: Text('إغلاق'),),
+
+
+                                              ],
+                                            ),
+                                          ),
+
+                                        ));
+
+
+                                      }),
+                                  const Spacer(flex: 3,),
                                   const Text("التدريبات الصوتية",
                                       style: TextStyle(
                                           color: Colors.green,
                                           fontSize: 30,
                                           fontFamily: "DroidKufi",
                                           fontWeight: FontWeight.w700)),
-                                  const Spacer(),
+                                  const Spacer(flex: 2,),
                                   TextButton(
                                     // زر بدأ الاختبار
                                     onPressed: () {
@@ -528,20 +598,20 @@ class _voicexState extends State<voicex> {
                                                Text('أختيار صورة'),
                                              ],
                                            )),
-                                            FloatingActionButton(onPressed: (){
+                                            FloatingActionButton(child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
                                               showDialog(barrierDismissible: true,context: context, builder: (_)=>AlertDialog(
                                                title: Image.memory(base64Decode(imageb)),
                                               ));
                                             }),
                                             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
-                                              addSound(SnameCont.text,imageb);
+                                              addSound(SnameCont.text,imageb,'B');
 
                                             }
                                             , child: Text('حفظ'),),
                                             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
                                              Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
                                                setState(() {
-                                                 
+
                                                });
                                              });
 
