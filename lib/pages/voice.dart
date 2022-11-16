@@ -32,7 +32,7 @@ class voicex extends StatefulWidget {
 
 class _voicexState extends State<voicex> {
   File? image;
-  addSound(String x , Uint8List img)async{
+  addSound(String x , String img)async{
     print (x);
     var url = 'http://192.168.1.106/imageStore.php';
     var response = await http.post(Uri.parse(url), body :{
@@ -117,6 +117,7 @@ class _voicexState extends State<voicex> {
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
                             );
                           },),
 
@@ -152,7 +153,8 @@ class _voicexState extends State<voicex> {
                             return soundsWidget(  
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
-                              Spath: snapshot.data![index]['audio'],  
+                              Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
                             );
                           },),
 
@@ -403,7 +405,8 @@ class _voicexState extends State<voicex> {
                             return soundsWidget(
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
-                              Spath: snapshot.data![index]['audio'],  
+                              Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
                             );
                           },),
 
@@ -440,6 +443,7 @@ class _voicexState extends State<voicex> {
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
                             );
                           },),
 
@@ -526,7 +530,7 @@ class _voicexState extends State<voicex> {
                                            )),
                                             FloatingActionButton(onPressed: (){
                                               showDialog(barrierDismissible: true,context: context, builder: (_)=>AlertDialog(
-                                               title: Image.memory(imageb),
+                                               title: Image.memory(base64Decode(imageb)),
                                               ));
                                             }),
                                             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
@@ -534,6 +538,15 @@ class _voicexState extends State<voicex> {
 
                                             }
                                             , child: Text('حفظ'),),
+                                            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
+                                             Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
+                                               setState(() {
+                                                 
+                                               });
+                                             });
+
+                                            }
+                                              , child: Text('إغلاق'),),
 
 
                                           ],
@@ -723,9 +736,9 @@ Future PickImage() async {
       if (image == null) return;
       final imageTemp = image.files.first.bytes;
      setState(() {
-       imageb=imageTemp;
+       imageb=base64Encode(imageTemp!);
        www = Text('data');
-       print('sss');
+
      });
 
       return imageTemp;

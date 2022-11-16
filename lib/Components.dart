@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/audio.dart';
@@ -7,11 +9,13 @@ class soundsWidget extends StatelessWidget {
   late String Spath; //sound path
   late String Ipath;// Image path
   late String Name; // name of the sound
+  late String s;
 
   soundsWidget({
     required this.Spath ,
     required this.Ipath ,
     required this.Name,
+    required this.s,
   });
 
   @override
@@ -49,12 +53,9 @@ class soundsWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(30)),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
-                          child: Image.asset(
-                            Ipath,
-                            width: MediaQuery.of(context).size.width / 5,
+                          child: Image.memory(base64Decode(s),width: MediaQuery.of(context).size.width / 5,
                             height: MediaQuery.of(context).size.height / 3.0,
-                            fit: BoxFit.fill,
-                          ),
+                            fit: BoxFit.fill,),
                         ),
                       ),
                        Text(Name,
@@ -101,11 +102,12 @@ class soundsWidget extends StatelessWidget {
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(25),
-          child: /*Image.memory(s),*/ Image.asset(
+          child: Image.memory(base64Decode(s),width: MediaQuery.of(context).size.width / 9,
+            fit: BoxFit.fill,),/* Image.asset(
             Ipath,
             width: MediaQuery.of(context).size.width / 9,
             fit: BoxFit.fill,
-          ),
+          ),*/
         ),
 
       ),
