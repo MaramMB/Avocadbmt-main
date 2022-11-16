@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/soundrecourd.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_application_1/pages/voicetestbe.dart';
 import 'package:flutter_application_1/Components.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -493,12 +496,16 @@ class _voicexState extends State<voicex> {
                                                 ),
                                                 border: OutlineInputBorder(),
                                               ),
-
-
-
-
-
-                                            )
+                                            ),
+                                            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
+                                           ,onPressed: () {
+                                              getHttp();
+                                                }, child: Row(
+                                             children: [
+                                               Icon(Icons.upload),
+                                               Text('أختيار صورة'),
+                                             ],
+                                           ))
                                           ],
                                         ),
                                       ),
@@ -678,6 +685,60 @@ class _voicexState extends State<voicex> {
       );
     }
 
+
+  }
+
+  void getHttp() async {
+
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    var path='';
+
+    var filename='';
+
+    if (result != null) {
+
+      PlatformFile file = result.files.first;
+
+      var path=file.path.toString();
+
+      var filename=file.name;
+
+      print(file.name);
+
+      print(file.bytes);
+
+      print(file.size);
+
+      print(file.extension);
+
+      print(file.path);
+
+      var formData = FormData.fromMap({
+
+        'name': '1',
+
+        'age': '2',
+
+        'fileToUpload' : await MultipartFile.fromFile(
+
+            path,
+
+            filename:filename,
+
+            contentType: new MediaType("image", "jpeg")
+
+        ),
+
+      });
+
+      Response response = await Dio().post('http://192.168.1.106/imgStore.php', data: formData);
+
+      print(response.data.toString());
+
+    } else {
+
+    }
 
   }
 }
