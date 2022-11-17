@@ -239,7 +239,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
         },
       );
     } else {
-      var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/lib/add_student.php';
+      var url = 'http://localhost/lib/add_student.php';
 
       final response = await http.post(
         Uri.parse(url),
@@ -399,7 +399,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
         },
       );
     } else {
-      var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/lib/add_teacher.php';
+      var url = 'http://localhost/lib/add_teacher.php';
 
       final response = await http.post(
         Uri.parse(url),

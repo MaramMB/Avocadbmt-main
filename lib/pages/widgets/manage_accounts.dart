@@ -356,7 +356,7 @@ class _managepageState extends State<managepage> {
   }
 
   getStudents() async {
-    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/get_students.php';
+    var url = 'http://localhost/get_students.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;
@@ -366,7 +366,7 @@ class _managepageState extends State<managepage> {
   var searchController = TextEditingController();
 
   searchStudents() async {
-    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/search_student.php';
+    var url = 'http://localhost/search_student.php';
     var response = await http.post(
       Uri.parse(url),
       body: {
@@ -378,7 +378,7 @@ class _managepageState extends State<managepage> {
   }
 
   getTeachers() async {
-    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/get_teachers.php';
+    var url = 'http://localhost/get_teachers.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;

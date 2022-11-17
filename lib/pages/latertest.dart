@@ -233,7 +233,7 @@ class lettertest extends StatefulWidget {
 }
 
 class _lettertestState extends State<lettertest> {
-  String phpurl = "http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/spellRes.php";
+  String phpurl = "http://localhost/spellRes.php";
   bool dberror = false;
   Future<void> sendData(String letter , String result) async {
 

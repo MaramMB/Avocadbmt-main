@@ -10,15 +10,16 @@ if($val)
 {
 $word = $_POST["word"];
 $img = $_POST["imageByte"];
+$type = $_POST["type"];
 if($return["error"] == false){
     $word = mysqli_real_escape_string($link, $word);
     $img = mysqli_real_escape_string($link, $img);
 
     //escape inverted comma query conflict from string
-   
+
 
     $sql="INSERT into sounds(word,image,imageByte,audio,type,newsound,tid)
-    values ('$word','tetest','$img','tetest','B','0','1')";
+    values ('$word','tetest','$img','tetest','$type','1','1')";
 
     $res = mysqli_query($link, $sql);
     if($res){

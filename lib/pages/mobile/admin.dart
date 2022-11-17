@@ -236,7 +236,7 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
   }
 
   getTeachers() async {
-    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/lib/add_societis.php';
+    var url = 'http://localhost/lib/add_societis.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;

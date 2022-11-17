@@ -34,7 +34,7 @@ class _mobileloginState extends State<mobilelogin> {
   TextEditingController pass=TextEditingController();
   // String error = '';
   login()async {
-    const url="http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/log.php";
+    const url="http://localhost/log.php";
 
     final response =await http.post(Uri.parse(url),body:{
       "Email":email.text,

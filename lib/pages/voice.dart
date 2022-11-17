@@ -21,7 +21,7 @@ int _value = 1;
 late var imageb;
 Widget www = Text('sss');
 bool isA=true;
-final SnameCont = TextEditingController();
+var SnameCont = TextEditingController();
 
 class voicex extends StatefulWidget {
   const voicex({Key? key}) : super(key: key);
@@ -34,7 +34,7 @@ class _voicexState extends State<voicex> {
   File? image;
   addSound(String x , String img,String type)async{
     print (x);
-    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/imageStore.php';
+    var url = 'http://localhost/imageStore.php';
     var response = await http.post(Uri.parse(url), body :{
       'word': x,
       'imageByte': img,
@@ -59,7 +59,7 @@ class _voicexState extends State<voicex> {
       x="B";
 
     }
-    var url = 'http://192.168.1.106/getSound.php';
+    var url = 'http://localhost/getSound.php';
     var response = await http.post(Uri.parse(url), body :{
       'type': x
     });
@@ -73,6 +73,8 @@ class _voicexState extends State<voicex> {
 
   }
   int _selectedType = 1;
+  bool secT=false;
+  bool imgUp = false;
   TextStyle unselectedTypeTextStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
@@ -82,7 +84,26 @@ class _voicexState extends State<voicex> {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
+ @override
+  void initState() {
+   if(secT){
+     setState((){
+       isA=false;
+       _selectedType=0;
+       secT=false;
+     });
 
+   }
+   else{
+     setState((){
+       isA=true;
+       _selectedType=1;
+       secT=true;
+     });
+   }
+
+    super.initState();
+  }
 
   late final check=getData(1);
   late final check2=getData(2);
@@ -243,8 +264,9 @@ class _voicexState extends State<voicex> {
                                                     )),
                                                 FloatingActionButton(child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
 
+
                                                   showDialog(barrierDismissible: true,context: context, builder: (_) {
-                                                    if(imageb!= null){  return AlertDialog(
+                                                    if(imgUp){  return AlertDialog(
                                                       title: Image.memory(base64Decode(imageb)),
                                                     );}
                                                     else return AlertDialog(title: Text('لا توجد صورة'),);
@@ -252,17 +274,25 @@ class _voicexState extends State<voicex> {
                                                   });
                                                 }),
                                                 ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
+                                                  setState(() {
+                                                    isA=false;
+                                                    imgUp=false;
+                                                    SnameCont.text='';
+                                                    imageb='';
+                                                  });
                                                   addSound(SnameCont.text,imageb,'A');
 
                                                 }
                                                   , child: Text('حفظ'),),
                                                 SizedBox(height: 20,),
                                                 ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
-                                                  Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
-                                                    setState(() {
 
+                                                  Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
+                                                      setState(() {
+                                                        secT=true;
                                                     });
                                                   });
+
 
                                                 }
                                                   , child: Text('إغلاق'),),
@@ -609,13 +639,20 @@ class _voicexState extends State<voicex> {
                                             }
                                             , child: Text('حفظ'),),
                                             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
+
                                              Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
                                                setState(() {
-
+                                                 isA=false;
+                                                 imgUp=false;
+                                                 SnameCont.text='';
+                                                 imageb='';
                                                });
+
                                              });
 
+
                                             }
+
                                               , child: Text('إغلاق'),),
 
 
@@ -808,7 +845,7 @@ Future PickImage() async {
      setState(() {
        imageb=base64Encode(imageTemp!);
        www = Text('data');
-
+        imgUp=true;
      });
 
       return imageTemp;
