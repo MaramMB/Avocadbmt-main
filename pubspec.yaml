@@ -61,9 +61,6 @@ dependencies:
   video_player: ^2.4.7
   intl: ^0.17.0
   responsive_builder: ^0.4.3
-  either_dart: ^0.3.0
-  awesome_dialog: ^3.0.2
-  shared_preferences: ^2.0.15
 #  wave_progress_bars: ^0.1.0
 #  wave_progress_bars: ^0.0.1
 dev_dependencies:

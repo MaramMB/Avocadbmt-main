@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../rowbar.dart';
-import '../../widgets/manage_accounts.dart';
 // import 'package:intl/intl.dart';
 
 enum SingingCharacterTeacher { Male, Female }
@@ -18,14 +17,14 @@ enum SingingCharacterStudent { Male, Female }
 
 enum SingingCharacterProblem { hear, pron }
 
-class AddAccountForm extends StatefulWidget {
-  const AddAccountForm({Key? key}) : super(key: key);
+class AddScociety extends StatefulWidget {
+  const AddScociety({Key? key}) : super(key: key);
 
   @override
-  State<AddAccountForm> createState() => _AddAccountFormState();
+  State<AddScociety> createState() => _AddScocietyState();
 }
 
-class _AddAccountFormState extends State<AddAccountForm> {
+class _AddScocietyState extends State<AddScociety> {
   String gender = '';
   int _selectedType = 2;
   TextStyle unselectedTypeTextStyle = const TextStyle(
@@ -55,7 +54,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
             ),
             Container(
               height: MediaQuery.of(context).size.height / 1.2,
-              width: MediaQuery.of(context).size.width / 1.5,
+              width: MediaQuery.of(context).size.width / 1.8,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -67,95 +66,16 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     // textDirection: TextDirection.rtl,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text("اضافه حساب",
+                      const Text("اضافه جمعيه",
                           style: TextStyle(
                               color: Colors.green,
                               fontSize: 30,
                               fontFamily: "DroidKufi",
                               fontWeight: FontWeight.w700)),
                       const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            // زر الاستيعابية
-                            onPressed: () {
-                              setState(() {
-                                _selectedType = 1;
-                                /*displayedList = soundList
-                                    .where((element) => element.sounds.type == soundType.asteabe)
-                                    .toList();*/
-                              });
-                            },
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              minimumSize:
-                                  MaterialStateProperty.all(const Size(85, 42)),
-                              textStyle: MaterialStateProperty.all(
-                                  const TextStyle(
-                                      fontFamily: "DroidKufi", fontSize: 20)),
-                              backgroundColor: MaterialStateProperty.all(
-                                _selectedType == 1 ? Colors.green : Colors.grey,
-                              ),
-                            ),
-                            child: Text(
-                              'اضافه معلم',
-                              style: _selectedType == 1
-                                  ? selectedTypeTextStyle
-                                  : unselectedTypeTextStyle,
-                            ),
-                          ),
-                          const SizedBox(width: 5),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedType = 0;
-                                /*  displayedList = soundList
-                                    .where((element) => element.sounds.type == soundType.beae)
-                                    .toList();*/
-                              });
-                            },
-                            style: ButtonStyle(
-                              // زر البيئية
-
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              minimumSize: MaterialStateProperty.all(
-                                  const Size(110, 42)),
-                              textStyle: MaterialStateProperty.all(
-                                  const TextStyle(
-                                      fontFamily: "DroidKufi", fontSize: 20)),
-                              backgroundColor: MaterialStateProperty.all(
-                                _selectedType == 0 ? Colors.green : Colors.grey,
-                              ),
-                            ),
-                            child: Text(
-                              'اضافه طالب',
-                              style: _selectedType == 0
-                                  ? selectedTypeTextStyle
-                                  : unselectedTypeTextStyle,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
                         height: 20,
                       ),
-                      _selectedType == 0
-                          ? studentwidget()
-                          : _selectedType == 1
-                              ? teacherwidget()
-                              : Container(),
+                      teacherwidget()
                     ],
                   ),
                 ),
@@ -256,9 +176,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
           'ptype': pro.toString().split('.').last,
         },
       );
-      
       var data = jsonDecode(response.body);
-     
       if (data == 'Success') {
         Navigator.of(context, rootNavigator: true).pop();
         showDialog(
@@ -274,10 +192,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                         onTap: () {
                           Navigator.pop(context);
                           Fluttertoast.showToast(msg: "تم اضافه الطالب بنجاح");
-                          Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return const MyApp();
-                }));
+                          Navigator.pop(context);
                         },
                         child: Container(
                             decoration: BoxDecoration(
@@ -316,58 +231,8 @@ class _AddAccountFormState extends State<AddAccountForm> {
           },
         );
       } else {
-       Navigator.of(context, rootNavigator: true).pop();
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
-              actions: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Fluttertoast.showToast(msg: "تم اضافه الطالب بنجاح");
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10)),
-                            height: 40,
-                            width: 100,
-                            child: Center(
-                                child: Text(
-                              "نعم",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            )))),
-                    InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10)),
-                            height: 40,
-                            width: 100,
-                            child: Center(
-                                child: Text(
-                              "لا",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            )))),
-                  ],
-                ),
-              ],
-            );
-          },
-        );
+        Navigator.of(context, rootNavigator: true).pop();
+        // print('fsdsdfs');
       }
     }
   }
@@ -506,51 +371,23 @@ class _AddAccountFormState extends State<AddAccountForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        namefield(field: "اسم المعلم"),
+        namefield(field: "اسم الجمعيه"),
         textfieldwidget(
           type: TextInputType.name,
           ontap: () {},
           wid: 300,
           hei: 40,
           nameController: nameController,
-          text: "أسم المعلم",
+          text: "أسم الجمعيه",
         ),
-        namefield(field: "رقم الهويه"),
+        namefield(field: "العنوان"),
         textfieldwidget(
           type: TextInputType.name,
           ontap: () {},
           wid: 300,
           hei: 40,
           nameController: IDTeacherController,
-          text: "رقم الهويه",
-        ),
-        namefield(field: "رقم الحساب"),
-        Padding(
-          padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-          child: Container(
-            height: 40,
-            width: 300,
-            child: TextField(
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-              ],
-              keyboardType:
-                  TextInputType.numberWithOptions(signed: true, decimal: true),
-              onTap: () {},
-              textAlign: TextAlign.right,
-              controller: accountnumberController,
-              obscureText: false,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 2.0, color: backgreen),
-                ),
-                hintText: "رقم الحساب",
-              ),
-            ),
-          ),
+          text: "العنوان",
         ),
         namefield(field: "رقم الهاتف"),
         Padding(
@@ -580,61 +417,25 @@ class _AddAccountFormState extends State<AddAccountForm> {
             ),
           ),
         ),
-        namefield(field: "البريد الالكتروني"),
+        namefield(field: "تاريخ الجمعيه"),
         textfieldwidget(
-          type: TextInputType.emailAddress,
-          ontap: () {},
+          type: TextInputType.datetime,
+          ontap: () {
+            _pickDate();
+          },
+          nameController: dateinput,
           wid: 300,
           hei: 40,
-          nameController: emailController,
-          text: "البريد الالكتروني",
+          text: "تاريخ الجمعيه",
         ),
-        namefield(field: "التخصص"),
+        namefield(field: "أسم المدير"),
         textfieldwidget(
           type: TextInputType.text,
           ontap: () {},
           wid: 300,
           hei: 40,
           nameController: specificController,
-          text: "التخصص",
-        ),
-        namefield(field: "الجنس"),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 50,
-              width: 200,
-              child: RadioListTile(
-                  activeColor: backgreen,
-                  title: Text("ذكر"),
-                  value: SingingCharacterTeacher.Male,
-                  groupValue: _character,
-                  selected: _character == SingingCharacterTeacher.Male,
-                  onChanged: (SingingCharacterTeacher? value) {
-                    setState(() {
-                      _character = value;
-                    });
-                  }),
-            ),
-            SizedBox(
-              height: 50,
-              width: 150,
-              child: Center(
-                child: RadioListTile(
-                    activeColor: backgreen,
-                    title: Text("انثى"),
-                    value: SingingCharacterTeacher.Female,
-                    groupValue: _character,
-                    selected: _character == SingingCharacterTeacher.Female,
-                    onChanged: (SingingCharacterTeacher? value) {
-                      setState(() {
-                        _character = value;
-                      });
-                    }),
-              ),
-            ),
-          ],
+          text: "أسم المدير",
         ),
         Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -658,7 +459,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               height: 40,
               child: Center(
                 child: Text(
-                  "اضافه معلم",
+                  "اضافه جمعيه",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
