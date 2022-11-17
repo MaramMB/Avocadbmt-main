@@ -250,15 +250,11 @@ class _lettertestState extends State<lettertest> {
           dberror = true;
         });
       }else{
-
-
       }
-
     }else{
       //there is error
       setState(() {
         dberror = true;
-
       });
     }
   }

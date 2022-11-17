@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/homepage.dart';
 import 'package:flutter_application_1/pages/latter.dart';
+import 'package:flutter_application_1/pages/loginpage.dart';
 import 'package:flutter_application_1/pages/mainpage.dart';
+import 'package:flutter_application_1/pages/mobile/loginmobile.dart';
+import 'package:flutter_application_1/pages/mobile/mainmobailepage.dart';
+import 'package:flutter_application_1/pages/mobile/sidebar.dart';
 import 'package:flutter_application_1/pages/signup.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/speechtotext.dart';
+import 'package:flutter_application_1/pages/testeslog.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/pages/voice.dart';
 
@@ -19,7 +24,9 @@ class StartPoint extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BDTM',
       theme: ThemeData.light(),
-     home: sign(),
+     // home: testlog(title: '',),
+     //  home: mobilelogin(title: '',),
+      home: testlog(title: '',),
 
     );
   }

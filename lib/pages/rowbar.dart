@@ -199,7 +199,7 @@ class _SelectionButtonState extends State<SelectionButton> {
 
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return const MyApp();
+                  return const adminmanage();
                 }));
               },
               child: const Text(

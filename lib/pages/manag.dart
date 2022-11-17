@@ -6,29 +6,15 @@ import 'widgets/person_record.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class adminmanage extends StatefulWidget {
+  const adminmanage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<adminmanage> createState() => _adminmanageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _adminmanageState extends State<adminmanage> {
   int _selectedAccountType = 1;
 
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(

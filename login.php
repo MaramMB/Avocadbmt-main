@@ -1,19 +1,38 @@
 <?php
-// include("../connect.php");
-Access-Control-Allow-Origin: *
-Origin: <origin>
-Access-Control-Request-Method: <method>
+//include('localConnection.php');
+header('Access-Control-Allow-Origin: *');
 
+header('Access-Control-Allow-Methods: GET, POST');
 
-$host="localhost";
-$user="root";
-$pass="";
-$dbname="bdmtproject";
-$con=mysqli_connect($host,$user,$pass,$dbname);
-$sql="SELECT * FROM usersacounts ";
-$result=$con->query($sql);
-while($row=$result->fetch_assoc()){
-$data[]=$row;
+header("Access-Control-Allow-Headers: X-Requested-With");
+// header("content-type:application/json");
+$db = "bdmtproject";
+$dbuser = "root";
+$dbpassword = "";
+$dbhost = "localhost";
+$db = mysqli_connect($dbhost, $dbuser, $dbpassword, $db);
+if(!$db){
+echo "DB connection field";
 }
-echo json_encode($data);
+               $email=$_POST['Email'];
+               $pass=$_POST['pass'];
+               $userData = array();
+               $qu="SELECT * FROM usersacounts WHERE Email='$email' and Passward='$pass'";
+               $resu=mysqli_query($db,$qu);
+//                $userData = mysqli_fetch_assoc($qu);
+
+              if(mysqli_num_rows($resu)==1)
+              {
+                    echo json_encode("success");
+                    $sql = "SELECT * FROM usersacounts WHERE Email='$email'";
+                    $queryresult = mysqli_query($db,$sql);
+                    $userData = mysqli_fetch_array($queryresult);
+//                     echo json_encode($userData);
+
+              } else{
+                       echo json_encode("fail");
+                       exit();
+
+                   }
+                     mysqli_close($db); //close mysqli
 ?>
