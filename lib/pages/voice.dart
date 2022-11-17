@@ -34,7 +34,7 @@ class _voicexState extends State<voicex> {
   File? image;
   addSound(String x , String img,String type)async{
     print (x);
-    var url = 'http://192.168.1.106/imageStore.php';
+    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/imageStore.php';
     var response = await http.post(Uri.parse(url), body :{
       'word': x,
       'imageByte': img,

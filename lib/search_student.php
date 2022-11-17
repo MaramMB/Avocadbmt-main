@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header("Access-Control-Allow-Headers: X-Requested-With");
 // header('Content-Type: applcation/json; charset = utf-8');
-	$db = mysqli_connect('localhost','root','','new_donia');
+	$db = mysqli_connect('localhost','root','','bdmtproject');
 
 	if($db){
 

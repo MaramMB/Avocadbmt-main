@@ -1,9 +1,12 @@
 <?php
-	$db = mysqli_connect('localhost','root','','bdmtproject');
-	if (!$db) {
-		echo "Database connection faild";
-	}
-
+$db = "bdmtproject";
+$dbuser = "root";
+$dbpassword = "";
+$dbhost = "localhost";
+$db = mysqli_connect($dbhost, $dbuser, $dbpassword, $db);
+if(!$db){
+echo "DB connection field";
+}
 	// $id = $_POST['id'];
 	$name = $_POST['Society_Name'];
 	$Society_Id = $_POST['Society_Id'];

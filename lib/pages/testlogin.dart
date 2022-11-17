@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Profile/profile.dart';
 import 'package:flutter_application_1/pages/logindb.dart';
 import 'package:flutter_application_1/pages/manag.dart';
+import 'package:flutter_application_1/pages/widgets/manage_accounts.dart';
+import 'package:flutter_application_1/pages/widgets/societies.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 // import 'package:fluttertoast/fluttertoast.dart';
@@ -31,7 +33,7 @@ class _testlogState extends State<testlog> {
   TextEditingController pass=TextEditingController();
   // String error = '';
   login()async {
-    const url="http://192.168.1.114/Avocadbmt-main/Avocadbmt-main/log.php";
+    const url="http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/log.php";
 
     final response =await http.post(Uri.parse(url),body:{
       "Email":email.text,
@@ -61,12 +63,12 @@ class _testlogState extends State<testlog> {
         if(user['active'] == 'active') {
           if (user['Kind'] == 'manager') {
             Navigator.push(context,
-              MaterialPageRoute(builder: (context) => adminmanage(),),);
+              MaterialPageRoute(builder: (context) => managepage(),),);
             print(user['Kind']);
             print(user['active']);
           } else if (user['Kind'] == 'admin') {
             Navigator.push(
-              context, MaterialPageRoute(builder: (context) => personal(),),);
+              context, MaterialPageRoute(builder: (context) => Socieites(),),);
             print(user['Kind']);
           } else if (user['Kind'] == 'student') {
             Navigator.push(

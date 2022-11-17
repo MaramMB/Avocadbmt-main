@@ -104,21 +104,23 @@ class _adminmanageState extends State<adminmanage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:backgreen,
-      body: Container(
-        child:  Column(
-            children: [
-              const SelectionButton(),
-          const SizedBox(height: 25,),
-          buildTable(context),
-        ]),
+      body: Center(
+        child: Container(
+          child:  Column(
+              children: [
+                // const SelectionButton(),
+            const SizedBox(height: 25,),
+            buildTable(context),
+          ]),
+        ),
       ),
     );
   }
   // this container contains the person list and search bar and buttons
   Container buildTable(BuildContext context) {
     return  Container(
-      height: MediaQuery.of(context).size.height/1.15,
-      width: MediaQuery.of(context).size.width/1.9,
+      height: MediaQuery.of(context).size.height/1.1,
+      width: MediaQuery.of(context).size.width/1.8,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -128,10 +130,14 @@ class _adminmanageState extends State<adminmanage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text('ادارة الحسابات',
-                style: TextStyle(
-                    color: Colors.green,fontSize: 25,fontFamily: "DroidKufi",fontWeight: FontWeight.w700)
+              SizedBox(height: 10,),
+              Center(
+                child: const Text('ادارة الحسابات',
+                  style: TextStyle(
+                      color: Colors.green,fontSize: 35,fontFamily: "DroidKufi",fontWeight: FontWeight.w700)
+                ),
               ),
+              SizedBox(height: 15,),
               const Text('هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
                   ' من مولد النص العربي.',
                 style: TextStyle(

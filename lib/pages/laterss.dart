@@ -35,7 +35,7 @@ class letterss extends StatefulWidget {
 class _letterssState extends State<letterss> {
 
   Future<List<dynamic>?> getData() async{
-    var url = 'http://192.168.1.106/getSpell.php';
+    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/getSpell.php';
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(response.body);
 

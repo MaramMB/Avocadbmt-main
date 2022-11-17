@@ -159,7 +159,7 @@ class _AddScocietyState extends State<AddScociety> {
         },
       );
     } else {
-      var url = 'http://localhost/donia_code/add_student.php';
+      var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/lib/add_student.php';
 
       final response = await http.post(
         Uri.parse(url),
@@ -264,7 +264,7 @@ class _AddScocietyState extends State<AddScociety> {
         },
       );
     } else {
-      var url = 'http://localhost/donia_code/add_teacher.php';
+      var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/lib/add_teacher.php';
 
       final response = await http.post(
         Uri.parse(url),

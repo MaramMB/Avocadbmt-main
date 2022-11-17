@@ -3,12 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_society.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:flutter_application_1/pages/widgets/person_record.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import '../Account_Managment/Add_Account/add_account_form.dart';
 import '../models/person.dart';
-
-import 'person_record.dart';
 
 // import 'package:flutter_app_4/models/person.dart';
 // import 'package:flutter_app_4/screens/add_account_form.dart';
@@ -20,14 +19,14 @@ int _value = 1;
 
 // void main() => runApp(const MyApp());
 
-class Socieites extends StatefulWidget {
-  const Socieites({super.key});
+class Socieitesmobile extends StatefulWidget {
+  const Socieitesmobile({super.key});
 
   @override
-  State<Socieites> createState() => _SocieitesState();
+  State<Socieitesmobile> createState() => _SocieitesmobileState();
 }
 
-class _SocieitesState extends State<Socieites> {
+class _SocieitesmobileState extends State<Socieitesmobile> {
   int _selectedAccountType = 1;
 
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
@@ -64,13 +63,13 @@ class _SocieitesState extends State<Socieites> {
   Container buildTable(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height / 1.1,
-      width: MediaQuery.of(context).size.width / 1.8,
+      width: MediaQuery.of(context).size.width / 1.1,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(right: 25.0, top: 10),
+        padding: const EdgeInsets.only(right: 10.0, top: 10,left: 10),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -85,7 +84,7 @@ class _SocieitesState extends State<Socieites> {
               ),
               const Text(
                 'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
-                ' من مولد النص العربي.',
+                    ' من مولد النص العربي.',
                 style: TextStyle(
                     fontFamily: "DroidKufi",
                     fontSize: 12,
@@ -143,7 +142,7 @@ class _SocieitesState extends State<Socieites> {
                                 color: Colors.black12,
                               ),
                             ),
-                            height: 350,
+                            height: 310,
                             child: FutureBuilder(
                               future: getTeachers(),
                               builder: (BuildContext context,
@@ -171,13 +170,13 @@ class _SocieitesState extends State<Socieites> {
                                         return PersonRecord(
                                           person: Person(
                                             name: Customers[index]
-                                                ["Society_Name"],
+                                            ["Society_Name"],
                                             id: Customers[index]["Society_Id"],
                                             gender: Gender.male,
                                             address: Customers[index]
-                                                ["Society_Address"],
+                                            ["Society_Address"],
                                             phoneNumber: Customers[index]
-                                                ["Society_Phone"],
+                                            ["Society_Phone"],
                                             type: AccountType.teacher,
                                           ),
                                           isActive: true,
@@ -190,7 +189,7 @@ class _SocieitesState extends State<Socieites> {
                                             height: 40,
                                             width: 40,
                                             child:
-                                                CircularProgressIndicator()));
+                                            CircularProgressIndicator()));
                                   }
                                 }
                               },
@@ -208,7 +207,7 @@ class _SocieitesState extends State<Socieites> {
                               const EdgeInsets.only(
                                   top: 8, bottom: 10, right: 18, left: 20)),
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.green),
+                          MaterialStateProperty.all(Colors.green),
                         ),
                         onPressed: () {
                           Navigator.of(context).push(
@@ -237,7 +236,7 @@ class _SocieitesState extends State<Socieites> {
   }
 
   getTeachers() async {
-    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/get_societis.php';
+    var url = 'http://10.7.4.183/Avocadbmt-main/Avocadbmt-main/lib/add_societis.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;

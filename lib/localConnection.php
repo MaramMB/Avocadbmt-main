@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 header("Access-Control-Allow-Headers: X-Requested-With");
 
-  $db = "bdmtproject"; //database name
+  $db = "projectt"; //database name
   $dbuser = "root"; //database username
   $dbpassword = ""; //database password
   $dbhost = "localhost"; //database host

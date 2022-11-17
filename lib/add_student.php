@@ -1,10 +1,17 @@
 <?php
-	$db = mysqli_connect('localhost','root','','bdmtproject');
-	if (!$db) {
-		echo "Database connection faild";
-	}
+header('Access-Control-Allow-Origin: *');
 
-	// $id = $_POST['id'];
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
+$db = "bdmtproject";
+$dbuser = "root";
+$dbpassword = "";
+$dbhost = "localhost";
+$db = mysqli_connect($dbhost, $dbuser, $dbpassword, $db);
+if(!$db){
+echo "DB connection field";
+}
 	$name = $_POST['firstname'];
 	$father_name = $_POST['secname'];
 	$thirdname = $_POST['thirdname'];

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/expl.dart';
-
+import 'package:flutter_application_1/pages/mobile/mobileprofile.dart';
+const backgreen = Color.fromRGBO(131, 190, 99, 1);
 class mainmobile extends StatelessWidget {
   const mainmobile({Key? key}) : super(key: key);
 
@@ -16,25 +17,24 @@ class mainmobile extends StatelessWidget {
         hoverColor: Colors.transparent,
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const mobile(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class mobile extends StatefulWidget {
+  const mobile({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _mobileState createState() => _mobileState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _mobileState extends State<mobile> {
   int pageIndex = 0;
 
   final pages = [
     const Page1(),
     const Page2(),
-    const Page3(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -65,10 +65,14 @@ class _HomePageState extends State<HomePage> {
               enableFeedback: false,
               // onPressed: _openEndDrawer,
               onPressed: () {
-                setState(() {
-                  pageIndex = 2;
-                  // Page2();
-                });
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const mobileprofile();
+                }));
+                // setState(() {
+                //   pageIndex = 2;
+                //   // Page2();
+                // });
               },
               icon: pageIndex == 2
                   ? const Icon(
@@ -344,24 +348,5 @@ class _Page2State extends State<Page2> {
   }
 }
 
-class Page3 extends StatelessWidget {
-  const Page3({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xffC4DFCB),
-      child: Center(
-        child: Text(
-          "Page Number 3",
-          style: TextStyle(
-            color: Colors.green[900],
-            fontSize: 45,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
-}
 
