@@ -1,26 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/Profile/profile.dart';
-import 'package:flutter_application_1/pages/Videos/videos.dart';
-import 'package:flutter_application_1/pages/Videos/videos28..dart';
 import 'package:flutter_application_1/pages/dic.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/homepage.dart';
 import 'package:flutter_application_1/pages/latterexpl.dart';
-import 'package:flutter_application_1/pages/nexthomepage.dart';
-// import 'package:flutter_application_1/pages/personal.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/training_face/training_face.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
-
 import 'mainpage.dart';
 import 'manag.dart';
-
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-int _value = 0;
-
+int _value = 1;
 class SelectionButton extends StatefulWidget {
   const SelectionButton({super.key});
 
@@ -118,12 +109,6 @@ class _SelectionButtonState extends State<SelectionButton> {
 
                     DropdownMenuItem(
                       alignment: Alignment.centerRight,
-                      value: 0,
-                      enabled:true,
-                      child: Text("قائمة التدريبات"),
-                    ),
-                    DropdownMenuItem(
-                      alignment: Alignment.centerRight,
                       value: 1,
                       child: Text("تدريبات نطق الحروف"),
                     ),
@@ -186,37 +171,37 @@ class _SelectionButtonState extends State<SelectionButton> {
               ),
             ),
           ),
-          Container(
-            decoration: const BoxDecoration(
-              border: Border(left: BorderSide(color: Colors.black12,width: 0.5),right: BorderSide(color: Colors.black12,width: 0.5)),
-            ),
-            child: TextButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.white),
-                padding: MaterialStateProperty.all(const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15.0, bottom: 15.0)),
-                shape: MaterialStateProperty.all(
-                  const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(0.1),
-                          bottomLeft: Radius.circular(0.1))),),
-
-              ),
-              onPressed: () {
-                (context as Element).reassemble();
-
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return const MyApp();
-                }));
-              },
-              child: const Text(
-                "إدارة الحسابات",
-                style: TextStyle(color: blak, fontFamily: "DroidKufi"),
-              ),
-            ),
-          ),
+          // Container(
+          //   decoration: const BoxDecoration(
+          //     border: Border(left: BorderSide(color: Colors.black12,width: 0.5),right: BorderSide(color: Colors.black12,width: 0.5)),
+          //   ),
+          //   child: TextButton(
+          //     style: ButtonStyle(
+          //       backgroundColor: MaterialStateColor.resolveWith(
+          //               (states) => Colors.white),
+          //       padding: MaterialStateProperty.all(const EdgeInsets.only(
+          //           left: 15.0, right: 15.0, top: 15.0, bottom: 15.0)),
+          //       shape: MaterialStateProperty.all(
+          //         const RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.only(
+          //                 bottomRight: Radius.circular(0.1),
+          //                 bottomLeft: Radius.circular(0.1))),),
+          //
+          //     ),
+          //     onPressed: () {
+          //       (context as Element).reassemble();
+          //
+          //       Navigator.of(context)
+          //           .push(MaterialPageRoute(builder: (context) {
+          //         return const adminmanage();
+          //       }));
+          //     },
+          //     child: const Text(
+          //       "إدارة الحسابات",
+          //       style: TextStyle(color: blak, fontFamily: "DroidKufi"),
+          //     ),
+          //   ),
+          // ),
           TextButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateColor.resolveWith(

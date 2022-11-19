@@ -1,8 +1,8 @@
-import 'dart:html';
 
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/soundrecourd.dart';
 import 'package:flutter_application_1/pages/soundtype.dart';
@@ -11,13 +11,17 @@ import 'package:flutter_application_1/Components.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+late var imageb;
+Widget www = Text('sss');
 bool isA=true;
-final SnameCont = TextEditingController();
+var SnameCont = TextEditingController();
 
 class voicex extends StatefulWidget {
   const voicex({Key? key}) : super(key: key);
@@ -27,6 +31,19 @@ class voicex extends StatefulWidget {
 }
 
 class _voicexState extends State<voicex> {
+  File? image;
+  addSound(String x , String img,String type)async{
+    print (x);
+    var url = 'http://localhost/imageStore.php';
+    var response = await http.post(Uri.parse(url), body :{
+      'word': x,
+      'imageByte': img,
+      'type': type,
+    });
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      print(data.toString());}
+  }
   Future<List<dynamic>?> getData(int type) async{
     String x;
     if(type==1){
@@ -42,7 +59,7 @@ class _voicexState extends State<voicex> {
       x="B";
 
     }
-    var url = 'http://192.168.1.106/getSound.php';
+    var url = 'http://localhost/getSound.php';
     var response = await http.post(Uri.parse(url), body :{
       'type': x
     });
@@ -56,6 +73,8 @@ class _voicexState extends State<voicex> {
 
   }
   int _selectedType = 1;
+  bool secT=false;
+  bool imgUp = false;
   TextStyle unselectedTypeTextStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
@@ -65,7 +84,26 @@ class _voicexState extends State<voicex> {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
+ @override
+  void initState() {
+   if(secT){
+     setState((){
+       isA=false;
+       _selectedType=0;
+       secT=false;
+     });
 
+   }
+   else{
+     setState((){
+       isA=true;
+       _selectedType=1;
+       secT=true;
+     });
+   }
+
+    super.initState();
+  }
 
   late final check=getData(1);
   late final check2=getData(2);
@@ -101,6 +139,7 @@ class _voicexState extends State<voicex> {
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
                             );
                           },),
 
@@ -133,10 +172,11 @@ class _voicexState extends State<voicex> {
                                 crossAxisCount: 3,
                                 crossAxisSpacing: 20),
                             itemCount: length, itemBuilder: (context, index) {
-                            return soundsWidget(
+                            return soundsWidget(  
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
                             );
                           },),
 
@@ -187,15 +227,93 @@ class _voicexState extends State<voicex> {
                             children: [
                               Row(
                                 children: [
-                                  const Spacer(),
-                                  const Spacer(),
+                                  FloatingActionButton(backgroundColor: Colors.green, // زر اختيار الصورة
+                                      child:Icon(Icons.add_outlined),onPressed: (){
+                                        showDialog(barrierDismissible: false,context: context, builder: (_)=>AlertDialog(
+                                          title: Container(
+                                            child: Column(
+                                              children: [
+                                                TextField(
+
+                                                  style: TextStyle(
+                                                    fontFamily: "DroidKufi",
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                  controller: SnameCont,
+                                                  autofocus: false,
+                                                  maxLength: 20,
+                                                  decoration: InputDecoration(
+                                                    hintText: 'اسم الصوت',
+                                                    enabledBorder:OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Colors.green, width: 2),
+                                                    ),
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                ),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
+                                                    ,onPressed: () {
+                                                      //getHttp();
+                                                      PickImage();
+
+                                                    }, child: Row(
+                                                      children: [
+                                                        Icon(Icons.upload),
+                                                        Text('أختيار صورة'),
+
+                                                      ],
+                                                    )),
+                                                FloatingActionButton(child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
+
+
+                                                  showDialog(barrierDismissible: true,context: context, builder: (_) {
+                                                    if(imgUp){  return AlertDialog(
+                                                      title: Image.memory(base64Decode(imageb)),
+                                                    );}
+                                                    else return AlertDialog(title: Text('لا توجد صورة'),);
+
+                                                  });
+                                                }),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
+                                                  setState(() {
+                                                    isA=false;
+                                                    imgUp=false;
+                                                    SnameCont.text='';
+                                                    imageb='';
+                                                  });
+                                                  addSound(SnameCont.text,imageb,'A');
+
+                                                }
+                                                  , child: Text('حفظ'),),
+                                                SizedBox(height: 20,),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
+
+                                                  Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
+                                                      setState(() {
+                                                        secT=true;
+                                                    });
+                                                  });
+
+
+                                                }
+                                                  , child: Text('إغلاق'),),
+
+
+                                              ],
+                                            ),
+                                          ),
+
+                                        ));
+
+
+                                      }),
+                                  const Spacer(flex: 3,),
                                   const Text("التدريبات الصوتية",
                                       style: TextStyle(
                                           color: Colors.green,
                                           fontSize: 30,
                                           fontFamily: "DroidKufi",
                                           fontWeight: FontWeight.w700)),
-                                  const Spacer(),
+                                  const Spacer(flex: 2,),
                                   TextButton(
                                     // زر بدأ الاختبار
                                     onPressed: () {
@@ -388,6 +506,7 @@ class _voicexState extends State<voicex> {
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
                             );
                           },),
 
@@ -424,6 +543,7 @@ class _voicexState extends State<voicex> {
                               Name: snapshot.data![index]['word'],
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
                             );
                           },),
 
@@ -474,7 +594,7 @@ class _voicexState extends State<voicex> {
                             children: [
                               Row(
                                 children: [
-                                  FloatingActionButton(backgroundColor: Colors.green,
+                                  FloatingActionButton(backgroundColor: Colors.green, // زر اختيار الصورة
                                       child:Icon(Icons.add_outlined),onPressed: (){
                                     showDialog(barrierDismissible: false,context: context, builder: (_)=>AlertDialog(
                                       title: Container(
@@ -499,13 +619,43 @@ class _voicexState extends State<voicex> {
                                             ),
                                             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
                                            ,onPressed: () {
-                                              getHttp();
+                                              //getHttp();
+                                                  PickImage();
+
                                                 }, child: Row(
                                              children: [
                                                Icon(Icons.upload),
                                                Text('أختيار صورة'),
                                              ],
-                                           ))
+                                           )),
+                                            FloatingActionButton(child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
+                                              showDialog(barrierDismissible: true,context: context, builder: (_)=>AlertDialog(
+                                               title: Image.memory(base64Decode(imageb)),
+                                              ));
+                                            }),
+                                            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
+                                              addSound(SnameCont.text,imageb,'B');
+
+                                            }
+                                            , child: Text('حفظ'),),
+                                            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
+
+                                             Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
+                                               setState(() {
+                                                 isA=false;
+                                                 imgUp=false;
+                                                 SnameCont.text='';
+                                                 imageb='';
+                                               });
+
+                                             });
+
+
+                                            }
+
+                                              , child: Text('إغلاق'),),
+
+
                                           ],
                                         ),
                                       ),
@@ -687,8 +837,35 @@ class _voicexState extends State<voicex> {
 
 
   }
+Future PickImage() async {
+    try {
+      final image =  await FilePicker.platform.pickFiles(type: FileType.any, allowMultiple: false);
+      if (image == null) return;
+      final imageTemp = image.files.first.bytes;
+     setState(() {
+       imageb=base64Encode(imageTemp!);
+       www = Text('data');
+        imgUp=true;
+     });
 
-  void getHttp() async {
+      return imageTemp;
+
+      setState(() {
+        //this.image =  imageTemp;
+       // ConvertImage(imageTemp);
+      });
+    } on PlatformException catch (e){
+      print(e);
+    }
+}
+Future ConvertImage(File image) async {
+  Image.memory(await image.readAsBytes());
+
+  Uint8List imageBytes = await image.readAsBytes();
+    String base64 = base64Encode(imageBytes);
+    print(base64);
+  }
+ void getHttp() async {
 
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 

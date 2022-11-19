@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/expl.dart';
-
+import 'package:flutter_application_1/pages/mobile/mobileprofile.dart';
+const backgreen = Color.fromRGBO(131, 190, 99, 1);
 class mainmobile extends StatelessWidget {
   const mainmobile({Key? key}) : super(key: key);
 
@@ -16,27 +17,25 @@ class mainmobile extends StatelessWidget {
         hoverColor: Colors.transparent,
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const mobile(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class mobile extends StatefulWidget {
+  const mobile({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _mobileState createState() => _mobileState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _mobileState extends State<mobile> {
   int pageIndex = 0;
 
   final pages = [
     const Page1(),
     const Page2(),
-    const Page3(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,10 +63,16 @@ class _HomePageState extends State<HomePage> {
           children: [
             IconButton(
               enableFeedback: false,
+              // onPressed: _openEndDrawer,
               onPressed: () {
-                setState(() {
-                  pageIndex = 2;
-                });
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const mobileprofile();
+                }));
+                // setState(() {
+                //   pageIndex = 2;
+                //   // Page2();
+                // });
               },
               icon: pageIndex == 2
                   ? const Icon(
@@ -260,63 +265,88 @@ class Page1 extends StatelessWidget {
     );
   }
 }
-
-class Page2 extends StatelessWidget {
+class Page2 extends StatefulWidget {
   const Page2({Key? key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Drawer(
-        child: ListView(
-          children: [
-            // UserAccountsDrawerHeader(accountName:"" , accountEmail: accountEmail)
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
-                Icon( Icons.arrow_drop_down,color: Colors.white,),
-                SizedBox(width: 5,),
-                Text("مرام البدارين",style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontFamily: "DroidKufi"),),
-                SizedBox(width: 5,),
-                CircleAvatar(backgroundImage:AssetImage("img/avocado.png"),radius: 16.7 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10,
-                    // vertical: 20
-                  ),    ),
-                // Image.asset("img/avocado.png",width: 30,)
-              ],
-            ),
-          ],
-        ),
-
-      ),
-    );
-  }
+  State<Page2> createState() => _Page2State();
 }
 
-class Page3 extends StatelessWidget {
-  const Page3({Key? key}) : super(key: key);
-
+class _Page2State extends State<Page2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xffC4DFCB),
-      child: Center(
-        child: Text(
-          "Page Number 3",
-          style: TextStyle(
-            color: Colors.green[900],
-            fontSize: 45,
-            fontWeight: FontWeight.w500,
-          ),
+      child: Drawer(
+        elevation: 10.0,
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade500
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: NetworkImage('https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+                    radius: 40.0,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Tom Cruise',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 25.0
+                        ),
+                      ),
+                      SizedBox(height: 10.0),
+                      Text('tomcruise@gmail.com',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 14.0
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+
+            //Here you place your menu items
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home Page', style: TextStyle(fontSize: 18)),
+              onTap: () {
+                // Here you can give your route to navigate
+
+              },
+            ),
+            Divider(height: 3.0),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings', style: TextStyle(fontSize: 18)),
+              onTap: () {
+                // Here you can give your route to navigate
+
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.close),
+              title: Text('Close Drawer', style: TextStyle(fontSize: 18)),
+              onTap: () {
+                // Here you can give your route to navigate
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+
 

@@ -1,4 +1,5 @@
 <?php
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header("Access-Control-Allow-Headers: X-Requested-With");
@@ -12,3 +13,4 @@ header("Access-Control-Allow-Headers: X-Requested-With");
         { die("Connection failed: " . $conn->connect_error); }
     $conn-> set_charset("utf8");
 ?>
+

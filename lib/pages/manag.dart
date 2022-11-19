@@ -6,29 +6,15 @@ import 'widgets/person_record.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class adminmanage extends StatefulWidget {
+  const adminmanage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<adminmanage> createState() => _adminmanageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _adminmanageState extends State<adminmanage> {
   int _selectedAccountType = 1;
 
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
@@ -118,21 +104,23 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:backgreen,
-      body: Container(
-        child:  Column(
-            children: [
-              const SelectionButton(),
-          const SizedBox(height: 25,),
-          buildTable(context),
-        ]),
+      body: Center(
+        child: Container(
+          child:  Column(
+              children: [
+                // const SelectionButton(),
+            const SizedBox(height: 25,),
+            buildTable(context),
+          ]),
+        ),
       ),
     );
   }
   // this container contains the person list and search bar and buttons
   Container buildTable(BuildContext context) {
     return  Container(
-      height: MediaQuery.of(context).size.height/1.15,
-      width: MediaQuery.of(context).size.width/1.9,
+      height: MediaQuery.of(context).size.height/1.1,
+      width: MediaQuery.of(context).size.width/1.8,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -142,10 +130,14 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text('ادارة الحسابات',
-                style: TextStyle(
-                    color: Colors.green,fontSize: 25,fontFamily: "DroidKufi",fontWeight: FontWeight.w700)
+              SizedBox(height: 10,),
+              Center(
+                child: const Text('ادارة الحسابات',
+                  style: TextStyle(
+                      color: Colors.green,fontSize: 35,fontFamily: "DroidKufi",fontWeight: FontWeight.w700)
+                ),
               ),
+              SizedBox(height: 15,),
               const Text('هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
                   ' من مولد النص العربي.',
                 style: TextStyle(

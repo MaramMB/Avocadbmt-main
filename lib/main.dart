@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/homepage.dart';
-import 'package:flutter_application_1/pages/latertest.dart';
-import 'package:flutter_application_1/pages/latter.dart';
-import 'package:flutter_application_1/pages/mainpage.dart';
-import 'package:flutter_application_1/pages/signup.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
-import 'package:flutter_application_1/pages/speechtotext.dart';
-import 'package:flutter_application_1/pages/testlogin.dart';
+import 'package:flutter_application_1/pages/mobile/admin.dart';
+import 'package:flutter_application_1/pages/mobile/homepagemobile.dart';
+import 'package:flutter_application_1/pages/mobile/loginmobile.dart';
+import 'package:flutter_application_1/pages/mobile/mainmobailepage.dart';
+import 'package:flutter_application_1/pages/mobile/managemobile.dart';
 import 'package:flutter_application_1/pages/voice.dart';
-
-import 'insertTest.dart';
+// import 'package:flutter_application_1/pages/mobile/mainmobailepage.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 
 void main() {
@@ -22,7 +20,13 @@ class StartPoint extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BDTM',
       theme: ThemeData.light(),
-     home: voicex(),
+        home: ScreenTypeLayout.builder(
+          // mobile: (BuildContext context) => const HomemobailPage(uname: null,),
+          mobile: (BuildContext context) => mobilelogin(title: '',),
+          tablet: (BuildContext context) => const HomemobailPage(uname: null,),
+          //desktop: (BuildContext context) => const HomePage(uname: "",),
+          desktop: (BuildContext context) => const voicex(),
+        ),
 
     );
   }

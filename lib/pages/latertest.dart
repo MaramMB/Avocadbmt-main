@@ -233,7 +233,7 @@ class lettertest extends StatefulWidget {
 }
 
 class _lettertestState extends State<lettertest> {
-  String phpurl = "http://192.168.1.106/spellRes.php";
+  String phpurl = "http://localhost/spellRes.php";
   bool dberror = false;
   Future<void> sendData(String letter , String result) async {
 
@@ -246,11 +246,9 @@ class _lettertestState extends State<lettertest> {
       print(res.body); //print raw response on console
       var data = json.decode(res.body); //decoding json to array
       if(data["error"]){
-        if (this.mounted) {
-          setState(() {
-            dberror = true;
-          });
-        }
+        setState(() {
+          dberror = true;
+        });
       }else{
 
 
@@ -258,11 +256,10 @@ class _lettertestState extends State<lettertest> {
 
     }else{
       //there is error
-      if (this.mounted){
-        setState(() {
-          dberror = true;
-        });
-      }
+      setState(() {
+        dberror = true;
+
+      });
     }
   }
   @override
@@ -373,11 +370,12 @@ class _lettertestState extends State<lettertest> {
                 Visibility(
                   visible: isCorrect,
                   child: ElevatedButton(
-                    onPressed: () async {
+                    onPressed: () {
                       (context as Element).reassemble();
-                      var  count = 0;
-                      Navigator.popUntil(context, (route) {return count++ == 2;});
-
+                      var count = 0;
+                      Navigator.popUntil(context, (route) {
+                        return count++ == 2;
+                      });
                       setState(() {
                         isCorrect = false;
                       });
@@ -423,8 +421,8 @@ class _lettertestState extends State<lettertest> {
               _text = val.recognizedWords;
               if (_text==letters[Lindex]['word']){
                 print('Correct !');
-                sendData(letters[Lindex]['letter']!,'true');
                 setState(() {
+                  sendData(letters[Lindex]['letter']!,'true');
                   isCorrect=true;
                   Status = "عمل رائع !";
                 });
@@ -452,7 +450,11 @@ class _lettertestState extends State<lettertest> {
       _speech.stop();
     }
   }
-
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
 }
 

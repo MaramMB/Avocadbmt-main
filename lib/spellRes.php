@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 
 header("Access-Control-Allow-Headers: X-Requested-With");
 
-$db = "project"; //database name
+$db = "projectt"; //database name
 $dbuser = "root"; //database username
 $dbpassword = ""; //database password
 $dbhost = "localhost"; //database host
@@ -23,10 +23,6 @@ $val = isset($_POST["letter"]) && isset($_POST["result"]);
 
        $letter = $_POST["letter"]; //grabing the data from headers
        $result = $_POST["result"];
-
-
-
-
        //if there is no any error then ready for database write
        if($return["error"] == false){
             $letter = mysqli_real_escape_string($link, $letter);

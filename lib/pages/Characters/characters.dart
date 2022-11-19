@@ -27,48 +27,183 @@ class _sptestState extends State<sptest> {
     _loading = false;
     _progressValue = 0.0;
   }
-/*late List<Map <String,String>> b =[
-  {
-    'name':'donia',
-    'image':'img/img'
-  },
-  {
-    'name':'donia',
-    'image':'img/img'
-  },
-  {
-    'name':'donia',
-    'image':'img/img'
-  },
 
-];
-  b[0]['name']; //donia
-  b[0]['image']; //img/img*/
   int index = 0;
   var names = [
-    "طائره",
-    "نمله",
-    "تفاح",
+    "سجادة",
+    "بقرة",
+    "شوكة",
+    "حليب",
+    "شمس",
+    "شطيرة",
+    "غراب",
+    "قهوة",
+    "دجاج",
+    "مواصلات",
+    "رئيس",
+    "استحمام",
+    "منزل",
+    "شباك",
+    "الطقس",
+    "ريشة",
+    "حيوانات",
+    "الوان",
     "موز",
+    "مكتب",
+    "عصا",
+    "خلاط",
+    "أسد",
+    "رمان",
+    "كرسي",
+    "ذرة",
+    "رسالة",
+    "نظارة",
+    " أطار",
+    "كأس حليب",
+    "مضرب",
+    "ماء",
+    "مزهرية",
+    "بطاقة",
+    "شارع",
+    "بيض",
+    "جبنة",
+    "خيار",
+    "زهور",
+    "بيانو",
+    "مزرعة",
+    "خشب",
+    "عجل",
+    "اناناس",
+    "صندوق",
+    "قلم",
+    "ديك",
+    "بصل",
+    "أرنب",
+    "سفينة",
+    "فأر",
+    "سمك",
+    "تين",
+    "مذياع",
+    "حلزون",
+    "عسل",
+    "لحمة",
+    "قبعة",
+    "ورقة",
+    "مصباح",
+    "ببغاء",
+    "زيت",
+    "طائرة",
+    "نملة",
+    "تفاحة",
+    "يد",
+    "بطة",
+    "هدية",
+    "سلم",
+    "ضفدع",
+    "عنب",
+    "صمغ",
+    "معلقة",
+    "وسادة",
+    "بطيخ",
     "جرس",
+    "هاتف",
+    "مفتاح",
     "عصفور",
-    "فراشه",
-    "ازرار",
-    "كيك"
+    "فراشة",
+    " ثعلب",
+    " فستان",
+    "افوكادو",
+    "كيكة"
   ];
   var images = [
+    "carbet.png",
+    "ca.png",
+    "aaa.png",
+    "milk.png",
+    "shamos.png",
+    "sa.png",
+    "cr.png",
+    "co.png",
+    "dag.png",
+    "transportation.jpeg",
+    "president.png",
+    "tub.jpg",
+    "home.jpeg",
+    "wind.png",
+    "climate.jpg",
+    "fea.png",
+    "animals.jpeg",
+    "colors.jpeg",
+    "ba.png",
+    "Desk.jpg",
+    "cane.jpg",
+    "mixer.jpg",
+    "leon.png",
+    "pomegranate.jpg",
+    "chair.jpg",
+    "corn.jpg",
+    "envelope.jpg",
+    "Eyeglasses.jpg",
+    "frame.jpg",
+    "leb.png",
+    "pad.png",
+    "Water.jpg",
+    "vase.jpg",
+    "ticket.jpg",
+    "Street.jpg",
+    "eggs.jpg",
+    "cheese.jpg",
+    "Cucumber.png",
+    "flo.png",
+    "pia.png",
+    "plough.jpg",
+    "wood.jpg",
+    "tir.png",
+    "ananas-removebg-preview.png",
+    "treas.png",
+    "pencil.jpg",
+    "rooster.jpg",
+    "onion.png",
+    "rabbit.png",
+    "Stea.png",
+    "mouse.png",
+    "Fish.jpg",
+    "Figs.jpg",
+    "radio.jpg",
+    "snail.jpg",
+    "honey.jpg",
+    "meat.jpg",
+    "hat.jpg",
+    "paper.jpg",
+    "ll.png",
+    "parrot.jpg",
+    "oil.jpg",
     "airplane.jpg",
     "ant.jpg",
     "apple.jpg",
-    "banana.jpg",
+    "hand.jpg",
+    "D.png",
+    "gift.jpg",
+    "ladder.jpg",
+    "frog.jpg",
+    "Grape.png",
+    "Glue.png",
+    "spoon.jpg",
+    "Pillow.jpg",
+    "waterm.png",
     "bell.jpg",
-    "bird.jpg",
-    "Butterfly.png",
-    "button.jpg",
+    "ipho.png",
+    "key.jpg",
+    "BRIDE.png",
+    "B.png",
+    "fox.png",
+    "DREES.png",
+    "maram.png",
     "cake.jpg"
   ];
   var errors = [];
   var truee = [];
+  bool active = true;
 
   @override
   Widget build(BuildContext context) {
@@ -162,56 +297,68 @@ class _sptestState extends State<sptest> {
                                           )),
                                         ),
                                       ]),
-                                      Container(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            ButtonBar(
-                                              children: [
-                                                IconButton(
-                                                    onPressed: () {
-                                                      if (index == 8) {
-                                                        truee.add(1);
-                                                        myDiealog();
-                                                      } else {
-                                                        setState(() {
-                                                          _loading = !_loading;
-                                                          index++;
+                                      Visibility(
+                                        visible: active,
+                                        child: Container(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ButtonBar(
+                                                children: [
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        if (index == 83) {
                                                           truee.add(1);
-                                                          _updateProgress();
-                                                        });
-                                                      }
-                                                    },
-                                                    iconSize: 82,
-                                                    icon: Image.asset(
-                                                        "img/btick.png")),
-                                                const SizedBox(
-                                                  width: 130,
-                                                ),
-                                                IconButton(
-                                                    onPressed: () {
-                                                      if (index == 8) {
-                                                        errors
-                                                            .add(names[index]);
-                                                        myDiealog();
-                                                      } else {
-                                                        setState(() {
-                                                          _loading = !_loading;
-                                                          index++;
+                                                          setState(() {
+                                                            active = false;
+                                                          });
+                                                          myDiealog();
+                                                        } else {
+                                                          setState(() {
+                                                            truee.add(1);
+                                                            _loading =
+                                                                !_loading;
+                                                            index++;
+
+                                                            _updateProgress();
+                                                          });
+                                                        }
+                                                      },
+                                                      iconSize: 82,
+                                                      icon: Image.asset(
+                                                          "img/btick.png")),
+                                                  const SizedBox(
+                                                    width: 130,
+                                                  ),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        if (index == 83) {
                                                           errors.add(
                                                               names[index]);
+                                                          setState(() {
+                                                            active = false;
+                                                          });
+                                                          myDiealog();
+                                                        } else {
+                                                          setState(() {
+                                                            errors.add(
+                                                                names[index]);
+                                                            _loading =
+                                                                !_loading;
+                                                            index++;
 
-                                                          _updateProgress();
-                                                        });
-                                                      }
-                                                    },
-                                                    iconSize: 82,
-                                                    icon: Image.asset(
-                                                        "img/bcross.png")),
-                                              ],
-                                            ),
-                                          ],
+                                                            _updateProgress();
+                                                          });
+                                                        }
+                                                      },
+                                                      iconSize: 82,
+                                                      icon: Image.asset(
+                                                          "img/bcross.png")),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       )
                                     ]),
@@ -238,65 +385,74 @@ class _sptestState extends State<sptest> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text(
-            "تم الانتهاء من التدريب",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          scrollable: true,
+          content: Center(
+            child: Text(
+              "تم الانتهاء من التدريب",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
           ),
           actions: <Widget>[
-            Column(
-              children: [
-                Text(
-                  "نتيجتك من 9 هي : ${truee.length}",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "الأخطاء هي التالي  : ",
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 200,
-                  width: 300,
-                  child: ListView.builder(
-                      itemCount: errors.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (_, int index) {
-                        return Text(
-                          errors[index],
-                          style: TextStyle(fontSize: 20),
-                        );
-                      }),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      width: 200,
-                      height: 35,
-                      decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                        child: Text(
-                          "حسنا",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white),
+            Center(
+              child: Column(
+                children: [
+                  Text(
+                    "نتيجتك من 84 هي : ${truee.length}",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "الأخطاء هي التالي  : ",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 300,
+                    width: 300,
+                    child: Center(
+                      child: ListView.builder(
+                          itemCount: errors.length,
+                          shrinkWrap: true,
+                          // physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (_, int index) {
+                            return Center(
+                              child: Text(
+                                errors[index],
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            );
+                          }),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        width: 200,
+                        height: 35,
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Center(
+                          child: Text(
+                            "حسنا",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
                         ),
-                      ),
-                    )),
-              ],
+                      )),
+                ],
+              ),
             ),
           ],
         );
