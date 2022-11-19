@@ -27,6 +27,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
             $response[$i]["father_name"]=$row["secname"];
             $response[$i]["father_phone"]=$row["phone"];
             $response[$i]["ptype"]=$row["ptype"];
+            $response[$i]["image"]=$row["image"];
             $response[$i]["student_id"]=$row["Students_Id"];
             $i++;
         }

@@ -1,12 +1,14 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:image_picker_web/image_picker_web.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 import 'dart:html' as html;
-
+import 'package:http/http.dart' as http;
 import 'package:mime_type/mime_type.dart';
 import 'package:path/path.dart' as Path;
 
@@ -23,13 +25,21 @@ class personal extends StatefulWidget {
 }
 
 var emailController = TextEditingController();
+var ageController = TextEditingController();
+var nameController = TextEditingController();
+var fathernameController = TextEditingController();
+var genderController = TextEditingController();
+var dateboyController = TextEditingController();
 var phoneController = TextEditingController();
+var dateController = TextEditingController();
+var problemController = TextEditingController();
+var IDController = TextEditingController();
 
 // Booleans for check if edit or view
 bool email = true;
 bool phone = true;
 bool image = true;
-bool date = false;
+bool date = true;
 
 html.File? _cloudFile;
 var _fileBytes;
@@ -40,7 +50,7 @@ class _personalState extends State<personal> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             const SelectionButton(),
@@ -48,7 +58,7 @@ class _personalState extends State<personal> {
               height: 30,
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 1.2,
+              height: MediaQuery.of(context).size.height / 1.1,
               width: MediaQuery.of(context).size.width / 1.8,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -91,25 +101,26 @@ class _personalState extends State<personal> {
                                           borderRadius:
                                               BorderRadius.circular(30)),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(25),
-                                        child: imagevalue == null
-                                            ? Image.asset(
-                                                'img/avocado.png',
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5.7,
-                                                fit: BoxFit.fill,
-                                              )
-                                            : Image.memory(
-                                                imagevalue!,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5.7,
-                                                fit: BoxFit.fill,
-                                              ),
-                                      ),
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          child: imagevalue == null
+                                              ? Image.asset(
+                                                  'img/avocado.png',
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5.7,
+                                                  fit: BoxFit.fill,
+                                                )
+                                              // Image.network(
+                                              //   'http://localhost/tasneem/userImage/1.jpg',
+                                              //   width: MediaQuery.of(context)
+                                              //           .size
+                                              //           .width /
+                                              //       5.7,
+                                              //   fit: BoxFit.fill,
+                                              // )
+                                              : _image()),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -164,7 +175,7 @@ class _personalState extends State<personal> {
                                             padding: const EdgeInsets.only(
                                                 right: 15, left: 15, top: 5),
                                             child: Container(
-                                              height: 40,
+                                              height: 50,
                                               width: 200,
                                               child: TextField(
                                                 textAlign: TextAlign.right,
@@ -240,11 +251,15 @@ class _personalState extends State<personal> {
                                             padding: const EdgeInsets.only(
                                                 right: 15, left: 15, top: 5),
                                             child: Container(
-                                              height: 40,
+                                              height: 50,
                                               width: 200,
                                               child: TextField(
                                                 textAlign: TextAlign.right,
                                                 controller: phoneController,
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .allow(RegExp(r'[0-9]'))
+                                                ],
                                                 obscureText: false,
                                                 decoration: InputDecoration(
                                                   focusedBorder:
@@ -301,8 +316,9 @@ class _personalState extends State<personal> {
                                     ),
                                     // Card(shape:BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35),)),color: Colors.green, child: Icon(Icons.phone,size: 28)),
                                     // Card(shape:Border(left: Border.fromBorderSide(side)), child: Icon(Icons.phone,size: 25)),
-                                    const Text(
-                                      " 25/13/3133",
+
+                                    Text(
+                                      dateController.text,
                                       style: TextStyle(
                                           decoration: TextDecoration.none,
                                           color: Colors.black87,
@@ -328,8 +344,8 @@ class _personalState extends State<personal> {
                                   children: [
                                     Row(
                                       // textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text("احداما",
+                                      children: [
+                                        Text(nameController.text,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87,
@@ -343,8 +359,8 @@ class _personalState extends State<personal> {
                                     ),
                                     Row(
                                       textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text("ابو الاحداما",
+                                      children: [
+                                        Text(fathernameController.text,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87,
@@ -358,7 +374,62 @@ class _personalState extends State<personal> {
                                     ),
                                     Row(
                                       textDirection: TextDirection.rtl,
-                                      children: const [
+                                      children: [
+                                        Text(ageController.text,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text("سنين",
+                                            style: TextStyle(
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 12,
+                                    ),
+                                    Row(
+                                      textDirection: TextDirection.rtl,
+                                      children: [
+                                        Text(genderController.text,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 12,
+                                    ),
+                                    Row(
+                                      textDirection: TextDirection.rtl,
+                                      children: [
+                                        Text(dateController.text,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 12,
+                                    ),
+                                    Row(
+                                      textDirection: TextDirection.rtl,
+                                      children: [
                                         Text("",
                                             style: TextStyle(
                                               color: Colors.green,
@@ -366,7 +437,7 @@ class _personalState extends State<personal> {
                                               fontSize: 19.0,
                                               fontWeight: FontWeight.bold,
                                             )),
-                                        Text("767",
+                                        Text(IDController.text,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87,
@@ -380,60 +451,8 @@ class _personalState extends State<personal> {
                                     ),
                                     Row(
                                       textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text("ذكر",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black87,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                            )),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text(" 32 / 34 / 1321 ",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black87,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                            )),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text("",
-                                            style: TextStyle(
-                                              color: Colors.green,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                              fontWeight: FontWeight.bold,
-                                            )),
-                                        Text("723984937",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black87,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                            )),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text("السمع",
+                                      children: [
+                                        Text(problemController.text,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87,
@@ -565,17 +584,22 @@ class _personalState extends State<personal> {
                         visible: image && phone && email ? false : true,
                         child: Center(
                           child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                email = true;
-                                phone = true;
-                              });
-                              Fluttertoast.showToast(
-                                  msg: "تم تعديل البيانات بنجاح");
-                              // Navigator.of(context)
-                              //     .push(MaterialPageRoute(builder: (context) {
-                              //   return const edit();
-                              // }));
+                            onPressed: () async {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: SizedBox(
+                                        height: 100,
+                                        width: 100,
+                                        child: Center(
+                                            child:
+                                                CircularProgressIndicator())),
+                                  );
+                                },
+                              );
+
+                              await updateStudent();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
@@ -606,16 +630,101 @@ class _personalState extends State<personal> {
     );
   }
 
+  bool validateEmail(String? value) {
+    String pattern =
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?)*$";
+    RegExp regex = RegExp(pattern);
+    if (value == null || value.isEmpty || !regex.hasMatch(value))
+      return true;
+    else
+      return false;
+  }
+
+  Future<void> updateStudent() async {
+    if (emailController.text == '' ||
+        phoneController.text == '' ||
+        validateEmail(emailController.text)) {
+      Navigator.of(context, rootNavigator: true).pop();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text('الرجاء اضافه البريد الالكتروني  و رقم الهاتف'),
+            actions: <Widget>[
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'حسنا',
+                  style: TextStyle(color: Color(0xff34568B)),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      var url = 'http://localhost/tasneem/edit_student.php';
+      final response = await http.post(
+        Uri.parse(url),
+        body: jsonEncode({
+          "id": 1,
+          "phone": phoneController.text,
+          "email": emailController.text
+        }),
+      );
+
+      var data = jsonDecode(response.body);
+      if (data == 'Success') {
+        setState(() {
+          email = true;
+          phone = true;
+        });
+        Navigator.of(context, rootNavigator: true).pop();
+        Fluttertoast.showToast(msg: "تم تعديل بيانات الطالب بنجاح");
+      } else {
+        Navigator.of(context, rootNavigator: true).pop();
+      }
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     setControllers();
+    getUser();
+  }
+
+  getUser() async {
+    var url = 'http://localhost/tasneem/getUsers.php?id=1';
+
+    var response = await http.get(Uri.parse(url));
+    var res = jsonDecode(response.body);
+    var bytes = base64Decode(res[0]["image"]);
+    var ints = bytes.buffer.asUint8List();
+
+    setState(() {
+      emailController.text = res[0]["email"] ?? "";
+      phoneController.text = res[0]["phone"] ?? "";
+      dateController.text = res[0]["dob"] ?? "";
+      imagevalue = ints;
+      IDController.text = res[0]["student_id"] ?? "";
+      nameController.text = res[0]["name"] ?? "";
+      ageController.text = res[0]["age"].toString();
+      fathernameController.text = res[0]["father_name"] ?? "";
+      genderController.text = res[0]["gender"] == "male" ? "ذكر" : "انثى";
+      problemController.text =
+          res[0]["ptype"] == "hear" ? "مشكله بالسمع" : "مشكله بالنطق";
+    });
   }
 
   Uint8List? imagevalue;
 
-  // TO Change Image Profile Picture
+  
   uploadImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
@@ -624,12 +733,49 @@ class _personalState extends State<personal> {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      setState(() {
-        imagevalue = file.bytes;
-      });
+      var url = 'http://localhost/tasneem/uploadImage.php';
+
+      List<int> imageBytes = file.bytes!.toList();
+      String Image = base64Encode(imageBytes);
+
+      final response = await http.post(
+        Uri.parse(url),
+        body: jsonEncode({
+          "id": 1,
+          "image": Image,
+        }),
+      );
+
+      var data = jsonDecode(response.body);
+      if (data == 'Success') {
+        setState(() {
+          imagevalue = file.bytes;
+        });
+      }
     } else {
       // User canceled the picker
+      return;
     }
+  }
+
+  Widget _image() {
+    // replace 1 by user id to get user image after user login
+    var url = 'http://localhost/tasneem/userImage/1.jpg';
+
+    // var response = await http.get(Uri.parse(url));
+
+    return Image.memory(
+      imagevalue!,
+      width: MediaQuery.of(context).size.width / 5.7,
+      fit: BoxFit.fill,
+    );
+
+    // Image.network(
+    //         url,
+    //         width: MediaQuery.of(context).size.width / 5.7,
+    //         fit: BoxFit.fill,
+    //       )
+    //    ;
   }
 
   setControllers() {
