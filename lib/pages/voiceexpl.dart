@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voice.dart';
-import 'mainpage.dart';
-import 'manag.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+
 class voiceexp extends StatefulWidget {
   const voiceexp({Key? key}) : super(key: key);
 
@@ -65,7 +63,6 @@ class _voiceexpState extends State<voiceexp> {
                         const Text(
                             "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات ",
                             style: TextStyle(fontFamily: "DroidKufi")),
-
                         const SizedBox(
                           height: 30,
                         ),
@@ -81,7 +78,7 @@ class _voiceexpState extends State<voiceexp> {
                               backgroundColor: Colors.green,
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                                      BorderRadius.all(Radius.circular(10))),
                               elevation: 2.0,
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 35, vertical: 10),

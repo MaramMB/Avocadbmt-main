@@ -9,18 +9,16 @@ import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import 'mainpage.dart';
-import 'manag.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int index = 0;
-bool ShowMsg = false;
+bool _loading = false;
 double _progressValue = 0;
 bool isClicked = false;
-bool isEnd=false;
-int totalScore=0;
-late List<Map<String, Object>> testType;
+bool isEnd = false;
+int totalScore = 0;
 List<Map<String, Object>> be = const [
   {
     'audio': 'audio/rain.mp3',
@@ -28,146 +26,78 @@ List<Map<String, Object>> be = const [
       {'image': 'img/rain.gif', 'score': true},
       {'image': 'img/bcross.png', 'score': false},
       {'image': 'img/avocado.png', 'score': false},
-
     ],
   },
-
-  {
-    'audio': 'audio/avocado.mp3',
-    'answers': [
-      {'image': 'img/rain.gif', 'score': true},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': false},
-
-    ],
-  },
-
   {
     'audio': 'audio/rain.mp3',
     'answers': [
       {'image': 'img/rain.gif', 'score': true},
       {'image': 'img/bcross.png', 'score': false},
       {'image': 'img/avocado.png', 'score': false},
-
     ],
   },
-];
-List<Map<String, Object>> as = const [
-  {
-    'audio': 'audio/rain.mp3',
-    'answers': [
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': true},
-
-    ],
-  },
-
-  {
-    'audio': 'audio/avocado.mp3',
-    'answers': [
-      {'image': 'img/rain.gif', 'score': true},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': false},
-
-    ],
-  },
-
   {
     'audio': 'audio/rain.mp3',
     'answers': [
       {'image': 'img/rain.gif', 'score': true},
       {'image': 'img/bcross.png', 'score': false},
       {'image': 'img/avocado.png', 'score': false},
-
     ],
   },
 ];
 
 class betest extends StatefulWidget {
-   late int type;
-   betest({required this.type}){
+  betest({Key? key}) : super(key: key);
 
-     if(type==1)
-     {
-       testType = be;
-     }
-     else
-     {
-       testType = as;
-     }
-   }
-
-   @override
+  @override
   State<betest> createState() => _betestState();
 }
 
 class _betestState extends State<betest> {
-
-
   void initState() {
     super.initState();
+    _loading = false;
     _progressValue = 0.0;
   }
 
   //functions
-  void nextquestion()
-  {
-    audioPlayer.dispose();
-
-    if (isClicked==false)
-    {
-      audioPlayer.dispose();
-
-      setState((){
-      ShowMsg=true;
-      });
-      return;
-    }
-    if (index + 1 == testType.length )
-    {
-      setState((){
+  void nextquestion() {
+    if (index + 1 == be.length) {
+      setState(() {
         isClicked = true;
         isEnd = true;
-
-
       });
 
       // show dialog with the result **
-      showDialog(context: context, builder: (context)=> AlertDialog(
-        title: Container(
-          width: 100,
-          child: Center(
-            child: Text(
-              ' نتيجتك هي : $totalScore من ${testType.length} ',
-                style: TextStyle(
-                color: Colors.green,
-                fontSize: 20,
-                fontFamily: "DroidKufi",
-                fontWeight: FontWeight.w700),
-            ),
-          ),
-        ) ,
-      )
-      );
-    }
-    else
-    {
-      ShowMsg=false;
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Container(
+                  width: 100,
+                  child: Center(
+                    child: Text(
+                      ' نتيجتك هي : $totalScore من ${be.length} ',
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 20,
+                          fontFamily: "DroidKufi",
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                ),
+              ));
+    } else {
       index++;
     }
   }
 
-  void questionAnswered(bool? score)
-  {
-    setState((){
+  void questionAnswered(bool? score) {
+    setState(() {
       isClicked = true;
-      if (score!){
+      if (score!) {
         totalScore++;
       }
-
     });
-
   }
 
   @override
@@ -182,7 +112,7 @@ class _betestState extends State<betest> {
               height: 30,
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 1.15,
+              height: MediaQuery.of(context).size.height / 1.19,
               width: MediaQuery.of(context).size.width / 1.8,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -206,108 +136,122 @@ class _betestState extends State<betest> {
                               LinearPercentIndicator(
                                 width: MediaQuery.of(context).size.width / 2,
                                 // backgroundColor: Colors.grey,
-                                animateFromLastPercent: true,
-                                percent: ((index as double)+1)/(testType.length),
-                                 animation: true,
-                                lineHeight: 18.0,
-                                 animationDuration: 500,
+                                // progressColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                                percent: _progressValue,
+                                // animation: true,
+                                lineHeight: 20.0,
+                                // animationDuration: 2500,
                                 // percent: 0.8,
                                 center:
-                                Text((index+1).toString() , style: TextStyle(
-                                  color:  ((index as double)+1)/(testType.length) > 0.5 ? Colors.white : Colors.black
-                                  ,fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                ),),
+                                    Text("${(_progressValue * 84).round()}"),
                                 barRadius: const Radius.circular(15),
                                 linearStrokeCap: LinearStrokeCap.roundAll,
                                 progressColor: Colors.green,
                               ),
-                             const SizedBox(height: 20,),
-                             const Text("استمع الى الصوت واختر الصورة المناسبة",  style: TextStyle(
-                                 color: Colors.green,
-                                 fontSize: 25,
-                                 fontFamily: "DroidKufi",
-                                 fontWeight: FontWeight.w700)),
-                             const SizedBox(height: 35,),
-                              audio(path: testType[index]['audio'] as String),
-                             const SizedBox(height: 35,),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text(
+                                  "استمع الى الصوت واختر الصورة المناسبة",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 25,
+                                      fontFamily: "DroidKufi",
+                                      fontWeight: FontWeight.w700)),
+                              const SizedBox(
+                                height: 35,
+                              ),
+                              audio(path: be[index]['audio'] as String),
+                              const SizedBox(
+                                height: 35,
+                              ),
                               Row(
                                 children: [
-                                  const SizedBox(width: 15,),
-                                  ...(testType[index]['answers'] as List<Map<String, Object>>).map((answer) => Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 7),
-                                    child: Container(
-                                      decoration: BoxDecoration(
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  ...(be[index]['answers']
+                                          as List<Map<String, Object>>)
+                                      .map(
+                                    (answer) => Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 7),
+                                      child: Container(
+                                        decoration: BoxDecoration(
                                           border: Border.all(
-                                              color: isClicked? answer['score'] as bool ? Colors.green : Colors.red : Colors.black, width: 3.5
-                                          ),
-                                          borderRadius: BorderRadius.circular(30),
-
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
-
-                                          setState(() {
-                                            (context as Element).reassemble();
-
-                                            if (isClicked || isEnd)
-                                              {return;}
-                                            questionAnswered(answer['score'] as bool);
-                                          });
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(25),
-                                          child: Image.asset(
-                                            answer['image'] as String,
-                                            width: MediaQuery.of(context).size.width / 7,
-                                            fit: BoxFit.fill,
+                                              color: isClicked
+                                                  ? answer['score'] as bool
+                                                      ? Colors.green
+                                                      : Colors.red
+                                                  : Colors.black,
+                                              width: 3.5),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              if (isClicked || isEnd) {
+                                                return;
+                                              }
+                                              questionAnswered(
+                                                  answer['score'] as bool);
+                                            });
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                            child: Image.asset(
+                                              answer['image'] as String,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  7,
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
-
                                       ),
-
                                     ),
-                                  ),),
-
-
-
+                                  ),
                                 ],
                               ),
-                              const SizedBox(height: 35,),
+                              const SizedBox(
+                                height: 35,
+                              ),
                               ElevatedButton(
                                 onPressed: () {
                                   setState(() {
-                                    if(isEnd)
-                                      {
-                                        setState((){
-                                          index =0;
-                                          totalScore=0;
-                                          isEnd=false;
-                                        });
+                                    if (isEnd) {
+                                      setState(() {
+                                        index = 0;
+                                        totalScore = 0;
+                                        isEnd = false;
+                                      });
 
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(builder: (context) {
-
-                                          return  voicex();
-                                        }));
-                                      }
-                                    else {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(builder: (context) {
+                                        return voicex();
+                                      }));
+                                    } else {
                                       nextquestion();
                                       isClicked = false;
+                                      _loading = !_loading;
+                                      _updateProgress();
                                     }
                                   });
-
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: isEnd ? Colors.blueAccent : Colors.green,
+                                  backgroundColor:
+                                      isEnd ? Colors.blueAccent : Colors.green,
                                   shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
                                   elevation: 2.0,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 25, vertical: 5),
                                 ),
-                                child:  Text(
+                                child: Text(
                                     isEnd ? "العودة الى التدريب" : 'التالي',
                                     style: TextStyle(
                                       color: Colors.white,
@@ -315,14 +259,6 @@ class _betestState extends State<betest> {
                                       fontSize: 18.0,
                                     )),
                               ),
-                              SizedBox(height: 10,),
-                              Visibility(
-                                visible: ShowMsg ,
-                                  child: Text(" * قم بإختيار إجابة قبل الانتقال الى السؤال التالي " ,textDirection: TextDirection.rtl, style: TextStyle(
-                                    color: Colors.red[900],
-                                    fontFamily: "DroidKufi",
-
-                                  ),)),
                             ],
                           ),
                         ),
@@ -337,13 +273,32 @@ class _betestState extends State<betest> {
       ),
     );
   }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    audioPlayer.dispose();
-    super.dispose();
+
+  void downloadData() {
+    Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+      setState(() {
+        if (_progressValue == 1) {
+          timer.cancel();
+        } else {
+          _progressValue = _progressValue + 0.0119047619;
+        }
+      });
+    });
   }
 
-
-
+  void _updateProgress() {
+    const oneSec = const Duration(milliseconds: 100);
+    Timer.periodic(oneSec, (Timer t) {
+      setState(() {
+        _progressValue += 0.0119047619;
+        t.cancel();
+        // we "finish" downloading here
+        if (_progressValue.toStringAsFixed(1) == '1.0') {
+          _loading = false;
+          t.cancel();
+          return;
+        }
+      });
+    });
+  }
 }

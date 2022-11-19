@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/face.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
-import 'mainpage.dart';
-import 'manag.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -55,7 +51,6 @@ class _editState extends State<edit> {
                       height: 30,
                     ),
                     Row(
-
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
@@ -72,12 +67,15 @@ class _editState extends State<edit> {
                                   borderRadius: BorderRadius.circular(25),
                                   child: Image.asset(
                                     'img/avocado.png',
-                                    width: MediaQuery.of(context).size.width / 5.7,
+                                    width:
+                                        MediaQuery.of(context).size.width / 5.7,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 15,),
+                              const SizedBox(
+                                height: 15,
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -86,8 +84,7 @@ class _editState extends State<edit> {
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: Colors.green, width: 1.5),
-                                        borderRadius:
-                                        BorderRadius.circular(6)),
+                                        borderRadius: BorderRadius.circular(6)),
                                     child: const Icon(
                                       Icons.alternate_email,
                                       size: 25,
@@ -115,8 +112,7 @@ class _editState extends State<edit> {
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: Colors.green, width: 1.5),
-                                        borderRadius:
-                                        BorderRadius.circular(6)),
+                                        borderRadius: BorderRadius.circular(6)),
                                     child: const Icon(
                                       Icons.phone,
                                       size: 25,
@@ -145,8 +141,7 @@ class _editState extends State<edit> {
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: Colors.green, width: 1.5),
-                                        borderRadius:
-                                        BorderRadius.circular(6)),
+                                        borderRadius: BorderRadius.circular(6)),
                                     child: const Icon(
                                       Icons.person,
                                       size: 25,
@@ -168,10 +163,7 @@ class _editState extends State<edit> {
                               // ,child: Image.asset("img/avocado.png",width: MediaQuery.of(context).size.width/4.8,fit:BoxFit.cover,))
                             ],
                           ),
-
-
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Row(
@@ -183,214 +175,245 @@ class _editState extends State<edit> {
                                   // mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    const Text("احداما",style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
-                                      fontFamily: "DroidKufi",
-                                      fontSize: 19.0,
-                                    )),
-                                    const SizedBox(height: 12,),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text("ابو الاحداما",style: TextStyle(
+                                    const Text("احداما",
+                                        style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black87,
                                           fontFamily: "DroidKufi",
                                           fontSize: 19.0,
                                         )),
-                                      ],
+                                    const SizedBox(
+                                      height: 12,
                                     ),
-                                    const SizedBox(height: 12,),
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: const [
-                                        Text("", style: TextStyle(
-                                          color: Colors.green,
-                                          fontFamily: "DroidKufi",
-                                          fontSize: 19.0,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                        Text("767",style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                          fontFamily: "DroidKufi",
-                                          fontSize: 19.0,
-                                        )),
+                                        Text("ابو الاحداما",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
                                       ],
                                     ),
-                                    const SizedBox(height: 12,),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: const [
-                                        Text("ذكر",style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                          fontFamily: "DroidKufi",
-                                          fontSize: 19.0,
-                                        )),
+                                        Text("",
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                        Text("767",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
                                       ],
                                     ),
-                                    const SizedBox(height: 12,),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: const [
-
-                                        Text(" 32 / 34 / 1321 ",style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                          fontFamily: "DroidKufi",
-                                          fontSize: 19.0,
-                                        )),
+                                        Text("ذكر",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
                                       ],
                                     ),
-                                    const SizedBox(height: 12,),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: const [
-                                        Text("", style: TextStyle(
-                                          color: Colors.green,
-                                          fontFamily: "DroidKufi",
-                                          fontSize: 19.0,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                        Text("723984937",style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                          fontFamily: "DroidKufi",
-                                          fontSize: 19.0,
-                                        )),
+                                        Text(" 32 / 34 / 1321 ",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
                                       ],
                                     ),
-                                    const SizedBox(height: 12,),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: const [
-                                        Text("السمع",style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                          fontFamily: "DroidKufi",
-                                          fontSize: 19.0,
-                                        )),
+                                        Text("",
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                        Text("723984937",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
                                       ],
                                     ),
-
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Row(
+                                      textDirection: TextDirection.rtl,
+                                      children: const [
+                                        Text("السمع",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ),
-
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Row(
                                     textDirection: TextDirection.rtl,
                                     children: const [
-                                      Text(" : الاسم   ", style: TextStyle(
-                                        color: Colors.green,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 19.0,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                      Text(" : الاسم   ",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontFamily: "DroidKufi",
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                          )),
                                     ],
                                   ),
-                                  const SizedBox(height: 12,),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
                                   Row(
                                     textDirection: TextDirection.rtl,
                                     children: const [
-                                      Text(" : اسم الأب   ", style: TextStyle(
-                                        color: Colors.green,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 19.0,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                      Text(" : اسم الأب   ",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontFamily: "DroidKufi",
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                          )),
                                     ],
                                   ),
-                                  const SizedBox(height: 12,),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
                                   Row(
                                     textDirection: TextDirection.rtl,
                                     children: const [
-                                      Text(" : العمر   ", style: TextStyle(
-                                        color: Colors.green,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 19.0,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                      Text(" : العمر   ",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontFamily: "DroidKufi",
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                          )),
                                     ],
                                   ),
-                                  const SizedBox(height: 12,),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
                                   Row(
                                     textDirection: TextDirection.rtl,
                                     children: const [
-                                      Text(" : الجنس   ", style: TextStyle(
-                                        color: Colors.green,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 19.0,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                      Text(" : الجنس   ",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontFamily: "DroidKufi",
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                          )),
                                     ],
                                   ),
-                                  const SizedBox(height: 12,),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
                                   Row(
                                     textDirection: TextDirection.rtl,
                                     children: const [
-                                      Text(" : تاريخ الميلاد   ", style: TextStyle(
-                                        color: Colors.green,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 19.0,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                      Text(" : تاريخ الميلاد   ",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontFamily: "DroidKufi",
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                          )),
                                     ],
                                   ),
-                                  const SizedBox(height: 12,),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
                                   Row(
                                     textDirection: TextDirection.rtl,
                                     children: const [
-                                      Text(" : رقم الهوية   ", style: TextStyle(
-                                        color: Colors.green,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 19.0,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                      Text(" : رقم الهوية   ",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontFamily: "DroidKufi",
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                          )),
                                     ],
                                   ),
-                                  const SizedBox(height: 12,),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
                                   Row(
                                     textDirection: TextDirection.rtl,
                                     children: const [
-                                      Text("  : نقاط الضعف   ", style: TextStyle(
-                                        color: Colors.green,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 19.0,
-                                        fontWeight: FontWeight.bold,
-                                      )),
-
+                                      Text("  : نقاط الضعف   ",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontFamily: "DroidKufi",
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold,
+                                          )),
                                     ],
                                   ),
-
                                 ],
                               )
                             ],
                           ),
                         ),
-
-
                       ],
                     ),
-
                     const SizedBox(
                       height: 15,
                     ),
                     Center(
                       child: ElevatedButton(
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           shape: const RoundedRectangleBorder(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(10))),
+                                  BorderRadius.all(Radius.circular(10))),
                           elevation: 2.0,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 35, vertical: 10),

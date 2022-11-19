@@ -1,47 +1,37 @@
-import 'dart:html';
 import 'dart:math';
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-bool ch = false;
 // import 'package:wave_progress_bars/wave_progress_bars.dart';
-AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
 class audio extends StatefulWidget {
     late String path;
     audio( {required this.path} );
 
   @override
-  audioState createState() => audioState();
+  _audioState createState() => _audioState();
 }
 
-class audioState extends State<audio>
-    with TickerProviderStateMixin {
-  late AnimationController  iconController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 700)); // make sure u have flutter sdk > 2.12.0 (null safety)
+class _audioState extends State<audio>
+    with SingleTickerProviderStateMixin {
+  late AnimationController
+  iconController; // make sure u have flutter sdk > 2.12.0 (null safety)
 
   bool isAnimated = false;
   bool showPlay = true;
   bool shopPause = false;
 
-
-
+  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
 
   @override
   void initState() {
-
     // TODO: implement initState
     super.initState();
-    ch = true;
 
     iconController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 700));
 
-    audioPlayer.open(Audio(widget.path),autoStart: false,showNotification: false);
-
-  }
-  void test(){
-
+    audioPlayer.open(Audio(widget.path),autoStart: false,showNotification: true);
 
   }
   @override
@@ -94,7 +84,6 @@ class audioState extends State<audio>
   }
 
   void AnimateIcon() {
-
     setState(() {
       isAnimated = !isAnimated;
 
@@ -113,10 +102,8 @@ class audioState extends State<audio>
    @override
   void dispose() {
     // TODO: implement dispose
-     iconController = AnimationController(
-         vsync: this, duration: const Duration(milliseconds: 700));
+    iconController.dispose();
     audioPlayer.dispose();
-    iconController.stop();
     super.dispose();
   }
 

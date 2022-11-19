@@ -1,12 +1,18 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/widgets/user_profile.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 import '../models/person.dart';
 // import 'package:flutter_app_4/models/person.dart';
 
 class PersonRecord extends StatefulWidget {
-  PersonRecord({Key? key, required this.person, required this.isActive})
+  PersonRecord(
+      {Key? key, required this.person, this.ID, required this.isActive})
       : super(key: key);
   final Person person;
+  final ID;
   late bool isActive;
 
   @override
@@ -22,7 +28,6 @@ class _PersonRecordState extends State<PersonRecord> {
     }
     return "";
   }
-
 
   String get type {
     if (widget.person.type == AccountType.student) {
@@ -54,144 +59,18 @@ class _PersonRecordState extends State<PersonRecord> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         TextButton(
                           onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext ctx) {
-                                  return SimpleDialog(
-
-                                    title: const Text(
-                                      'الملف الشخصي',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: "Tajawal",
-                                      ),
-                                    ),
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(20),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                          children: [
-                                            // place the image widget here
-                                            //--------------------------------------------
-                                            //-------------------------------------------------
-                                            Text(
-                                              type,
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: 'الرقم:',
-                                                    style: const TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: widget.person.id,
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.normal,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: 'الاسم:',
-                                                    style: const TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                    children: [
-                                                      TextSpan(
-                                                          text: widget.person.name,
-                                                          style: const TextStyle(
-                                                            fontWeight:
-                                                            FontWeight.normal,
-                                                          )),
-                                                    ]),
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: 'الجنس:',
-                                                    style: const TextStyle(
-                                                        fontWeight:
-                                                        FontWeight.bold),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: gender,
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.normal,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: 'العنوان:',
-                                                    style: const TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: widget.person.address,
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.normal,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: widget.person.phoneNumber,
-                                                    children: const [
-                                                      TextSpan(
-                                                        text: ':رقم الهاتف',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                textAlign: TextAlign.right,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                });
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return UserProfile(
+                                  person: widget.person, id: widget.ID);
+                            }));
                           },
                           style: ButtonStyle(
                             minimumSize:
-                            MaterialStateProperty.all(const Size(90, 40)),
+                                MaterialStateProperty.all(const Size(90, 40)),
                             backgroundColor: MaterialStateProperty.all(
                               Colors.lightBlue,
                             ),
@@ -217,20 +96,22 @@ class _PersonRecordState extends State<PersonRecord> {
               ),
               // SizedBox(width: 20,),
               Container(
-                // color: Colors.white,
                 height: 65,
-                // color: Colors.white,
-                width: MediaQuery.of(context).size.width/5.8,
+                width: MediaQuery.of(context).size.width / 5.8,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: ListTile(
                     trailing: const CircleAvatar(
-                      backgroundColor:Color(75747400),
-                      child: Icon(Icons.account_circle_outlined,size: 60,color: Colors.green,),
+                      backgroundColor: Color(75747400),
+                      child: Icon(
+                        Icons.account_circle_outlined,
+                        size: 60,
+                        color: Colors.green,
+                      ),
                       // child: ClipOval(),
                     ),
                     title: Padding(
-                      padding: const EdgeInsets.only(top:12.0),
+                      padding: const EdgeInsets.only(top: 12.0),
                       child: Text(
                         widget.person.name,
                         textAlign: TextAlign.right,
@@ -241,7 +122,8 @@ class _PersonRecordState extends State<PersonRecord> {
                         ),
                       ),
                     ),
-                    subtitle: Text(widget.person.id, textAlign: TextAlign.right),
+                    subtitle:
+                        Text(widget.person.id, textAlign: TextAlign.right),
                   ),
                 ),
               ),
@@ -273,12 +155,85 @@ class _PersonRecordState extends State<PersonRecord> {
     );
   }
 
+  void confirmDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text("هل تريد بالتأكيد تعديل حاله الحساب ؟ "),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      updateActive();
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        height: 40,
+                        width: 100,
+                        child: const Center(
+                            child: Text(
+                          "نعم",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        )))),
+                InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        height: 40,
+                        width: 100,
+                        child: const Center(
+                            child: Text(
+                          "لا",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        )))),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> updateActive() async {
+    {
+      var url = 'http://localhost/donia_code/edit_user.php';
+      bool toggle = !widget.isActive;
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          "Id_Num": widget.ID.toString(),
+          "active": toggle ? "active" : "inactive",
+        },
+      );
+      var data = jsonDecode(response.body);
+      if (data == 'Success') {
+        setState(() {
+          widget.isActive = toggle;
+        });
+        Fluttertoast.showToast(msg: "تم تعديل حاله الحساب بنجاح");
+      } else {
+        Fluttertoast.showToast(
+            msg: "حدثت مشكلة اثناء التفعيل", backgroundColor: Colors.red);
+      }
+    }
+  }
+
   TextButton buildEnableButton() {
     return TextButton(
       onPressed: () {
-        setState(() {
-          widget.isActive = true;
-        });
+        confirmDialog();
       },
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all(const Size(90, 40)),
@@ -301,9 +256,7 @@ class _PersonRecordState extends State<PersonRecord> {
   TextButton buildDisableButton() {
     return TextButton(
       onPressed: () {
-        setState(() {
-          widget.isActive = false;
-        });
+        confirmDialog();
       },
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all(const Size(90, 40)),

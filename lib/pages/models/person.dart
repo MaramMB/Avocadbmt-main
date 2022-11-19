@@ -4,6 +4,7 @@ class Person {
   String name, id, address, phoneNumber;
   AccountType type;
   Gender gender;
+
   Person({
     required this.name,
     required this.id,

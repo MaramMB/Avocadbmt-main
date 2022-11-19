@@ -1,22 +1,16 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/expl.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
-import 'package:flutter_application_1/pages/laterss.dart';
-import 'package:flutter_application_1/pages/latertest.dart';
-import 'package:flutter_application_1/pages/latterexpl.dart';
-import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
-import 'package:flutter_application_1/pages/voiceexpl.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import 'manag.dart';
+import 'package:flutter_application_1/pages/latertest.dart';
+
+import 'package:flutter_application_1/pages/rowbar.dart';
+
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+<<<<<<< Updated upstream
 late String url;
 late int Lindex;
 List<Map<String, String>> letters = const [
@@ -202,18 +196,18 @@ int search (String s){
   }
   return x;
 }
+=======
+>>>>>>> Stashed changes
 
 class lettervideo extends StatefulWidget {
-  late String letter;
-  lettervideo({
-    required this.letter,
-  });
-  @override
+  const lettervideo({Key? key}) : super(key: key);
 
+  @override
   State<lettervideo> createState() => _lettervideoState();
 }
 
 class _lettervideoState extends State<lettervideo> {
+<<<<<<< Updated upstream
   late YoutubePlayerController _controller;
   @override
   void initState() {
@@ -231,6 +225,8 @@ class _lettervideoState extends State<lettervideo> {
       _controller.loadVideoByUrl(mediaContentUrl: letters[Lindex]['video']!);
     };
   }
+=======
+>>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -246,7 +242,7 @@ class _lettervideoState extends State<lettervideo> {
             width: MediaQuery.of(context).size.width / 1.8,
             decoration: const BoxDecoration(
               // color: Color(0x6BFFFFFF),
-              gradient:LinearGradient(
+              gradient: LinearGradient(
                 colors: [
                   Color(0x6BFFFFFF),
                   Color(0x5FC3FFC3),
@@ -260,34 +256,23 @@ class _lettervideoState extends State<lettervideo> {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
-                children:   [
-
-                  Row(
-                    children: [
-                      SizedBox(width: 50,),
-                      Spacer(),
-                      Text('حرف ال'+letters[Lindex]['name']!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontFamily: "DroidKufi",
-                              fontWeight: FontWeight.w700)),
-                      Spacer(),
-                      GestureDetector(
-                          onTap: (){
-                            Navigator.pop(context);
-                          },
-                          child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("حرف العين",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontFamily: "DroidKufi",
+                          fontWeight: FontWeight.w700)),
+                  const SizedBox(
+                    height: 5,
                   ),
-                  const SizedBox(height: 5,),
                   const Text("فيديو يوضح طريقة نطق الحرف",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 25,
                           fontFamily: "DroidKufi",
                           fontWeight: FontWeight.w700)),
+<<<<<<< Updated upstream
                   const SizedBox(height: 10,),
                   Container(
                     // color: Colors.green,
@@ -295,21 +280,40 @@ class _lettervideoState extends State<lettervideo> {
                     height: 300,
                     child: Center(
                       child: YoutubePlayer(controller: _controller,)
-                    ),
+=======
+                  const SizedBox(
+                    height: 10,
                   ),
-                  SizedBox(height: 30,),
+                  YoutubePlayer(
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    controller: YoutubePlayerController(
+                      initialVideoId:
+                          'https://www.youtube.com/watch?v=KXG-u2SOD7M', //Add videoID.
+                      flags: const YoutubePlayerFlags(
+                        hideControls: false,
+                        controlsVisibleAtStart: true,
+                        autoPlay: false,
+                        mute: false,
+                      ),
+>>>>>>> Stashed changes
+                    ),
+                    showVideoProgressIndicator: true,
+                    // progressIndicatorColor: AppColors.primary,
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return  lettertest(letter: letters[Lindex]['letter']!,);
+                        return const lettertest();
                       }));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       shape: const RoundedRectangleBorder(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(10))),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
                       elevation: 2.0,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 35, vertical: 12),
@@ -325,11 +329,8 @@ class _lettervideoState extends State<lettervideo> {
               ),
             ),
           )
-
         ],
       ),
     );
-
   }
 }
-

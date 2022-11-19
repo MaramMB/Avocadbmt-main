@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/face.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
-import 'mainpage.dart';
-import 'manag.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+
 class faceexp extends StatefulWidget {
   const faceexp({Key? key}) : super(key: key);
 
@@ -65,23 +62,22 @@ class _faceexpState extends State<faceexp> {
                         const Text(
                             "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات ",
                             style: TextStyle(fontFamily: "DroidKufi")),
-
                         const SizedBox(
                           height: 30,
                         ),
                         Center(
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return const faceex();
-                              }));
+                              // Navigator.of(context)
+                              //     .push(MaterialPageRoute(builder: (context) {
+                              //   return const TrainingFace();
+                              // }));
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                                      BorderRadius.all(Radius.circular(10))),
                               elevation: 2.0,
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 35, vertical: 10),

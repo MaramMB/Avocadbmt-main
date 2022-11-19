@@ -43,7 +43,7 @@ class _sptestState extends State<sptest> {
     "رئيس",
     "استحمام",
     "منزل",
-    "شباك",
+    "بنت",
     "الطقس",
     "ريشة",
     "حيوانات",
@@ -112,7 +112,7 @@ class _sptestState extends State<sptest> {
     "فراشة",
     " ثعلب",
     " فستان",
-    "افوكادو",
+    "ولد",
     "كيكة"
   ];
   var images = [
@@ -120,16 +120,16 @@ class _sptestState extends State<sptest> {
     "ca.png",
     "aaa.png",
     "milk.png",
-    "shamos.png",
+    "sha.png",
     "sa.png",
     "cr.png",
     "co.png",
-    "dag.png",
+    "da.jpg",
     "transportation.jpeg",
     "president.png",
     "tub.jpg",
     "home.jpeg",
-    "wind.png",
+    "girl-explain.png",
     "climate.jpg",
     "fea.png",
     "animals.jpeg",
@@ -145,8 +145,8 @@ class _sptestState extends State<sptest> {
     "envelope.jpg",
     "Eyeglasses.jpg",
     "frame.jpg",
-    "leb.png",
-    "pad.png",
+    "leben.jpg",
+    "paddle.jpg",
     "Water.jpg",
     "vase.jpg",
     "ticket.jpg",
@@ -154,18 +154,18 @@ class _sptestState extends State<sptest> {
     "eggs.jpg",
     "cheese.jpg",
     "Cucumber.png",
-    "flo.png",
-    "pia.png",
+    "flower.jpg",
+    "piano.jpg",
     "plough.jpg",
     "wood.jpg",
-    "tir.png",
+    "tire.jpg",
     "ananas-removebg-preview.png",
-    "treas.png",
+    "treasure.jpg",
     "pencil.jpg",
     "rooster.jpg",
     "onion.png",
     "rabbit.png",
-    "Stea.png",
+    "Steamship.jpg",
     "mouse.png",
     "Fish.jpg",
     "Figs.jpg",
@@ -175,14 +175,14 @@ class _sptestState extends State<sptest> {
     "meat.jpg",
     "hat.jpg",
     "paper.jpg",
-    "ll.png",
+    "light.jpg",
     "parrot.jpg",
     "oil.jpg",
     "airplane.jpg",
     "ant.jpg",
     "apple.jpg",
     "hand.jpg",
-    "D.png",
+    "Duck.jpg",
     "gift.jpg",
     "ladder.jpg",
     "frog.jpg",
@@ -190,15 +190,15 @@ class _sptestState extends State<sptest> {
     "Glue.png",
     "spoon.jpg",
     "Pillow.jpg",
-    "waterm.png",
+    "watermelon.png",
     "bell.jpg",
-    "ipho.png",
+    "iphone.jpg",
     "key.jpg",
-    "BRIDE.png",
-    "B.png",
+    "brid.jpg",
+    "Butterfly.png",
     "fox.png",
-    "DREES.png",
-    "maram.png",
+    "dress.png",
+    "boytalk.png",
     "cake.jpg"
   ];
   var errors = [];
@@ -316,11 +316,10 @@ class _sptestState extends State<sptest> {
                                                           myDiealog();
                                                         } else {
                                                           setState(() {
-                                                            truee.add(1);
                                                             _loading =
                                                                 !_loading;
                                                             index++;
-
+                                                            truee.add(1);
                                                             _updateProgress();
                                                           });
                                                         }
@@ -342,11 +341,11 @@ class _sptestState extends State<sptest> {
                                                           myDiealog();
                                                         } else {
                                                           setState(() {
-                                                            errors.add(
-                                                                names[index]);
                                                             _loading =
                                                                 !_loading;
                                                             index++;
+                                                            errors.add(
+                                                                names[index]);
 
                                                             _updateProgress();
                                                           });
@@ -386,11 +385,9 @@ class _sptestState extends State<sptest> {
       builder: (BuildContext context) {
         return AlertDialog(
           scrollable: true,
-          content: Center(
-            child: Text(
-              "تم الانتهاء من التدريب",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
+          content: Text(
+            "تم الانتهاء من التدريب",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           actions: <Widget>[
             Center(
