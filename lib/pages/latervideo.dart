@@ -23,170 +23,170 @@ List<Map<String, String>> letters = const [
   {
     'letter': 'أ',
     'name' : 'الف',
-    'video' : 'https://youtu.be/Vdch39qe5_0',
+    'video' : 'http://www.youtube.com/v/Vdch39qe5_0',
 
   },
   {
     'letter': 'ب',
     'name' : 'باء',
-    'video' : 'https://youtu.be/snBplpE9HPQ',
+    'video' : 'http://www.youtube.com/v/snBplpE9HPQ',
 
   },
   {
     'letter': 'ت',
     'name' : 'تاء',
-    'video' : 'https://youtu.be/NRAHR79_FD8',
+    'video' : 'http://www.youtube.com/v/NRAHR79_FD8',
 
   },
   {
     'letter': 'ث',
     'name' : 'ثاء',
-    'video' : 'https://youtu.be/N9cDgSjmX2E',
+    'video' : 'http://www.youtube.com/v/N9cDgSjmX2E',
 
   },
   {
     'letter': 'ج',
     'name' : 'جيم',
-    'video' : 'https://youtu.be/wUX_1m0NJ5o',
+    'video' : 'http://www.youtube.com/v/wUX_1m0NJ5o',
 
   },
   {
     'letter': 'ح',
     'name' : 'حاء',
-    'video' : 'https://youtu.be/569GkdUjPCo',
+    'video' : 'http://www.youtube.com/v/569GkdUjPCo',
 
   },
   {
     'letter': 'خ',
     'name' : 'خاء',
-    'video' : 'https://youtu.be/F-a8viuS4Bw',
+    'video' : 'http://www.youtube.com/v/F-a8viuS4Bw',
 
   },
   {
     'letter': 'د',
     'name' : 'دال',
-    'video' : 'https://youtu.be/p4mXFsF1FnY',
+    'video' : 'http://www.youtube.com/v/p4mXFsF1FnY',
 
   },
   {
     'letter': 'ذ',
     'name' : 'ذال',
-    'video' : 'https://youtu.be/SsVVi0EE7ow',
+    'video' : 'http://www.youtube.com/v/SsVVi0EE7ow',
 
   },
   {
     'letter': 'ر',
     'name' : 'راء',
-    'video' : 'https://youtu.be/1ZifdMbGjLE',
+    'video' : 'http://www.youtube.com/v/1ZifdMbGjLE',
 
   },
   {
     'letter': 'ز',
     'name' : 'زاي',
-    'video' : 'https://youtu.be/41LRxNKgnjk',
+    'video' : 'http://www.youtube.com/v/41LRxNKgnjk',
 
   },
   {
     'letter': 'س',
     'name' : 'سين',
-    'video' : 'https://youtu.be/0OIh22MQXtM',
+    'video' : 'http://www.youtube.com/v/0OIh22MQXtM',
 
   },
   {
     'letter': 'ش',
     'name' : 'شين',
-    'video' : 'https://youtu.be/EXwAa_MiRl0',
+    'video' : 'http://www.youtube.com/v/EXwAa_MiRl0',
 
   },
   {
     'letter': 'ص',
     'name' : 'صاد',
-    'video' : 'https://youtu.be/3usY54GS-0o',
+    'video' : 'http://www.youtube.com/v/3usY54GS-0o',
 
   },
   {
     'letter': 'ض',
     'name' : 'ضاد',
-    'video' : 'https://youtu.be/H6XWY5YiMVU',
+    'video' : 'http://www.youtube.com/v/H6XWY5YiMVU',
 
   },
   {
     'letter': 'ط',
     'name' : 'طاء',
-    'video' : 'https://youtu.be/Ueh2dk_sIw8',
+    'video' : 'http://www.youtube.com/v/Ueh2dk_sIw8',
 
   },
   {
     'letter': 'ظ',
     'name' : 'ظاء',
-    'video' : 'https://youtu.be/QjrWwoRwkfw',
+    'video' : 'http://www.youtube.com/v/QjrWwoRwkfw',
 
   },
   {
     'letter': 'ع',
     'name' : 'عين',
-    'video' : 'https://youtu.be/u_qPMA7fP48',
+    'video' : 'http://www.youtube.com/v/u_qPMA7fP48',
 
   },
   {
     'letter': 'غ',
     'name' : 'غين',
-    'video' : 'https://youtu.be/KXG-u2SOD7M',
+    'video' : 'http://www.youtube.com/v/KXG-u2SOD7M',
 
   },
   {
     'letter': 'ف',
     'name' : 'فاء',
-    'video' : 'https://youtu.be/my12d4B8als',
+    'video' : 'http://www.youtube.com/v/my12d4B8als',
 
   },
   {
     'letter': 'ق',
     'name' : 'قاف',
-    'video' : 'https://youtu.be/3vnUEw1L_RQ',
+    'video' : 'http://www.youtube.com/v/3vnUEw1L_RQ',
 
   },
   {
     'letter': 'ك',
     'name' : 'كاف',
-    'video' : 'https://youtu.be/WsQKd8U7Nnk',
+    'video' : 'http://www.youtube.com/v/WsQKd8U7Nnk',
 
   },
 
   {
     'letter': 'ل',
     'name' : 'لام',
-    'video' : 'https://youtu.be/lGhEbrUKKwQ',
+    'video' : 'http://www.youtube.com/v/lGhEbrUKKwQ',
 
   },
   {
     'letter': 'م',
     'name' : 'ميم',
-    'video' : 'https://youtu.be/dtC7i-qBccI',
+    'video' : 'http://www.youtube.com/v/dtC7i-qBccI',
 
   },
   {
     'letter': 'ن',
     'name' : 'نون',
-    'video' : 'https://youtu.be/J8R_RWnUf2E',
+    'video' : 'http://www.youtube.com/v/J8R_RWnUf2E',
 
   },
   {
     'letter': 'ه',
     'name' : 'هاء',
-    'video' : 'https://youtu.be/0x3OTCpJ4ys',
+    'video' : 'http://www.youtube.com/v/0x3OTCpJ4ys',
 
   },
   {
     'letter': 'و',
     'name' : 'واو',
-    'video' : 'https://youtu.be/o6__TLsUvxA',
+    'video' : 'http://www.youtube.com/v/o6__TLsUvxA',
 
   },
   {
     'letter': 'ي',
     'name' : 'ياء',
-    'video' : 'https://youtu.be/kLiXXdpGwqk',
+    'video' : 'http://www.youtube.com/v/kLiXXdpGwqk',
 
   },
 
@@ -228,7 +228,7 @@ class _lettervideoState extends State<lettervideo> {
         loop: false,
       ),
     )..onInit = (){
-      _controller.loadVideo("letters[Lindex]['video']");
+      _controller.loadVideoByUrl(mediaContentUrl: letters[Lindex]['video']!);
     };
   }
   @override
@@ -294,14 +294,7 @@ class _lettervideoState extends State<lettervideo> {
                     width: 592,
                     height: 300,
                     child: Center(
-                      child: YoutubePlayerScaffold( controller: _controller,  aspectRatio: 4 / 3,
-                        builder: (BuildContext context, Widget player) {
-                          return Scaffold(
-                            body: player,
-                          );
-                        },
-
-                      ),
+                      child: YoutubePlayer(controller: _controller,)
                     ),
                   ),
                   SizedBox(height: 30,),

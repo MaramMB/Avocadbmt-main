@@ -17,7 +17,7 @@ class _logintestState extends State<logintest> {
   TextEditingController email=TextEditingController();
   TextEditingController pass=TextEditingController();
    login()async {
-     const url="http://192.168.1.114/Avocadbmt-main/Avocadbmt-main/log.php";
+     const url="http://localhost/log.php";
 
      final response =await http.post(Uri.parse(url),body:{
        "Email":email.text,

@@ -68,6 +68,10 @@ dependencies:
   flutter_spinkit: ^5.1.0
   awesome_dialog: ^3.0.2
   auto_reload: ^1.1.0
+  path: ^1.8.2
+  firebase_core_web: ^2.0.1
+  firebase_core: ^2.3.0
+  firebase_storage: ^11.0.6
 #  wave_progress_bars: ^0.1.0
 #  wave_progress_bars: ^0.0.1
 dev_dependencies:

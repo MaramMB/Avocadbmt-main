@@ -1,5 +1,9 @@
 
+import 'dart:html' as html;
+
 import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +21,9 @@ import 'dart:io';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
+var bfile;
+var filename;
+var progress;
 int _value = 1;
 late var imageb;
 Widget www = Text('sss');
@@ -32,6 +39,31 @@ class voicex extends StatefulWidget {
 
 class _voicexState extends State<voicex> {
   File? image;
+  var audio;
+ Future getAudio () async {
+    FilePickerResult? file = await FilePicker.platform.pickFiles(type: FileType.audio, allowMultiple: false);
+      if (file!=null) {
+        setState(() {
+          bfile = file.files.first.bytes;
+          filename = file.files.first.name;
+        });
+
+      }
+      else {
+        // error please choose file !
+
+      }
+
+  }
+  void UploadFiles() async{
+    UploadTask task = FirebaseStorage.instance.ref().child("files/$filename").putData(bfile);
+    task.snapshotEvents.listen((event) {
+      setState(() {
+       progress = ((event.bytesTransferred.toDouble()/event.totalBytes.toDouble())*100).roundToDouble();
+       print(progress);
+      });
+    });
+  }
   addSound(String x , String img,String type)async{
     print (x);
     var url = 'http://localhost/imageStore.php';
@@ -65,7 +97,6 @@ class _voicexState extends State<voicex> {
     });
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      print(data.toString());
       return data;
 
     }
@@ -296,6 +327,8 @@ class _voicexState extends State<voicex> {
 
                                                 }
                                                   , child: Text('إغلاق'),),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { getAudio(); }, child: Text('اضافة صوت'),),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { UploadFiles(); }, child: Text('رفع'),),
 
 
                                               ],
@@ -863,7 +896,6 @@ Future ConvertImage(File image) async {
 
   Uint8List imageBytes = await image.readAsBytes();
     String base64 = base64Encode(imageBytes);
-    print(base64);
   }
  void getHttp() async {
 
