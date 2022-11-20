@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -7,6 +5,7 @@ import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_so
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
+import '../Account_Managment/Add_Account/add_account_form.dart';
 import '../models/person.dart';
 
 import 'person_record.dart';
@@ -17,17 +16,20 @@ import 'person_record.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
+int _value = 1;
 
 // void main() => runApp(const MyApp());
 
 class Socieites extends StatefulWidget {
-  const Socieites({Key? key}) : super(key: key);
+  const Socieites({super.key});
 
   @override
   State<Socieites> createState() => _SocieitesState();
 }
 
 class _SocieitesState extends State<Socieites> {
+  int _selectedAccountType = 1;
+
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
@@ -44,14 +46,16 @@ class _SocieitesState extends State<Socieites> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
-      body: Container(
-        child: Column(children: [
-          const SelectionButton(),
-          const SizedBox(
-            height: 25,
-          ),
-          buildTable(context),
-        ]),
+      body: Center(
+        child: Container(
+          child: Column(children: [
+            // const SelectionButton(),
+            const SizedBox(
+              height: 25,
+            ),
+            buildTable(context),
+          ]),
+        ),
       ),
     );
   }
@@ -59,8 +63,8 @@ class _SocieitesState extends State<Socieites> {
   // this container contains the person list and search bar and buttons
   Container buildTable(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.15,
-      width: MediaQuery.of(context).size.width / 1.9,
+      height: MediaQuery.of(context).size.height / 1.1,
+      width: MediaQuery.of(context).size.width / 1.8,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -71,12 +75,14 @@ class _SocieitesState extends State<Socieites> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text('اداره الجمعيات',
-                  style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 25,
-                      fontFamily: "DroidKufi",
-                      fontWeight: FontWeight.w700)),
+              Center(
+                child: const Text('اداره الجمعيات',
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 35,
+                        fontFamily: "DroidKufi",
+                        fontWeight: FontWeight.w700)),
+              ),
               const Text(
                 'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
                 ' من مولد النص العربي.',
@@ -139,17 +145,16 @@ class _SocieitesState extends State<Socieites> {
                             ),
                             height: 350,
                             child: FutureBuilder(
-                              future: getSocieties(),
+                              future: getTeachers(),
                               builder: (BuildContext context,
                                   AsyncSnapshot snapshot) {
                                 if (snapshot.connectionState ==
-                                        ConnectionState.waiting ||
-                                    !snapshot.hasData) {
+                                    ConnectionState.waiting) {
                                   return Container(
                                     width: double.infinity,
                                     height: MediaQuery.of(context).size.height *
                                         0.4,
-                                    child: const SpinKitPulse(
+                                    child: SpinKitPulse(
                                       color: Colors.green,
                                       size: 60,
                                     ),
@@ -161,8 +166,7 @@ class _SocieitesState extends State<Socieites> {
                                     return ListView.builder(
                                       itemCount: Customers.length,
                                       shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
+                                      physics: NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
                                         return PersonRecord(
                                           person: Person(
@@ -181,7 +185,7 @@ class _SocieitesState extends State<Socieites> {
                                       },
                                     );
                                   } else {
-                                    return const Center(
+                                    return Center(
                                         child: SizedBox(
                                             height: 40,
                                             width: 40,
@@ -232,13 +236,8 @@ class _SocieitesState extends State<Socieites> {
     );
   }
 
-<<<<<<< Updated upstream
   getTeachers() async {
     var url = 'http://localhost/get_societis.php';
-=======
-  getSocieties() async {
-    var url = 'http://localhost/donia_code/get_societis.php';
->>>>>>> Stashed changes
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;

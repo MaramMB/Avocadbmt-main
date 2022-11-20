@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -40,7 +39,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
   );
 
   final _formKey = GlobalKey<FormState>();
-  var backgreen = const Color.fromRGBO(131, 190, 99, 1);
+  var backgreen = Color.fromRGBO(131, 190, 99, 1);
   var height16 = const SizedBox(height: 16);
 
   @override
@@ -224,13 +223,13 @@ class _AddAccountFormState extends State<AddAccountForm> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: const Text('الرجاء تعبئه جميع الفراغات'),
+            content: Text('الرجاء تعبئه جميع الفراغات'),
             actions: <Widget>[
               InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text(
+                child: Text(
                   'حسنا',
                   style: TextStyle(color: Color(0xff34568B)),
                 ),
@@ -240,36 +239,33 @@ class _AddAccountFormState extends State<AddAccountForm> {
         },
       );
     } else {
-<<<<<<< Updated upstream
       var url = 'http://localhost/lib/add_student.php';
-=======
-      var url = 'http://localhost/donia_code/add_student.php';
-      final requestBody = {
-        "firstname": firstnameController.text,
-        "secname": secondnameController.text,
-        "thirdname": thirdnameController.text,
-        "familyname": lastnameController.text,
-        "DOB": dateinput.text,
-        "Gender": _characterstudent.toString().split('.').last,
-        "Address": addressstudentController.text,
-        "phone": familyphoneController.text,
-        "Students_Id": IDstudentController.text,
-        "ptype": pro.toString().split('.').last,
-        "img": ""
-      };
 
-      final response = await http.post(Uri.parse(url), body: requestBody);
->>>>>>> Stashed changes
-
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          'firstname': firstnameController.text,
+          'secname': secondnameController.text,
+          'thirdname': thirdnameController.text,
+          'familyname': lastnameController.text,
+          'DOB': dateinput.text,
+          'Gender': _characterstudent.toString().split('.').last,
+          'Address': addressstudentController.text,
+          'phone': familyphoneController.text,
+          'Students_Id': IDstudentController.text,
+          'ptype': pro.toString().split('.').last,
+        },
+      );
+      
       var data = jsonDecode(response.body);
-
+     
       if (data == 'Success') {
         Navigator.of(context, rootNavigator: true).pop();
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
+              content: Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
               actions: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -279,9 +275,9 @@ class _AddAccountFormState extends State<AddAccountForm> {
                           Navigator.pop(context);
                           Fluttertoast.showToast(msg: "تم اضافه الطالب بنجاح");
                           Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const MyApp();
-                          }));
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const MyApp();
+                }));
                         },
                         child: Container(
                             decoration: BoxDecoration(
@@ -289,7 +285,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                                 borderRadius: BorderRadius.circular(10)),
                             height: 40,
                             width: 100,
-                            child: const Center(
+                            child: Center(
                                 child: Text(
                               "نعم",
                               style: TextStyle(
@@ -306,7 +302,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                                 borderRadius: BorderRadius.circular(10)),
                             height: 40,
                             width: 100,
-                            child: const Center(
+                            child: Center(
                                 child: Text(
                               "لا",
                               style: TextStyle(
@@ -320,12 +316,12 @@ class _AddAccountFormState extends State<AddAccountForm> {
           },
         );
       } else {
-        Navigator.of(context, rootNavigator: true).pop();
+       Navigator.of(context, rootNavigator: true).pop();
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
+              content: Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
               actions: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -342,7 +338,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                                 borderRadius: BorderRadius.circular(10)),
                             height: 40,
                             width: 100,
-                            child: const Center(
+                            child: Center(
                                 child: Text(
                               "نعم",
                               style: TextStyle(
@@ -359,7 +355,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                                 borderRadius: BorderRadius.circular(10)),
                             height: 40,
                             width: 100,
-                            child: const Center(
+                            child: Center(
                                 child: Text(
                               "لا",
                               style: TextStyle(
@@ -387,13 +383,13 @@ class _AddAccountFormState extends State<AddAccountForm> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: const Text('الرجاء تعبئه جميع الفراغات'),
+            content: Text('الرجاء تعبئه جميع الفراغات'),
             actions: <Widget>[
               InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text(
+                child: Text(
                   'حسنا',
                   style: TextStyle(color: Color(0xff34568B)),
                 ),
@@ -403,22 +399,18 @@ class _AddAccountFormState extends State<AddAccountForm> {
         },
       );
     } else {
-<<<<<<< Updated upstream
       var url = 'http://localhost/lib/add_teacher.php';
-=======
-      var url = 'http://localhost/donia_code/add_teacher.php';
->>>>>>> Stashed changes
 
       final response = await http.post(
         Uri.parse(url),
         body: {
-          "Name": nameController.text,
-          "email": emailController.text,
-          "gender": _character.toString().split('.').last,
-          "specialization": specificController.text,
-          "Phone_Num": phoneController.text,
-          "accountnum": accountnumberController.text,
-          "Society_Id": IDTeacherController.text,
+          'name': nameController.text,
+          'email': emailController.text,
+          'gender': _character.toString().split('.').last,
+          'spec': specificController.text,
+          'phone': phoneController.text,
+          'accountnumber': accountnumberController.text,
+          'teachers_id': IDTeacherController.text,
         },
       );
 
@@ -430,7 +422,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
+              content: Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
               actions: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -447,7 +439,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                                 borderRadius: BorderRadius.circular(10)),
                             height: 40,
                             width: 100,
-                            child: const Center(
+                            child: Center(
                                 child: Text(
                               "نعم",
                               style: TextStyle(
@@ -464,7 +456,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                                 borderRadius: BorderRadius.circular(10)),
                             height: 40,
                             width: 100,
-                            child: const Center(
+                            child: Center(
                                 child: Text(
                               "لا",
                               style: TextStyle(
@@ -506,10 +498,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
   var familyphoneController = TextEditingController();
   var dateinput = TextEditingController();
 
-  var passController = TextEditingController();
-  var confirmPassController = TextEditingController();
-  var dateAppliedController = TextEditingController();
-
   SingingCharacterTeacher? _character = SingingCharacterTeacher.Female;
   SingingCharacterStudent? _characterstudent = SingingCharacterStudent.Female;
   SingingCharacterProblem? pro = SingingCharacterProblem.hear;
@@ -546,14 +534,14 @@ class _AddAccountFormState extends State<AddAccountForm> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
               ],
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: true, decimal: true),
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
               onTap: () {},
               textAlign: TextAlign.right,
               controller: accountnumberController,
               obscureText: false,
               decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -574,14 +562,14 @@ class _AddAccountFormState extends State<AddAccountForm> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
               ],
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: true, decimal: true),
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
               onTap: () {},
               textAlign: TextAlign.right,
               controller: phoneController,
               obscureText: false,
               decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -619,7 +607,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               width: 200,
               child: RadioListTile(
                   activeColor: backgreen,
-                  title: const Text("ذكر"),
+                  title: Text("ذكر"),
                   value: SingingCharacterTeacher.Male,
                   groupValue: _character,
                   selected: _character == SingingCharacterTeacher.Male,
@@ -635,7 +623,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               child: Center(
                 child: RadioListTile(
                     activeColor: backgreen,
-                    title: const Text("انثى"),
+                    title: Text("انثى"),
                     value: SingingCharacterTeacher.Female,
                     groupValue: _character,
                     selected: _character == SingingCharacterTeacher.Female,
@@ -655,7 +643,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const AlertDialog(
+                  return AlertDialog(
                     content: SizedBox(
                         height: 100,
                         width: 100,
@@ -668,7 +656,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
             child: Container(
               width: 200,
               height: 40,
-              child: const Center(
+              child: Center(
                 child: Text(
                   "اضافه معلم",
                   style: TextStyle(
@@ -700,129 +688,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
     } else {
       // print("Date is not selected");
     }
-  }
-
-  void msgDialog(String msg) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Text(msg),
-          actions: <Widget>[
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text(
-                'حسنا',
-                style: TextStyle(color: Color(0xff34568B)),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget get _email => Column(
-        children: [
-          namefield(field: "البريد الالكتروني"),
-          customTextFieldWidget(
-            type: TextInputType.name,
-            ontap: () {},
-            wid: 300,
-            hei: 40,
-            nameController: emailController,
-            text: "bara@gmail.com :مثال",
-          ),
-        ],
-      );
-
-  Widget get _password => Column(
-        children: [
-          namefield(field: "كلمة المرور"),
-          customTextFieldWidget(
-            type: TextInputType.name,
-            ontap: () {},
-            wid: 300,
-            hei: 40,
-            nameController: passController,
-            text: "مكونة من 8 أحرف و أرقام",
-          ),
-        ],
-      );
-
-  Widget get _dateApplied => Column(
-        children: [
-          namefield(field: "تاريخ الانضمام"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: setCurrentDate,
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(6)),
-                  child: const Icon(
-                    Icons.calendar_month,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 2.0,
-              ),
-              customTextFieldWidget(
-                type: TextInputType.name,
-                ontap: setCurrentDate,
-                wid: 250,
-                hei: 40,
-                nameController: dateAppliedController,
-                text: "مكونة من 8 أحرف و أرقام",
-              ),
-            ],
-          ),
-        ],
-      );
-
-  Widget get _confirmPassword => Column(
-        children: [
-          namefield(field: "تأكيد كلمة المرور"),
-          customTextFieldWidget(
-            type: TextInputType.name,
-            ontap: () {},
-            wid: 300,
-            hei: 40,
-            nameController: confirmPassController,
-            text: "",
-          ),
-        ],
-      );
-  void setCurrentDate() {
-    setState(() {
-      dateAppliedController.text =
-          DateFormat('yyyy-MM-dd').format(DateTime.now());
-    });
-  }
-
-  String? validateEmail(String value) {
-    RegExp regex = RegExp(
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-    return regex.hasMatch(value)
-        ? null
-        : "InValid Email, Please enter in Right Form";
-  }
-
-  String? passValidation() {
-    RegExp regex = RegExp(r'^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$');
-    return !regex.hasMatch(passController.text) &&
-            passController.text == confirmPassController.text
-        ? null
-        : "كلمة المرور خاطئة, الرجاء ادخال كلمة مطابقة و صحيحة";
   }
 
   Widget studentwidget() {
@@ -896,14 +761,14 @@ class _AddAccountFormState extends State<AddAccountForm> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
               ],
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: true, decimal: true),
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
               onTap: () {},
               textAlign: TextAlign.right,
               controller: IDstudentController,
               obscureText: false,
               decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -933,14 +798,14 @@ class _AddAccountFormState extends State<AddAccountForm> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
               ],
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: true, decimal: true),
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
               onTap: () {},
               textAlign: TextAlign.right,
               controller: familyphoneController,
               obscureText: false,
               decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -971,7 +836,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               width: 200,
               child: RadioListTile(
                   activeColor: backgreen,
-                  title: const Text("ذكر"),
+                  title: Text("ذكر"),
                   value: SingingCharacterStudent.Male,
                   groupValue: _characterstudent,
                   selected: _characterstudent == SingingCharacterStudent.Male,
@@ -987,7 +852,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               child: Center(
                 child: RadioListTile(
                     activeColor: backgreen,
-                    title: const Text("انثى"),
+                    title: Text("انثى"),
                     value: SingingCharacterStudent.Female,
                     groupValue: _characterstudent,
                     selected:
@@ -1010,7 +875,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               width: 200,
               child: RadioListTile(
                   activeColor: backgreen,
-                  title: const Text("سمع"),
+                  title: Text("سمع"),
                   value: SingingCharacterProblem.hear,
                   groupValue: pro,
                   selected: pro == SingingCharacterProblem.hear,
@@ -1026,7 +891,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               child: Center(
                 child: RadioListTile(
                     activeColor: backgreen,
-                    title: const Text("نطق"),
+                    title: Text("نطق"),
                     value: SingingCharacterProblem.pron,
                     groupValue: pro,
                     selected: pro == SingingCharacterProblem.pron,
@@ -1046,7 +911,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const AlertDialog(
+                  return AlertDialog(
                     content: SizedBox(
                         height: 100,
                         width: 100,
@@ -1059,7 +924,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
             child: Container(
               width: 200,
               height: 40,
-              child: const Center(
+              child: Center(
                 child: Text(
                   "اضافه طالب",
                   style: TextStyle(
@@ -1085,7 +950,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
         children: [
           Text(
             field,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -1127,10 +992,10 @@ class textfieldwidget extends StatelessWidget {
           controller: nameController,
           obscureText: false,
           decoration: InputDecoration(
-            focusedBorder: const OutlineInputBorder(
+            focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
             ),
-            enabledBorder: const OutlineInputBorder(
+            enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(width: 2.0, color: backgreen),
             ),
             hintText: text,

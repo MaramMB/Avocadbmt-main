@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Profile/profile.dart';
+import 'package:flutter_application_1/pages/logindb.dart';
+import 'package:flutter_application_1/pages/manag.dart';
+import 'package:flutter_application_1/pages/widgets/manage_accounts.dart';
+import 'package:flutter_application_1/pages/widgets/societies.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
 import 'forgetpass.dart';
 import 'mainpage.dart';
+import 'mobile/mainmobailepage.dart';
   bool _passwordInVisible = true;
 class testlog extends StatefulWidget {
   testlog({Key? key, required this.title}) : super(key: key);
@@ -14,118 +21,82 @@ class testlog extends StatefulWidget {
 }
 
 class _testlogState extends State<testlog> {
-  late TextEditingController emailInputController;
-  late TextEditingController pwdInputController;
-  late String email;
   bool _visible = false;
-  // final userController = TextEditingController();
-  // final pwdController = TextEditingController();
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
-
-
   void _toggle(){
     setState(() {
       _obscureText = !_obscureText;
     });
   }
-<<<<<<< Updated upstream
   TextEditingController email=TextEditingController();
   TextEditingController pass=TextEditingController();
   // String error = '';
   login()async {
     const url="http://localhost/log.php";
-=======
-  initState() {
-    emailInputController = new TextEditingController();
-    pwdInputController = new TextEditingController();
-    super.initState();
-  }
 
-  // void validateLogin(){
-  //   if(_formKey.currentState.validate()){
-  //     _formKey.currentState.save();
-  //     if(_emailID == _email && _password == _pass){
-  //       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
-  //     }
-  //   }
-  // }
-  String pwdValidator(String value) {
-    if (value.length < 8) {
-      return 'Password must be longer than 8 characters';
-    } else {
-      return "";
-    }
-  }
-
-
->>>>>>> Stashed changes
-
-  Future userLogin() async {
-    var url = "http://192.168.1.1/avocadbmt/login.php";
-    
-    // Showing LinearProgressIndicator.
-    setState(() {
-      _visible = true;
+    final response =await http.post(Uri.parse(url),body:{
+      "Email":email.text,
+      "pass":pass.text,
     });
-
-    // Getting username and password from Controller
-    var data = {
-      'username': emailInputController.text,
-      'password': pwdInputController.text,
-    };
-
-    //Starting Web API Call.
-    var response = await http.post(Uri.parse(url), body: json.encode(data));
-    // var response = await http.get(url);
     if (response.statusCode == 200) {
-      //Server response into variable
-      print(response.body);
-      var msg = jsonDecode(response.body);
-      if (msg['loginStatus'] == true) {
-        setState(() {
-          _visible = false;
-        });
-        Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return const mainpage();
-                      })
-                      );
-      } else {
-        setState(() {
-          _visible = false;
-          //Show Error Message Dialog
-          showMessage(msg["message"]);
-        });
-      }
-    } else {
-      setState(() {
-        _visible = false;
-
-        //Show Error Message Dialog
-        showMessage("Error during connecting to Server.");
-      });
-    }
-  }
-  Future<dynamic> showMessage(String msg) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(msg),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+      var user = json.decode(response.body);
+      print(user);
+      if (user == "Error") {
+        showDialog(
+          context: (context),
+          builder: (context) => AlertDialog(
+            content: Text('Invalid Username and password'),
+            actions: <Widget>[
+              ElevatedButton(
+                // : Colors.red,
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          ),
         );
-      },
-    );
+        print("Username & Password Invalid");
+      } else {
+        if(user['active'] == 'active') {
+          if (user['Kind'] == 'manager') {
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => managepage(),),);
+            print(user['Kind']);
+            print(user['active']);
+          } else if (user['Kind'] == 'admin') {
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Socieites(),),);
+            print(user['Kind']);
+          } else if (user['Kind'] == 'student') {
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => mainpage(),),);
+            print(user['Kind']);
+          } else {
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => mainpage(),),);
+            print(user['Kind']);
+          }
+        }
+        else{
+          Fluttertoast.showToast(
+            msg: "الحساب الذي تحاول الدخول اليه معطل",
+            toastLength: Toast.LENGTH_LONG,
+            // gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white70,
+            fontSize: 30,
+          );
+        }
+
+      }
+      setState(() {});
+    }
+
   }
-  // final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,7 +150,7 @@ class _testlogState extends State<testlog> {
                         Directionality(
                           textDirection: TextDirection.rtl,
                           child: TextFormField(
-                            controller: emailInputController,
+                            controller: email,
                             textAlign: TextAlign.right,
                             decoration:  const InputDecoration(
                               fillColor: Colors.white,
@@ -213,92 +184,94 @@ class _testlogState extends State<testlog> {
                               ),
                             ),
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'يرجى تعبئة حقل البريد الالكتروني ';
+                              String pattern =
+                                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                              RegExp regExp = new RegExp(pattern);
+                              if (value!.isEmpty) {
+                                return "يرجى تعبئة حقل البريد الالكتروني ";
+                              } else if (!regExp.hasMatch(value!)) {
+                                return "يرجى ادخال بريد الكتروني صالح";
+                              } else {
+                                return null;
                               }
-                              if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
-                                return 'يرجى ادخال بريد الكتروني صالح';
-                              }
-                              return null;
                             },
                           ),
                         ),
+                        const SizedBox(height: 30,),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color:  Color.fromRGBO(255, 255, 255, 0.85),
+                            borderRadius: BorderRadius.all(Radius.circular(15),
+                            ),),
+                          child:
+                          Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: TextFormField(
+                              textAlign: TextAlign.right,
+                              obscureText: _obscureText,
+                              controller: pass,
+                              decoration: InputDecoration(
+
+                                fillColor: Colors.white,
+
+                                border: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(15))
+                                ),
+                                icon: const Icon(Icons.lock,size: 35,),
+                                hintText: 'كلمة المرور',
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                                  ),
+                                  onPressed: _toggle,
+                                ),
+
+                                // suffixIcon: Icon(Icons.remove_red_eye),
+                                // labelText: 'Message',
+
+                                errorBorder: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 1.0,
+                                    style: BorderStyle.solid,
+                                  ),
+
+                                ),
+
+                                focusedBorder: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                  borderSide: BorderSide(
+                                      color: Colors.green,
+                                      width: 2.5
+                                  ),
+
+                                ),
+                              ),
+                              validator: (value) {
+                                String patttern = r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$)';
+                                RegExp regExp = new RegExp(patttern);
+                                if (value!.isEmpty) {
+                                  return "يرجى تعبئة كلمة المرور ";
+                                }
+                                else if (value.length < 6) {
+                                  return "يجب أن لا تقل كلمة المرور عن ستة أرقام";
+                                }
+                                // else if (!regExp.hasMatch(value)) {
+                                //   return "يجب ان تحتوي كلمة المرور على حر كبير وحرف صغير على الاقل";
+                                // }
+                                return null;
+                              },
+
+                            ),
+                          ),
+                        ),
+
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 30,),
-                Container(
-                  decoration: const BoxDecoration(
-                    color:  Color.fromRGBO(255, 255, 255, 0.85),
-                    borderRadius: BorderRadius.all(Radius.circular(15),
-                    ),),
-                  child:
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextFormField(
-                      textAlign: TextAlign.right,
-                      obscureText: _obscureText,
-                      controller: pwdInputController,
-                      // validator: pwddValidator,
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     return 'Please Enter Password';
-                      //   }
-                      //   return null;
-                      // },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          // addError(error: kPassNullError);
-                          return "يرجى ادخال كلمة المرور";
-                        } else if (value.length < 8) {
-                          // addError(error: kShortPassError);
-                          return "يرجى ادخال كلمة مرور اطول";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
 
-                        fillColor: Colors.white,
-
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15))
-                        ),
-                        icon: const Icon(Icons.lock,size: 35,),
-                        hintText: 'كلمة المرور',
-                        suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscureText ? Icons.visibility_off : Icons.visibility,
-                              ),
-                              onPressed: _toggle,
-                            ),
-
-                        // suffixIcon: Icon(Icons.remove_red_eye),
-                        // labelText: 'Message',
-
-                        errorBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          borderSide: BorderSide(
-                            color: Colors.red,
-                            width: 1.0,
-                            style: BorderStyle.solid,
-                          ),
-
-                        ),
-
-                        focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          borderSide: BorderSide(
-                              color: Colors.green,
-                              width: 2.5
-                          ),
-
-                        ),
-                      ),
-
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 15,),
                 Container(
                   child:        TextButton(
@@ -321,20 +294,31 @@ class _testlogState extends State<testlog> {
                   child: ElevatedButton(
                       onPressed: ()=>{
                         if (_formKey.currentState!.validate()) {
-                      setState(() {
-                           _visible = false;
-                                  }),
-                      Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const mainpage();
-                  })
-                  ),
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              _visible = false;
+                            }),
+                            login(),
+                          }
+                          else{
+                            const Text("Not Found The Account"),
+                          },
                         }
-                        else{
-                          const Text("Not Found The Account"),
-
-
-                  }
+                        // login(context),
+                  //       if (_formKey.currentState!.validate()) {
+                  //     setState(() {
+                  //          _visible = false;
+                  //                 }),
+                  //         // login()
+                  // //     Navigator.of(context)
+                  // //     .push(MaterialPageRoute(builder: (context) {
+                  // //   return const mainpage();
+                  // // })
+                  // // ),
+                  //       }
+                  //       else{
+                  //         const Text("Not Found The Account"),
+                  // }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,

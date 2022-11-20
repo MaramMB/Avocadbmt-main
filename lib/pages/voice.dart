@@ -1,20 +1,22 @@
-import 'dart:html';
 
-<<<<<<< Updated upstream
 import 'dart:html' as html;
 
 import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
-=======
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/soundrecourd.dart';
 import 'package:flutter_application_1/pages/soundtype.dart';
 import 'package:flutter_application_1/pages/voicetestbe.dart';
 import 'package:flutter_application_1/Components.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -23,13 +25,10 @@ var bfile;
 var filename;
 var progress;
 int _value = 1;
-<<<<<<< Updated upstream
 late var imageb;
 Widget www = Text('sss');
 bool isA=true;
 var SnameCont = TextEditingController();
-=======
->>>>>>> Stashed changes
 
 class voicex extends StatefulWidget {
   const voicex({Key? key}) : super(key: key);
@@ -39,7 +38,6 @@ class voicex extends StatefulWidget {
 }
 
 class _voicexState extends State<voicex> {
-<<<<<<< Updated upstream
   File? image;
   var audio;
  Future getAudio () async {
@@ -105,8 +103,6 @@ class _voicexState extends State<voicex> {
 
 
   }
-=======
->>>>>>> Stashed changes
   int _selectedType = 1;
   bool secT=false;
   bool imgUp = false;
@@ -137,242 +133,123 @@ class _voicexState extends State<voicex> {
      });
    }
 
-<<<<<<< Updated upstream
     super.initState();
-=======
-  Widget Stype(int x) {
-    Widget as = Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              soundsWidget(
-                Name: 'مطر',
-                Ipath: 'img/rain.gif',
-                Spath: "audio/rain.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-    Widget be = Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              soundsWidget(
-                Name: 'اسم',
-                Ipath: 'img/avocado.png',
-                Spath: "audio/avoc.mp3",
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-    //  as 1 = استيعابي
-    // 0 = بيئي be
-    if (x == 1)
-      return as;
-    else
-      return be;
->>>>>>> Stashed changes
   }
 
+  late final check=getData(1);
+  late final check2=getData(2);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgreen,
-      body: Container(
-        child: Column(
-          children: [
-            const SelectionButton(),
-            const SizedBox(
-              height: 30,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height / 1.2,
-              width: MediaQuery.of(context).size.width / 1.8,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Row(
+    if(isA) {
+      return FutureBuilder<List<dynamic>?>(
+        future: check,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Widget Stype(int x, int length) {
+              Widget as = Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 70),
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.start,
+                        spacing: 35,
+                        runAlignment: WrapAlignment.start,
+                        runSpacing: 25,
                         children: [
-                          const Spacer(),
-                          const Spacer(),
-                          const Text("التدريبات الصوتية",
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 30,
-                                  fontFamily: "DroidKufi",
-                                  fontWeight: FontWeight.w700)),
-                          const Spacer(),
-                          TextButton(
-                            // زر بدأ الاختبار
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return betest();
-                              }));
-                            },
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              minimumSize: MaterialStateProperty.all(
-                                  const Size(120, 42)),
-                              textStyle: MaterialStateProperty.all(
-                                  const TextStyle(
-                                      fontFamily: "DroidKufi", fontSize: 16)),
-                              backgroundColor: MaterialStateProperty.all(
-                                  const Color(0xff467BDB)),
-                            ),
-                            child: const Text(
-                              'بدأ الاختبار',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          GridView.builder(
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisSpacing: 20,
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 20),
+                            itemCount: length, itemBuilder: (context, index) {
+                            return soundsWidget(
+                              Name: snapshot.data![index]['word'],
+                              Ipath: snapshot.data![index]['image'],
+                              Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
+                            );
+                          },),
+
                         ],
+
                       ),
-                      const SizedBox(
-                        height: 15,
+                    ),
+
+
+                  ],
+                ),
+              );
+              Widget be = Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 70),
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.start,
+                        spacing: 35,
+                        runAlignment: WrapAlignment.start,
+                        runSpacing: 25,
+                        children: [
+                          GridView.builder(
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisSpacing: 20,
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 20),
+                            itemCount: length, itemBuilder: (context, index) {
+                            return soundsWidget(  
+                              Name: snapshot.data![index]['word'],
+                              Ipath: snapshot.data![index]['image'],
+                              Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
+                            );
+                          },),
+
+                        ],
+
                       ),
-<<<<<<< Updated upstream
+                    ),
+
+
+                  ],
+                ),
+              );
+              //  as 1 = استيعابي
+              // 0 = بيئي be
+              if (x == 1)
+                return as;
+              else
+                return be;
+            }
+
+            return Scaffold(
+              backgroundColor: backgreen,
+              body: Container(
+                child: Column(
+                  children: [
+                    const SelectionButton(),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height / 1.2,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 1.8,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: SingleChildScrollView(
@@ -587,84 +464,125 @@ class _voicexState extends State<voicex> {
                                     ),
                                   ),
                                 ],
-=======
-                      Row(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            // زر الاستيعابية
-                            onPressed: () {
-                              setState(() {
-                                _selectedType = 1;
-                                /*displayedList = soundList
-                                    .where((element) => element.sounds.type == soundType.asteabe)
-                                    .toList();*/
-                              });
-                            },
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
->>>>>>> Stashed changes
                               ),
-                              minimumSize:
-                                  MaterialStateProperty.all(const Size(85, 42)),
-                              textStyle: MaterialStateProperty.all(
-                                  const TextStyle(
-                                      fontFamily: "DroidKufi", fontSize: 20)),
-                              backgroundColor: MaterialStateProperty.all(
-                                _selectedType == 1 ? Colors.green : Colors.grey,
+                              const SizedBox(
+                                height: 20,
                               ),
-                            ),
-                            child: Text(
-                              'الاستيعابية',
-                              style: _selectedType == 1
-                                  ? selectedTypeTextStyle
-                                  : unselectedTypeTextStyle,
-                            ),
-                          ),
-                          const SizedBox(width: 5),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedType = 0;
-                                /*  displayedList = soundList
-                                    .where((element) => element.sounds.type == soundType.beae)
-                                    .toList();*/
-                              });
-                            },
-                            style: ButtonStyle(
-                              // زر البيئية
+                              Column(
+                                children: [
+                                  Stype(_selectedType, snapshot.data!.length),
+                                  /*Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.green, width: 3.5),
+                                borderRadius: BorderRadius.circular(30)
 
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              minimumSize: MaterialStateProperty.all(
-                                  const Size(110, 42)),
-                              textStyle: MaterialStateProperty.all(
-                                  const TextStyle(
-                                      fontFamily: "DroidKufi", fontSize: 20)),
-                              backgroundColor: MaterialStateProperty.all(
-                                _selectedType == 0 ? Colors.green : Colors.grey,
-                              ),
                             ),
-                            child: Text(
-                              'البيئية',
-                              style: _selectedType == 0
-                                  ? selectedTypeTextStyle
-                                  : unselectedTypeTextStyle,
+                            child: Container(
+                              child: soundsWidget(Name: 'اسم',Ipath: 'img/avocado.png', Spath: "audio/avoc.mp3", )
                             ),
+
                           ),
+                          */
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          };
+          return Scaffold(
+            backgroundColor: Colors.green,
+            body: Center(
+              child: Container(color: Colors.green,
+                child: SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: CircularProgressIndicator(color: Colors.white,)),),
+            ),
+          );
+        },
+      );
+    }
+    else{
+      return FutureBuilder<List<dynamic>?>(
+        future: check2,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Widget Stype(int x, int length) {
+              Widget as = Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 70),
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.start,
+                        spacing: 35,
+                        runAlignment: WrapAlignment.start,
+                        runSpacing: 25,
+                        children: [
+                          GridView.builder(
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisSpacing: 20,
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 20),
+                            itemCount: length, itemBuilder: (context, index) {
+                            return soundsWidget(
+                              Name: snapshot.data![index]['word'],
+                              Ipath: snapshot.data![index]['image'],
+                              Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
+                            );
+                          },),
+
                         ],
+
                       ),
-                      const SizedBox(
-                        height: 20,
+                    ),
+
+
+                  ],
+                ),
+              );
+              Widget be = Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 70),
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.start,
+                        spacing: 35,
+                        runAlignment: WrapAlignment.start,
+                        runSpacing: 25,
+                        children: [
+                          GridView.builder(
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisSpacing: 20,
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 20),
+                            itemCount: length, itemBuilder: (context, index) {
+                            return soundsWidget(
+                              Name: snapshot.data![index]['word'],
+                              Ipath: snapshot.data![index]['image'],
+                              Spath: snapshot.data![index]['audio'],
+                              s: snapshot.data![index]['imageByte'],
+                            );
+                          },),
+
+                        ],
+
                       ),
-<<<<<<< Updated upstream
                     ),
 
 
@@ -912,12 +830,6 @@ class _voicexState extends State<voicex> {
                                 children: [
                                   Stype(_selectedType, snapshot.data!.length),
                                   /*Container(
-=======
-                      Column(
-                        children: [
-                          Stype(_selectedType),
-                          /*Container(
->>>>>>> Stashed changes
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     color: Colors.green, width: 3.5),
@@ -930,13 +842,16 @@ class _voicexState extends State<voicex> {
 
                           ),
                           */
-                        ],
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
-<<<<<<< Updated upstream
             );
           };
           return Scaffold(
@@ -1022,12 +937,17 @@ Future ConvertImage(File image) async {
 
             contentType: new MediaType("image", "jpeg")
 
-=======
-            )
-          ],
->>>>>>> Stashed changes
         ),
-      ),
-    );
+
+      });
+
+      Response response = await Dio().post('http://192.168.1.106/imgStore.php', data: formData);
+
+      print(response.data.toString());
+
+    } else {
+
+    }
+
   }
 }

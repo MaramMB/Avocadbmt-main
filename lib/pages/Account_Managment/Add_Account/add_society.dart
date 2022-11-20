@@ -1,19 +1,19 @@
-// ignore_for_file: prefer_final_fields, use_build_context_synchronously
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/pages/personal.dart';
-import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../rowbar.dart';
+// import 'package:intl/intl.dart';
 
-// ignore: constant_identifier_names
-enum SingingCharacterGender { Male, Female }
+enum SingingCharacterTeacher { Male, Female }
+
+const backgreen = Color.fromRGBO(131, 190, 99, 1);
+
+enum SingingCharacterStudent { Male, Female }
 
 enum SingingCharacterProblem { hear, pron }
 
@@ -26,6 +26,7 @@ class AddScociety extends StatefulWidget {
 
 class _AddScocietyState extends State<AddScociety> {
   String gender = '';
+  int _selectedType = 2;
   TextStyle unselectedTypeTextStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
@@ -36,64 +37,99 @@ class _AddScocietyState extends State<AddScociety> {
     fontWeight: FontWeight.bold,
   );
 
-  // Controllers for Teachers
-  var nameController = TextEditingController();
-  var addressController = TextEditingController();
-  var phoneController = TextEditingController();
-  var dateController = TextEditingController();
-  var managerController = TextEditingController();
-  var emailController = TextEditingController();
-  var passController = TextEditingController();
-  var confirmPassController = TextEditingController();
-  var dateAppliedController = TextEditingController();
-
-  var backgreen = const Color.fromRGBO(131, 190, 99, 1);
+  final _formKey = GlobalKey<FormState>();
+  var backgreen = Color.fromRGBO(131, 190, 99, 1);
   var height16 = const SizedBox(height: 16);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
-      body: Column(
-        children: [
-          const SelectionButton(),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height / 1.2,
-            width: MediaQuery.of(context).size.width / 1.8,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+      body: Container(
+        child: Column(
+          children: [
+            const SelectionButton(),
+            const SizedBox(
+              height: 30,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text("اضافه جمعيه",
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 30,
-                            fontFamily: "DroidKufi",
-                            fontWeight: FontWeight.w700)),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    societieWidget()
-                  ],
+            Container(
+              height: MediaQuery.of(context).size.height / 1.2,
+              width: MediaQuery.of(context).size.width / 1.8,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    // textDirection: TextDirection.rtl,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text("اضافه جمعيه",
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 30,
+                              fontFamily: "DroidKufi",
+                              fontWeight: FontWeight.w700)),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      teacherwidget()
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
+    // Container(
+    //   padding: const EdgeInsets.all(30),
+    //   alignment: Alignment.topCenter,
+    //   child: Column(
+    //     children: [
+    //       const Text("إنشاء حساب جديد",
+    //         style: TextStyle(
+    //           color: Colors.white,
+    //           fontFamily: "Tajawal",
+    //           fontSize: 40,
+    //           fontWeight: FontWeight.bold,
+    //         ),),
+    //       SizedBox(height: 20,),
+    //       Container(
+    //         decoration: BoxDecoration(
+    //           // border: Border.all(color: Colors.black38),
+    //           borderRadius: BorderRadius.circular(20),
+    //           // color: Colors.gr,
+    //         ),
+    //         width: MediaQuery.of(context).size.width / 2,
+    //         child: Form(
+    //           key: _formKey,
+    //           child: Padding(
+    //             padding:
+    //             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+    //             child: Column(
+    //               children: [
+
+    //                 height16,
+    //                 SizedBox(height: 30,),
+    //                 buildCreateAccountButton(context),
+    //                 height16,
+    //                 SizedBox(height: 30,),
+    //                 buildCreateAccountButton2(context)
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+
+    //     ],
+    //   ),
+    // ),
   }
 
-<<<<<<< Updated upstream
   addStudent() async {
     if (firstnameController.text == "" ||
         secondnameController.text == "" ||
@@ -190,73 +226,44 @@ class _AddScocietyState extends State<AddScociety> {
                             )))),
                   ],
                 ),
-=======
-  void confirm() {
-    Navigator.of(context, rootNavigator: true).pop();
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
-          actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                      addSocietie();
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 40,
-                        width: 100,
-                        child: const Center(
-                            child: Text(
-                          "نعم",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                        )))),
-                InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 40,
-                        width: 100,
-                        child: const Center(
-                            child: Text(
-                          "لا",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                        )))),
->>>>>>> Stashed changes
               ],
-            ),
-          ],
+            );
+          },
         );
-      },
-    );
+      } else {
+        Navigator.of(context, rootNavigator: true).pop();
+        // print('fsdsdfs');
+      }
+    }
   }
 
-  void addSocietie() async {
+  addTeacher() async {
     if (nameController.text == "" ||
+        accountnumberController.text == "" ||
         phoneController.text == "" ||
         emailController.text == "" ||
-        addressController.text == "" ||
-        passController.text == "" ||
-        dateController.text == "" ||
-        dateAppliedController.text == "" ||
-        managerController.text == "") {
+        specificController.text == "") {
       Navigator.of(context, rootNavigator: true).pop();
-      msgDialog('الرجاء تعبئه جميع الفراغات');
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text('الرجاء تعبئه جميع الفراغات'),
+            actions: <Widget>[
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'حسنا',
+                  style: TextStyle(color: Color(0xff34568B)),
+                ),
+              ),
+            ],
+          );
+        },
+      );
     } else {
-<<<<<<< Updated upstream
       var url = 'http://localhost/lib/add_teacher.php';
 
       final response = await http.post(
@@ -271,50 +278,62 @@ class _AddScocietyState extends State<AddScociety> {
           'teachers_id': IDTeacherController.text,
         },
       );
-=======
-      var urll = 'http://localhost/donia_code/add_user.php';
->>>>>>> Stashed changes
 
-      var emailValidation = validateEmail(emailController.text);
+      var data = jsonDecode(response.body);
 
-      if (emailValidation != null) {
-        msgDialog(emailValidation);
-        return;
-      }
-
-      String? passMsg = passValidation();
-
-      if (passMsg != null) {
-        msgDialog(passMsg);
-        return;
-      }
-
-      final req = await http.post(Uri.parse(urll), body: {
-        "email": emailController.text,
-        "password": passController.text
-      });
-
-      var userResponse = jsonDecode(req.body);
-
-      if (userResponse == 'Success') {
-        var url = 'http://localhost/donia_code/add_society.php';
-
-        final response = await http.post(
-          Uri.parse(url),
-          body: {
-            "name": nameController.text,
-            "Society_Manager": managerController.text,
-            "Society_Phone": phoneController.text,
-            "Society_Address": addressController.text,
-            "Participation_Date": dateController.text,
+      if (data == 'Success') {
+        Navigator.of(context, rootNavigator: true).pop();
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              content: Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
+              actions: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                          Fluttertoast.showToast(msg: "تم اضافه المعلم بنجاح");
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 40,
+                            width: 100,
+                            child: Center(
+                                child: Text(
+                              "نعم",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            )))),
+                    InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 40,
+                            width: 100,
+                            child: Center(
+                                child: Text(
+                              "لا",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            )))),
+                  ],
+                ),
+              ],
+            );
           },
         );
-
-        var data = jsonDecode(response.body);
-
-        if (data == 'Success') {
-          Fluttertoast.showToast(msg: "تم اضافه المعلم بنجاح");
-        }
       } else {
         Navigator.of(context, rootNavigator: true).pop();
         // print('fsdsdfs');
@@ -322,34 +341,38 @@ class _AddScocietyState extends State<AddScociety> {
     }
   }
 
-  void msgDialog(String msg) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Text(msg),
-          actions: <Widget>[
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text(
-                'حسنا',
-                style: TextStyle(color: Color(0xff34568B)),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // Controllers for Teachers
+  var nameController = TextEditingController();
+  var IDTeacherController = TextEditingController();
+  var accountnumberController = TextEditingController();
+  var phoneController = TextEditingController();
+  // var fathernameController = TextEditingController();
+  // var addressController = TextEditingController();
+  var emailController = TextEditingController();
+  var specificController = TextEditingController();
 
-  Widget societieWidget() {
+  //Controllers for Strudents
+  var firstnameController = TextEditingController();
+  var secondnameController = TextEditingController();
+  var thirdnameController = TextEditingController();
+  var lastnameController = TextEditingController();
+  var IDstudentController = TextEditingController();
+  var emailstudentController = TextEditingController();
+  var fathernameController = TextEditingController();
+  var addressstudentController = TextEditingController();
+  var familyphoneController = TextEditingController();
+  var dateinput = TextEditingController();
+
+  SingingCharacterTeacher? _character = SingingCharacterTeacher.Female;
+  SingingCharacterStudent? _characterstudent = SingingCharacterStudent.Female;
+  SingingCharacterProblem? pro = SingingCharacterProblem.hear;
+
+  Widget teacherwidget() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         namefield(field: "اسم الجمعيه"),
-        customTextFieldWidget(
+        textfieldwidget(
           type: TextInputType.name,
           ontap: () {},
           wid: 300,
@@ -358,12 +381,12 @@ class _AddScocietyState extends State<AddScociety> {
           text: "أسم الجمعيه",
         ),
         namefield(field: "العنوان"),
-        customTextFieldWidget(
+        textfieldwidget(
           type: TextInputType.name,
           ontap: () {},
           wid: 300,
           hei: 40,
-          nameController: addressController,
+          nameController: IDTeacherController,
           text: "العنوان",
         ),
         namefield(field: "رقم الهاتف"),
@@ -376,14 +399,14 @@ class _AddScocietyState extends State<AddScociety> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
               ],
-              keyboardType: const TextInputType.numberWithOptions(
-                  signed: true, decimal: true),
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
               onTap: () {},
               textAlign: TextAlign.right,
               controller: phoneController,
               obscureText: false,
               decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -395,27 +418,25 @@ class _AddScocietyState extends State<AddScociety> {
           ),
         ),
         namefield(field: "تاريخ الجمعيه"),
-        customTextFieldWidget(
+        textfieldwidget(
           type: TextInputType.datetime,
-          ontap: () => _pickDate(),
-          nameController: dateController,
+          ontap: () {
+            _pickDate();
+          },
+          nameController: dateinput,
           wid: 300,
           hei: 40,
           text: "تاريخ الجمعيه",
         ),
         namefield(field: "أسم المدير"),
-        customTextFieldWidget(
+        textfieldwidget(
           type: TextInputType.text,
           ontap: () {},
           wid: 300,
           hei: 40,
-          nameController: managerController,
+          nameController: specificController,
           text: "أسم المدير",
         ),
-        _email,
-        _password,
-        _confirmPassword,
-        _dateApplied,
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: InkWell(
@@ -423,7 +444,7 @@ class _AddScocietyState extends State<AddScociety> {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const AlertDialog(
+                  return AlertDialog(
                     content: SizedBox(
                         height: 100,
                         width: 100,
@@ -431,14 +452,12 @@ class _AddScocietyState extends State<AddScociety> {
                   );
                 },
               );
-              confirm();
+              addTeacher();
             },
             child: Container(
               width: 200,
               height: 40,
-              decoration: BoxDecoration(
-                  color: backgreen, borderRadius: BorderRadius.circular(10)),
-              child: const Center(
+              child: Center(
                 child: Text(
                   "اضافه جمعيه",
                   style: TextStyle(
@@ -447,6 +466,8 @@ class _AddScocietyState extends State<AddScociety> {
                       color: Colors.white),
                 ),
               ),
+              decoration: BoxDecoration(
+                  color: backgreen, borderRadius: BorderRadius.circular(10)),
             ),
           ),
         )
@@ -454,108 +475,7 @@ class _AddScocietyState extends State<AddScociety> {
     );
   }
 
-  Widget get _email => Column(
-        children: [
-          namefield(field: "البريد الالكتروني"),
-          customTextFieldWidget(
-            type: TextInputType.name,
-            ontap: () {},
-            wid: 300,
-            hei: 40,
-            nameController: emailController,
-            text: "donia@gmail.com :مثال",
-          ),
-        ],
-      );
-
-  Widget get _password => Column(
-        children: [
-          namefield(field: "كلمة المرور"),
-          customTextFieldWidget(
-            type: TextInputType.name,
-            ontap: () {},
-            wid: 300,
-            hei: 40,
-            nameController: passController,
-            text: "مكونة من 8 أحرف و أرقام",
-          ),
-        ],
-      );
-
-  Widget get _dateApplied => Column(
-        children: [
-          namefield(field: "تاريخ الانضمام"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: setCurrentDate,
-                child: Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(6)),
-                  child: const Icon(
-                    Icons.calendar_month,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 2.0,
-              ),
-              customTextFieldWidget(
-                type: TextInputType.name,
-                ontap: setCurrentDate,
-                wid: 250,
-                hei: 40,
-                nameController: dateAppliedController,
-                text: "مكونة من 8 أحرف و أرقام",
-              ),
-            ],
-          ),
-        ],
-      );
-
-  Widget get _confirmPassword => Column(
-        children: [
-          namefield(field: "تأكيد كلمة المرور"),
-          customTextFieldWidget(
-            type: TextInputType.name,
-            ontap: () {},
-            wid: 300,
-            hei: 40,
-            nameController: confirmPassController,
-            text: "",
-          ),
-        ],
-      );
-  void setCurrentDate() {
-    setState(() {
-      dateAppliedController.text =
-          DateFormat('yyyy-MM-dd').format(DateTime.now());
-    });
-  }
-
-  String? validateEmail(String value) {
-    RegExp regex = RegExp(
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-    return regex.hasMatch(value)
-        ? null
-        : "InValid Email, Please enter in Right Form";
-  }
-
-  String? passValidation() {
-    RegExp regex = RegExp(r'^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$');
-    return !regex.hasMatch(passController.text) &&
-            passController.text == confirmPassController.text
-        ? null
-        : "كلمة المرور خاطئة, الرجاء ادخال كلمة مطابقة و صحيحة";
-  }
-
-  Future<void> _pickDate() async {
+  _pickDate() async {
     DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -564,12 +484,263 @@ class _AddScocietyState extends State<AddScociety> {
     if (pickedDate != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       setState(() {
-        dateController.text =
-            formattedDate; //set output date to TextField value.
+        dateinput.text = formattedDate; //set output date to TextField value.
       });
     } else {
       // print("Date is not selected");
     }
+  }
+
+  Widget studentwidget() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              children: [
+                namefield(field: "الأسم الأخير"),
+                textfieldwidget(
+                  type: TextInputType.name,
+                  ontap: () {},
+                  wid: 150,
+                  hei: 40,
+                  nameController: lastnameController,
+                  text: "الأسم الأخير",
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                namefield(field: "الأسم الثالث"),
+                textfieldwidget(
+                  type: TextInputType.name,
+                  ontap: () {},
+                  wid: 150,
+                  hei: 40,
+                  nameController: thirdnameController,
+                  text: "الأسم الثالث",
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                namefield(field: "الأسم الثاني"),
+                textfieldwidget(
+                  type: TextInputType.name,
+                  ontap: () {},
+                  wid: 150,
+                  hei: 40,
+                  nameController: secondnameController,
+                  text: "الأسم الثاني",
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                namefield(field: "الأسم الأول"),
+                textfieldwidget(
+                  type: TextInputType.name,
+                  ontap: () {},
+                  wid: 150,
+                  hei: 40,
+                  nameController: firstnameController,
+                  text: "الأسم الأول",
+                ),
+              ],
+            ),
+          ],
+        ),
+        namefield(field: "رقم هويه الطالب"),
+        Padding(
+          padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+          child: Container(
+            height: 40,
+            width: 300,
+            child: TextField(
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
+              ],
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
+              onTap: () {},
+              textAlign: TextAlign.right,
+              controller: IDstudentController,
+              obscureText: false,
+              decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 2.0, color: backgreen),
+                ),
+                hintText: "رقم هويه الطالب",
+              ),
+            ),
+          ),
+        ),
+        namefield(field: "العنوان"),
+        textfieldwidget(
+          type: TextInputType.number,
+          ontap: () {},
+          wid: 300,
+          hei: 40,
+          nameController: addressstudentController,
+          text: "العنوان",
+        ),
+        namefield(field: "رقم هاتف الأهل"),
+        Padding(
+          padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+          child: Container(
+            height: 40,
+            width: 300,
+            child: TextField(
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
+              ],
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
+              onTap: () {},
+              textAlign: TextAlign.right,
+              controller: familyphoneController,
+              obscureText: false,
+              decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 2.0, color: backgreen),
+                ),
+                hintText: "رقم هاتف الأهل",
+              ),
+            ),
+          ),
+        ),
+        namefield(field: "تاريخ الميلاد"),
+        textfieldwidget(
+          type: TextInputType.datetime,
+          ontap: () {
+            _pickDate();
+          },
+          nameController: dateinput,
+          wid: 300,
+          hei: 40,
+          text: "تاريخ الميلاد",
+        ),
+        namefield(field: "الجنس"),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 50,
+              width: 200,
+              child: RadioListTile(
+                  activeColor: backgreen,
+                  title: Text("ذكر"),
+                  value: SingingCharacterStudent.Male,
+                  groupValue: _characterstudent,
+                  selected: _characterstudent == SingingCharacterStudent.Male,
+                  onChanged: (SingingCharacterStudent? value) {
+                    setState(() {
+                      _characterstudent = value;
+                    });
+                  }),
+            ),
+            SizedBox(
+              height: 50,
+              width: 150,
+              child: Center(
+                child: RadioListTile(
+                    activeColor: backgreen,
+                    title: Text("انثى"),
+                    value: SingingCharacterStudent.Female,
+                    groupValue: _characterstudent,
+                    selected:
+                        _characterstudent == SingingCharacterStudent.Female,
+                    onChanged: (SingingCharacterStudent? value) {
+                      setState(() {
+                        _characterstudent = value;
+                      });
+                    }),
+              ),
+            ),
+          ],
+        ),
+        namefield(field: "المشكله لديه"),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 50,
+              width: 200,
+              child: RadioListTile(
+                  activeColor: backgreen,
+                  title: Text("سمع"),
+                  value: SingingCharacterProblem.hear,
+                  groupValue: pro,
+                  selected: pro == SingingCharacterProblem.hear,
+                  onChanged: (SingingCharacterProblem? value) {
+                    setState(() {
+                      pro = value;
+                    });
+                  }),
+            ),
+            SizedBox(
+              height: 50,
+              width: 150,
+              child: Center(
+                child: RadioListTile(
+                    activeColor: backgreen,
+                    title: Text("نطق"),
+                    value: SingingCharacterProblem.pron,
+                    groupValue: pro,
+                    selected: pro == SingingCharacterProblem.pron,
+                    onChanged: (SingingCharacterProblem? value) {
+                      setState(() {
+                        pro = value;
+                      });
+                    }),
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Center(child: CircularProgressIndicator())),
+                  );
+                },
+              );
+              addStudent();
+            },
+            child: Container(
+              width: 200,
+              height: 40,
+              child: Center(
+                child: Text(
+                  "اضافه طالب",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.white),
+                ),
+              ),
+              decoration: BoxDecoration(
+                  color: backgreen, borderRadius: BorderRadius.circular(10)),
+            ),
+          ),
+        )
+      ],
+    );
   }
 
   Widget namefield({String field = ""}) {
@@ -580,9 +751,57 @@ class _AddScocietyState extends State<AddScociety> {
         children: [
           Text(
             field,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class textfieldwidget extends StatelessWidget {
+  textfieldwidget({
+    Key? key,
+    required this.nameController,
+    required this.ontap,
+    required this.text,
+    required this.wid,
+    required this.hei,
+    required this.type,
+  }) : super(key: key);
+
+  final TextEditingController nameController;
+  final text;
+  Function ontap;
+  final wid;
+  final hei;
+  final type;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+      child: Container(
+        height: hei,
+        width: wid,
+        child: TextField(
+          keyboardType: type,
+          onTap: () {
+            ontap();
+          },
+          textAlign: TextAlign.right,
+          controller: nameController,
+          obscureText: false,
+          decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 2.0, color: backgreen),
+            ),
+            hintText: text,
+          ),
+        ),
       ),
     );
   }

@@ -13,9 +13,7 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required uname}) : super(key: key);
-
-  // const HomePage({super.key, });
+  const HomePage({super.key, required uname});
 
   @override
   State<HomePage> createState() => _HomePageState();
