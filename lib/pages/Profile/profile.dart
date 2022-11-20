@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker_web/image_picker_web.dart';
+// import 'package:image_picker_web/image_picker_web.dart';
 import 'dart:html' as html;
 import 'package:http/http.dart' as http;
 import 'package:mime_type/mime_type.dart';
@@ -102,26 +102,6 @@ class _personalState extends State<personal> {
                                           BorderRadius.circular(30)),
                                       child: ClipRRect(
                                           borderRadius:
-<<<<<<< HEAD
-                                              BorderRadius.circular(25),
-                                          child: imagevalue == null
-                                              ? Image.asset(
-                                                  'img/avocado.png',
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5.7,
-                                                  fit: BoxFit.fill,
-                                                )
-                                              // Image.network(
-                                              //   'http://localhost/tasneem/userImage/1.jpg',
-                                              //   width: MediaQuery.of(context)
-                                              //           .size
-                                              //           .width /
-                                              //       5.7,
-                                              //   fit: BoxFit.fill,
-                                              // )
-=======
                                           BorderRadius.circular(25),
                                           child: imagevalue == null
                                               ? Image.asset(
@@ -140,7 +120,6 @@ class _personalState extends State<personal> {
                                           //       5.7,
                                           //   fit: BoxFit.fill,
                                           // )
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
                                               : _image()),
                                     ),
                                     Padding(
@@ -193,34 +172,6 @@ class _personalState extends State<personal> {
                                           fontSize: 20),
                                     )
                                         : Padding(
-<<<<<<< HEAD
-                                            padding: const EdgeInsets.only(
-                                                right: 15, left: 15, top: 5),
-                                            child: Container(
-                                              height: 50,
-                                              width: 200,
-                                              child: TextField(
-                                                textAlign: TextAlign.right,
-                                                controller: emailController,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Color(0xff34568B),
-                                                        width: 2.0),
-                                                  ),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        width: 2.0,
-                                                        color: backgreen),
-                                                  ),
-                                                  hintText: "",
-                                                ),
-                                              ),
-=======
                                       padding: const EdgeInsets.only(
                                           right: 15, left: 15, top: 5),
                                       child: Container(
@@ -237,7 +188,6 @@ class _personalState extends State<personal> {
                                                   color:
                                                   Color(0xff34568B),
                                                   width: 2.0),
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
                                             ),
                                             enabledBorder:
                                             OutlineInputBorder(
@@ -298,38 +248,6 @@ class _personalState extends State<personal> {
                                           fontSize: 20),
                                     )
                                         : Padding(
-<<<<<<< HEAD
-                                            padding: const EdgeInsets.only(
-                                                right: 15, left: 15, top: 5),
-                                            child: Container(
-                                              height: 50,
-                                              width: 200,
-                                              child: TextField(
-                                                textAlign: TextAlign.right,
-                                                controller: phoneController,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .allow(RegExp(r'[0-9]'))
-                                                ],
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Color(0xff34568B),
-                                                        width: 2.0),
-                                                  ),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        width: 2.0,
-                                                        color: backgreen),
-                                                  ),
-                                                  hintText: "",
-                                                ),
-                                              ),
-=======
                                       padding: const EdgeInsets.only(
                                           right: 15, left: 15, top: 5),
                                       child: Container(
@@ -350,7 +268,6 @@ class _personalState extends State<personal> {
                                                   color:
                                                   Color(0xff34568B),
                                                   width: 2.0),
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
                                             ),
                                             enabledBorder:
                                             OutlineInputBorder(
@@ -677,11 +594,7 @@ class _personalState extends State<personal> {
                                         width: 100,
                                         child: Center(
                                             child:
-<<<<<<< HEAD
-                                                CircularProgressIndicator())),
-=======
                                             CircularProgressIndicator())),
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
                                   );
                                 },
                               );
@@ -730,13 +643,7 @@ class _personalState extends State<personal> {
   }
 
   Future<void> updateStudent() async {
-<<<<<<< HEAD
-    if (emailController.text == '' ||
-        phoneController.text == '' ||
-        validateEmail(emailController.text)) {
-=======
     if (emailController.text == '' || phoneController.text == '' || validateEmail(emailController.text)) {
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
       Navigator.of(context, rootNavigator: true).pop();
       showDialog(
         context: context,
@@ -758,11 +665,7 @@ class _personalState extends State<personal> {
         },
       );
     } else {
-<<<<<<< HEAD
-      var url = 'http://localhost/tasneem/edit_student.php';
-=======
       var url = 'http://localhost/Avocadbmt-main/Avocadbmt-main/edit_student.php';
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
       final response = await http.post(
         Uri.parse(url),
         body: jsonEncode({
@@ -799,37 +702,24 @@ class _personalState extends State<personal> {
 
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
-<<<<<<< HEAD
-    var bytes = base64Decode(res[0]["image"]);
-    var ints = bytes.buffer.asUint8List();
-=======
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
 
     setState(() {
       emailController.text = res[0]["email"] ?? "";
       phoneController.text = res[0]["phone"] ?? "";
       dateController.text = res[0]["dob"] ?? "";
-<<<<<<< HEAD
-      imagevalue = ints;
-=======
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
       IDController.text = res[0]["student_id"] ?? "";
       nameController.text = res[0]["name"] ?? "";
       ageController.text = res[0]["age"].toString();
       fathernameController.text = res[0]["father_name"] ?? "";
       genderController.text = res[0]["gender"] == "male" ? "ذكر" : "انثى";
       problemController.text =
-<<<<<<< HEAD
-          res[0]["ptype"] == "hear" ? "مشكله بالسمع" : "مشكله بالنطق";
-=======
       res[0]["ptype"] == "hear" ? "مشكله بالسمع" : "مشكله بالنطق";
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
     });
   }
 
   Uint8List? imagevalue;
 
-  
+  // TO Change Image Profile Picture
   uploadImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
@@ -841,20 +731,12 @@ class _personalState extends State<personal> {
       var url = 'http://localhost/tasneem/uploadImage.php';
 
       List<int> imageBytes = file.bytes!.toList();
-<<<<<<< HEAD
-      String Image = base64Encode(imageBytes);
-=======
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
 
       final response = await http.post(
         Uri.parse(url),
         body: jsonEncode({
           "id": 1,
-<<<<<<< HEAD
-          "image": Image,
-=======
           "image": base64Encode(imageBytes),
->>>>>>> 1c0b00a6e8d73300f9d2cb245d20b4ab85081402
         }),
       );
 
