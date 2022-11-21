@@ -31,19 +31,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const managepage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class managepage extends StatefulWidget {
+  const managepage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<managepage> createState() => _managepageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _managepageState extends State<managepage> {
   int _selectedAccountType = 1;
 
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(

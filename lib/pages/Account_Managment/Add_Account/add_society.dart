@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/pages/personal.dart';
+// import 'package:flutter_application_1/pages/personal.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
