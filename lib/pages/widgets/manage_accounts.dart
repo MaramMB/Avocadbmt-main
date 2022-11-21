@@ -21,7 +21,7 @@ int _value = 1;
 // void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +31,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const managepage(),
+      home: const MyHomePage(),
     );
   }
 }
 
-class managepage extends StatefulWidget {
-  const managepage({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<managepage> createState() => _managepageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _managepageState extends State<managepage> {
+class _MyHomePageState extends State<MyHomePage> {
   int _selectedAccountType = 1;
 
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
@@ -89,40 +89,40 @@ class _managepageState extends State<managepage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Center(
-                child: const Text('ادارة الحسابات',
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 25,
-                        fontFamily: "DroidKufi",
-                        fontWeight: FontWeight.w700)),
-              ),
-              SizedBox(
+              const Text('ادارة الحسابات',
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 25,
+                      fontFamily: "DroidKufi",
+                      fontWeight: FontWeight.w700)),
+              const SizedBox(
                 height: 10,
               ),
-              // InkWell(
-              //   onTap: () {
-              //     Navigator.push(context,
-              //         MaterialPageRoute(builder: (context) => Socieites()));
-              //   },
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(10),
-              //       color: Colors.green,
-              //     ),
-              //     height: 40,
-              //     width: 100,
-              //     child: Center(
-              //       child: Text(
-              //         "الجمعيات",
-              //         style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //             color: Colors.white,
-              //             fontSize: 18),
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Socieites()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.green,
+                  ),
+                  height: 40,
+                  width: 100,
+                  child: const Center(
+                    child: Text(
+                      "الجمعيات",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
               const Text(
                 'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
                 ' من مولد النص العربي.',
@@ -209,7 +209,7 @@ class _managepageState extends State<managepage> {
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.4,
-                                        child: SpinKitPulse(
+                                        child: const SpinKitPulse(
                                           color: Colors.green,
                                           size: 60,
                                         ),
@@ -222,14 +222,13 @@ class _managepageState extends State<managepage> {
                                           itemCount: Customers.length,
                                           shrinkWrap: true,
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           itemBuilder: (context, index) {
                                             return PersonRecord(
-                                              // ID: Customers[index]["id"],
+                                              ID: Customers[index]["id"],
                                               person: Person(
                                                 name: Customers[index]["name"],
-                                                id: Customers[index]
-                                                    ["teachers_id"],
+                                                id: Customers[index]["Id_Num"],
                                                 gender: Customers[index]
                                                             ["gender"] ==
                                                         "female"
@@ -245,7 +244,7 @@ class _managepageState extends State<managepage> {
                                           },
                                         );
                                       } else {
-                                        return Center(
+                                        return const Center(
                                             child: SizedBox(
                                                 height: 40,
                                                 width: 40,
@@ -267,7 +266,7 @@ class _managepageState extends State<managepage> {
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.4,
-                                        child: SpinKitPulse(
+                                        child: const SpinKitPulse(
                                           color: Colors.green,
                                           size: 60,
                                         ),
@@ -278,11 +277,9 @@ class _managepageState extends State<managepage> {
                                         return ListView.builder(
                                           itemCount: Customers.length,
                                           shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
                                           itemBuilder: (context, index) {
                                             return PersonRecord(
-                                              // ID: Customers[index]["id"],
+                                              ID: Customers[index]["id"],
                                               person: Person(
                                                 name: Customers[index]["name"],
                                                 id: Customers[index]
@@ -303,7 +300,7 @@ class _managepageState extends State<managepage> {
                                           },
                                         );
                                       } else {
-                                        return Center(
+                                        return const Center(
                                             child: SizedBox(
                                                 height: 40,
                                                 width: 40,
@@ -356,7 +353,7 @@ class _managepageState extends State<managepage> {
   }
 
   getStudents() async {
-    var url = 'http://localhost/get_students.php';
+    var url = 'http://localhost/donia_code/get_students.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;
@@ -366,7 +363,7 @@ class _managepageState extends State<managepage> {
   var searchController = TextEditingController();
 
   searchStudents() async {
-    var url = 'http://localhost/search_student.php';
+    var url = 'http://localhost/donia_code/search_student.php';
     var response = await http.post(
       Uri.parse(url),
       body: {
@@ -378,7 +375,7 @@ class _managepageState extends State<managepage> {
   }
 
   getTeachers() async {
-    var url = 'http://localhost/get_teachers.php';
+    var url = 'http://localhost/donia_code/get_teachers.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;
@@ -443,4 +440,14 @@ class _managepageState extends State<managepage> {
       ),
     );
   }
+
+  Widget get _noSocietyFound => const Center(
+        child: const Text(
+          "لا توجد جمعيات مضافة",
+          style: TextStyle(
+            fontSize: 16,
+            fontFamily: "DroidKufi",
+          ),
+        ),
+      );
 }

@@ -4,25 +4,26 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header("Access-Control-Allow-Headers: X-Requested-With");
 // header('Content-Type: applcation/json; charset = utf-8');
-	$db = mysqli_connect('localhost','root','','avocado');
+	$db = mysqli_connect('localhost','root','','bdmtproject');
 
 	if($db){
 
        
-        $sql ="select * from teachers";
+        $sql ="select * from students";
         
     $result =mysqli_query($db , $sql);
     if($result){
         $i=0;
         while ($row=mysqli_fetch_assoc($result)){
-            $response[$i]["id"]=$row["id"];
-            $response[$i]["email"]=$row["email"];
-            $response[$i]["name"]=$row["name"];
-            $response[$i]["accountnumber"]=$row["accountnumber"];
-            $response[$i]["gender"]=$row["gender"];
-            $response[$i]["spec"]=$row["spec"];
+            $response[$i]["id"]=$row["Id"];
+            $response[$i]["name"]=$row["firstname"];
+            $response[$i]["dob"]=$row["DOB"];
+            $response[$i]["gender"]=$row["Gender"];
+            $response[$i]["address"]=$row["Address"];
             $response[$i]["phone"]=$row["phone"];
-            $response[$i]["teachers_id"]=$row["teachers_id"];
+            $response[$i]["father_name"]=$row["secname"];
+            $response[$i]["ptype"]=$row["ptype"];
+            $response[$i]["student_id"]=$row["Students_Id"];
             $i++;
         }
         echo json_encode($response , JSON_PRETTY_PRINT);
@@ -34,3 +35,5 @@ header("Access-Control-Allow-Headers: X-Requested-With");
     
 
 ?>
+
+
