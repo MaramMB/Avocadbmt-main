@@ -425,6 +425,8 @@ class _lettertestState extends State<lettertest> {
                   sendData(letters[Lindex]['letter']!,'true');
                   isCorrect=true;
                   Status = "عمل رائع !";
+                  _isListening = false;
+
                 });
               }
               else
