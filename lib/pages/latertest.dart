@@ -1,8 +1,11 @@
 import 'dart:html';
 import 'dart:convert';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/pages/audio.dart';
 import 'package:http/http.dart' as http;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +24,8 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+bool played=false;
+
 
 List<Map<String, String>> letters = const [
   {
@@ -264,9 +269,11 @@ class _lettertestState extends State<lettertest> {
   }
   @override
   void initState() {
+
     super.initState();
     _speech = stt.SpeechToText();
     locales =  _speech.locales();
+    played = false;
   }
   late int Lindex = search(widget.letter);
   late String word= letters[Lindex]['word']!;
@@ -367,6 +374,7 @@ class _lettertestState extends State<lettertest> {
                         fontFamily: "DroidKufi",
                         fontWeight: FontWeight.w700)),
                 const SizedBox(height: 10,),
+
                 Visibility(
                   visible: isCorrect,
                   child: ElevatedButton(
@@ -408,24 +416,32 @@ class _lettertestState extends State<lettertest> {
   }
   void _listen() async {
     if (!_isListening) {
+
       bool available = await _speech.initialize(
         onStatus: (val) => print('onStatus: $val'),
         onError: (val) => print('onError: $val'),
 
       );
       if (available) {
-
         setState(() => _isListening = true);
         _speech.listen(
             onResult: (val) => setState(() {
               _text = val.recognizedWords;
               if (_text==letters[Lindex]['word']){
+                if(played==false){
+                  AssetsAudioPlayer.playAndForget(Audio("audio/correct.mp3"));
+                  setState(() {
+                    played=true;
+                  });
+                }
                 print('Correct !');
                 setState(() {
                   sendData(letters[Lindex]['letter']!,'true');
                   isCorrect=true;
                   Status = "عمل رائع !";
                   _isListening = false;
+                  _text='';
+
 
                 });
               }

@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:math';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter_application_1/pages/audio.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/voice.dart';
@@ -126,6 +127,8 @@ class _betestState extends State<betest> {
     }
     if (index + 1 == testType.length )
     {
+      AssetsAudioPlayer.playAndForget(Audio("audio/correct.mp3"));
+
       setState((){
         isClicked = true;
         isEnd = true;
