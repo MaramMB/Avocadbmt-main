@@ -3,10 +3,10 @@ import 'package:flutter_application_1/pages/expl.dart';
 import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
+//import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
 
-import 'manag.dart';
+//import 'manag.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -99,10 +99,10 @@ class _mainpageState extends State<mainpage> {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context)
+                 /*          Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
                               return const expage();
-                            }));
+                            }));*/
                           },
                           style: ElevatedButton.styleFrom(
                             alignment: Alignment.bottomCenter,

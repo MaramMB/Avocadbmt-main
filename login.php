@@ -16,6 +16,7 @@ echo "DB connection field";
 }
                $email=$_POST['Email'];
                $pass=$_POST['pass'];
+              
                $userData = array();
                $qu="SELECT * FROM usersacounts WHERE Email='$email' and Passward='$pass'";
                $resu=mysqli_query($db,$qu);
