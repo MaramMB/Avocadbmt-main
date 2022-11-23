@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/pages/personal.dart';
+// import 'package:flutter_application_1/pages/personal.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -107,6 +107,7 @@ class _AddScocietyState extends State<AddScociety> {
   }
 
   void confirm() {
+    Navigator.of(context, rootNavigator: true).pop();
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -118,7 +119,7 @@ class _AddScocietyState extends State<AddScociety> {
               children: [
                 InkWell(
                     onTap: () {
-                      Navigator.of(context, rootNavigator: true).pop();
+                      Navigator.pop(context);
                       addSocietie();
                     },
                     child: Container(
@@ -194,7 +195,6 @@ class _AddScocietyState extends State<AddScociety> {
         var data = jsonDecode(response.body);
 
         if (data == 'Success') {
-          Navigator.of(context).pop();
           Fluttertoast.showToast(msg: "تم اضافه المعلم بنجاح");
         }
       } else {
@@ -239,131 +239,80 @@ class _AddScocietyState extends State<AddScociety> {
           nameController: nameController,
           text: "أسم الجمعيه",
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                namefield(field: "العنوان"),
-                customTextFieldWidget(
-                  type: TextInputType.name,
-                  ontap: () {},
-                  wid: 300,
-                  hei: 40,
-                  nameController: addressController,
-                  text: "العنوان",
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                namefield(field: "رقم الهاتف"),
-                Padding(
-                  padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                  child: Container(
-                    height: 40,
-                    width: 300,
-                    child: TextField(
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                      ],
-                      keyboardType: const TextInputType.numberWithOptions(
-                          signed: true, decimal: true),
-                      onTap: () {},
-                      textAlign: TextAlign.right,
-                      controller: phoneController,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xff34568B), width: 2.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2.0, color: backgreen),
-                        ),
-                        hintText: "رقم الهاتف",
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+        namefield(field: "العنوان"),
+        customTextFieldWidget(
+          type: TextInputType.name,
+          ontap: () {},
+          wid: 300,
+          hei: 40,
+          nameController: addressController,
+          text: "العنوان",
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                                namefield(field: "تاريخ الجمعيه"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: _pickDate,
-                        child: Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: const Icon(
-                            Icons.calendar_month,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 2.0,
-                      ),
-                                      customTextFieldWidget(
-                  type: TextInputType.datetime,
-                  ontap: () => _pickDate(),
-                  nameController: dateController,
-                  wid: 250,
-                  hei: 40,
-                  readOnly: true,
-                  text: "تاريخ الجمعيه",
-                ),
-
-                    ],
-                  ),
+        namefield(field: "رقم الهاتف"),
+        Padding(
+          padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+          child: Container(
+            height: 40,
+            width: 300,
+            child: TextField(
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
               ],
-            ),
-            Column(
-              children: [
-                namefield(field: "أسم المدير"),
-                customTextFieldWidget(
-                  type: TextInputType.text,
-                  ontap: () {},
-                  wid: 300,
-                  hei: 40,
-                  nameController: managerController,
-                  text: "أسم المدير",
+              keyboardType: const TextInputType.numberWithOptions(
+                  signed: true, decimal: true),
+              onTap: () {},
+              textAlign: TextAlign.right,
+              controller: phoneController,
+              obscureText: false,
+              decoration: InputDecoration(
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
                 ),
-              ],
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 2.0, color: backgreen),
+                ),
+                hintText: "رقم الهاتف",
+              ),
             ),
-          ],
+          ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _confirmPassword,
-            _password,
-          ],
+        namefield(field: "تاريخ الجمعيه"),
+        customTextFieldWidget(
+          type: TextInputType.datetime,
+          ontap: () => _pickDate(),
+          nameController: dateController,
+          wid: 300,
+          hei: 40,
+          text: "تاريخ الجمعيه",
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _dateApplied,
-            _email,
-          ],
+        namefield(field: "أسم المدير"),
+        customTextFieldWidget(
+          type: TextInputType.text,
+          ontap: () {},
+          wid: 300,
+          hei: 40,
+          nameController: managerController,
+          text: "أسم المدير",
         ),
+        _email,
+        _password,
+        _confirmPassword,
+        _dateApplied,
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: InkWell(
             onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return const AlertDialog(
+                    content: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Center(child: CircularProgressIndicator())),
+                  );
+                },
+              );
               confirm();
             },
             child: Container(
@@ -466,7 +415,6 @@ class _AddScocietyState extends State<AddScociety> {
                 ontap: setCurrentDate,
                 wid: 250,
                 hei: 40,
-                readOnly: true,
                 nameController: dateAppliedController,
                 text: "تاريخ الانضمام",
               ),

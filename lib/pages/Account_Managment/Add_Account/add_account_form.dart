@@ -339,8 +339,8 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     InkWell(
                         onTap: () {
                           Navigator.pop(context);
-                          Navigator.of(context, rootNavigator: true).pop();
                           Fluttertoast.showToast(msg: "تم اضافه الطالب بنجاح");
+                          Navigator.pop(context);
                         },
                         child: Container(
                             decoration: BoxDecoration(
@@ -410,8 +410,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
       );
     } else {
       var url = 'http://localhost/donia_code/add_teacher.php';
-
-      Navigator.of(context, rootNavigator: true).pop();
 
       final response = await http.post(
         Uri.parse(url),
@@ -537,109 +535,81 @@ class _AddAccountFormState extends State<AddAccountForm> {
             nameController: nameController,
             text: "أسم المعلم",
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "رقم الهويه"),
-                  textfieldwidget(
-                    type: TextInputType.name,
-                    ontap: () {},
-                    wid: 300,
-                    hei: 40,
-                    nameController: IDTeacherController,
-                    text: "رقم الهويه",
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "رقم الحساب"),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Container(
-                      height: 40,
-                      width: 300,
-                      child: TextField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        onTap: () {},
-                        textAlign: TextAlign.right,
-                        controller: accountnumberController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2.0, color: backgreen),
-                          ),
-                          hintText: "رقم الحساب",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          namefield(field: "رقم الهويه"),
+          textfieldwidget(
+            type: TextInputType.name,
+            ontap: () {},
+            wid: 300,
+            hei: 40,
+            nameController: IDTeacherController,
+            text: "رقم الهويه",
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "رقم الهاتف"),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Container(
-                      height: 40,
-                      width: 300,
-                      child: TextField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        onTap: () {},
-                        textAlign: TextAlign.right,
-                        controller: phoneController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2.0, color: backgreen),
-                          ),
-                          hintText: "رقم الهاتف",
-                        ),
-                      ),
-                    ),
-                  ),
+          namefield(field: "رقم الحساب"),
+          Padding(
+            padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+            child: Container(
+              height: 40,
+              width: 300,
+              child: TextField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
                 ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "التخصص"),
-                  textfieldwidget(
-                    type: TextInputType.text,
-                    ontap: () {},
-                    wid: 300,
-                    hei: 40,
-                    nameController: specificController,
-                    text: "التخصص",
+                keyboardType: const TextInputType.numberWithOptions(
+                    signed: true, decimal: true),
+                onTap: () {},
+                textAlign: TextAlign.right,
+                controller: accountnumberController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xff34568B), width: 2.0),
                   ),
-                ],
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2.0, color: backgreen),
+                  ),
+                  hintText: "رقم الحساب",
+                ),
               ),
-            ],
+            ),
+          ),
+          namefield(field: "رقم الهاتف"),
+          Padding(
+            padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+            child: Container(
+              height: 40,
+              width: 300,
+              child: TextField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
+                ],
+                keyboardType: const TextInputType.numberWithOptions(
+                    signed: true, decimal: true),
+                onTap: () {},
+                textAlign: TextAlign.right,
+                controller: phoneController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xff34568B), width: 2.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2.0, color: backgreen),
+                  ),
+                  hintText: "رقم الهاتف",
+                ),
+              ),
+            ),
+          ),
+          namefield(field: "التخصص"),
+          textfieldwidget(
+            type: TextInputType.text,
+            ontap: () {},
+            wid: 300,
+            hei: 40,
+            nameController: specificController,
+            text: "التخصص",
           ),
           namefield(field: "الجنس"),
           Row(
@@ -679,20 +649,10 @@ class _AddAccountFormState extends State<AddAccountForm> {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _confirmPassword,
-              _password,
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _dateApplied,
-              _email,
-            ],
-          ),
+          _email,
+          _password,
+          _confirmPassword,
+          _dateApplied,
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: InkWell(
@@ -849,7 +809,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
                 ontap: setCurrentDate,
                 wid: 250,
                 hei: 40,
-                readOnly: true,
                 nameController: dateAppliedController,
                 text: "تاريخ الانضمام",
               ),
@@ -959,149 +918,88 @@ class _AddAccountFormState extends State<AddAccountForm> {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "رقم هويه الطالب"),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Container(
-                      height: 40,
-                      width: 300,
-                      child: TextField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        onTap: () {},
-                        textAlign: TextAlign.right,
-                        controller: IDstudentController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2.0, color: backgreen),
-                          ),
-                          hintText: "رقم هويه الطالب",
-                        ),
-                      ),
-                    ),
-                  ),
+          namefield(field: "رقم هويه الطالب"),
+          Padding(
+            padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+            child: Container(
+              height: 40,
+              width: 300,
+              child: TextField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
                 ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "العنوان"),
-                  textfieldwidget(
-                    type: TextInputType.number,
-                    ontap: () {},
-                    wid: 300,
-                    hei: 40,
-                    nameController: addressstudentController,
-                    text: "العنوان",
+                keyboardType: const TextInputType.numberWithOptions(
+                    signed: true, decimal: true),
+                onTap: () {},
+                textAlign: TextAlign.right,
+                controller: IDstudentController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xff34568B), width: 2.0),
                   ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "رقم هاتف الأهل"),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Container(
-                      height: 40,
-                      width: 300,
-                      child: TextField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        onTap: () {},
-                        textAlign: TextAlign.right,
-                        controller: familyphoneController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2.0, color: backgreen),
-                          ),
-                          hintText: "رقم هاتف الأهل",
-                        ),
-                      ),
-                    ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2.0, color: backgreen),
                   ),
-                ],
+                  hintText: "رقم هويه الطالب",
+                ),
               ),
-              Column(
-                children: [
-                  namefield(field: "تاريخ الميلاد"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: _pickDate,
-                        child: Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: const Icon(
-                            Icons.calendar_month,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 2.0,
-                      ),
-                      textfieldwidget(
-                        type: TextInputType.datetime,
-                        ontap: () {
-                          _pickDate();
-                        },
-                        nameController: dateinput,
-                        wid: 250,
-                        hei: 40,
-                        text: "تاريخ الميلاد",
-                      ),
-                    ],
+            ),
+          ),
+          namefield(field: "العنوان"),
+          textfieldwidget(
+            type: TextInputType.number,
+            ontap: () {},
+            wid: 300,
+            hei: 40,
+            nameController: addressstudentController,
+            text: "العنوان",
+          ),
+          namefield(field: "رقم هاتف الأهل"),
+          Padding(
+            padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+            child: Container(
+              height: 40,
+              width: 300,
+              child: TextField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
+                ],
+                keyboardType: const TextInputType.numberWithOptions(
+                    signed: true, decimal: true),
+                onTap: () {},
+                textAlign: TextAlign.right,
+                controller: familyphoneController,
+                obscureText: false,
+                decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xff34568B), width: 2.0),
                   ),
-                ],
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2.0, color: backgreen),
+                  ),
+                  hintText: "رقم هاتف الأهل",
+                ),
               ),
-            ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _confirmPassword,
-              _password,
-            ],
+          namefield(field: "تاريخ الميلاد"),
+          textfieldwidget(
+            type: TextInputType.datetime,
+            ontap: () {
+              _pickDate();
+            },
+            nameController: dateinput,
+            wid: 300,
+            hei: 40,
+            text: "تاريخ الميلاد",
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _dateApplied,
-              _email,
-            ],
-          ),
+          _email,
+          _password,
+          _confirmPassword,
+          _dateApplied,
           namefield(field: "الجنس"),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
