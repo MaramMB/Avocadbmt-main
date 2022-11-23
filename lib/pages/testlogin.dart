@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Profile/profile.dart';
 import 'package:flutter_application_1/pages/logindb.dart';
 import 'package:flutter_application_1/pages/manag.dart';
-//import 'package:flutter_application_1/pages/widgets/manage_accounts.dart';
-//import 'package:flutter_application_1/pages/widgets/societies.dart';
+import 'package:flutter_application_1/pages/widgets/manage_accounts.dart';
+import 'package:flutter_application_1/pages/widgets/societies.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
-//import 'forgetpass.dart';
+import 'forgetpass.dart';
 import 'mainpage.dart';
-
-//import 'mobile/mainmobailepage.dart';
-bool _passwordInVisible = true;
-
+import 'mobile/mainmobailepage.dart';
+  bool _passwordInVisible = true;
 class testlog extends StatefulWidget {
   testlog({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -24,25 +21,23 @@ class testlog extends StatefulWidget {
 }
 
 class _testlogState extends State<testlog> {
-
   bool _visible = false;
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
-  void _toggle() {
+  void _toggle(){
     setState(() {
       _obscureText = !_obscureText;
     });
   }
-
-  TextEditingController email = TextEditingController();
-  TextEditingController pass = TextEditingController();
+  TextEditingController email=TextEditingController();
+  TextEditingController pass=TextEditingController();
   // String error = '';
-  login() async {
-    const url = "http://localhost/tasneem/log.php";
+  login()async {
+    const url="http://localhost/log.php";
 
-    final response = await http.post(Uri.parse(url), body: {
-      "Email": email.text,
-      "pass": pass.text,
+    final response =await http.post(Uri.parse(url),body:{
+      "Email":email.text,
+      "pass":pass.text,
     });
     if (response.statusCode == 200) {
       var user = json.decode(response.body);
@@ -65,9 +60,8 @@ class _testlogState extends State<testlog> {
         );
         print("Username & Password Invalid");
       } else {
-            final SharedPreferences prefs = await SharedPreferences.getInstance();
-        if (user['active'] == 'active') {
-          /*  if (user['Kind'] == 'manager') {
+        if(user['active'] == 'active') {
+          if (user['Kind'] == 'manager') {
             Navigator.push(context,
               MaterialPageRoute(builder: (context) => managepage(),),);
             print(user['Kind']);
@@ -76,28 +70,17 @@ class _testlogState extends State<testlog> {
             Navigator.push(
               context, MaterialPageRoute(builder: (context) => Socieites(),),);
             print(user['Kind']);
-          } */
-          await prefs.setString('userKind',user['Kind']);
-          await prefs.setString('userId',user['Id_Num']);
-
-          if (user['Kind'] == 'student') {
+          } else if (user['Kind'] == 'student') {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => mainpage(),
-              ),
-            );
+              context, MaterialPageRoute(builder: (context) => mainpage(),),);
             print(user['Kind']);
           } else {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => mainpage(),
-              ),
-            );
+              context, MaterialPageRoute(builder: (context) => mainpage(),),);
             print(user['Kind']);
           }
-        } else {
+        }
+        else{
           Fluttertoast.showToast(
             msg: "الحساب الذي تحاول الدخول اليه معطل",
             toastLength: Toast.LENGTH_LONG,
@@ -108,25 +91,28 @@ class _testlogState extends State<testlog> {
             fontSize: 30,
           );
         }
+
       }
       setState(() {});
     }
-  }
 
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('img/loginback.jpeg'),
-          fit: BoxFit.cover,
-        )),
+              image: AssetImage('img/loginback.jpeg'),
+              fit: BoxFit.cover,
+            )),
+
         child: Center(
           child: Container(
-            width: MediaQuery.of(context).size.width / 2.6,
+            width:MediaQuery.of(context).size.width/2.6,
             child: Column(
-              textDirection: TextDirection.rtl,
+
+            textDirection: TextDirection.rtl,
               // crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -149,17 +135,15 @@ class _testlogState extends State<testlog> {
                       fontWeight: FontWeight.bold),
                 ),
                 // Text("يرجى كتابة البريد الالكتروني الخاص بك هنا",style: TextStyle( fontFamily: "DroidKufi", fontSize: 20,fontWeight: FontWeight.bold)),
-                const SizedBox(
-                  height: 100,
-                ),
+                const SizedBox(height: 100,),
                 Container(
+
                   decoration: const BoxDecoration(
-                    color: Color.fromRGBO(255, 255, 255, 0.85),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  child: Form(
+                    color:  Color.fromRGBO(255, 255, 255, 0.85),
+                    borderRadius: BorderRadius.all(Radius.circular(15),
+                    ),),
+                  child:
+                  Form(
                     key: _formKey,
                     child: Column(
                       children: [
@@ -168,15 +152,11 @@ class _testlogState extends State<testlog> {
                           child: TextFormField(
                             controller: email,
                             textAlign: TextAlign.right,
-                            decoration: const InputDecoration(
+                            decoration:  const InputDecoration(
                               fillColor: Colors.white,
-                              icon: Icon(
-                                Icons.email,
-                                size: 35,
-                              ),
+                              icon: Icon(Icons.email,size: 35,),
                               border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                   color: Colors.green,
                                   width: 1.0,
@@ -184,17 +164,18 @@ class _testlogState extends State<testlog> {
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                borderSide:
-                                    BorderSide(color: Colors.green, width: 2.5),
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(
+                                    color: Colors.green,
+                                    width: 2.5
+                                ),
+
                               ),
                               // icon: Icon(Icons.email),
                               hintText: 'البريد الالكتروني',
                               // labelText: 'Message',
                               errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                   color: Colors.red,
                                   width: 1.0,
@@ -208,7 +189,7 @@ class _testlogState extends State<testlog> {
                               RegExp regExp = new RegExp(pattern);
                               if (value!.isEmpty) {
                                 return "يرجى تعبئة حقل البريد الالكتروني ";
-                              } else if (!regExp.hasMatch(value)) {
+                              } else if (!regExp.hasMatch(value!)) {
                                 return "يرجى ادخال بريد الكتروني صالح";
                               } else {
                                 return null;
@@ -216,38 +197,31 @@ class _testlogState extends State<testlog> {
                             },
                           ),
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 30,),
                         Container(
                           decoration: const BoxDecoration(
-                            color: Color.fromRGBO(255, 255, 255, 0.85),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                          ),
-                          child: Directionality(
+                            color:  Color.fromRGBO(255, 255, 255, 0.85),
+                            borderRadius: BorderRadius.all(Radius.circular(15),
+                            ),),
+                          child:
+                          Directionality(
                             textDirection: TextDirection.rtl,
                             child: TextFormField(
                               textAlign: TextAlign.right,
                               obscureText: _obscureText,
                               controller: pass,
                               decoration: InputDecoration(
+
                                 fillColor: Colors.white,
 
                                 border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15))),
-                                icon: const Icon(
-                                  Icons.lock,
-                                  size: 35,
+                                    borderRadius: BorderRadius.all(Radius.circular(15))
                                 ),
+                                icon: const Icon(Icons.lock,size: 35,),
                                 hintText: 'كلمة المرور',
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscureText
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
+                                    _obscureText ? Icons.visibility_off : Icons.visibility,
                                   ),
                                   onPressed: _toggle,
                                 ),
@@ -256,29 +230,31 @@ class _testlogState extends State<testlog> {
                                 // labelText: 'Message',
 
                                 errorBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
                                   borderSide: BorderSide(
                                     color: Colors.red,
                                     width: 1.0,
                                     style: BorderStyle.solid,
                                   ),
+
                                 ),
 
                                 focusedBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
                                   borderSide: BorderSide(
-                                      color: Colors.green, width: 2.5),
+                                      color: Colors.green,
+                                      width: 2.5
+                                  ),
+
                                 ),
                               ),
                               validator: (value) {
-                                String patttern =
-                                    r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$)';
+                                String patttern = r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$)';
                                 RegExp regExp = new RegExp(patttern);
                                 if (value!.isEmpty) {
                                   return "يرجى تعبئة كلمة المرور ";
-                                } else if (value.length < 6) {
+                                }
+                                else if (value.length < 6) {
                                   return "يجب أن لا تقل كلمة المرور عن ستة أرقام";
                                 }
                                 // else if (!regExp.hasMatch(value)) {
@@ -286,24 +262,24 @@ class _testlogState extends State<testlog> {
                                 // }
                                 return null;
                               },
+
                             ),
                           ),
                         ),
+
                       ],
                     ),
                   ),
                 ),
 
-                const SizedBox(
-                  height: 15,
-                ),
+                const SizedBox(height: 15,),
                 Container(
-                  child: TextButton(
+                  child:        TextButton(
                     onPressed: () {
-                      /*         Navigator.of(context)
+                      Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
                         return const forgetpassw();
-                      }));*/
+                      }));
                     },
                     child: const Text(
                       "هل نسيت كلمة المرور ؟",
@@ -313,64 +289,56 @@ class _testlogState extends State<testlog> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                const SizedBox(height: 40,),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () => {
-                      if (_formKey.currentState!.validate())
-                        {
-                          if (_formKey.currentState!.validate())
-                            {
-                              setState(() {
-                                _visible = false;
-                              }),
-                              login(),
-                            }
-                          else
-                            {
-                              const Text("Not Found The Account"),
-                            },
+                      onPressed: ()=>{
+                        if (_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              _visible = false;
+                            }),
+                            login(),
+                          }
+                          else{
+                            const Text("Not Found The Account"),
+                          },
                         }
-                      // login(context),
-                      //       if (_formKey.currentState!.validate()) {
-                      //     setState(() {
-                      //          _visible = false;
-                      //                 }),
-                      //         // login()
-                      // //     Navigator.of(context)
-                      // //     .push(MaterialPageRoute(builder: (context) {
-                      // //   return const mainpage();
-                      // // })
-                      // // ),
-                      //       }
-                      //       else{
-                      //         const Text("Not Found The Account"),
-                      // }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      elevation: 2.0,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 12),
-                    ),
-                    child: const Text("تسجيل الدخول",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "DroidKufi",
-                          fontSize: 18.0,
-                        )),
+                        // login(context),
+                  //       if (_formKey.currentState!.validate()) {
+                  //     setState(() {
+                  //          _visible = false;
+                  //                 }),
+                  //         // login()
+                  // //     Navigator.of(context)
+                  // //     .push(MaterialPageRoute(builder: (context) {
+                  // //   return const mainpage();
+                  // // })
+                  // // ),
+                  //       }
+                  //       else{
+                  //         const Text("Not Found The Account"),
+                  // }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        elevation: 2.0,
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),),
+                      child: const Text("تسجيل الدخول",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "DroidKufi",
+                            fontSize: 18.0,
+                          )),
                   ),
                 ),
-                const SizedBox(
-                  height: 90,
-                ),
+                const SizedBox(height: 90,),
               ],
             ),
           ),
         ),
       ),
+
     );
   }
 }
