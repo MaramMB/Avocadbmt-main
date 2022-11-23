@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/Profile/profile.dart';
@@ -11,7 +12,27 @@ import 'manag.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-int _value = 1;
+int _value = 0;
+bool dropOpen = false;
+var list1 = [
+
+  DropdownMenuItem(
+    alignment: Alignment.centerRight,
+    value: 1,
+    child: Text("تدريبات نطق الحروف"),
+  ),
+  DropdownMenuItem(
+    alignment: Alignment.centerRight,
+    value: 2,
+    child: Text("التدريبات الصوتية"),
+  ),
+  DropdownMenuItem(
+    alignment: Alignment.centerRight,
+    value: 3,
+    child: Text("تدريبات الوجه"),
+  )
+];
+
 class SelectionButton extends StatefulWidget {
   const SelectionButton({super.key});
 
@@ -41,6 +62,9 @@ class _SelectionButtonState extends State<SelectionButton> {
                           bottomLeft: Radius.circular(25)))),
             ),
             onPressed: () {
+              setState(() {
+                _value = 0;
+              });
               (context as Element).reassemble();
 
               Navigator.of(context)
@@ -69,6 +93,9 @@ class _SelectionButtonState extends State<SelectionButton> {
                             bottomRight: Radius.circular(0.1)))),
               ),
               onPressed: () {
+                setState(() {
+                  _value = 0;
+                });
                 (context as Element).reassemble();
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
@@ -83,8 +110,9 @@ class _SelectionButtonState extends State<SelectionButton> {
           ),
 
           Container(
+            width: 185,
             padding:
-            const EdgeInsets.only(left: 15.0, right: 15.0, top: 0),
+            const EdgeInsets.only(left: 0.0, right: 0.0, top: 0),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius:
@@ -97,32 +125,23 @@ class _SelectionButtonState extends State<SelectionButton> {
 
               child: DropdownButtonHideUnderline(
 
-                child: DropdownButton(
-                  dropdownColor: Colors.white,
+                child: DropdownButton2(
+                hint: Row(
+                  children: const [
+                    Text('قائمة التدريبات', style: TextStyle(
+                        decoration: TextDecoration.none,
+                        color: blak,
+                        fontFamily: "DroidKufi"),),
+                  ],
+                ),
+
                   alignment: Alignment.center ,
                   style: const TextStyle(
                       decoration: TextDecoration.none,
                       color: blak,
                       fontFamily: "DroidKufi"),
-                  value: _value,
-                  items: const [
-
-                    DropdownMenuItem(
-                      alignment: Alignment.centerRight,
-                      value: 1,
-                      child: Text("تدريبات نطق الحروف"),
-                    ),
-                    DropdownMenuItem(
-                      alignment: Alignment.centerRight,
-                      value: 2,
-                      child: Text("التدريبات الصوتية"),
-                    ),
-                    DropdownMenuItem(
-                      alignment: Alignment.centerRight,
-                      value: 3,
-                      child: Text("تدريبات الوجه"),
-                    )
-                  ],
+                  value: _value == 0 ? null : _value,
+                  items: list1,
                   onChanged: (value) {
                     setState(() {
                       _value = value!;
@@ -166,6 +185,9 @@ class _SelectionButtonState extends State<SelectionButton> {
                       }
                     });
                   },
+
+
+
                   // underline:ButtonBar(),
                 ),
               ),
@@ -215,7 +237,9 @@ class _SelectionButtonState extends State<SelectionButton> {
             ),
             onPressed: () {
               (context as Element).reassemble();
-
+              setState(() {
+                _value = 0;
+              });
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) {
                 return const mainpage();
@@ -273,6 +297,9 @@ class _SelectionButtonState extends State<SelectionButton> {
               elevation: 2,
               // on selected we show the dialog box
               onSelected: (value) async {
+                setState(() {
+                  _value = 0;
+                });
                 // if value 1 show dialog
                 if (value == 1) {
                   (context as Element).reassemble();
