@@ -29,7 +29,6 @@ int _value = 1;
 late var imageb;
 Widget www = Text('sss');
 bool isA=true;
-bool addCheck = false;
 var SnameCont = TextEditingController();
 
 class voicex extends StatefulWidget {
@@ -123,7 +122,6 @@ class _voicexState extends State<voicex> {
      setState((){
        isA=false;
        _selectedType=0;
-       addCheck = false;
        secT=false;
      });
 
@@ -263,189 +261,84 @@ class _voicexState extends State<voicex> {
                                 children: [
                                   FloatingActionButton(backgroundColor: Colors.green, // زر اختيار الصورة
                                       child:Icon(Icons.add_outlined),onPressed: (){
-                                        showDialog(barrierDismissible: false,context: context, builder: (_)=>
-                                            StatefulBuilder(
-                                                builder: (context, setState) {
-                                             return AlertDialog(
-                                               title: Container(
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text('إضافة صوت استيعابي',style: TextStyle(
+                                        showDialog(barrierDismissible: false,context: context, builder: (_)=>AlertDialog(
+                                          title: Container(
+                                            child: Column(
+                                              children: [
+                                                TextField(
+
+                                                  style: TextStyle(
                                                     fontFamily: "DroidKufi",
                                                     fontWeight: FontWeight.w700,
-                                                    color: Colors.green,
-                                                  ),),
-                                                  SizedBox(height: 30,),
-                                                  Directionality(
-                                                    textDirection: TextDirection.rtl,
-                                                    child: TextField(
-                                                      textDirection: TextDirection.rtl,
-                                                      style: TextStyle(
-                                                        fontFamily: "DroidKufi",
-                                                        fontWeight: FontWeight.w500,
-                                                      ),
-                                                      controller: SnameCont,
-                                                      autofocus: false,
-                                                      maxLength: 20,
-                                                      decoration: InputDecoration(
-                                                        hintText: 'اسم الصوت',
-                                                        enabledBorder:OutlineInputBorder(
-                                                          borderSide: const BorderSide(color: Colors.green, width: 2),
-                                                        ),
-                                                        border: OutlineInputBorder(),
-                                                      ),
+                                                  ),
+                                                  controller: SnameCont,
+                                                  autofocus: false,
+                                                  maxLength: 20,
+                                                  decoration: InputDecoration(
+                                                    hintText: 'اسم الصوت',
+                                                    enabledBorder:OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Colors.green, width: 2),
                                                     ),
+                                                    border: OutlineInputBorder(),
                                                   ),
-                                                  SizedBox(height: 20,),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                ),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
+                                                    ,onPressed: () {
+                                                      //getHttp();
+                                                      PickImage();
 
-                                                    children: [
-                                                      FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
+                                                    }, child: Row(
+                                                      children: [
+                                                        Icon(Icons.upload),
+                                                        Text('أختيار صورة'),
 
-
-                                                        showDialog(barrierDismissible: true,context: context, builder: (_) {
-                                                          if(imgUp){  return AlertDialog(
-                                                            title: Column(
-                                                              children: [
-                                                                Image.memory(base64Decode(imageb),width: 300, height: 300,),
-                                                                SizedBox(height: 30,),
-                                                                SizedBox(
-                                                                  height: 40,
-                                                                  child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
-                                                                    Navigator.pop(context);
-                                                                  }, child: Text("رجوع",style: TextStyle(fontFamily: "DroidKufi"),)),
-                                                                ),
+                                                      ],
+                                                    )),
+                                                FloatingActionButton(child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
 
 
-                                                              ],
-                                                            ),
-                                                          );}
-                                                          else return AlertDialog(title: Column(
-                                                            children: [
-                                                              Center(child: Text('لم يتم اختيار صورة')),
-                                                              SizedBox(height: 30,),
-                                                              SizedBox(
-                                                                height: 40,
-                                                                child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
-                                                                  Navigator.pop(context);
-                                                                }, child: Text("العودة",style: TextStyle(fontFamily: "DroidKufi"),)),
-                                                              ),
+                                                  showDialog(barrierDismissible: true,context: context, builder: (_) {
+                                                    if(imgUp){  return AlertDialog(
+                                                      title: Image.memory(base64Decode(imageb)),
+                                                    );}
+                                                    else return AlertDialog(title: Text('لا توجد صورة'),);
 
-                                                            ],
-                                                          ),);
-                                                        });
-                                                      }),
-                                                      SizedBox(width: 20,),
-                                                      SizedBox(
-                                                        width: 140,
-                                                        height: 50,
-                                                        child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
-                                                            ,onPressed: () {
-                                                              PickImage();
-
-                                                            }, child: Row(
-                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                              children: [
-                                                                Text(imgUp?'استبدال':'اختيار صورة',style:TextStyle(
-                                                                  fontFamily: "DroidKufi",
-                                                                  ) ,),
-                                                                SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                Icon(imgUp?Icons.refresh:Icons.upload),
-                                                              ],
-                                                            )),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                  SizedBox(height: 20,),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      SizedBox(height: 40,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { UploadFiles(); }, child: Text('رفع'),)),
-                                                      SizedBox(width: 20,),
-                                                      SizedBox(width: 140,height: 50,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { getAudio(); }, child: Text('اضافة صوت'),)),
+                                                  });
+                                                }),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
+                                                  setState(() {
+                                                    isA=false;
+                                                    imgUp=false;
+                                                  });
+                                                  addSound(SnameCont.text,imageb,'A');
 
 
-                                                    ],
-                                                  ),
-                                                  SizedBox(height: 20,),
-                                                   Visibility(
-                                                     visible: addCheck,
-                                                     child: Text(" خطأ ، قم بالتأكد من البيانات المطلوبة *", style: TextStyle(
-                                                      fontFamily: "DroidKufi",
-                                                      fontSize: 13,
-                                                      fontWeight: FontWeight.w600,
-                                                      color: Colors.red[800],
-                                                  ) ,),
-                                                   ),
-                                                  SizedBox(height: 20,),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                }
+                                                  , child: Text('حفظ'),),
+                                                SizedBox(height: 20,),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
+                                                setState(() { SnameCont.clear();
+                                                imageb='';});
+                                                  Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
+                                                      setState(() {
+                                                        secT=true;
 
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 40,
-                                                        child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
-                                                          setState(() {
-                                                            addCheck = false;
+                                                    });
 
-                                                            SnameCont.clear();
-                                                            imageb='';});
-                                                          Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
-                                                            setState(() {
-                                                              secT=true;
-                                                            });
-
-                                                          });
+                                                  });
 
 
-                                                        }
-                                                          , child: Text('إغلاق'),),
-                                                      ),
-                                                      SizedBox(width: 20,),
-                                                      SizedBox(
-                                                        height: 40,
-                                                        child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[700]), onPressed: () {
-                                                          if (!imgUp || SnameCont.text==''){
-                                                            setState(() {
-                                                              addCheck = true;
-                                                            });
-
-                                                            // اظهار رسالة خطأ ( رفع صورة)
-
-                                                          }
-                                                          else{
-                                                            setState(() {
-                                                              isA=false;
-                                                              imgUp=false;
-                                                              addCheck = false;
-
-                                                            });
-                                                            addSound(SnameCont.text,imageb,'A');
-                                                          }
+                                                }
+                                                  , child: Text('إغلاق'),),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { getAudio(); }, child: Text('اضافة صوت'),),
+                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { UploadFiles(); }, child: Text('رفع'),),
 
 
-
-                                                        }
-                                                          , child: Text('حفظ'),),
-                                                      ),
-
-
-                                                    ],
-                                                  ),
-
-
-
-                                                ],
-                                              ),
+                                              ],
+                                            ),
                                           ),
 
-                                        );
-                          }));
+                                        ));
 
 
                                       }),
@@ -739,189 +632,73 @@ class _voicexState extends State<voicex> {
                                 children: [
                                   FloatingActionButton(backgroundColor: Colors.green, // زر اختيار الصورة
                                       child:Icon(Icons.add_outlined),onPressed: (){
-                                        showDialog(barrierDismissible: false,context: context, builder: (_)=>
-                                            StatefulBuilder(
-                                                builder: (context, setState) {
-                                                  return AlertDialog(
-                                                    title: Container(
-                                                      child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                        children: [
-                                                          Text('إضافة صوت استيعابي',style: TextStyle(
-                                                            fontFamily: "DroidKufi",
-                                                            fontWeight: FontWeight.w700,
-                                                            color: Colors.green,
-                                                          ),),
-                                                          SizedBox(height: 30,),
-                                                          Directionality(
-                                                            textDirection: TextDirection.rtl,
-                                                            child: TextField(
-                                                              textDirection: TextDirection.rtl,
-                                                              style: TextStyle(
-                                                                fontFamily: "DroidKufi",
-                                                                fontWeight: FontWeight.w500,
-                                                              ),
-                                                              controller: SnameCont,
-                                                              autofocus: false,
-                                                              maxLength: 20,
-                                                              decoration: InputDecoration(
-                                                                hintText: 'اسم الصوت',
-                                                                enabledBorder:OutlineInputBorder(
-                                                                  borderSide: const BorderSide(color: Colors.green, width: 2),
-                                                                ),
-                                                                border: OutlineInputBorder(),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(height: 20,),
-                                                          Row(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                    showDialog(barrierDismissible: false,context: context, builder: (_)=>AlertDialog(
+                                      title: Container(
+                                        child: Column(
+                                          children: [
+                                            TextField(
 
-                                                            children: [
-                                                              FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
+                                              style: TextStyle(
+                                                  fontFamily: "DroidKufi",
+                                                  fontWeight: FontWeight.w700,
+                                              ),
+                                              controller: SnameCont,
+                                              autofocus: false,
+                                             maxLength: 20,
+                                              decoration: InputDecoration(
+                                                hintText: 'اسم الصوت',
+                                                enabledBorder:OutlineInputBorder(
+                                                  borderSide: const BorderSide(color: Colors.green, width: 2),
+                                                ),
+                                                border: OutlineInputBorder(),
+                                              ),
+                                            ),
+                                            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
+                                           ,onPressed: () {
+                                              //getHttp();
+                                                  PickImage();
 
+                                                }, child: Row(
+                                             children: [
+                                               Icon(Icons.upload),
+                                               Text('أختيار صورة'),
+                                             ],
+                                           )),
+                                            FloatingActionButton(child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
+                                              showDialog(barrierDismissible: true,context: context, builder: (_) {
+                                                if(imgUp){  return AlertDialog(
+                                                  title: Image.memory(base64Decode(imageb)),
+                                                );}
+                                                else return AlertDialog(title: Text('لا توجد صورة'),);
+                                              });
+                                            }),
+                                            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () {
+                                              addSound(SnameCont.text,imageb,'B');
 
-                                                                showDialog(barrierDismissible: true,context: context, builder: (_) {
-                                                                  if(imgUp){  return AlertDialog(
-                                                                    title: Column(
-                                                                      children: [
-                                                                        Image.memory(base64Decode(imageb),width: 300, height: 300,),
-                                                                        SizedBox(height: 30,),
-                                                                        SizedBox(
-                                                                          height: 40,
-                                                                          child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
-                                                                            Navigator.pop(context);
-                                                                          }, child: Text("رجوع",style: TextStyle(fontFamily: "DroidKufi"),)),
-                                                                        ),
+                                            }
+                                            , child: Text('حفظ'),),
+                                            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
+                                              setState(() { SnameCont.clear();
+                                              imageb='';});
+                                             Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
+                                               setState(() {
+                                                 isA=false;
+                                                 imgUp=false;
+                                               });
 
-
-                                                                      ],
-                                                                    ),
-                                                                  );}
-                                                                  else return AlertDialog(title: Column(
-                                                                    children: [
-                                                                      Center(child: Text('لم يتم اختيار صورة')),
-                                                                      SizedBox(height: 30,),
-                                                                      SizedBox(
-                                                                        height: 40,
-                                                                        child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
-                                                                          Navigator.pop(context);
-                                                                        }, child: Text("العودة",style: TextStyle(fontFamily: "DroidKufi"),)),
-                                                                      ),
-
-                                                                    ],
-                                                                  ),);
-                                                                });
-                                                              }),
-                                                              SizedBox(width: 20,),
-                                                              SizedBox(
-                                                                width: 140,
-                                                                height: 50,
-                                                                child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green)
-                                                                    ,onPressed: () {
-                                                                      PickImage();
-
-                                                                    }, child: Row(
-                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                      children: [
-                                                                        Text(imgUp?'استبدال':'اختيار صورة',style:TextStyle(
-                                                                          fontFamily: "DroidKufi",
-                                                                        ) ,),
-                                                                        SizedBox(
-                                                                          width: 10,
-                                                                        ),
-                                                                        Icon(imgUp?Icons.refresh:Icons.upload),
-                                                                      ],
-                                                                    )),
-                                                              ),
-
-                                                            ],
-                                                          ),
-                                                          SizedBox(height: 20,),
-                                                          Row(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            children: [
-                                                              SizedBox(height: 40,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { UploadFiles(); }, child: Text('رفع'),)),
-                                                              SizedBox(width: 20,),
-                                                              SizedBox(width: 140,height: 50,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { getAudio(); }, child: Text('اضافة صوت'),)),
+                                             });
 
 
-                                                            ],
-                                                          ),
-                                                          SizedBox(height: 20,),
-                                                          Visibility(
-                                                            visible: addCheck,
-                                                            child: Text(" خطأ ، قم بالتأكد من البيانات المطلوبة *", style: TextStyle(
-                                                              fontFamily: "DroidKufi",
-                                                              fontSize: 13,
-                                                              fontWeight: FontWeight.w600,
-                                                              color: Colors.red[800],
-                                                            ) ,),
-                                                          ),
-                                                          SizedBox(height: 20,),
-                                                          Row(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            }
 
-                                                            children: [
-                                                              SizedBox(
-                                                                height: 40,
-                                                                child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
-                                                                  setState(() {
-                                                                    addCheck = false;
-
-                                                                    SnameCont.clear();
-                                                                    imageb='';});
-                                                                  Navigator.push(context,MaterialPageRoute(builder: (context) => voicex())).then((value) => (){
-                                                                    setState(() {
-                                                                      secT=true;
-                                                                    });
-
-                                                                  });
+                                              , child: Text('إغلاق'),),
 
 
-                                                                }
-                                                                  , child: Text('إغلاق'),),
-                                                              ),
-                                                              SizedBox(width: 20,),
-                                                              SizedBox(
-                                                                height: 40,
-                                                                child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[700]), onPressed: () {
-                                                                  if (!imgUp || SnameCont.text==''){
-                                                                    setState(() {
-                                                                      addCheck = true;
-                                                                    });
+                                          ],
+                                        ),
+                                      ),
 
-                                                                    // اظهار رسالة خطأ ( رفع صورة)
-
-                                                                  }
-                                                                  else{
-                                                                    setState(() {
-                                                                      isA=false;
-                                                                      imgUp=false;
-                                                                      addCheck = false;
-
-                                                                    });
-                                                                    addSound(SnameCont.text,imageb,'B');
-                                                                  }
-
-
-
-                                                                }
-                                                                  , child: Text('حفظ'),),
-                                                              ),
-
-
-                                                            ],
-                                                          ),
-
-
-
-                                                        ],
-                                                      ),
-                                                    ),
-
-                                                  );
-                                                }));
+                                    ));
 
 
                                   }),
@@ -1100,7 +877,7 @@ class _voicexState extends State<voicex> {
   }
 Future PickImage() async {
     try {
-      final image =  await FilePicker.platform.pickFiles(type: FileType.image, allowMultiple: false);
+      final image =  await FilePicker.platform.pickFiles(type: FileType.any, allowMultiple: false);
       if (image == null) return;
       final imageTemp = image.files.first.bytes;
      setState(() {
