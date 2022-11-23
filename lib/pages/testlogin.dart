@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/Profile/profile.dart';
-import 'package:flutter_application_1/pages/logindb.dart';
-import 'package:flutter_application_1/pages/manag.dart';
 import 'package:flutter_application_1/pages/widgets/manage_accounts.dart';
 import 'package:flutter_application_1/pages/widgets/societies.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
 import 'forgetpass.dart';
 import 'mainpage.dart';
-import 'mobile/mainmobailepage.dart';
-  bool _passwordInVisible = true;
+bool ShowMsg = false;
+bool ShowMs = false;
 class testlog extends StatefulWidget {
-  testlog({Key? key, required this.title}) : super(key: key);
-  final String title;
+  testlog({Key? key}) : super(key: key);
+
 
   @override
   State<testlog> createState() => _testlogState();
 }
 
 class _testlogState extends State<testlog> {
+  List<FocusNode> _focusNodes = [
+    FocusNode(),
+    FocusNode(),
+  ];
+  void initState() {
+    _focusNodes.forEach((node){
+      node.addListener(() {
+        setState(() {});
+      });
+    });
+    super.initState();
+  }
   bool _visible = false;
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
@@ -31,6 +38,7 @@ class _testlogState extends State<testlog> {
   }
   TextEditingController email=TextEditingController();
   TextEditingController pass=TextEditingController();
+
   // String error = '';
   login()async {
     const url="http://localhost/log.php";
@@ -43,59 +51,50 @@ class _testlogState extends State<testlog> {
       var user = json.decode(response.body);
       print(user);
       if (user == "Error") {
-        showDialog(
-          context: (context),
-          builder: (context) => AlertDialog(
-            content: Text('Invalid Username and password'),
-            actions: <Widget>[
-              ElevatedButton(
-                // : Colors.red,
-                child: Text('Cancel'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              )
-            ],
-          ),
-        );
-        print("Username & Password Invalid");
+        setState((){
+          ShowMs=true;
+          ShowMsg=false;
+        });
+        return;
       } else {
         if(user['active'] == 'active') {
           if (user['Kind'] == 'manager') {
-            Navigator.push(context,
-              MaterialPageRoute(builder: (context) => managepage(),),);
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>  managepage(),),);
             print(user['Kind']);
             print(user['active']);
           } else if (user['Kind'] == 'admin') {
             Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Socieites(),),);
+              context, MaterialPageRoute(builder: (context) => const Socieites(),),);
             print(user['Kind']);
           } else if (user['Kind'] == 'student') {
             Navigator.push(
-              context, MaterialPageRoute(builder: (context) => mainpage(),),);
+              context, MaterialPageRoute(builder: (context) => const mainpage(),),);
             print(user['Kind']);
           } else {
             Navigator.push(
-              context, MaterialPageRoute(builder: (context) => mainpage(),),);
+              context, MaterialPageRoute(builder: (context) => const mainpage(),),);
             print(user['Kind']);
           }
         }
         else{
-          Fluttertoast.showToast(
-            msg: "الحساب الذي تحاول الدخول اليه معطل",
-            toastLength: Toast.LENGTH_LONG,
-            // gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white70,
-            fontSize: 30,
-          );
+          setState((){
+            ShowMsg=true;
+            ShowMs=false;
+          });
+          return;
+          // Fluttertoast.showToast(
+          //   msg: "الحساب الذي تحاول الدخول اليه معطل",
+          //   toastLength: Toast.LENGTH_LONG,
+          //   // gravity: ToastGravity.CENTER,
+          //   timeInSecForIosWeb: 1,
+          //   backgroundColor: Colors.red,
+          //   textColor: Colors.white70,
+          //   fontSize: 30,
+          // );
         }
-
       }
       setState(() {});
     }
-
   }
   @override
   Widget build(BuildContext context) {
@@ -150,12 +149,13 @@ class _testlogState extends State<testlog> {
                         Directionality(
                           textDirection: TextDirection.rtl,
                           child: TextFormField(
+                            focusNode: _focusNodes[0],
                             controller: email,
                             textAlign: TextAlign.right,
-                            decoration:  const InputDecoration(
+                            decoration:  InputDecoration(
                               fillColor: Colors.white,
-                              icon: Icon(Icons.email,size: 35,),
-                              border: OutlineInputBorder(
+                              icon: Icon( Icons.email,size: 35,color: _focusNodes[0].hasFocus? Colors.green : Colors.grey),
+                              border: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                   color: Colors.green,
@@ -163,7 +163,7 @@ class _testlogState extends State<testlog> {
                                   style: BorderStyle.solid,
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                     color: Colors.green,
@@ -174,7 +174,7 @@ class _testlogState extends State<testlog> {
                               // icon: Icon(Icons.email),
                               hintText: 'البريد الالكتروني',
                               // labelText: 'Message',
-                              errorBorder: OutlineInputBorder(
+                              errorBorder: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                   color: Colors.red,
@@ -207,28 +207,25 @@ class _testlogState extends State<testlog> {
                           Directionality(
                             textDirection: TextDirection.rtl,
                             child: TextFormField(
+                            focusNode: _focusNodes[1],
                               textAlign: TextAlign.right,
                               obscureText: _obscureText,
                               controller: pass,
                               decoration: InputDecoration(
-
                                 fillColor: Colors.white,
-
                                 border: const OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(15))
                                 ),
-                                icon: const Icon(Icons.lock,size: 35,),
+                                icon:  Icon(Icons.lock,size: 35,color: _focusNodes[1].hasFocus? Colors.green : Colors.grey,),
                                 hintText: 'كلمة المرور',
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     _obscureText ? Icons.visibility_off : Icons.visibility,
+                                    color: _focusNodes[1].hasFocus? Colors.green : Colors.grey,
                                   ),
                                   onPressed: _toggle,
+
                                 ),
-
-                                // suffixIcon: Icon(Icons.remove_red_eye),
-                                // labelText: 'Message',
-
                                 errorBorder: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(15)),
                                   borderSide: BorderSide(
@@ -300,25 +297,7 @@ class _testlogState extends State<testlog> {
                             }),
                             login(),
                           }
-                          else{
-                            const Text("Not Found The Account"),
-                          },
                         }
-                        // login(context),
-                  //       if (_formKey.currentState!.validate()) {
-                  //     setState(() {
-                  //          _visible = false;
-                  //                 }),
-                  //         // login()
-                  // //     Navigator.of(context)
-                  // //     .push(MaterialPageRoute(builder: (context) {
-                  // //   return const mainpage();
-                  // // })
-                  // // ),
-                  //       }
-                  //       else{
-                  //         const Text("Not Found The Account"),
-                  // }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -331,8 +310,24 @@ class _testlogState extends State<testlog> {
                             fontSize: 18.0,
                           )),
                   ),
+
                 ),
-                const SizedBox(height: 90,),
+                const SizedBox(height: 30,),
+                Visibility(
+                    visible: ShowMsg ,
+                    child: Text(" * الحساب الذي تحاول الدخول اليه معطل " ,textDirection: TextDirection.rtl, style: TextStyle(
+                      color: Colors.red[900],
+                      fontFamily: "DroidKufi",
+                    ),)
+                ),
+                Visibility(
+                    visible: ShowMs ,
+                    child: Text(" * عنوان البريد الالكتروني او كلمة المرور التي ادخلتها غير صالحة " ,textDirection: TextDirection.rtl, style: TextStyle(
+                      color: Colors.red[900],
+                      fontFamily: "DroidKufi",
+                    ),)
+                ),
+                const SizedBox(height: 50,),
               ],
             ),
           ),

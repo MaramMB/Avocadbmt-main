@@ -1169,7 +1169,7 @@ Future ConvertImage(File image) async {
 
       });
 
-      Response response = await Dio().post('http://192.168.1.106/imgStore.php', data: formData);
+      Response response = await Dio().post('http://localhost/imgStore.php', data: formData);
 
       print(response.data.toString());
 

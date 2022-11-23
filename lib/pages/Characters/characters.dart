@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:html';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -5,6 +6,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:http/http.dart' as http;
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -29,6 +31,178 @@ class _sptestState extends State<sptest> {
   }
 
   int index = 0;
+  var place = [
+    "بداية",
+    "بداية",
+    "بداية",
+    "بداية",
+    "وسط",
+    "وسط",
+    "بداية",
+    "بداية",
+    "بداية",
+    "وسط",
+    "بداية",
+    "وسط",
+    "وسط",
+    "نهاية",
+    "وسط",
+    "بداية",
+    "وسط",
+    "نهاية",
+    "بداية",
+    "نهاية",
+    "بداية",
+    "بداية",
+    "بداية",
+    "رمان",
+    "بداية",
+    "بداية",
+    "وسط",
+    "بداية",
+    "نهاية",
+    "وسط",
+    "وسط",
+    "بداية",
+    "وسط",
+    "بطاقة",
+    "نهاية",
+    "نهاية",
+    "وسط",
+    "وسط",
+    "بداية",
+    "نهاية",
+    "مزرعة",
+    "وسط",
+    "نهاية",
+    "نهاية",
+    "نهاية",
+    "نهاية",
+    "ديك",
+    "بصل",
+    "نهاية",
+    "سفينة",
+    "بداية",
+    "سمك",
+    "بداية",
+    "نهاية",
+    "حلزون",
+    "عسل",
+    "بداية",
+    "وسط",
+    "بداية",
+    "نهاية",
+    "نهاية",
+    "نهاية",
+    "بداية",
+    "نملة",
+    "وسط",
+    "نهاية",
+    "بطة",
+    "وسط",
+    "سلم",
+    "بداية",
+    "عنب",
+    "نهاية",
+    "معلقة",
+    "وسادة",
+    "نهاية",
+    "بداية",
+    "وسط",
+    "وسط",
+    "عصفور",
+    "نهاية",
+    " بداية",
+    " فستان",
+    "افوكادو",
+    "وسط"
+  ];
+  var later = [
+    "س",
+    "ب",
+    "ش",
+    "ح",
+    "م",
+    "ط",
+    "غ",
+    "ق",
+    "د",
+    "ص",
+    "ر",
+    "س",
+    "ن",
+    "ك",
+    "ق",
+    "ر",
+    "و",
+    "ن",
+    "م",
+    "ب",
+    "ع",
+    "خ",
+    "أ",
+    "رمان",
+    "ك",
+    "ذ",
+    "ل",
+    "ب",
+    "ر",
+    "أ",
+    "ض",
+    "م",
+    "ز",
+    "بطاقة",
+    "ع",
+    "ض",
+    "ب",
+    "ي",
+    "ز",
+    "و",
+    "مزرعة",
+    "ش",
+    "ل",
+    "س",
+    "ق",
+    "م",
+    "ديك",
+    "بصل",
+    "ب",
+    "سفينة",
+    "ف",
+    "سمك",
+    "ت",
+    "ع",
+    "حلزون",
+    "عسل",
+    "ل",
+    "ع",
+    "و",
+    "ح",
+    "ء",
+    "ت",
+    "ط",
+    "نملة",
+    "ح",
+    "د",
+    "بطة",
+    "د",
+    "سلم",
+    "ض",
+    "عنب",
+    "غ",
+    "معلقة",
+    "وسادة",
+    "خ",
+    "ج",
+    "ت",
+    "ف",
+    "عصفور",
+    "ش",
+    " ث",
+    " فستان",
+    "افوكادو",
+    "ك"
+  ];
   var names = [
     "سجادة",
     "بقرة",
@@ -59,7 +233,7 @@ class _sptestState extends State<sptest> {
     "رسالة",
     "نظارة",
     " أطار",
-    "كأس حليب",
+    "كأس ",
     "مضرب",
     "ماء",
     "مزهرية",
@@ -204,6 +378,29 @@ class _sptestState extends State<sptest> {
   var errors = [];
   var truee = [];
   bool active = true;
+  void addresult() async {
+
+      var url = 'http://localhost/firsttest.php';
+
+      final req = await http.post(Uri.parse(url), body: {
+        "studid": 2,
+        "note":truee.length,
+        "res": errors[index],
+      });
+
+      var response = jsonDecode(req.body);
+        var data = jsonDecode(response.body);
+
+        if (data == 'Success') {
+          Fluttertoast.showToast(msg: "تم اضافه النتيجة بنجاح");
+        }
+      else {
+        Navigator.of(context, rootNavigator: true).pop();
+        print('fsdsdfs');
+      }
+    }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +440,7 @@ class _sptestState extends State<sptest> {
                                   width: MediaQuery.of(context).size.width / 2,
                                   // backgroundColor: Colors.grey,
                                   // progressColor: new AlwaysStoppedAnimation<Color>(Colors.red),
-                                  percent: _progressValue,
+                                  percent: ((index as double)+1)/84,
                                   // animation: true,
                                   lineHeight: 20.0,
                                   // animationDuration: 2500,
@@ -258,111 +455,158 @@ class _sptestState extends State<sptest> {
                           ),
                           Stack(
                             children: [
-                              Center(
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Stack(children: [
-                                        Center(
-                                            child: Image.asset(
-                                          "img/board.png",
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              1.85,
-                                        )),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 85.0),
-                                          child: Center(
-                                              child: Column(
-                                            children: [
-                                              Image.asset(
-                                                  "img/${images[index]}",
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height /
-                                                      3.65,
-                                                  alignment: Alignment.center),
-                                              Text(names[index],
-                                                  style: TextStyle(
-                                                    fontFamily: "ArbFONTS",
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 45,
-                                                  )),
-                                              // SizedBox(height: 10,),
-                                            ],
-                                          )),
-                                        ),
-                                      ]),
-                                      Visibility(
-                                        visible: active,
-                                        child: Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              ButtonBar(
-                                                children: [
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        if (index == 83) {
-                                                          truee.add(1);
-                                                          setState(() {
-                                                            active = false;
-                                                          });
-                                                          myDiealog();
-                                                        } else {
-                                                          setState(() {
-                                                            truee.add(1);
-                                                            _loading =
-                                                                !_loading;
-                                                            index++;
 
-                                                            _updateProgress();
-                                                          });
-                                                        }
-                                                      },
-                                                      iconSize: 82,
-                                                      icon: Image.asset(
-                                                          "img/btick.png")),
-                                                  const SizedBox(
-                                                    width: 130,
-                                                  ),
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        if (index == 83) {
-                                                          errors.add(
-                                                              names[index]);
-                                                          setState(() {
-                                                            active = false;
-                                                          });
-                                                          myDiealog();
-                                                        } else {
-                                                          setState(() {
-                                                            errors.add(
-                                                                names[index]);
-                                                            _loading =
-                                                                !_loading;
-                                                            index++;
+                              Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                  children: [
 
-                                                            _updateProgress();
-                                                          });
-                                                        }
-                                                      },
-                                                      iconSize: 82,
-                                                      icon: Image.asset(
-                                                          "img/bcross.png")),
-                                                ],
+                                    Stack(
+                                        children: [
+                                      Row(
+                                         mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              if (index == 0) {
+                                                setState(() {
+                                                  index=0;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  truee.add(-1);
+                                                  // errors.removeLast();
+                                                  _loading =
+                                                  !_loading;
+                                                  index--;
+                                                  _updateProgress();
+                                                });
+                                              }
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top: 60,right: 50),
+                                              child: Container(
+                                                child: Icon(
+                                                  Icons.arrow_back_sharp,
+                                                  color: Colors.green,
+                                                  size: 50,
+                                                ),
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      )
+                                          Center(
+                                              child: Image.asset(
+                                            "img/board.png",
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                1.85,
+                                          )),
+                                          InkWell(
+                                            onTap: () {
+                                              // Navigator.pop(context);
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(top: 60,right: 50),
+                                              child: Container(
+                                                child: Icon(
+                                                  Icons.arrow_back_sharp,
+                                                  color: Colors.white70,
+                                                  size: 50,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 85.0),
+                                        child: Center(
+                                            child: Column(
+                                          children: [
+                                            Image.asset(
+                                                "img/${images[index]}",
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    3.65,
+                                                alignment: Alignment.center),
+                                            Text(names[index],
+                                                style: TextStyle(
+                                                  fontFamily: "ArbFONTS",
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 45,
+                                                )),
+                                            // SizedBox(height: 10,),
+                                          ],
+                                        )),
+                                      ),
                                     ]),
-                              ),
+                                    Visibility(
+                                      visible: active,
+                                      child: Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            ButtonBar(
+                                              children: [
+                                                IconButton(
+                                                    onPressed: () {
+                                                      if (index == 83) {
+                                                        truee.add(1);
+                                                        setState(() {
+                                                          active = false;
+                                                        });
+                                                        myDiealog();
+                                                      } else {
+                                                        setState(() {
+                                                          truee.add(1);
+                                                          _loading =
+                                                              !_loading;
+                                                          index++;
+
+                                                          _updateProgress();
+                                                        });
+                                                      }
+                                                    },
+                                                    iconSize: 82,
+                                                    icon: Image.asset(
+                                                        "img/btick.png")),
+                                                const SizedBox(
+                                                  width: 130,
+                                                ),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      if (index == 83) {
+                                                        // errors.add(later[index]+" حرف ال "+place[index]+" في ");
+                                                        setState(() {
+                                                          active = false;
+                                                        });
+                                                        myDiealog();
+                                                      } else {
+                                                        setState(() {
+                                                          errors.add(" حرف ال "+later[index]+" في ال"+place[index]);
+                                                          _loading =
+                                                              !_loading;
+                                                          index++;
+
+                                                          _updateProgress();
+                                                        });
+                                                      }
+                                                    },
+                                                    iconSize: 82,
+                                                    icon: Image.asset(
+                                                        "img/bcross.png")),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ]),
                             ],
                           ),
                           // const Text("الاختبار الاولي",style: TextStyle(color: Colors.green,fontSize: 25,fontFamily: "DroidKufi",fontWeight: FontWeight.w700)),
@@ -386,33 +630,50 @@ class _sptestState extends State<sptest> {
       builder: (BuildContext context) {
         return AlertDialog(
           scrollable: true,
-          content: Center(
-            child: Text(
-              "تم الانتهاء من التدريب",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ),
           actions: <Widget>[
             Center(
               child: Column(
                 children: [
                   Text(
+                    "تم الانتهاء من التدريب",
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontFamily: "DroidKufi",
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w600,
+
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
                     "نتيجتك من 84 هي : ${truee.length}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: "DroidKufi",
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w600,
+
+                      )
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Text(
-                    "الأخطاء هي التالي  : ",
-                    style: TextStyle(fontSize: 20),
+                    ": الأخطاء هي التالي   ",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontFamily: "DroidKufi",
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w900,
+
+                    ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Container(
-                    height: 300,
-                    width: 300,
+                    height: 150,
+                    width: 400,
                     child: Center(
                       child: ListView.builder(
                           itemCount: errors.length,
@@ -422,17 +683,24 @@ class _sptestState extends State<sptest> {
                             return Center(
                               child: Text(
                                 errors[index],
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: "DroidKufi",
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+
+                              )
                               ),
                             );
                           }),
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   InkWell(
                       onTap: () {
+                        addresult();
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -444,13 +712,17 @@ class _sptestState extends State<sptest> {
                         child: Center(
                           child: Text(
                             "حسنا",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.white),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "DroidKufi",
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+
+                              )
                           ),
                         ),
                       )),
+                  SizedBox(height: 6,)
                 ],
               ),
             ),

@@ -43,13 +43,15 @@ class _SocieitesState extends State<Socieites> {
     return Scaffold(
       backgroundColor: backgreen,
       body: Container(
-        child: Column(children: [
-          const SelectionButton(),
-          const SizedBox(
-            height: 25,
-          ),
-          buildTable(context),
-        ]),
+        child: Center(
+          child: Column(children: [
+            // const SelectionButton(),
+            const SizedBox(
+              height: 25,
+            ),
+            buildTable(context),
+          ]),
+        ),
       ),
     );
   }
@@ -57,8 +59,8 @@ class _SocieitesState extends State<Socieites> {
   // this container contains the person list and search bar and buttons
   Container buildTable(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.15,
-      width: MediaQuery.of(context).size.width / 1.9,
+      height: MediaQuery.of(context).size.height / 1.1,
+      width: MediaQuery.of(context).size.width / 1.8,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -86,7 +88,7 @@ class _SocieitesState extends State<Socieites> {
               Center(
                 child: Container(
                   // color: Colors.black38,
-                  height: 500,
+                  height: 510,
                   width: 600,
                   padding: const EdgeInsets.all(20),
                   child: Column(
@@ -116,7 +118,7 @@ class _SocieitesState extends State<Socieites> {
                                   textAlign: TextAlign.right,
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'أدخل اسم الجمعيه',
+                                    hintText: 'أدخل اسم الجمعية',
                                     prefixIcon: Icon(Icons.search),
                                   ),
                                 ),
@@ -135,7 +137,7 @@ class _SocieitesState extends State<Socieites> {
                                 color: Colors.black12,
                               ),
                             ),
-                            height: 350,
+                            height: 380,
                             child: FutureBuilder(
                               future: getSocieties(),
                               builder: (BuildContext context,
@@ -201,7 +203,7 @@ class _SocieitesState extends State<Socieites> {
                           ),
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.only(
-                                  top: 8, bottom: 10, right: 18, left: 20)),
+                                  top: 8, right: 18, left: 20)),
                           backgroundColor:
                               MaterialStateProperty.all(Colors.green),
                         ),
@@ -213,7 +215,7 @@ class _SocieitesState extends State<Socieites> {
                           );
                         },
                         child: const Text(
-                          'اضافه جمعيه',
+                          'اضافه جمعية',
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: "DroidKufi",
@@ -232,7 +234,7 @@ class _SocieitesState extends State<Socieites> {
   }
 
   getSocieties() async {
-    var url = 'http://localhost/donia_code/get_societis.php';
+    var url = 'http://localhost/get_societis.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;

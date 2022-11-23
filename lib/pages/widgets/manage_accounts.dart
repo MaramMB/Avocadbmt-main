@@ -62,14 +62,16 @@ class _managepageState extends State<managepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
-      body: Container(
-        child: Column(children: [
-          const SelectionButton(),
-          const SizedBox(
-            height: 25,
-          ),
-          buildTable(context),
-        ]),
+      body: Center(
+        child: Container(
+          child: Column(children: [
+            // const SelectionButton(),
+            const SizedBox(
+              height: 25,
+            ),
+            buildTable(context),
+          ]),
+        ),
       ),
     );
   }
@@ -77,8 +79,8 @@ class _managepageState extends State<managepage> {
   // this container contains the person list and search bar and buttons
   Container buildTable(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.15,
-      width: MediaQuery.of(context).size.width / 1.9,
+      height: MediaQuery.of(context).size.height / 1.1,
+      width: MediaQuery.of(context).size.width / 1.8,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -97,31 +99,6 @@ class _managepageState extends State<managepage> {
                       fontWeight: FontWeight.w700)),
               const SizedBox(
                 height: 10,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Socieites()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.green,
-                  ),
-                  height: 40,
-                  width: 100,
-                  child: const Center(
-                    child: Text(
-                      "الجمعيات",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 18),
-                    ),
-                  ),
-                ),
               ),
               const Text(
                 'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
@@ -196,7 +173,7 @@ class _managepageState extends State<managepage> {
                               color: Colors.black12,
                             ),
                           ),
-                          height: 350,
+                          height: 370,
                           child: teacher
                               ? FutureBuilder(
                                   future: getTeachers(),
@@ -322,7 +299,7 @@ class _managepageState extends State<managepage> {
                           ),
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.only(
-                                  top: 8, bottom: 10, right: 18, left: 20)),
+                                  top: 8, right: 18, left: 20)),
                           backgroundColor:
                               MaterialStateProperty.all(Colors.green),
                         ),
@@ -353,7 +330,7 @@ class _managepageState extends State<managepage> {
   }
 
   getStudents() async {
-    var url = 'http://localhost/donia_code/get_students.php';
+    var url = 'http://localhost/get_students.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;
@@ -363,7 +340,7 @@ class _managepageState extends State<managepage> {
   var searchController = TextEditingController();
 
   searchStudents() async {
-    var url = 'http://localhost/donia_code/search_student.php';
+    var url = 'http://localhost/search_student.php';
     var response = await http.post(
       Uri.parse(url),
       body: {
@@ -375,7 +352,7 @@ class _managepageState extends State<managepage> {
   }
 
   getTeachers() async {
-    var url = 'http://localhost/donia_code/get_teachers.php';
+    var url = 'http://localhost/get_teachers.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;

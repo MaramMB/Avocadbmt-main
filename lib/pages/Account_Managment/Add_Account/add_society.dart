@@ -64,6 +64,7 @@ class _AddScocietyState extends State<AddScociety> {
     return Scaffold(
       backgroundColor: backgreen,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SelectionButton(),
           const SizedBox(
@@ -169,7 +170,7 @@ class _AddScocietyState extends State<AddScociety> {
         managerController.text == "") {
       msgDialog('الرجاء تعبئه جميع الفراغات');
     } else {
-      var urll = 'http://localhost/donia_code/add_user.php';
+      var urll = 'http://localhost/add_user.php';
 
       final req = await http.post(Uri.parse(urll), body: {
         "email": emailController.text,
@@ -179,7 +180,7 @@ class _AddScocietyState extends State<AddScociety> {
       var userResponse = jsonDecode(req.body);
 
       if (userResponse == 'Success') {
-        var url = 'http://localhost/donia_code/add_society.php';
+        var url = 'http://localhost/add_society.php';
 
         final response = await http.post(
           Uri.parse(url),
