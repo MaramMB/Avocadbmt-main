@@ -17,7 +17,7 @@ class _logintesttestState extends State<logintesttest> {
   String msg='';
 
    login() async {
-    const url="http://192.168.1.114/Avocadbmt-main/Avocadbmt-main/login.php";
+    const url="http://localhost/login.php";
 
     final response =await http.post(Uri.parse(url),body:{
       "Email":email.text,

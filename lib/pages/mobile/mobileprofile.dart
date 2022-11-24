@@ -667,7 +667,7 @@ class _mobileprofileState extends State<mobileprofile> {
         },
       );
     } else {
-      var url = 'http://localhost/tasneem/edit_student.php';
+      var url = 'http://localhost/edit_student.php';
       final response = await http.post(
         Uri.parse(url),
         body: jsonEncode({
@@ -700,7 +700,7 @@ class _mobileprofileState extends State<mobileprofile> {
   }
 
   getUser() async {
-    var url = 'http://localhost/tasneem/getUsers.php?id=1';
+    var url = 'http://localhost/getUsers.php?id=1';
 
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
@@ -730,7 +730,7 @@ class _mobileprofileState extends State<mobileprofile> {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      var url = 'http://localhost/tasneem/uploadImage.php';
+      var url = 'http://localhost/uploadImage.php';
 
       List<int> imageBytes = file.bytes!.toList();
 
@@ -756,7 +756,7 @@ class _mobileprofileState extends State<mobileprofile> {
 
   Widget _image() {
     // replace 1 by user id to get user image after user login
-    var url = 'http://localhost/tasneem/userImage/1.jpg';
+    var url = 'http://localhost/userImage/1.jpg';
 
     // var response = await http.get(Uri.parse(url));
 

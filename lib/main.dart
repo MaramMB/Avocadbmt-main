@@ -2,16 +2,12 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/json.dart';
-import 'package:flutter_application_1/pages/mainpage.dart';
 import 'package:flutter_application_1/pages/mobile/admin.dart';
 import 'package:flutter_application_1/pages/mobile/homepagemobile.dart';
 import 'package:flutter_application_1/pages/mobile/loginmobile.dart';
 import 'package:flutter_application_1/pages/mobile/mainmobailepage.dart';
 import 'package:flutter_application_1/pages/mobile/managemobile.dart';
-import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/pages/voice.dart';
-import 'package:flutter_application_1/pages/widgets/manage_accounts.dart';
 import 'package:flutter_application_1/scroll.dart';
 // import 'package:flutter_application_1/pages/mobile/mainmobailepage.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -24,7 +20,7 @@ Future main()  async {
 
   await Firebase.initializeApp(
     name: "flutterproject1337",
-    options: kIsWeb || Platform.isAndroid ? const FirebaseOptions(
+    options: kIsWeb || Platform.isAndroid ? FirebaseOptions(
       apiKey: "AIzaSyCHMOTWmG8K5j8A_3fnK5LmM49Lwyw6YmE",
       appId: "1:865215937003:web:c04c8ddca5b010aa1d81ae",
       messagingSenderId: "865215937003",
@@ -44,8 +40,8 @@ class StartPoint extends StatelessWidget {
           // mobile: (BuildContext context) => const HomemobailPage(uname: null,),
           mobile: (BuildContext context) => mobilelogin(title: '',),
           tablet: (BuildContext context) => const HomemobailPage(uname: null,),
-          // desktop: (BuildContext context) => const HomePage(uname: "",),
-          desktop: (BuildContext context) =>  mainpage(),
+          desktop: (BuildContext context) =>  scrollhome(),
+          // desktop: (BuildContext context) => const voicex(),
         ),
 
     );

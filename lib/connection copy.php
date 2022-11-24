@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "new_tasneem";
+    $dbname = "bdmtproject";
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) 
         { die("Connection failed: " . $conn->connect_error); }

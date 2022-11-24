@@ -9,9 +9,6 @@ import '../models/person.dart';
 
 import 'person_record.dart';
 
-// import 'package:flutter_app_4/models/person.dart';
-// import 'package:flutter_app_4/screens/add_account_form.dart';
-// import 'package:flutter_app_4/widgets/person_record.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);

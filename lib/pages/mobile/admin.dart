@@ -236,7 +236,7 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
   }
 
   getTeachers() async {
-    var url = 'http://localhost/lib/add_societis.php';
+    var url = 'http://localhost/add_societis.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;

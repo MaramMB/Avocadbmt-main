@@ -15,12 +15,12 @@ $db = mysqli_connect('localhost','root','','bdmtproject');
 	$accountnumber = $_POST['accountnum'];
 	$gender = $_POST['gender'];
 	$spec = $_POST['specialization'];
-	$Society_Id = $_POST['Society_Id'] ?? 100;
+	$Society_Id = $_POST['Society_Id'] ;
 
 	//for user account
 	$email = $_POST['email'];
 	$pass = $_POST['password'];
-	$kind = $_POST['kind'] ?? 'manager';
+	$kind = $_POST['kind'] ?? 'teacher';
 	$active = $_POST['active'] ?? 'active';
 
 

@@ -236,7 +236,7 @@ class _voicexState extends State<voicex> {
               body: Container(
                 child: Column(
                   children: [
-                    const SelectionButton(),
+                     SelectionButton(),
                     const SizedBox(
                       height: 30,
                     ),
@@ -712,7 +712,7 @@ class _voicexState extends State<voicex> {
               body: Container(
                 child: Column(
                   children: [
-                    const SelectionButton(),
+                     SelectionButton(),
                     const SizedBox(
                       height: 30,
                     ),

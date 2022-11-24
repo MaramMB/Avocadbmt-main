@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/widgets/manage_accounts.dart';
 import 'package:flutter_application_1/pages/widgets/societies.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'forgetpass.dart';
@@ -47,8 +48,9 @@ class _testlogState extends State<testlog> {
       "Email":email.text,
       "pass":pass.text,
     });
+    var user = json.decode(response.body);
+
     if (response.statusCode == 200) {
-      var user = json.decode(response.body);
       print(user);
       if (user == "Error") {
         setState((){
@@ -57,7 +59,10 @@ class _testlogState extends State<testlog> {
         });
         return;
       } else {
+       final SharedPreferences prefs = await SharedPreferences.getInstance();
         if(user['active'] == 'active') {
+          await prefs.setString('userKind',user['Kind']);
+          await prefs.setString('userId',user['Id_Num']);
           if (user['Kind'] == 'manager') {
             Navigator.push(context, MaterialPageRoute(builder: (context) =>  managepage(),),);
             print(user['Kind']);
@@ -95,6 +100,7 @@ class _testlogState extends State<testlog> {
       }
       setState(() {});
     }
+
   }
   @override
   Widget build(BuildContext context) {
@@ -111,7 +117,7 @@ class _testlogState extends State<testlog> {
             width:MediaQuery.of(context).size.width/2.6,
             child: Column(
 
-            textDirection: TextDirection.rtl,
+              textDirection: TextDirection.rtl,
               // crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -156,7 +162,7 @@ class _testlogState extends State<testlog> {
                               fillColor: Colors.white,
                               icon: Icon( Icons.email,size: 35,color: _focusNodes[0].hasFocus? Colors.green : Colors.grey),
                               border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                   color: Colors.green,
                                   width: 1.0,
@@ -164,7 +170,7 @@ class _testlogState extends State<testlog> {
                                 ),
                               ),
                               focusedBorder: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                     color: Colors.green,
                                     width: 2.5
@@ -175,7 +181,7 @@ class _testlogState extends State<testlog> {
                               hintText: 'البريد الالكتروني',
                               // labelText: 'Message',
                               errorBorder: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
                                   color: Colors.red,
                                   width: 1.0,
@@ -207,7 +213,7 @@ class _testlogState extends State<testlog> {
                           Directionality(
                             textDirection: TextDirection.rtl,
                             child: TextFormField(
-                            focusNode: _focusNodes[1],
+                              focusNode: _focusNodes[1],
                               textAlign: TextAlign.right,
                               obscureText: _obscureText,
                               controller: pass,
@@ -289,26 +295,26 @@ class _testlogState extends State<testlog> {
                 const SizedBox(height: 40,),
                 Center(
                   child: ElevatedButton(
-                      onPressed: ()=>{
+                    onPressed: ()=>{
+                      if (_formKey.currentState!.validate()) {
                         if (_formKey.currentState!.validate()) {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              _visible = false;
-                            }),
-                            login(),
-                          }
+                          setState(() {
+                            _visible = false;
+                          }),
+                          login(),
                         }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        elevation: 2.0,
-                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),),
-                      child: const Text("تسجيل الدخول",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "DroidKufi",
-                            fontSize: 18.0,
-                          )),
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      elevation: 2.0,
+                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),),
+                    child: const Text("تسجيل الدخول",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "DroidKufi",
+                          fontSize: 18.0,
+                        )),
                   ),
 
                 ),

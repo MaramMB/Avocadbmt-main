@@ -28,7 +28,7 @@ class _dicState extends State<dic> {
         radius: const Radius.circular(10),
         child: Column(
           children: [
-            const SelectionButton(),
+             SelectionButton(),
             const SizedBox(
               height: 30,
             ),

@@ -52,7 +52,7 @@ class _logintestState extends State<logintest> {
              print(user['active']);
            } else if (user['Kind'] == 'admin') {
              Navigator.push(
-               context, MaterialPageRoute(builder: (context) => personal(),),);
+               context, MaterialPageRoute(builder: (context) => mainpage(),),);
              print(user['Kind']);
            } else if (user['Kind'] == 'student') {
              Navigator.push(

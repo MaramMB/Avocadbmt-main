@@ -19,7 +19,7 @@ class WriteSQLdataState extends State<WriteSQLdata>{
   late bool error, sending, success;
   late String msg;
 
-  String phpurl = "http://192.168.1.106/spellRes.php";
+  String phpurl = "http://localhost/spellRes.php";
   
   @override
   void initState() {

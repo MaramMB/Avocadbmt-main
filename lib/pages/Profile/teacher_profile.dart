@@ -14,25 +14,25 @@ import 'package:path/path.dart' as Path;
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
+int _value = 1;
 
-class personal extends StatefulWidget {
-  const personal({Key? key, required this.userId}) : super(key: key);
+class TeacherProfile extends StatefulWidget {
+  const TeacherProfile({Key? key, required this.userId}) : super(key: key);
   final String userId;
 
   @override
-  State<personal> createState() => _personalState();
+  State<TeacherProfile> createState() => _TeacherProfileState();
 }
 
+//change this to user who sign in to be dynamic
+
 var emailController = TextEditingController();
-var ageController = TextEditingController();
 var nameController = TextEditingController();
-var fathernameController = TextEditingController();
 var genderController = TextEditingController();
-var dateboyController = TextEditingController();
 var phoneController = TextEditingController();
-var dateController = TextEditingController();
-var problemController = TextEditingController();
 var IDController = TextEditingController();
+var accountNumController = TextEditingController();
+var specialistController = TextEditingController();
 
 // Booleans for check if edit or view
 bool email = true;
@@ -44,7 +44,7 @@ html.File? _cloudFile;
 var _fileBytes;
 Image? _imageWidget;
 
-class _personalState extends State<personal> {
+class _TeacherProfileState extends State<TeacherProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +52,7 @@ class _personalState extends State<personal> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SelectionButton(),
+             SelectionButton(),
             const SizedBox(
               height: 30,
             ),
@@ -128,7 +128,6 @@ class _personalState extends State<personal> {
                                             Icons.camera_alt_rounded,
                                             size: 40,
                                             color: Colors.green,
-                                            //colors.transparent
                                           )),
                                     )
                                   ],
@@ -281,7 +280,7 @@ class _personalState extends State<personal> {
                                     IconButton(
                                         onPressed: () {
                                           setState(() {
-                                            phone = !phone;
+                                            phone = false;
                                           });
                                         },
                                         icon: const Icon(
@@ -294,36 +293,6 @@ class _personalState extends State<personal> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                // Row(
-                                //   mainAxisAlignment: MainAxisAlignment.start,
-                                //   children: [
-                                //     Container(
-                                //       padding: const EdgeInsets.all(2),
-                                //       decoration: BoxDecoration(
-                                //           border: Border.all(
-                                //               color: Colors.green, width: 1.5),
-                                //           borderRadius:
-                                //           BorderRadius.circular(6)),
-                                //       child: const Icon(
-                                //         Icons.person,
-                                //         size: 25,
-                                //       ),
-                                //     ),
-                                //     // Card(shape:BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(35),)),color: Colors.green, child: Icon(Icons.phone,size: 28)),
-                                //     // Card(shape:Border(left: Border.fromBorderSide(side)), child: Icon(Icons.phone,size: 25)),
-                                //
-                                //     Text(
-                                //       dateController.text,
-                                //       style: const TextStyle(
-                                //           decoration: TextDecoration.none,
-                                //           color: Colors.black87,
-                                //           fontFamily: "Merienda",
-                                //           fontWeight: FontWeight.w600,
-                                //           fontSize: 20),
-                                //     ),
-                                //   ],
-                                // ),
-                                // ,child: Image.asset("img/avocado.png",width: MediaQuery.of(context).size.width/4.8,fit:BoxFit.cover,))
                               ],
                             ),
                           ),
@@ -334,11 +303,9 @@ class _personalState extends State<personal> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Column(
-                                  // mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Row(
-                                      // textDirection: TextDirection.rtl,
                                       children: [
                                         Text(nameController.text,
                                             style: const TextStyle(
@@ -355,62 +322,7 @@ class _personalState extends State<personal> {
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: [
-                                        Text(fathernameController.text,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black87,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                            )),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: [
-                                        Text(ageController.text,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black87,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                            )),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        const Text("سنين",
-                                            style: TextStyle(
-                                              color: Colors.black87,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                              fontWeight: FontWeight.bold,
-                                            )),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: [
                                         Text(genderController.text,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black87,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                            )),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: [
-                                        Text(dateController.text,
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87,
@@ -447,7 +359,36 @@ class _personalState extends State<personal> {
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: [
-                                        Text(problemController.text,
+                                        const Text("",
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                        Text(accountNumController.text,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                            )),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Row(
+                                      textDirection: TextDirection.rtl,
+                                      children: [
+                                        const Text("",
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                        Text(specialistController.text,
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black87,
@@ -481,52 +422,7 @@ class _personalState extends State<personal> {
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: const [
-                                        Text(" : اسم الأب   ",
-                                            style: TextStyle(
-                                              color: Colors.green,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                              fontWeight: FontWeight.bold,
-                                            )),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text(" : العمر   ",
-                                            style: TextStyle(
-                                              color: Colors.green,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                              fontWeight: FontWeight.bold,
-                                            )),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: const [
                                         Text(" : الجنس   ",
-                                            style: TextStyle(
-                                              color: Colors.green,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 19.0,
-                                              fontWeight: FontWeight.bold,
-                                            )),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Row(
-                                      textDirection: TextDirection.rtl,
-                                      children: const [
-                                        Text(" : تاريخ الميلاد   ",
                                             style: TextStyle(
                                               color: Colors.green,
                                               fontFamily: "DroidKufi",
@@ -556,7 +452,7 @@ class _personalState extends State<personal> {
                                     Row(
                                       textDirection: TextDirection.rtl,
                                       children: const [
-                                        Text("  : نقاط الضعف   ",
+                                        Text(" : رقم الحساب   ",
                                             style: TextStyle(
                                               color: Colors.green,
                                               fontFamily: "DroidKufi",
@@ -564,6 +460,24 @@ class _personalState extends State<personal> {
                                               fontWeight: FontWeight.bold,
                                             )),
                                       ],
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Row(
+                                      textDirection: TextDirection.rtl,
+                                      children: const [
+                                        Text(" : التخصص   ",
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 19.0,
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
                                     ),
                                   ],
                                 )
@@ -593,8 +507,7 @@ class _personalState extends State<personal> {
                                   );
                                 },
                               );
-
-                              await updateStudent();
+                              await updateTeatcher();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
@@ -625,6 +538,33 @@ class _personalState extends State<personal> {
     );
   }
 
+  Widget rowDataText(String data, String title) => Column(
+    children: [
+      const SizedBox(
+        height: 12,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(data,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
+              )),
+          Text(title,
+              style: const TextStyle(
+                color: Colors.green,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
+                fontWeight: FontWeight.bold,
+              )),
+        ],
+      ),
+    ],
+  );
+
   bool validateEmail(String? value) {
     String pattern =
         r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
@@ -637,7 +577,7 @@ class _personalState extends State<personal> {
       return false;
   }
 
-  Future<void> updateStudent() async {
+  Future<void> updateTeatcher() async {
     if (emailController.text == '' ||
         phoneController.text == '' ||
         validateEmail(emailController.text)) {
@@ -662,7 +602,7 @@ class _personalState extends State<personal> {
         },
       );
     } else {
-      var url = 'http://localhost/edit_student.php';
+      var url = 'http://localhost/edit_teacher.php';
       final response = await http.post(
         Uri.parse(url),
         body: jsonEncode({
@@ -690,12 +630,12 @@ class _personalState extends State<personal> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    setControllers();
-    getUser();
+    //setControllers();
+    getTeacher();
   }
 
-  getUser() async {
-    var url = 'http://localhost/getUsers.php?id=${widget.userId}';
+  getTeacher() async {
+    var url = 'http://localhost/getTeachers.php?id=${widget.userId}';
 
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
@@ -705,15 +645,12 @@ class _personalState extends State<personal> {
     setState(() {
       emailController.text = res[0]["email"] ?? "";
       phoneController.text = res[0]["phone"] ?? "";
-      dateController.text = res[0]["dob"] ?? "";
       imagevalue = ints.isEmpty ? null : ints;
-      IDController.text = res[0]["student_id"] ?? "";
+      IDController.text = res[0]["id"] ?? "";
       nameController.text = res[0]["name"] ?? "";
-      ageController.text = res[0]["age"].toString();
-      fathernameController.text = res[0]["father_name"] ?? "";
       genderController.text = res[0]["gender"] == "male" ? "ذكر" : "انثى";
-      problemController.text =
-      res[0]["ptype"] == "hear" ? "مشكله بالسمع" : "مشكله بالنطق";
+      specialistController.text = res[0]["spec"];
+      accountNumController.text = res[0]["accountnum"];
     });
   }
 
@@ -727,7 +664,7 @@ class _personalState extends State<personal> {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      var url = 'http://localhost/uploadImage.php';
+      var url = 'http://localhost/uploadimageteacher.php';
 
       List<int> imageBytes = file.bytes!.toList();
       String Image = base64Encode(imageBytes);

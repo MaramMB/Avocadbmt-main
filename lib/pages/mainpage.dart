@@ -5,6 +5,7 @@ import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'manag.dart';
 
@@ -20,13 +21,32 @@ class mainpage extends StatefulWidget {
 }
 
 class _mainpageState extends State<mainpage> {
+  String? userKind;
+  String userId = '';
+ // bool show=false;
+  bool showbtn  (){
+    if (userKind == 'student'){
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
       body: Column(
         children: [
-          const SelectionButton(),
+           SelectionButton(),
           const SizedBox(
             height: 30,
           ),
@@ -96,30 +116,33 @@ class _mainpageState extends State<mainpage> {
                       const SizedBox(
                         height: 40,
                       ),
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return const expage();
-                            }));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            alignment: Alignment.bottomCenter,
-                            backgroundColor: Colors.green,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                            elevation: 2.0,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 25, vertical: 12),
+                      Visibility(
+                        visible: showbtn(),
+                        child: Center(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return const expage();
+                              }));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              alignment: Alignment.bottomCenter,
+                              backgroundColor: Colors.green,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                              elevation: 2.0,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 25, vertical: 12),
+                            ),
+                            child: const Text("بدأ الاختبار الاولي للنطق",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "DroidKufi",
+                                  fontSize: 16.0,
+                                )),
                           ),
-                          child: const Text("بدأ الاختبار الاولي للنطق",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "DroidKufi",
-                                fontSize: 16.0,
-                              )),
                         ),
                       ),
                     ],

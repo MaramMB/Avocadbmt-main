@@ -1,5 +1,5 @@
 <?php
-require 'connection.php';
+require 'connection copy.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
@@ -12,8 +12,8 @@ $data = json_decode($json, true);
     $email = $data["email"];
     $phone = $data["phone"];
 
-	$query_std = "UPDATE students SET phone = '$phone' WHERE id = $id";
-	
+	$query_std = "UPDATE teachers SET Phone_Num = '$phone' WHERE Id_Num = $id";
+
 	$query_user ="UPDATE usersacounts SET Email = '$email' WHERE Id_Num = $id";
 
 

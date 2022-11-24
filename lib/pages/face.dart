@@ -186,10 +186,10 @@ class _faceexState extends State<faceex> {
                                     child: flickManager != null ?  Column(
                                       children: [
                                         FlickVideoPlayer(
-                                            flickManager: myfilk[index],
+                                          flickManager: myfilk[index],
 
                                         ),
-                                        
+
                                         // SizedBox(height: 10,),
                                         // IconButton(
                                         //     onPressed: () {

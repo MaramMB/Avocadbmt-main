@@ -208,7 +208,7 @@ class _PersonRecordState extends State<PersonRecord> {
 
   Future<void> updateActive() async {
     {
-      var url = 'http://localhost/donia_code/edit_user.php';
+      var url = 'http://localhost/edit_user.php';
       bool toggle = !widget.isActive;
       final response = await http.post(
         Uri.parse(url),

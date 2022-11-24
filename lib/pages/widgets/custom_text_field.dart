@@ -13,7 +13,7 @@ class customTextFieldWidget extends StatelessWidget {
       required this.hei,
       required this.type,
       this.validation,
-      this.hideShow = false})
+      this.hideShow = false, required bool readOnly})
       : super(key: key);
 
   final TextEditingController nameController;

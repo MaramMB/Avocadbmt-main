@@ -342,7 +342,7 @@ class _managemobileState extends State<managemobile> {
   }
 
   getStudents() async {
-    var url = 'http://localhost/lib/get_students.php';
+    var url = 'http://localhost/get_students.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;
@@ -352,7 +352,7 @@ class _managemobileState extends State<managemobile> {
   var searchController = TextEditingController();
 
   searchStudents() async {
-    var url = 'http://localhost/lib/search_student.php';
+    var url = 'http://localhost/search_student.php';
     var response = await http.post(
       Uri.parse(url),
       body: {
@@ -364,7 +364,7 @@ class _managemobileState extends State<managemobile> {
   }
 
   getTeachers() async {
-    var url = 'http://localhost/lib/get_teachers.php';
+    var url = 'http://localhost/get_teachers.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;

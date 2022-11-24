@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'connection copy.php';
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
@@ -9,7 +9,7 @@ $data = json_decode($json, true);
 
     $id = $data["id"];
     $email = $data["email"];
-    $phone = $data["phone"];
+    $phone = $data["Phone_Num"];
 
     echo $id . "\t" . $email;
     echo 'ok';

@@ -1,5 +1,5 @@
 <?php
-require 'connection.php';
+require 'connection copy.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
