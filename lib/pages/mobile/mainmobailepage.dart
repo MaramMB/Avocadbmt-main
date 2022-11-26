@@ -226,7 +226,7 @@ class Page1 extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return  expage(userId: '1',); // لازم الاي دي هون يتغير حسب الحساب الداخل
+                                  return  expage(); // لازم الاي دي هون يتغير حسب الحساب الداخل
                                 }));
                               },
                               style: ElevatedButton.styleFrom(
