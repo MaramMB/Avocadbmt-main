@@ -40,6 +40,10 @@ class _mainpageState extends State<mainpage> {
       userId = prefs.getString('userId') ?? '';
     });
   }
+  void initState() {
+    super.initState();
+    getUserData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

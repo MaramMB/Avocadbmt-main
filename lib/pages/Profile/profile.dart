@@ -57,8 +57,8 @@ class _personalState extends State<personal> {
               height: 30,
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 1.1,
-              width: MediaQuery.of(context).size.width / 1.8,
+              height: MediaQuery.of(context).size.height / 1.15,
+              width: MediaQuery.of(context).size.width / 1.9,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15)),

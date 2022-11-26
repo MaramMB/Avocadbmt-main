@@ -19,14 +19,14 @@ enum SingingCharacterStudent { Male, Female }
 
 enum SingingCharacterProblem { hear, pron }
 
-class AddAccountForm extends StatefulWidget {
-  const AddAccountForm({Key? key}) : super(key: key);
+class AddTeacheAccount extends StatefulWidget {
+  const AddTeacheAccount({Key? key}) : super(key: key);
 
   @override
-  State<AddAccountForm> createState() => _AddAccountFormState();
+  State<AddTeacheAccount> createState() => _AddTeacheAccountState();
 }
 
-class _AddAccountFormState extends State<AddAccountForm> {
+class _AddTeacheAccountState extends State<AddTeacheAccount> {
   String gender = '';
   int _selectedType = 2;
   TextStyle unselectedTypeTextStyle = const TextStyle(
@@ -77,7 +77,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                       // textDirection: TextDirection.rtl,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text("اضافه حساب",
+                        const Text("اضافه معلم",
                             style: TextStyle(
                                 color: Colors.green,
                                 fontSize: 30,
@@ -90,10 +90,14 @@ class _AddAccountFormState extends State<AddAccountForm> {
                           // crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            studentwidget(),
+                            Container(
+                                child: teacherwidget()
+                            ),
                           ],
                         ),
-
+                        const SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                   ),
@@ -147,169 +151,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
     //     ],
     //   ),
     // ),
-  }
-
-  addStudent() async {
-    if (firstnameController.text == "" ||
-        secondnameController.text == "" ||
-        thirdnameController.text == "" ||
-        lastnameController.text == "" ||
-        addressstudentController.text == "" ||
-        familyphoneController.text == "" ||
-        dateinput.text == "") {
-      Navigator.of(context, rootNavigator: true).pop();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: const Text('الرجاء تعبئه جميع الفراغات'),
-            actions: <Widget>[
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  'حسنا',
-                  style: TextStyle(color: Color(0xff34568B)),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      var url = 'http://localhost/add_student.php';
-      final requestBody = {
-        "firstname": firstnameController.text,
-        "secname": secondnameController.text,
-        "thirdname": thirdnameController.text,
-        "familyname": lastnameController.text,
-        "DOB": dateinput.text,
-        "Gender": _characterstudent.toString().split('.').last,
-        "Address": addressstudentController.text,
-        "phone": familyphoneController.text,
-        "Students_Id": IDstudentController.text,
-        "ptype": pro.toString().split('.').last,
-        "img": "",
-        "email": emailController.text,
-        "password": passController.text,
-      };
-
-      final response = await http.post(Uri.parse(url), body: requestBody);
-
-      var data = jsonDecode(response.body);
-
-      if (data == 'Success') {
-        Navigator.of(context, rootNavigator: true).pop();
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
-              actions: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Fluttertoast.showToast(msg: "تم اضافه الطالب بنجاح");
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const MyApp();
-                          }));
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10)),
-                            height: 40,
-                            width: 100,
-                            child: const Center(
-                                child: Text(
-                                  "نعم",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )))),
-                    InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10)),
-                            height: 40,
-                            width: 100,
-                            child: const Center(
-                                child: Text(
-                                  "لا",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )))),
-                  ],
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        Navigator.of(context, rootNavigator: true).pop();
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
-              actions: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.of(context, rootNavigator: true).pop();
-                          Fluttertoast.showToast(msg: "تم اضافه الطالب بنجاح");
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10)),
-                            height: 40,
-                            width: 100,
-                            child: const Center(
-                                child: Text(
-                                  "نعم",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )))),
-                    InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10)),
-                            height: 40,
-                            width: 100,
-                            child: const Center(
-                                child: Text(
-                                  "لا",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )))),
-                  ],
-                ),
-              ],
-            );
-          },
-        );
-      }
-    }
   }
 
   addTeacher() async {
@@ -1120,7 +961,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     );
                   },
                 );
-                addStudent();
+
               },
               child: Container(
                 width: 200,

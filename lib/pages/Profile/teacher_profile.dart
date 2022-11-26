@@ -21,7 +21,7 @@ class TeacherProfile extends StatefulWidget {
   final String userId;
 
   @override
-  State<TeacherProfile> createState() => _TeacherProfileState();
+  State<TeacherProfile> createState() => TeacherProfileState();
 }
 
 //change this to user who sign in to be dynamic
@@ -44,7 +44,7 @@ html.File? _cloudFile;
 var _fileBytes;
 Image? _imageWidget;
 
-class _TeacherProfileState extends State<TeacherProfile> {
+class TeacherProfileState extends State<TeacherProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,8 +57,8 @@ class _TeacherProfileState extends State<TeacherProfile> {
               height: 30,
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 1.1,
-              width: MediaQuery.of(context).size.width / 1.8,
+              height: MediaQuery.of(context).size.height / 1.15,
+              width: MediaQuery.of(context).size.width / 1.9,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -280,7 +280,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                                     IconButton(
                                         onPressed: () {
                                           setState(() {
-                                            phone = false;
+                                            phone = !phone;
                                           });
                                         },
                                         icon: const Icon(
@@ -567,14 +567,15 @@ class _TeacherProfileState extends State<TeacherProfile> {
 
   bool validateEmail(String? value) {
     String pattern =
-        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-        r"{0,253}[a-zA-Z0-9])?)*$";
-    RegExp regex = RegExp(pattern);
-    if (value == null || value.isEmpty || !regex.hasMatch(value))
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    if (value!.isEmpty) {
       return true;
-    else
+    } else if (!regExp.hasMatch(value!)) {
+      return true;
+    } else {
       return false;
+    }
   }
 
   Future<void> updateTeatcher() async {

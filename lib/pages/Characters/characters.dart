@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:html';
+import 'package:flutter_application_1/pages/models/person.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:getwidget/getwidget.dart';
@@ -11,13 +12,16 @@ import 'package:http/http.dart' as http;
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-int _value = 1;
+int _value = 0;
 int countr = 0;
 bool _loading = false;
 double _progressValue = 0;
 
 class sptest extends StatefulWidget {
-  const sptest({Key? key}) : super(key: key);
+  const sptest({Key? key, required this.person, required this.id}) : super(key: key);
+  final Person person;
+  final String id;
+
 
   @override
   State<sptest> createState() => _sptestState();
@@ -424,7 +428,7 @@ class _sptestState extends State<sptest> {
               //
               // ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 20.0, right: 20, left: 20),
+                padding: const EdgeInsets.only( right: 20, left: 20),
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
@@ -433,9 +437,36 @@ class _sptestState extends State<sptest> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Column(
                               children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      widget.person.name,
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                        fontFamily: "DroidKufi",
+                                        fontSize: 18,
+                                        // color: Colors.green,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    Text(
+                                      ' : الطالب ',
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(
+                                        fontFamily: "DroidKufi",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10,),
                                 LinearPercentIndicator(
                                   width: MediaQuery.of(context).size.width / 2,
                                   // backgroundColor: Colors.grey,
@@ -475,12 +506,22 @@ class _sptestState extends State<sptest> {
                                                 });
                                               } else {
                                                 setState(() {
-                                                  truee.add(-1);
-                                                  // errors.removeLast();
-                                                  _loading =
-                                                  !_loading;
-                                                  index--;
-                                                  _updateProgress();
+                                                  // truee.add(-1);
+                                                  if(_value==1){
+                                                    truee.removeLast();
+                                                    errors.removeLast();
+                                                    _loading =
+                                                    !_loading;
+                                                    index--;
+                                                    _updateProgress();
+                                                  }
+                                                  else
+                                                    {
+                                                      truee.removeLast();
+                                                       _loading = !_loading;
+                                                       index--;
+                                                       _updateProgress();
+                                                    }
                                                 });
                                               }
                                             },
@@ -505,14 +546,25 @@ class _sptestState extends State<sptest> {
                                           )),
                                           InkWell(
                                             onTap: () {
-                                              // Navigator.pop(context);
+                                              if (index == 83) {
+                                                setState(() {
+                                                  index=83;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  _loading =
+                                                  !_loading;
+                                                  index++;
+                                                  _updateProgress();
+                                                });
+                                              }
                                             },
                                             child: Padding(
-                                              padding: const EdgeInsets.only(top: 60,right: 50),
+                                              padding: const EdgeInsets.only(top: 60,left: 50),
                                               child: Container(
                                                 child: Icon(
-                                                  Icons.arrow_back_sharp,
-                                                  color: Colors.white70,
+                                                  Icons.arrow_forward_sharp,
+                                                  color: active == false ? Colors.green : Colors.white,
                                                   size: 50,
                                                 ),
                                               ),
@@ -563,6 +615,7 @@ class _sptestState extends State<sptest> {
                                                         myDiealog();
                                                       } else {
                                                         setState(() {
+                                                          _value=0;
                                                           truee.add(1);
                                                           _loading =
                                                               !_loading;
@@ -588,6 +641,7 @@ class _sptestState extends State<sptest> {
                                                         myDiealog();
                                                       } else {
                                                         setState(() {
+                                                          _value=1;
                                                           errors.add(" حرف ال "+later[index]+" في ال"+place[index]);
                                                           _loading =
                                                               !_loading;

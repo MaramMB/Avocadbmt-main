@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Characters/characters.dart';
+import 'package:flutter_application_1/pages/Profile/teacher_profile.dart';
 import 'package:flutter_application_1/pages/face.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
@@ -19,6 +23,8 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 0;
 bool dropOpen = false;
+Image? _imageWidget;
+// final name = getname(TeacherProfileState().nameController.text);
 var list1 = [
 
   DropdownMenuItem(
@@ -43,13 +49,14 @@ class SelectionButton extends StatefulWidget {
   const SelectionButton({super.key});
 
   @override
-  State<SelectionButton> createState() => _SelectionButtonState();
-}
+  State<SelectionButton> createState() => SelectionButtonState();
 
-class _SelectionButtonState extends State<SelectionButton> {
+}
+class SelectionButtonState extends State<SelectionButton> {
+var nameController = TextEditingController();
+var IDController = TextEditingController();
   String? userKind;
   String userId = '';
-
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -71,6 +78,7 @@ class _SelectionButtonState extends State<SelectionButton> {
   void initState() {
     super.initState();
     getUserData();
+    getTeacher();
   }
 
   @override
@@ -370,66 +378,59 @@ class _SelectionButtonState extends State<SelectionButton> {
                       MaterialPageRoute(
                           builder: (c) => scrollhome()),
                           (r) => false);
-                  // _exitApp(context);
-                  // showDialog(
-                  //   builder: (context) => AlertDialog(
-                  //     title: Text('Do you want to exit this application?'),
-                  //     content: Text('We hate to see you leave...'),
-                  //     actions: <Widget>[
-                  //       FloatingActionButton(
-                  //         onPressed: () {
-                  //           print("you choose no");
-                  //           Navigator.of(context).pop(false);
-                  //         },
-                  //         child: Text('No'),
-                  //       ),
-                  //       FloatingActionButton(
-                  //         onPressed: () {
-                  //           SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-                  //         },
-                  //         child: Text('Yes'),
-                  //       ),
-                  //     ],
-                  //   ),
-                  //
-                  // ) ??
-                  //     false;
-
                 }
               },
 
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: const [
-                  Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "مرام البدارين",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontFamily: "DroidKufi"),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  CircleAvatar(
-                    backgroundImage: AssetImage("img/avocado.png"),
-                    radius: 16.7,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10,
-                      // vertical: 20
+              child: SizedBox(
+                width: 175,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children:  [
+                    Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.white,
                     ),
-                  ),
-                  // Image.asset("img/avocado.png",width: 30,)
-                ],
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      nameController.text ,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontFamily: "DroidKufi"),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundImage: AssetImage("img/avocado.png"),
+                      radius: 16.7,
+                    ),
+                    // Container(
+                    //   child: CircleAvatar(
+                    //     // backgroundImage: AssetImage("img/avocado.png"),
+                    //     radius: 16.7,
+                    //       child: imagevalue == null
+                    //           ? Image.asset(
+                    //         'img/avocado.png',
+                    //         width: MediaQuery.of(context)
+                    //             .size
+                    //             .width /
+                    //             5.7,
+                    //         fit: BoxFit.fill,
+                    //       )
+                    //           : _image()),
+                    // ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        // vertical: 20
+                      ),
+                    ),
+                    // Image.asset("img/avocado.png",width: 30,)
+                  ],
+                ),
               ),
             ),
           ),
@@ -437,4 +438,20 @@ class _SelectionButtonState extends State<SelectionButton> {
       ),
     );
   }
+getTeacher() async {
+
+  var url = 'http://localhost/getname.php?id=${userId}';
+
+  var response = await http.get(Uri.parse(url));
+  var res = jsonDecode(response.body);
+  var bytes = base64Decode(res[0]["image"]);
+  var ints = bytes.buffer.asUint8List();
+
+  setState(() {
+    // imagevalue = ints.isEmpty ? null : ints;
+    IDController.text = res[0]["id"] ?? "";
+    nameController.text = res[0]["name"] ?? "";
+
+  });
+}
 }

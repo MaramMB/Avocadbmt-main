@@ -9,17 +9,17 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	if($db){
 
        $id = $_GET["id"];
+       $sql ="SELECT `first_name` + " " + `last_name` as `whole_name` FROM `teachers`";
 
-       $sql ="SELECT students.*, usersacounts.Email FROM students LEFT JOIN usersacounts ON students.Id = usersacounts.Id_Num AND students.id = $id";
+        //$sql ="SELECT teachers.*, usersacounts.Email FROM teachers LEFT JOIN usersacounts ON teachers.Id_Num = usersacounts.Id_Num AND teachers.Id_Num = $id";
 
     $result =mysqli_query($db , $sql);
     if($result){
         $i=0;
         while ($row=mysqli_fetch_assoc($result)){
-            $response[$i]["id"]=$row["Students_Id"];
-            $response[$i]["name"]=$row["firstname"];
-            $response[$i]["family_name"]=$row["secname"];
-//             $response[$i]["image"]=$row["image"];
+            $response[$i]["id"]=$row["Id_Num"];
+            $response[$i]["name"]=$row["Name"];
+            $response[$i]["image"]=$row["image"];
             $i++;
         }
         echo json_encode($response , JSON_PRETTY_PRINT);

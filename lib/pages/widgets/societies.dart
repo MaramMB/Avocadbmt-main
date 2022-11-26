@@ -183,8 +183,12 @@ class _SocieitesState extends State<Socieites> {
                                         child: SizedBox(
                                             height: 40,
                                             width: 40,
-                                            child:
-                                                CircularProgressIndicator()));
+                                            child:Text('لا يوجد حساب بهذا الاسم', style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: "DroidKufi",
+                                            ),)
+                                        )
+                                    );
                                   }
                                 }
                               },

@@ -1,110 +1,186 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/firsttestdata.dart';
-import 'package:flutter_application_1/pages/testdetail.dart';
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+import 'package:status_change/status_change.dart';
+const kTileHeight = 50.0;
+const inProgressColor = Colors.black87;
+const todoColor = Color(0xffd1d2d7);
+
+enum Pages {
+  DeliveryTime,
+  AddAddress,
+  Summary,
+}
+
+class HorizontalExample extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
-    );
+  _HorizontalExampleState createState() => _HorizontalExampleState();
+}
+
+class _HorizontalExampleState extends State<HorizontalExample> {
+  int _processIndex = 0;
+  Pages pages = Pages.DeliveryTime;
+
+  Color getColor(int index) {
+    if (index == _processIndex) {
+      return inProgressColor;
+    } else if (index < _processIndex) {
+      return Colors.green;
+    } else {
+      return todoColor;
+    }
   }
-}
-
-class omePage extends StatefulWidget {
-  const omePage({Key? key}) : super(key: key);
-
-  @override
-  _omePageState createState() => _omePageState();
-}
-
-class _omePageState extends State<omePage> {
-
-  static List<String> testword =['أسد','فأر','عصا','بطة','شباك','أرنب'];
-
-  static List<String> url = ['https://th.bing.com/th/id/OIP.iSebuYpfhQG14qgscrlV1QHaIg?w=186&h=213&c=7&r=0&o=5&dpr=1.5&pid=1.7',
-    'https://th.bing.com/th/id/R.4d72d9940dc967e6b7a53ab36dfbaf54?rik=Rq3566yQbsJ0%2bg&riu=http%3a%2f%2fsweetclipart.com%2fmultisite%2fsweetclipart%2ffiles%2fmouse_gray.png&ehk=MsRHbLxNwehMkTfFA%2faQ%2fDmSXirq6hn%2bvpIMn5v7IA0%3d&risl=&pid=ImgRaw&r=0',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Hapus_Mango.jpg/220px-Hapus_Mango.jpg',
-    'https://5.imimg.com/data5/VN/YP/MY-33296037/orange-600x600-500x500.jpg',
-    'https://5.imimg.com/data5/VN/YP/MY-33296037/orange-600x600-500x500.jpg',
-    'https://5.imimg.com/data5/GJ/MD/MY-35442270/fresh-pineapple-500x500.jpg'];
-
-  final List<FirstTest> testdata = List.generate(testword.length, (index) => FirstTest('${testword[index]}', '${url[index]}','${testword[index]} Description...'));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Pass Data from ListView to next Screen'),),
-        body: ListView.builder(
-            itemCount: testdata.length,
-            itemBuilder: (context,index){
-              return Card(
-                child: ListTile(
-                  title: Text(testdata[index].name),
-                  leading: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Image.network(testdata[index].ImageUrl),
-                  ),
-                  onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TestDetail(index: index,testDataModel: testdata,)));
-                  },
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        title: Text(
+          "Order Status",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              child: StatusChange.tileBuilder(
+                theme: StatusChangeThemeData(
+                  direction: Axis.horizontal,
+                  connectorTheme:
+                  ConnectorThemeData(space: 1.0, thickness: 1.0),
                 ),
-              );
+                builder: StatusChangeTileBuilder.connected(
+                  itemWidth: (_) =>
+                  MediaQuery.of(context).size.width / _processes.length,
+                  contentWidgetBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        'add content here',
+                        style: TextStyle(
+                          color: Colors
+                              .blue, // change color with dynamic color --> can find it with example section
+                        ),
+                      ),
+                    );
+                  },
+                  nameWidgetBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                        'your text ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: getColor(index),
+                        ),
+                      ),
+                    );
+                  },
+                  indicatorWidgetBuilder: (_, index) {
+                    if (index <= _processIndex) {
+                      return DotIndicator(
+                        size: 35.0,
+                        border: Border.all(color: Colors.green, width: 1),
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return OutlinedDotIndicator(
+                        size: 30,
+                        borderWidth: 1.0,
+                        color: todoColor,
+                      );
+                    }
+                  },
+                  lineWidgetBuilder: (index) {
+                    if (index > 0) {
+                      if (index == _processIndex) {
+                        final prevColor = getColor(index - 1);
+                        final color = getColor(index);
+                        var gradientColors;
+                        gradientColors = [
+                          prevColor,
+                          Color.lerp(prevColor, color, 0.5)
+                        ];
+                        return DecoratedLineConnector(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: gradientColors,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return SolidLineConnector(
+                          color: getColor(index),
+                        );
+                      }
+                    } else {
+                      return null;
+                    }
+                  },
+                  itemCount: _processes.length,
+                ),
+              ),
+
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.skip_next),
+        onPressed: () {
+          print(_processIndex);
+          setState(() {
+            _processIndex++;
+
+            if (_processIndex == 5) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => FinishView()));
             }
-        )
+          });
+        },
+        backgroundColor: inProgressColor,
+      ),
     );
   }
 }
-// import 'package:flutter/material.dart';
-// import 'package:flutter_application_1/pages/firsttestdata.dart';
-// import 'package:flutter_application_1/pages/testdetail.dart';
-// class HomPage extends StatefulWidget {
-//   const HomPage({Key? key}) : super(key: key);
-//
-//   @override
-//   _HomPageState createState() => _HomPageState();
-// }
-//
-// class _HomPageState extends State<HomPage> {
-//
-//   static List<String> fruitname =['أسد','فأر','عصا','بطة','شباك','أرنب'];
-//
-//   static List<String> url = ['https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg',
-//     'https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg',
-//     'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Hapus_Mango.jpg/220px-Hapus_Mango.jpg',
-//     'https://5.imimg.com/data5/VN/YP/MY-33296037/orange-600x600-500x500.jpg',
-//     'https://5.imimg.com/data5/GJ/MD/MY-35442270/fresh-pineapple-500x500.jpg'];
-//
-//   final List<FruitDataModel> Fruitdata = List.generate(fruitname.length, (index) => FruitDataModel('${fruitname[index]}', '${url[index]}','${fruitname[index]} Description...'));
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(title: Text('Pass Data from ListView to next Screen'),),
-//         body: ListView.builder(
-//             itemCount: Fruitdata.length,
-//             itemBuilder: (context,index){
-//               return Card(
-//                 child: ListTile(
-//                   title: Text(Fruitdata[index].name),
-//                   leading: SizedBox(
-//                     width: 50,
-//                     height: 50,
-//                     child: Image.network(Fruitdata[index].ImageUrl),
-//                   ),
-//                   onTap: (){
-//                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FruitDetail(index: index,fruitDataModel: Fruitdata,)));
-//                   },
-//                 ),
-//               );
-//             }
-//         )
-//     );
-//   }
-// }
+
+final _processes = [
+  'Order Signed',
+  'Order Processed',
+  'Shipped ',
+  'Out for delivery ',
+  'Delivered ',
+];
+
+final _content = [
+  '20/18',
+  '20/18',
+  '20/18',
+  '20/18',
+  '20/18',
+];
+class FinishView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Container(
+          child: Text("Finish View"),
+        ),
+      ),
+    );
+  }
+}

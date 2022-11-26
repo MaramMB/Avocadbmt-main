@@ -5,8 +5,7 @@ import 'package:flutter_application_1/pages/rowbar.dart';
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key, required this.person, required this.id})
-      : super(key: key);
+  const UserProfile({Key? key, required this.person, required this.id}) : super(key: key);
   final Person person;
   final String id;
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Account_Managment/Add_Account/addteacher.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/widgets/societies.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -17,6 +18,7 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+String type="";
 
 // void main() => runApp(const MyApp());
 
@@ -225,8 +227,11 @@ class _managepageState extends State<managepage> {
                                             child: SizedBox(
                                                 height: 40,
                                                 width: 40,
-                                                child:
-                                                    CircularProgressIndicator()));
+                                                child:Text('لا يوجد حساب بهذا الاسم', style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontFamily: "DroidKufi",
+                                                ),),
+                                            ));
                                       }
                                     }
                                   },
@@ -280,9 +285,11 @@ class _managepageState extends State<managepage> {
                                         return const Center(
                                             child: SizedBox(
                                                 height: 40,
-                                                width: 40,
-                                                child:
-                                                    CircularProgressIndicator()));
+                                                // width: 40,
+                                                child:Text("لا يوجد حساب بهذا الاسم", style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontFamily: "DroidKufi",
+                                                ),)));
                                       }
                                     }
                                   },
@@ -304,11 +311,30 @@ class _managepageState extends State<managepage> {
                               MaterialStateProperty.all(Colors.green),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext ctx) {
-                              return const AddAccountForm();
-                            }),
-                          );
+                          // if(teacher == true)
+                          //   {
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(builder: (BuildContext ctx) {
+                          //     return  AddAccountForm();
+                          //   }),
+                          // );
+                          //
+                          //   }
+                          // else
+                          //   {
+                          //     Navigator.of(context).push(
+                          //       MaterialPageRoute(builder: (BuildContext ctx) {
+                          //         return  AddTeacheAccount();
+                          //       }),
+                          //     );
+                          //   }
+
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return teacher == false
+                                ? AddAccountForm()
+                                : AddTeacheAccount();
+                          }));
                         },
                         child: const Text(
                           'إضافة حساب جديد',
