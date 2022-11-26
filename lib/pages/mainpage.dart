@@ -123,7 +123,7 @@ class _mainpageState extends State<mainpage> {
                             onPressed: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const expage();
+                                return  expage(userId: userId,);
                               }));
                             },
                             style: ElevatedButton.styleFrom(

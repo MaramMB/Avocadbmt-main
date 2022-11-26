@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Profile/profile.dart';
 import 'Profile/teacher_profile.dart';
 import 'dic.dart';
+import 'expl.dart';
 import 'mainpage.dart';
 import 'manag.dart';
 
@@ -43,10 +44,10 @@ class SelectionButton extends StatefulWidget {
   const SelectionButton({super.key});
 
   @override
-  State<SelectionButton> createState() => _SelectionButtonState();
+  State<SelectionButton> createState() => SelectionButtonState();
 }
 
-class _SelectionButtonState extends State<SelectionButton> {
+class SelectionButtonState extends State<SelectionButton> {
   String? userKind;
   String userId = '';
 
@@ -71,6 +72,8 @@ class _SelectionButtonState extends State<SelectionButton> {
   void initState() {
     super.initState();
     getUserData();
+
+
   }
 
   @override
@@ -128,7 +131,7 @@ class _SelectionButtonState extends State<SelectionButton> {
                   (context as Element).reassemble();
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return const dic();
+                    return  expage(userId: userId,);
                   }));
                 },
                 child: const Text(
