@@ -1,3 +1,4 @@
+
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
@@ -15,7 +16,7 @@ $db = mysqli_connect('localhost','root','','bdmtproject');
 	$accountnumber = $_POST['accountnum'];
 	$gender = $_POST['gender'];
 	$spec = $_POST['specialization'];
-	$Society_Id = $_POST['Society_Id'] ;
+	$Society_Id = $_POST['Society_Id'] ?? 100;
 
 	//for user account
 	$email = $_POST['email'];

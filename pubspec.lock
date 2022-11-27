@@ -127,13 +127,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  change_notifier_builder:
-    dependency: "direct main"
-    description:
-      name: change_notifier_builder
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.2"
   characters:
     dependency: transitive
     description:

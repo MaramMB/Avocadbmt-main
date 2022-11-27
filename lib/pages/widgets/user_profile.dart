@@ -34,7 +34,6 @@ class UserProfile extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-             SelectionButton(),
             const SizedBox(
               height: 30,
             ),

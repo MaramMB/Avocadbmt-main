@@ -9,15 +9,15 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 
-class Videos extends StatefulWidget {
+class Job extends StatefulWidget {
   final name;
-  const Videos({Key? key, this.name}) : super(key: key);
+  const Job({Key? key, this.name}) : super(key: key);
 
   @override
-  State<Videos> createState() => _VideosState();
+  State<Job> createState() => _JobState();
 }
 
-class _VideosState extends State<Videos> {
+class _JobState extends State<Job> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,18 +141,18 @@ class _VideosState extends State<Videos> {
   }
 
   var names = [
-    "يسبيسبسي",
-    "name2",
-    "name3",
-    "name4",
-    "name5",
-    "name6",
-    "name7",
-    "name8",
-    "name9",
-    "name10",
-    "name11",
-    "name12",
+    "معلم/ة",
+    "شرطي",
+    "طيار",
+    "ممرض/ة",
+    "محامي",
+    "صحفي",
+    "كوافير",
+    "بقال",
+    "مزارع",
+    "طبيب",
+    "طباخ",
+    "نجار",
   ];
 
   late YoutubePlayerController _controller;
@@ -191,51 +191,51 @@ class _VideosState extends State<Videos> {
     super.initState();
     _controller = YoutubePlayerController()
       ..onInit = () {
-        _controller.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller.loadVideoById(videoId: 'ev1mazcRxak', startSeconds: 30);
       };
     _controller1 = YoutubePlayerController()
       ..onInit = () {
-        _controller1.loadVideoById(videoId: 'HHjSdy9l7Kc', startSeconds: 30);
+        _controller1.loadVideoById(videoId: 'f8kNBXbY47I', startSeconds: 30);
       };
     _controller2 = YoutubePlayerController()
       ..onInit = () {
-        _controller2.loadVideoById(videoId: 'LTA9bwp-RrU', startSeconds: 30);
+        _controller2.loadVideoById(videoId: 'l6O1EMrYbRk', startSeconds: 30);
       };
     _controller3 = YoutubePlayerController()
       ..onInit = () {
-        _controller3.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller3.loadVideoById(videoId: '8JO9ghQ6SrY', startSeconds: 30);
       };
     _controller4 = YoutubePlayerController()
       ..onInit = () {
-        _controller4.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller4.loadVideoById(videoId: 'CoQol9hWVvw', startSeconds: 30);
       };
     _controller5 = YoutubePlayerController()
       ..onInit = () {
-        _controller5.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller5.loadVideoById(videoId: 'C7-ORKiRFwc', startSeconds: 30);
       };
     _controller6 = YoutubePlayerController()
       ..onInit = () {
-        _controller6.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller6.loadVideoById(videoId: '7O3Piby0AkA', startSeconds: 30);
       };
     _controller7 = YoutubePlayerController()
       ..onInit = () {
-        _controller7.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller7.loadVideoById(videoId: 'xXDyJiFfp0U', startSeconds: 30);
       };
     _controller8 = YoutubePlayerController()
       ..onInit = () {
-        _controller8.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller8.loadVideoById(videoId: '3BIpzwyw1mQ', startSeconds: 30);
       };
     _controller9 = YoutubePlayerController()
       ..onInit = () {
-        _controller9.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller9.loadVideoById(videoId: 'n-bDCtVlldE', startSeconds: 30);
       };
     _controller10 = YoutubePlayerController()
       ..onInit = () {
-        _controller10.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller10.loadVideoById(videoId: '3WflWRgzZbU', startSeconds: 30);
       };
     _controller11 = YoutubePlayerController()
       ..onInit = () {
-        _controller11.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
+        _controller11.loadVideoById(videoId: 'dQmfIvFZP5g', startSeconds: 30);
       };
   }
 }

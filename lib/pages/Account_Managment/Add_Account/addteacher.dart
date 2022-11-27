@@ -27,6 +27,7 @@ class AddTeacheAccount extends StatefulWidget {
 }
 
 class _AddTeacheAccountState extends State<AddTeacheAccount> {
+
   String gender = '';
   int _selectedType = 2;
   TextStyle unselectedTypeTextStyle = const TextStyle(
@@ -86,18 +87,8 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Row(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                child: teacherwidget()
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        teacherwidget(),
+
                       ],
                     ),
                   ),
@@ -108,50 +99,8 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
         ),
       ),
     );
-    // Container(
-    //   padding: const EdgeInsets.all(30),
-    //   alignment: Alignment.topCenter,
-    //   child: Column(
-    //     children: [
-    //       const Text("إنشاء حساب جديد",
-    //         style: TextStyle(
-    //           color: Colors.white,
-    //           fontFamily: "Tajawal",
-    //           fontSize: 40,
-    //           fontWeight: FontWeight.bold,
-    //         ),),
-    //       SizedBox(height: 20,),
-    //       Container(
-    //         decoration: BoxDecoration(
-    //           // border: Border.all(color: Colors.black38),
-    //           borderRadius: BorderRadius.circular(20),
-    //           // color: Colors.gr,
-    //         ),
-    //         width: MediaQuery.of(context).size.width / 2,
-    //         child: Form(
-    //           key: _formKey,
-    //           child: Padding(
-    //             padding:
-    //             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-    //             child: Column(
-    //               children: [
-
-    //                 height16,
-    //                 SizedBox(height: 30,),
-    //                 buildCreateAccountButton(context),
-    //                 height16,
-    //                 SizedBox(height: 30,),
-    //                 buildCreateAccountButton2(context)
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-
-    //     ],
-    //   ),
-    // ),
   }
+
 
   addTeacher() async {
     if (nameController.text == "" ||
@@ -159,27 +108,9 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
         phoneController.text == "" ||
         emailController.text == "" ||
         specificController.text == "") {
-      Navigator.of(context, rootNavigator: true).pop();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: const Text('الرجاء تعبئه جميع الفراغات'),
-            actions: <Widget>[
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  'حسنا',
-                  style: TextStyle(color: Color(0xff34568B)),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    } else {
+        msgDialog('الرجاء تعبئه جميع الفراغات');
+    }
+    else {
       var url = 'http://localhost/add_teacher.php';
 
       Navigator.of(context, rootNavigator: true).pop();
@@ -201,16 +132,31 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
       var data = jsonDecode(response.body);
 
       if (data == 'Success') {
-        Navigator.of(context, rootNavigator: true).pop();
-        confirmDialog();
+        clearData();
+        Fluttertoast.showToast(
+            msg: "تم اضافه المعلم بنجاح");
       } else {
         Navigator.of(context, rootNavigator: true).pop();
-        msgDialog("حدث خطأ ما");
       }
     }
   }
 
-  void confirmDialog() {
+  void clearData() {
+    setState(() {
+      nameController.clear();
+      dateinput.clear();
+      accountnumberController.clear();
+      emailController.clear();
+      specificController.clear();
+      dateAppliedController.clear();
+      IDTeacherController.clear();
+      confirmPassController.clear();
+      phoneController.clear();
+    });
+  }
+
+
+  void confirm() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -222,7 +168,7 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
               children: [
                 InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.of(context, rootNavigator: true).pop();
                       addTeacher();
                     },
                     child: Container(
@@ -239,7 +185,6 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                             )))),
                 InkWell(
                     onTap: () {
-                      Navigator.of(context).pop();
                       Navigator.of(context).pop();
                     },
                     child: Container(
@@ -269,17 +214,7 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   var phoneController = TextEditingController();
   var emailController = TextEditingController();
   var specificController = TextEditingController();
-  var firstnameController = TextEditingController();
-  var secondnameController = TextEditingController();
-  var thirdnameController = TextEditingController();
-  var lastnameController = TextEditingController();
-  var IDstudentController = TextEditingController();
-  var emailstudentController = TextEditingController();
-  var fathernameController = TextEditingController();
-  var addressstudentController = TextEditingController();
-  var familyphoneController = TextEditingController();
   var dateinput = TextEditingController();
-
   var passController = TextEditingController();
   var confirmPassController = TextEditingController();
   var dateAppliedController = TextEditingController();
@@ -475,7 +410,7 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                     );
                   },
                 );
-                confirmDialog();
+                confirm();
               },
               child: Container(
                 width: 200,
@@ -662,329 +597,6 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
         : "كلمة المرور خاطئة, الرجاء ادخال كلمة مطابقة و صحيحة";
   }
 
-  Widget studentwidget() {
-    return Form(
-      key: _formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "الأسم الأخير"),
-                  textfieldwidget(
-                    type: TextInputType.name,
-                    ontap: () {},
-                    wid: 150,
-                    hei: 40,
-                    nameController: lastnameController,
-                    text: "الأسم الأخير",
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "الأسم الثالث"),
-                  textfieldwidget(
-                    type: TextInputType.name,
-                    ontap: () {},
-                    wid: 150,
-                    hei: 40,
-                    nameController: thirdnameController,
-                    text: "الأسم الثالث",
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "الأسم الثاني"),
-                  textfieldwidget(
-                    type: TextInputType.name,
-                    ontap: () {},
-                    wid: 150,
-                    hei: 40,
-                    nameController: secondnameController,
-                    text: "الأسم الثاني",
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "الأسم الأول"),
-                  textfieldwidget(
-                    type: TextInputType.name,
-                    ontap: () {},
-                    wid: 150,
-                    hei: 40,
-                    nameController: firstnameController,
-                    text: "الأسم الأول",
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "رقم هويه الطالب"),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Container(
-                      height: 40,
-                      width: 300,
-                      child: TextField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        onTap: () {},
-                        textAlign: TextAlign.right,
-                        controller: IDstudentController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(width: 2.0, color: backgreen),
-                          ),
-                          hintText: "رقم هويه الطالب",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "العنوان"),
-                  textfieldwidget(
-                    type: TextInputType.number,
-                    ontap: () {},
-                    wid: 300,
-                    hei: 40,
-                    nameController: addressstudentController,
-                    text: "العنوان",
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "رقم هاتف الأهل"),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Container(
-                      height: 40,
-                      width: 300,
-                      child: TextField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        onTap: () {},
-                        textAlign: TextAlign.right,
-                        controller: familyphoneController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(width: 2.0, color: backgreen),
-                          ),
-                          hintText: "رقم هاتف الأهل",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "تاريخ الميلاد"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: _pickDate,
-                        child: Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: const Icon(
-                            Icons.calendar_month,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 2.0,
-                      ),
-                      textfieldwidget(
-                        type: TextInputType.datetime,
-                        ontap: () {
-                          _pickDate();
-                        },
-                        nameController: dateinput,
-                        wid: 250,
-                        hei: 40,
-                        text: "تاريخ الميلاد",
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _confirmPassword,
-              _password,
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _dateApplied,
-              _email,
-            ],
-          ),
-          namefield(field: "الجنس"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 50,
-                width: 200,
-                child: RadioListTile(
-                    activeColor: backgreen,
-                    title: const Text("ذكر"),
-                    value: SingingCharacterStudent.Male,
-                    groupValue: _characterstudent,
-                    selected: _characterstudent == SingingCharacterStudent.Male,
-                    onChanged: (SingingCharacterStudent? value) {
-                      setState(() {
-                        _characterstudent = value;
-                      });
-                    }),
-              ),
-              SizedBox(
-                height: 50,
-                width: 150,
-                child: Center(
-                  child: RadioListTile(
-                      activeColor: backgreen,
-                      title: const Text("انثى"),
-                      value: SingingCharacterStudent.Female,
-                      groupValue: _characterstudent,
-                      selected:
-                      _characterstudent == SingingCharacterStudent.Female,
-                      onChanged: (SingingCharacterStudent? value) {
-                        setState(() {
-                          _characterstudent = value;
-                        });
-                      }),
-                ),
-              ),
-            ],
-          ),
-          namefield(field: "المشكله لديه"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 50,
-                width: 200,
-                child: RadioListTile(
-                    activeColor: backgreen,
-                    title: const Text("سمع"),
-                    value: SingingCharacterProblem.hear,
-                    groupValue: pro,
-                    selected: pro == SingingCharacterProblem.hear,
-                    onChanged: (SingingCharacterProblem? value) {
-                      setState(() {
-                        pro = value;
-                      });
-                    }),
-              ),
-              SizedBox(
-                height: 50,
-                width: 150,
-                child: Center(
-                  child: RadioListTile(
-                      activeColor: backgreen,
-                      title: const Text("نطق"),
-                      value: SingingCharacterProblem.pron,
-                      groupValue: pro,
-                      selected: pro == SingingCharacterProblem.pron,
-                      onChanged: (SingingCharacterProblem? value) {
-                        setState(() {
-                          pro = value;
-                        });
-                      }),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const AlertDialog(
-                      content: SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: Center(child: CircularProgressIndicator())),
-                    );
-                  },
-                );
-
-              },
-              child: Container(
-                width: 200,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: backgreen, borderRadius: BorderRadius.circular(10)),
-                child: const Center(
-                  child: Text(
-                    "اضافه طالب",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   Widget namefield({String field = ""}) {
     return Padding(
       padding: const EdgeInsets.only(top: 30, right: 15, left: 15),
@@ -1047,4 +659,5 @@ class textfieldwidget extends StatelessWidget {
       ),
     );
   }
+
 }

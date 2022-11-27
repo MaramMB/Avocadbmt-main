@@ -29,7 +29,7 @@ class _Videos28State extends State<Videos28> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-               SelectionButton(),
+              const SelectionButton(),
               const SizedBox(
                 height: 30,
               ),
@@ -98,13 +98,28 @@ class _Videos28State extends State<Videos28> {
                         itemCount: 28,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: AspectRatio(
-                              aspectRatio: 5.5,
-                              child: _controller != null
-                                  ? YoutubePlayerIFrame(
-                                      controller: myControllers[index])
-                                  : Center(child: CircularProgressIndicator()),
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Column(
+                              children: [
+                                AspectRatio(
+                                  aspectRatio: 2.0,
+                                  child: _controller != null
+                                      ? YoutubePlayerIFrame(
+                                          controller: myControllers[index])
+                                      : Center(
+                                          child: CircularProgressIndicator()),
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  names[index],
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.white),
+                                )
+                              ],
                             ),
                           );
                         },
@@ -119,6 +134,37 @@ class _Videos28State extends State<Videos28> {
       ),
     );
   }
+
+  var names = [
+    "يسبيسبسي",
+    "name2",
+    "name3",
+    "name4",
+    "name5",
+    "name6",
+    "name7",
+    "name8",
+    "name9",
+    "name10",
+    "name11",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+    "name12",
+  ];
 
   late YoutubePlayerController _controller;
   late YoutubePlayerController _controller1;
@@ -299,121 +345,4 @@ class _Videos28State extends State<Videos28> {
         _controller27.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
       };
   }
-
-  // bool? autoPlay;
-  // final controller1 = YoutubePlayerController(
-  //   initialVideoId: 'K18cpp_-gP8',
-  //   params: YoutubePlayerParams(
-  //     startAt: Duration(seconds: 30),
-  //     autoPlay: true,
-  //   ),
-  // );
-  // final _con2 = YoutubePlayerController()
-  //   ..onInit = () {
-  //     if (autoPlay) {
-  //       _controller.loadVideoById(videoId: 'K18cpp_-gP8', startSeconds: 30);
-  //     } else {
-  //       _controller.cueVideoById(videoId: 'K18cpp_-gP8', startSeconds: 30);
-  //     }
-  //   };
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _setOrientation([
-  //     DeviceOrientation.landscapeRight,
-  //     DeviceOrientation.landscapeLeft,
-  //     DeviceOrientation.portraitUp,
-  //     DeviceOrientation.portraitDown,
-  //   ]);
-
-  //   WidgetsBinding.instance!.addPostFrameCallback((_) {
-  //     setState(() {
-  //       _controller = YoutubePlayerController(
-  //         initialVideoId: "K18cpp_-gP8",
-  //         params: YoutubePlayerParams(
-  //           showFullscreenButton: true,
-  //           autoPlay: false,
-  //         ),
-  //       );
-  //     });
-  //   });
-  //   _controller = VideoPlayerController.network(
-  //       'https://www.youtube.com/watch?v=HHjSdy9l7Kc')
-  //     ..initialize().then((_) {
-  //       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //       setState(() {});
-  //     });
-  // _controller1 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller2 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller3 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller4 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller2 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller5 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller6 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller7 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller8 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller9 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller10 =
-  //     VideoPlayerController.network('https://youtu.be/mxHICfk1Hj0 ')
-  //       ..initialize().then((_) {
-  //         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //         setState(() {});
-  //       });
-  // _controller11 = VideoPlayerController.network(
-  //     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
-  //   ..initialize().then((_) {
-  //     // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-  //     setState(() {});
-  //   });
-  // }
 }

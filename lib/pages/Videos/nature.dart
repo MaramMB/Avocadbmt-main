@@ -9,15 +9,15 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 
-class Videos extends StatefulWidget {
+class Nature extends StatefulWidget {
   final name;
-  const Videos({Key? key, this.name}) : super(key: key);
+  const Nature({Key? key, this.name}) : super(key: key);
 
   @override
-  State<Videos> createState() => _VideosState();
+  State<Nature> createState() => _NatureState();
 }
 
-class _VideosState extends State<Videos> {
+class _NatureState extends State<Nature> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

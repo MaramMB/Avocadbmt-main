@@ -4,7 +4,9 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Characters/characters.dart';
 import 'package:flutter_application_1/pages/Profile/teacher_profile.dart';
+import 'package:flutter_application_1/pages/chat.dart';
 import 'package:flutter_application_1/pages/face.dart';
+import 'package:flutter_application_1/pages/result.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/latterexpl.dart';
@@ -104,7 +106,7 @@ var IDController = TextEditingController();
             ),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const mainpage();
+                return const chat();
               }));
             },
             child: const Text(
@@ -136,7 +138,7 @@ var IDController = TextEditingController();
                   (context as Element).reassemble();
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return const dic();
+                    return  result(userId: userId,);
                   }));
                 },
                 child: const Text(

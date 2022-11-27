@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,11 +8,6 @@ import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-
-import '../../rowbar.dart';
-import '../../widgets/manage_accounts.dart';
-// import 'package:intl/intl.dart';
-
 enum SingingCharacterTeacher { Male, Female }
 
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
@@ -55,98 +52,46 @@ class _AddAccountFormState extends State<AddAccountForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
-      body: Container(
-        child: Column(
-          children: [
-            // const SelectionButton(),
-            const SizedBox(
-              height: 30,
-            ),
-            Center(
-              child: Container(
+      body: Center(
+        child: Container(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
                 height: MediaQuery.of(context).size.height / 1.1,
-                width: MediaQuery.of(context).size.width / 1.8,
+                width: MediaQuery.of(context).size.width / 1.6,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: SingleChildScrollView(
                     child: Column(
                       // textDirection: TextDirection.rtl,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text("اضافه حساب",
+                        const Text("اضافه طالب",
                             style: TextStyle(
                                 color: Colors.green,
                                 fontSize: 30,
                                 fontFamily: "DroidKufi",
                                 fontWeight: FontWeight.w700)),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            studentwidget(),
-                          ],
-                        ),
+
+                       studentwidget(),
 
                       ],
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
-    // Container(
-    //   padding: const EdgeInsets.all(30),
-    //   alignment: Alignment.topCenter,
-    //   child: Column(
-    //     children: [
-    //       const Text("إنشاء حساب جديد",
-    //         style: TextStyle(
-    //           color: Colors.white,
-    //           fontFamily: "Tajawal",
-    //           fontSize: 40,
-    //           fontWeight: FontWeight.bold,
-    //         ),),
-    //       SizedBox(height: 20,),
-    //       Container(
-    //         decoration: BoxDecoration(
-    //           // border: Border.all(color: Colors.black38),
-    //           borderRadius: BorderRadius.circular(20),
-    //           // color: Colors.gr,
-    //         ),
-    //         width: MediaQuery.of(context).size.width / 2,
-    //         child: Form(
-    //           key: _formKey,
-    //           child: Padding(
-    //             padding:
-    //             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-    //             child: Column(
-    //               children: [
-
-    //                 height16,
-    //                 SizedBox(height: 30,),
-    //                 buildCreateAccountButton(context),
-    //                 height16,
-    //                 SizedBox(height: 30,),
-    //                 buildCreateAccountButton2(context)
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-
-    //     ],
-    //   ),
-    // ),
   }
 
   addStudent() async {
@@ -201,60 +146,9 @@ class _AddAccountFormState extends State<AddAccountForm> {
 
       if (data == 'Success') {
         Navigator.of(context, rootNavigator: true).pop();
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
-              actions: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Fluttertoast.showToast(msg: "تم اضافه الطالب بنجاح");
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const MyApp();
-                          }));
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10)),
-                            height: 40,
-                            width: 100,
-                            child: const Center(
-                                child: Text(
-                                  "نعم",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )))),
-                    InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10)),
-                            height: 40,
-                            width: 100,
-                            child: const Center(
-                                child: Text(
-                                  "لا",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )))),
-                  ],
-                ),
-              ],
-            );
-          },
-        );
+        clearData();
+        Fluttertoast.showToast(
+            msg: "تم اضافه الطالب بنجاح", timeInSecForIosWeb: 1);
       } else {
         Navigator.of(context, rootNavigator: true).pop();
         showDialog(
@@ -312,64 +206,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
     }
   }
 
-  addTeacher() async {
-    if (nameController.text == "" ||
-        accountnumberController.text == "" ||
-        phoneController.text == "" ||
-        emailController.text == "" ||
-        specificController.text == "") {
-      Navigator.of(context, rootNavigator: true).pop();
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: const Text('الرجاء تعبئه جميع الفراغات'),
-            actions: <Widget>[
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  'حسنا',
-                  style: TextStyle(color: Color(0xff34568B)),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      var url = 'http://localhost/add_teacher.php';
-
-      Navigator.of(context, rootNavigator: true).pop();
-
-      final response = await http.post(
-        Uri.parse(url),
-        body: {
-          "Name": nameController.text,
-          "gender": _character.toString().split('.').last,
-          "specialization": specificController.text,
-          "Phone_Num": phoneController.text,
-          "accountnum": accountnumberController.text,
-          "Id_Num": IDTeacherController.text,
-          "email": emailController.text,
-          "password": passController.text,
-        },
-      );
-
-      var data = jsonDecode(response.body);
-
-      if (data == 'Success') {
-        Navigator.of(context, rootNavigator: true).pop();
-        confirmDialog();
-      } else {
-        Navigator.of(context, rootNavigator: true).pop();
-        msgDialog("حدث خطأ ما");
-      }
-    }
-  }
-
-  void confirmDialog() {
+  void confirmDialog({isTeacher = true}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -382,7 +219,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                 InkWell(
                     onTap: () {
                       Navigator.pop(context);
-                      addTeacher();
+                       addStudent();
                     },
                     child: Container(
                         decoration: BoxDecoration(
@@ -426,8 +263,12 @@ class _AddAccountFormState extends State<AddAccountForm> {
   var IDTeacherController = TextEditingController();
   var accountnumberController = TextEditingController();
   var phoneController = TextEditingController();
+  // var fathernameController = TextEditingController();
+  // var addressController = TextEditingController();
   var emailController = TextEditingController();
   var specificController = TextEditingController();
+
+  //Controllers for Strudents
   var firstnameController = TextEditingController();
   var secondnameController = TextEditingController();
   var thirdnameController = TextEditingController();
@@ -443,221 +284,33 @@ class _AddAccountFormState extends State<AddAccountForm> {
   var confirmPassController = TextEditingController();
   var dateAppliedController = TextEditingController();
 
+  void clearData() {
+    setState(() {
+      nameController.clear();
+      firstnameController.clear();
+      secondnameController.clear();
+      thirdnameController.clear();
+      lastnameController.clear();
+      passController.clear();
+      IDstudentController.clear();
+      emailstudentController.clear();
+      fathernameController.clear();
+      addressstudentController.clear();
+      familyphoneController.clear();
+      dateinput.clear();
+      accountnumberController.clear();
+      emailController.clear();
+      specificController.clear();
+      dateAppliedController.clear();
+      IDTeacherController.clear();
+      confirmPassController.clear();
+      phoneController.clear();
+    });
+  }
+
   SingingCharacterTeacher? _character = SingingCharacterTeacher.Female;
   SingingCharacterStudent? _characterstudent = SingingCharacterStudent.Female;
   SingingCharacterProblem? pro = SingingCharacterProblem.hear;
-
-  Widget teacherwidget() {
-    return Form(
-      key: _formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          namefield(field: "اسم المعلم"),
-          textfieldwidget(
-            type: TextInputType.name,
-            ontap: () {},
-            wid: 300,
-            hei: 40,
-            nameController: nameController,
-            text: "أسم المعلم",
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "رقم الهويه"),
-                  textfieldwidget(
-                    type: TextInputType.name,
-                    ontap: () {},
-                    wid: 300,
-                    hei: 40,
-                    nameController: IDTeacherController,
-                    text: "رقم الهويه",
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "رقم الحساب"),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Container(
-                      height: 40,
-                      width: 300,
-                      child: TextField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        onTap: () {},
-                        textAlign: TextAlign.right,
-                        controller: accountnumberController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(width: 2.0, color: backgreen),
-                          ),
-                          hintText: "رقم الحساب",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  namefield(field: "رقم الهاتف"),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
-                    child: Container(
-                      height: 40,
-                      width: 300,
-                      child: TextField(
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        keyboardType: const TextInputType.numberWithOptions(
-                            signed: true, decimal: true),
-                        onTap: () {},
-                        textAlign: TextAlign.right,
-                        controller: phoneController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(width: 2.0, color: backgreen),
-                          ),
-                          hintText: "رقم الهاتف",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  namefield(field: "التخصص"),
-                  textfieldwidget(
-                    type: TextInputType.text,
-                    ontap: () {},
-                    wid: 300,
-                    hei: 40,
-                    nameController: specificController,
-                    text: "التخصص",
-                  ),
-                ],
-              ),
-            ],
-          ),
-          namefield(field: "الجنس"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 50,
-                width: 200,
-                child: RadioListTile(
-                    activeColor: backgreen,
-                    title: const Text("ذكر"),
-                    value: SingingCharacterTeacher.Male,
-                    groupValue: _character,
-                    selected: _character == SingingCharacterTeacher.Male,
-                    onChanged: (SingingCharacterTeacher? value) {
-                      setState(() {
-                        _character = value;
-                      });
-                    }),
-              ),
-              SizedBox(
-                height: 50,
-                width: 150,
-                child: Center(
-                  child: RadioListTile(
-                      activeColor: backgreen,
-                      title: const Text("انثى"),
-                      value: SingingCharacterTeacher.Female,
-                      groupValue: _character,
-                      selected: _character == SingingCharacterTeacher.Female,
-                      onChanged: (SingingCharacterTeacher? value) {
-                        setState(() {
-                          _character = value;
-                        });
-                      }),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _confirmPassword,
-              _password,
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _dateApplied,
-              _email,
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const AlertDialog(
-                      content: SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: Center(child: CircularProgressIndicator())),
-                    );
-                  },
-                );
-                confirmDialog();
-              },
-              child: Container(
-                width: 200,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: backgreen, borderRadius: BorderRadius.circular(10)),
-                child: const Center(
-                  child: Text(
-                    "اضافه معلم",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   _pickDate() async {
     DateTime? pickedDate = await showDatePicker(
         context: context,
@@ -793,6 +446,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
         wid: 300,
         hei: 40,
         validation: (Val) => passValidation(),
+        hideShow: _passwordVisible,
         nameController: confirmPassController,
         text: "", readOnly: false,
       ),
@@ -824,7 +478,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
   Widget studentwidget() {
     return Form(
       key: _formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -1120,7 +773,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     );
                   },
                 );
-                addStudent();
+                confirmDialog(isTeacher: false);
               },
               child: Container(
                 width: 200,

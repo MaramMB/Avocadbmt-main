@@ -9,9 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../rowbar.dart';
-
-// ignore: constant_identifier_names
 enum SingingCharacterGender { Male, Female }
 
 enum SingingCharacterProblem { hear, pron }
@@ -170,42 +167,44 @@ class _AddScocietyState extends State<AddScociety> {
         managerController.text == "") {
       msgDialog('الرجاء تعبئه جميع الفراغات');
     } else {
-      var urll = 'http://localhost/add_user.php';
+      var url = 'http://localhost/add_society.php';
 
-      final req = await http.post(Uri.parse(urll), body: {
-        "sid": idController.text,
-        "email": emailController.text,
-        "pass": passController.text
-      });
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          "name": nameController.text,
+          "sid": idController.text,
+          "Society_Manager": managerController.text,
+          "email": emailController.text,
+          "pass": passController.text,
+          "phone": phoneController.text,
+          "address": addressController.text,
+          "date": dateController.text,
+        },
+      );
 
-      var userResponse = jsonDecode(req.body);
+      var data = jsonDecode(response.body);
 
-      if (userResponse == 'Success') {
-        var url = 'http://localhost/add_society.php';
-
-        final response = await http.post(
-          Uri.parse(url),
-          body: {
-            "name": nameController.text,
-            "sid": idController.text,
-            "Society_Manager": managerController.text,
-            "phone": phoneController.text,
-            "address": addressController.text,
-            "date": dateController.text,
-          },
-        );
-
-        var data = jsonDecode(response.body);
-
-        if (data == 'Success') {
-          Navigator.of(context).pop();
-          Fluttertoast.showToast(msg: "تم اضافه المعلم بنجاح");
-        }
+      if (data == 'Success') {
+        clearData();
+        Fluttertoast.showToast(msg: "تم اضافة الجمعية بنجاح");
       } else {
         Navigator.of(context, rootNavigator: true).pop();
-        // print('fsdsdfs');
       }
     }
+  }
+
+  void clearData() {
+    setState(() {
+      nameController.clear();
+      idController.clear();
+      managerController.clear();
+      dateController.clear();
+      emailController.clear();
+      passController.clear();
+      confirmPassController.clear();
+      phoneController.clear();
+    });
   }
 
   void msgDialog(String msg) {
@@ -235,6 +234,7 @@ class _AddScocietyState extends State<AddScociety> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               children: [
@@ -245,9 +245,9 @@ class _AddScocietyState extends State<AddScociety> {
                   wid: 300,
                   hei: 40,
                   nameController: nameController,
-                  text: "أسم الجمعيه", readOnly: false,
+                  text: "أسم الجمعيه",
+                  readOnly: false,
                 ),
-
               ],
             ),
             Column(
@@ -259,14 +259,13 @@ class _AddScocietyState extends State<AddScociety> {
                   wid: 300,
                   hei: 40,
                   nameController: idController,
-                  text: "رقم الجمعيه", readOnly: false,
+                  text: "رقم الجمعيه",
+                  readOnly: false,
                 ),
-
               ],
             ),
           ],
         ),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -279,7 +278,8 @@ class _AddScocietyState extends State<AddScociety> {
                   wid: 300,
                   hei: 40,
                   nameController: addressController,
-                  text: "العنوان", readOnly: false,
+                  text: "العنوان",
+                  readOnly: false,
                 ),
               ],
             ),
@@ -354,7 +354,6 @@ class _AddScocietyState extends State<AddScociety> {
                       readOnly: true,
                       text: "تاريخ الجمعيه",
                     ),
-
                   ],
                 ),
               ],
@@ -368,7 +367,8 @@ class _AddScocietyState extends State<AddScociety> {
                   wid: 300,
                   hei: 40,
                   nameController: managerController,
-                  text: "أسم المدير", readOnly: false,
+                  text: "أسم المدير",
+                  readOnly: false,
                 ),
               ],
             ),
@@ -425,7 +425,8 @@ class _AddScocietyState extends State<AddScociety> {
         hei: 40,
         validation: (Val) => validateEmail(emailController.text),
         nameController: emailController,
-        text: "bara@gmail.com :مثال", readOnly: false,
+        text: "bara@gmail.com :مثال",
+        readOnly: false,
       ),
     ],
   );
@@ -444,7 +445,8 @@ class _AddScocietyState extends State<AddScociety> {
             hei: 40,
             hideShow: _passwordVisible,
             nameController: passController,
-            text: "مكونة من 8 أحرف و أرقام", readOnly: false,
+            text: "مكونة من 8 أحرف و أرقام",
+            readOnly: false,
           ),
         ],
       ),
@@ -534,7 +536,7 @@ class _AddScocietyState extends State<AddScociety> {
   }
 
   String? passValidation() {
-    RegExp regex = RegExp(r'^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$');
+    RegExp regex = RegExp(r'^(.{0,7}|[^0-9]|[^A-Z]|[^a-z]|[a-zA-Z0-9])$');
     return !regex.hasMatch(passController.text) &&
         passController.text == confirmPassController.text
         ? null
