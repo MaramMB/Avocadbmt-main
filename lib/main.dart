@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_account_form.dart';
 import 'package:flutter_application_1/pages/mobile/admin.dart';
 import 'package:flutter_application_1/pages/mobile/homepagemobile.dart';
 import 'package:flutter_application_1/pages/mobile/loginmobile.dart';
@@ -40,7 +41,7 @@ class StartPoint extends StatelessWidget {
       theme: ThemeData.light(),
         home: ScreenTypeLayout.builder(
           // mobile: (BuildContext context) => const HomemobailPage(uname: null,),
-          mobile: (BuildContext context) => mobilelogin(title: '',),
+          mobile: (BuildContext context) => HomemobailPage(uname: null,),
           tablet: (BuildContext context) => const HomemobailPage(uname: null,),
           desktop: (BuildContext context) =>  scrollhome(),
           // desktop: (BuildContext context) => result(userId: '1337',),

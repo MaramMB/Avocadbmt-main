@@ -30,8 +30,8 @@ class customTextFieldWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
       child: Container(
-        height: hei,
-        width: wid,
+        height: 45,
+        width: 320,
         child: TextFormField(
           keyboardType: type,
           validator: validation,
@@ -40,11 +40,20 @@ class customTextFieldWidget extends StatelessWidget {
           controller: nameController,
           obscureText: hideShow,
           decoration: InputDecoration(
+            hintStyle: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontFamily: 'DroidKufi',
+              fontSize: 15,
+              color:Colors.black38,
+            ),
+
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
+                borderSide: BorderSide(color:Colors.black38, width: 2.0),
+                borderRadius: BorderRadius.all(Radius.circular(15))
             ),
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 2.0, color: backgreen),
+                borderSide: BorderSide(width: 1.5, color:Colors.black38),
+                borderRadius: BorderRadius.all(Radius.circular(15))
             ),
             hintText: text,
           ),

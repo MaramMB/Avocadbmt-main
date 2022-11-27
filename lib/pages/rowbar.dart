@@ -80,7 +80,7 @@ var IDController = TextEditingController();
   void initState() {
     super.initState();
     getUserData();
-    getTeacher();
+    // getTeacher();
   }
 
   @override
@@ -440,20 +440,12 @@ var IDController = TextEditingController();
       ),
     );
   }
-getTeacher() async {
-
-  var url = 'http://localhost/getname.php?id=${userId}';
-
-  var response = await http.get(Uri.parse(url));
-  var res = jsonDecode(response.body);
-  var bytes = base64Decode(res[0]["image"]);
-  var ints = bytes.buffer.asUint8List();
-
-  setState(() {
-    // imagevalue = ints.isEmpty ? null : ints;
-    IDController.text = res[0]["id"] ?? "";
-    nameController.text = res[0]["name"] ?? "";
-
-  });
 }
-}
+// Future<List<dynamic>?> getStudents(String id) async {
+//   var url = 'http://localhost/getStudents.php';
+//   var response = await http.post(Uri.parse(url), body: {
+//     'id':id,
+//   });
+//   var res = jsonDecode(response.body);
+//   return res;
+// }

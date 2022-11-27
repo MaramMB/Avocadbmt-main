@@ -71,8 +71,8 @@ class _resultState extends State<result> {
                   ),
                   Center(
                     child: Container(
-                      height: MediaQuery.of(context).size.height / 1.1,
-                      width: MediaQuery.of(context).size.width / 1.7,
+                      height: MediaQuery.of(context).size.height / 1.2,
+                      width: MediaQuery.of(context).size.width / 1.8,
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -102,7 +102,7 @@ class _resultState extends State<result> {
                               ),
                               Container(
                                 // color: Colors.black38,
-                                height: 510,
+                                height: 400,
                                 width: 600,
                                 padding: const EdgeInsets.only(top: 20),
                                 child: Stack(
@@ -409,34 +409,6 @@ class _resultState extends State<result> {
                                           ),
                                         ),
 
-                                        SizedBox(height: 80,),
-                                        Center(
-                                          // child: ElevatedButton(
-                                          //   onPressed: () {
-                                          //     Navigator.of(context)
-                                          //         .push(MaterialPageRoute(builder: (context) {
-                                          //       return sptest(id: '',);
-                                          //     }));
-                                          //   },
-                                          //   style: ElevatedButton.styleFrom(
-                                          //     backgroundColor: HexColor("#7BC155"),
-                                          //     shape: const RoundedRectangleBorder(
-                                          //         borderRadius:
-                                          //         BorderRadius.all(Radius.circular(10))),
-                                          //     elevation: 2.0,
-                                          //     padding: const EdgeInsets.symmetric(
-                                          //         horizontal: 35, vertical: 10),
-                                          //   ),
-                                          //   child: const Text("هيا لنبدأ",
-                                          //       style: TextStyle(
-                                          //         color: Colors.white,
-                                          //         fontFamily: "DroidKufi",
-                                          //         fontSize: 17.0,
-                                          //       )
-                                          //   ),
-                                          // )
-                                        ),
-
                                       ],
                                     ),
                                     Visibility(
@@ -507,7 +479,7 @@ class _resultState extends State<result> {
                   SizedBox(height: 30,),
                   Container(
                     height: MediaQuery.of(context).size.height / 1.2,
-                    width: MediaQuery.of(context).size.width / 1.7,
+                    width: MediaQuery.of(context).size.width / 1.8,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(25)),
