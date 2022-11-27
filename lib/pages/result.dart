@@ -18,6 +18,13 @@ String StName="اسم الطالب";
 String problem = "المشكلة";
 IconData SearchIcon = Icons.search;
 bool isClicked= false;
+var  resList;
+int idx=0;
+bool studentChoose = false;
+var resBe ;
+var resAs ;
+var resSp;
+var resSt;
 
 // void main() => runApp(const MyApp());
 
@@ -48,6 +55,7 @@ class _resultState extends State<result> {
   late final list = getStudents(widget.userId);
   late final Slist;
   var query;
+
 
 
   @override
@@ -210,19 +218,22 @@ class _resultState extends State<result> {
                                                             borderRadius: BorderRadius.circular(15)
                                                         ),
                                                         child: LinearPercentIndicator(
+                                                          animation: true,
                                                           progressColor: HexColor("#7BC155"),
                                                           backgroundColor: Colors.transparent,
-                                                          center: Text("55",style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
+                                                          center: Text(studentChoose ? resSt[0]['result'] : "0"
+                                                            ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
                                                           isRTL: true,
 
-                                                          percent: 0.7,
+                                                          percent: resSt != null?int.parse((resSt[0]['result']))/84 : 0,
                                                           lineHeight: 16,
                                                           width: 250,
                                                           barRadius: Radius.circular(10),
                                                         ),
                                                       ),
                                                       SizedBox(width: 10,),
-                                                      Text('84', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
+                                                      Text('84'
+                                                        , style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
 
                                                     ],
                                                   ),
@@ -231,7 +242,89 @@ class _resultState extends State<result> {
                                                     children: [
                                                       TextButton(onPressed: (){}, child: Text("عرض الأخطاء",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
                                                       SizedBox(width: 50,),
-                                                      TextButton(onPressed: (){}, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
+                                                      TextButton(onPressed: (){
+                                                        if(studentChoose)
+                                                        {
+                                                          showDialog(context: context, builder: (context)=>AlertDialog(
+                                                            title: Container(
+                                                              color: Colors.white,
+                                                              child: Column(
+                                                                children: [
+                                                                  Text('أنت الان على وشك تصفير النتيجة ، هل تريد المتابعة ؟', style: TextStyle(
+                                                                    fontFamily: "DroidKufi",
+                                                                    fontSize: 20,
+                                                                  ),),
+                                                                  SizedBox(
+                                                                    height: 15,
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                    children: [
+                                                                      ElevatedButton(
+                                                                        onPressed: () {
+                                                                          resetResult(idx.toString(), '1');
+                                                                          Navigator.push(context, MaterialPageRoute (
+                                                                            builder: (BuildContext context) => result(userId: widget.userId),
+                                                                          ),
+                                                                          );
+                                                                          
+                                                                        },
+                                                                        style: ElevatedButton.styleFrom(
+                                                                          backgroundColor: Colors.green,
+                                                                          shape: const RoundedRectangleBorder(
+                                                                              borderRadius:
+                                                                              BorderRadius.all(Radius.circular(10))),
+                                                                          elevation: 2.0,
+                                                                          padding: const EdgeInsets.symmetric(
+                                                                              horizontal: 25, vertical: 5),
+                                                                        ),
+                                                                        child:  Text( 'نعم',
+                                                                            style: TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontFamily: "DroidKufi",
+                                                                              fontSize: 18.0,
+                                                                            )),
+                                                                      ),
+                                                                      SizedBox(width: 30,),
+                                                                      ElevatedButton(
+                                                                        onPressed: () {
+                                                                          Navigator.pop(context);
+                                                                        },
+                                                                        style: ElevatedButton.styleFrom(
+                                                                          backgroundColor: Colors.red,
+                                                                          shape: const RoundedRectangleBorder(
+                                                                              borderRadius:
+                                                                              BorderRadius.all(Radius.circular(10))),
+                                                                          elevation: 2.0,
+                                                                          padding: const EdgeInsets.symmetric(
+                                                                              horizontal: 25, vertical: 5),
+                                                                        ),
+                                                                        child:  Text( 'لا',
+                                                                            style: TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontFamily: "DroidKufi",
+                                                                              fontSize: 18.0,
+                                                                            )),
+                                                                      ),
+
+
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ));
+                                                        }
+                                                        else {
+                                                          return;
+                                                        }
+                                                        setState(() {
+
+                                                        });
+                                                        
+                                                        
+
+                                                      }, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
 
                                                     ],
                                                   ),
@@ -261,19 +354,21 @@ class _resultState extends State<result> {
                                                             borderRadius: BorderRadius.circular(15)
                                                         ),
                                                         child: LinearPercentIndicator(
+                                                          animation: true,
                                                           progressColor: HexColor("#7BC155"),
                                                           backgroundColor: Colors.transparent,
-                                                          center: Text("55",style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
+                                                          center: Text(studentChoose ? resSp[0]['result'] : "0"
+                                                            ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
                                                           isRTL: true,
 
-                                                          percent: 0.7,
+                                                          percent: resSp != null?int.parse(resSp[0]['result'])/28 : 0,
                                                           lineHeight: 16,
                                                           width: 250,
                                                           barRadius: Radius.circular(10),
                                                         ),
                                                       ),
-
-                                                      Text('84', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
+                                                      SizedBox(width: 10),
+                                                      Text('28', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
 
                                                     ],
                                                   ),
@@ -281,7 +376,18 @@ class _resultState extends State<result> {
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
                                                       SizedBox(width: 170,),
-                                                      TextButton(onPressed: (){}, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
+                                                      TextButton(onPressed: (){
+                                                        if(studentChoose)
+                                                        {
+                                                          resetResult(idx.toString(), '6');
+                                                        }
+                                                        else {
+                                                          return;
+                                                        }
+                                                        setState(() {
+
+                                                        });
+                                                      }, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
 
                                                     ],
                                                   ),
@@ -323,19 +429,21 @@ class _resultState extends State<result> {
                                                             borderRadius: BorderRadius.circular(15)
                                                         ),
                                                         child: LinearPercentIndicator(
+                                                          animation: true,
                                                           progressColor: HexColor("#7BC155"),
                                                           backgroundColor: Colors.transparent,
-                                                          center: Text("55",style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
+                                                          center: Text(studentChoose ? resBe[0]['result'] : "0"
+                                                            ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
                                                           isRTL: true,
 
-                                                          percent: 0.7,
+                                                          percent: resBe != null?int.parse(resBe[0]['result'])/20 : 0,
                                                           lineHeight: 16,
                                                           width: 250,
                                                           barRadius: Radius.circular(10),
                                                         ),
                                                       ),
                                                       SizedBox(width: 10,),
-                                                      Text('84', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
+                                                      Text('20', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
 
                                                     ],
                                                   ),
@@ -343,7 +451,18 @@ class _resultState extends State<result> {
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
                                                       SizedBox(width: 170,),
-                                                      TextButton(onPressed: (){}, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
+                                                      TextButton(onPressed: (){
+                                                        if(studentChoose)
+                                                        {
+                                                          resetResult(idx.toString(), '4');
+                                                        }
+                                                        else {
+                                                          return;
+                                                        }
+                                                        setState(() {
+
+                                                        });
+                                                      }, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
 
                                                     ],
                                                   ),
@@ -361,6 +480,7 @@ class _resultState extends State<result> {
                                                     children: [
 
                                                       Text('الاصوات الاستيعابية', style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,fontSize: 17,color: HexColor("#7BC155")),),
+
                                                       SizedBox(width: 120,)
                                                     ],
                                                   ),
@@ -374,19 +494,21 @@ class _resultState extends State<result> {
                                                             borderRadius: BorderRadius.circular(15)
                                                         ),
                                                         child: LinearPercentIndicator(
+                                                          animation: true,
                                                           progressColor: HexColor("#7BC155"),
                                                           backgroundColor: Colors.transparent,
-                                                          center: Text("55",style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
+                                                          center: Text(studentChoose ? resAs[0]['result'] : "0"
+                                                            ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
                                                           isRTL: true,
 
-                                                          percent: 0.7,
+                                                          percent: resAs != null?int.parse(resAs[0]['result'])/28 : 0,
                                                           lineHeight: 16,
                                                           width: 250,
                                                           barRadius: Radius.circular(10),
                                                         ),
                                                       ),
-
-                                                      Text('84', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
+                                                      SizedBox(width: 10,),
+                                                      Text('20', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
 
                                                     ],
                                                   ),
@@ -394,7 +516,18 @@ class _resultState extends State<result> {
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
                                                       SizedBox(width: 170,),
-                                                      TextButton(onPressed: (){}, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
+                                                      TextButton(onPressed: (){
+                                                        if(studentChoose)
+                                                        {
+                                                          resetResult(idx.toString(), '5');
+                                                        }
+                                                        else {
+                                                          return;
+                                                        }
+                                                        setState(() {
+
+                                                        });
+                                                      }, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
 
                                                     ],
                                                   ),
@@ -418,6 +551,7 @@ class _resultState extends State<result> {
                                         child: SizedBox(
                                           width: 360,
                                           child: ListView.builder(itemCount: snapshot.data?.length,itemBuilder: (BuildContext context, int index) {
+
                                             String Fname =snapshot.data![index]['firstname']+' '+snapshot.data![index]['secname']+' '+snapshot.data![index]['thirdname']+' '+snapshot.data![index]['familyname'];
                                             return Container(
                                               decoration: BoxDecoration(
@@ -428,8 +562,17 @@ class _resultState extends State<result> {
                                                 textDirection: TextDirection.rtl,
                                                 child:ListTile(
 
-                                                  onTap: (){
+                                                  onTap: ()async{
+                                                    idx=int.parse(snapshot.data![index]['Students_Id']);
+                                                    print(snapshot.data![index]['Students_Id']);
+                                                    isClicked = false;
+                                                    resAs = await getResult(snapshot.data![index]['Students_Id'],'5');
+                                                    resBe = await getResult(snapshot.data![index]['Students_Id'],'4');
+                                                    resSt = await getResult(snapshot.data![index]['Students_Id'],'1');
+                                                    resSp = await getResult(snapshot.data![index]['Students_Id'],'6');
                                                     setState(() {
+
+                                                       studentChoose =true;
                                                       SearchController.text = Fname;
                                                       isClicked = false;
                                                       StName = ' '+Fname+' ';
@@ -514,4 +657,29 @@ Future<List<dynamic>?> getStudents(String id) async {
   });
   var res = jsonDecode(response.body);
   return res;
+}
+ getResult(String id , String tid) async {
+  var url = 'http://localhost/getResult.php';
+  var response = await http.post(Uri.parse(url), body: {
+    'sid':id,
+    'exid':tid,
+  });
+  var res = jsonDecode(response.body);
+
+  resList = res;
+  print(resList);
+  return res;
+
+}
+resetResult(String id , String tid) async {
+  print (id+' - - - -hh');
+  print (tid+' - - - -hh');
+  var url = 'http://localhost/resetResult.php';
+  var response = await http.post(Uri.parse(url), body: {
+    'sid':id,
+    'exid':tid,
+  });
+  var res = jsonDecode(response.body);
+
+
 }
