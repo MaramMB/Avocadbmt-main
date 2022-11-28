@@ -747,7 +747,7 @@ class _voicexState extends State<voicex> {
                                                       child: Column(
                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                         children: [
-                                                          Text('إضافة صوت استيعابي',style: TextStyle(
+                                                          Text('إضافة صوت بيئي',style: TextStyle(
                                                             fontFamily: "DroidKufi",
                                                             fontWeight: FontWeight.w700,
                                                             color: Colors.green,
