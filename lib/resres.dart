@@ -34,29 +34,29 @@ List<Students> userLists = [];
 
 // void main() => runApp(const MyApp());
 
-class result extends StatefulWidget {
-  const result({Key? key, required this.userId}) : super(key: key);
+class result11 extends StatefulWidget {
+  const result11({Key? key, required this.userId}) : super(key: key);
   final String userId;
   @override
-  State<result> createState() => _resultState();
+  State<result11> createState() => _resultState();
 }
 class Debouncer {
-  int? milliseconds;
-  VoidCallback? action;
-  Timer? timer;
+int? milliseconds;
+VoidCallback? action;
+Timer? timer;
 
-  run(VoidCallback action) {
-    if (null != timer) {
-      timer!.cancel();
-    }
-    timer = Timer(
-      Duration(milliseconds: Duration.millisecondsPerSecond),
-      action,
-    );
+run(VoidCallback action) {
+  if (null != timer) {
+    timer!.cancel();
   }
+  timer = Timer(
+    Duration(milliseconds: Duration.millisecondsPerSecond),
+    action,
+  );
+}
 }
 
-class _resultState extends State<result> {
+class _resultState extends State<result11> {
   final _debouncer = Debouncer();
 
   List<Students> ulist = [];
@@ -891,9 +891,9 @@ class _resultState extends State<result> {
 
   }
 }
-List<Students> parseAgents(String responseBody) {
-  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-  return parsed.map<Students>((json) => Students.fromJson(json)).toList();
+ List<Students> parseAgents(String responseBody) {
+final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+return parsed.map<Students>((json) => Students.fromJson(json)).toList();
 }
 
 Future<List<Students>> getStudents(String id) async {
