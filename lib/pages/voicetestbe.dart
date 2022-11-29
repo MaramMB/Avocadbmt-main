@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:confetti/confetti.dart';
 import 'package:flutter_application_1/pages/audio.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/voice.dart';
@@ -21,6 +22,8 @@ double _progressValue = 0;
 bool isClicked = false;
 bool isEnd=false;
 int totalScore=0;
+int isCorrect = 0;
+final Ccontroller = ConfettiController();
 late List<Map<String, Object>> testType;
 List<Map<String, Object>> be = const [
   {
@@ -114,7 +117,13 @@ class _betestState extends State<betest> {
   //functions
   void nextquestion()
   {
+    Ccontroller.stop();
     audioPlayer.dispose();
+    setState((){
+      isCorrect = 0;
+
+    });
+
 
     if (isClicked==false)
     {
@@ -127,7 +136,8 @@ class _betestState extends State<betest> {
     }
     if (index + 1 == testType.length )
     {
-      AssetsAudioPlayer.playAndForget(Audio("audio/correct.mp3"));
+      // finished
+      AssetsAudioPlayer.playAndForget(Audio("audio/result.mp3"));
 
       setState((){
         isClicked = true;
@@ -163,11 +173,17 @@ class _betestState extends State<betest> {
 
   void questionAnswered(bool? score)
   {
+    // is correct
     setState((){
       isClicked = true;
       if (score!){
         totalScore++;
+        AssetsAudioPlayer.playAndForget(Audio("audio/correct.mp3"));
+        Ccontroller.play();
+        isCorrect = 1;
+
       }
+
 
     });
 
@@ -175,169 +191,193 @@ class _betestState extends State<betest> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgreen,
-      body: Container(
-        child: Column(
-          children: [
-             SelectionButton(),
-            const SizedBox(
-              height: 30,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height / 1.15,
-              width: MediaQuery.of(context).size.width / 1.8,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(25)),
-              ),
-              // child: Stack(
-              //
-              // ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20.0, right: 20, left: 20),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+
+        Scaffold(
+          backgroundColor: backgreen,
+          body: Container(
+            child: Column(
+              children: [
+                 SelectionButton(),
+                 SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height / 1.15,
+                  width: MediaQuery.of(context).size.width / 1.8,
+                  decoration:  BoxDecoration(
+                    color: isCorrect == 1 ? Colors.green[100] : isCorrect == 2? Colors.red[100] : Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
+                  // child: Stack(
+                  //
+                  // ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0, right: 20, left: 20),
+                    child: Stack(
+                      fit: StackFit.expand,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            children: [
-                              LinearPercentIndicator(
-                                width: MediaQuery.of(context).size.width / 2,
-                                // backgroundColor: Colors.grey,
-                                animateFromLastPercent: true,
-                                percent: ((index as double)+1)/(testType.length),
-                                 animation: true,
-                                lineHeight: 18.0,
-                                 animationDuration: 500,
-                                // percent: 0.8,
-                                center:
-                                Text((index+1).toString() , style: TextStyle(
-                                  color:  ((index as double)+1)/(testType.length) > 0.5 ? Colors.white : Colors.black
-                                  ,fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                ),),
-                                barRadius: const Radius.circular(15),
-                                linearStrokeCap: LinearStrokeCap.roundAll,
-                                progressColor: Colors.green,
-                              ),
-                             const SizedBox(height: 20,),
-                             const Text("استمع الى الصوت واختر الصورة المناسبة",  style: TextStyle(
-                                 color: Colors.green,
-                                 fontSize: 25,
-                                 fontFamily: "DroidKufi",
-                                 fontWeight: FontWeight.w700)),
-                             const SizedBox(height: 35,),
-                              audio(path: testType[index]['audio'] as String),
-                             const SizedBox(height: 35,),
-                              Row(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
                                 children: [
-                                  const SizedBox(width: 15,),
-                                  ...(testType[index]['answers'] as List<Map<String, Object>>).map((answer) => Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 7),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: isClicked? answer['score'] as bool ? Colors.green : Colors.red : Colors.black, width: 3.5
+                                  LinearPercentIndicator(
+                                    width: MediaQuery.of(context).size.width / 2,
+                                    // backgroundColor: Colors.grey,
+                                    animateFromLastPercent: true,
+                                    percent: ((index as double)+1)/(testType.length),
+                                     animation: true,
+                                    lineHeight: 18.0,
+                                     animationDuration: 500,
+                                    // percent: 0.8,
+                                    center:
+                                    Text((index+1).toString() , style: TextStyle(
+                                      color:  ((index as double)+1)/(testType.length) > 0.5 ? Colors.white : Colors.black
+                                      ,fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                    ),),
+                                    barRadius: const Radius.circular(15),
+                                    linearStrokeCap: LinearStrokeCap.roundAll,
+                                    progressColor: Colors.green,
+                                  ),
+                                 const SizedBox(height: 20,),
+                                 const Text("استمع الى الصوت واختر الصورة المناسبة",  style: TextStyle(
+                                     color: Colors.green,
+                                     fontSize: 25,
+                                     fontFamily: "DroidKufi",
+                                     fontWeight: FontWeight.w700)),
+                                 const SizedBox(height: 35,),
+                                  audio(path: testType[index]['audio'] as String),
+                                 const SizedBox(height: 35,),
+                                  Row(
+                                    children: [
+                                      const SizedBox(width: 15,),
+                                      ...(testType[index]['answers'] as List<Map<String, Object>>).map((answer) => Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 7),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: isClicked? answer['score'] as bool ? Colors.green : Colors.red : Colors.black, width: 3.5
+                                              ),
+                                              borderRadius: BorderRadius.circular(30),
+
                                           ),
-                                          borderRadius: BorderRadius.circular(30),
+                                          child: GestureDetector(
+                                            onTap: () {
 
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () {
+                                              setState(() {
+                                                (context as Element).reassemble();
 
-                                          setState(() {
-                                            (context as Element).reassemble();
+                                                if (isClicked || isEnd)
+                                                  {return;}
+                                                if (answer['score'] as bool == false)
+                                                {
+                                                  AssetsAudioPlayer.playAndForget(Audio("audio/wrong.mp3"));
+                                                  setState((){
+                                                    isCorrect = 2;
+                                                  });
 
-                                            if (isClicked || isEnd)
-                                              {return;}
-                                            questionAnswered(answer['score'] as bool);
-                                          });
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(25),
-                                          child: Image.asset(
-                                            answer['image'] as String,
-                                            width: MediaQuery.of(context).size.width / 7,
-                                            fit: BoxFit.fill,
+                                                }
+                                                questionAnswered(answer['score'] as bool);
+
+                                              });
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(25),
+                                              child: Image.asset(
+                                                answer['image'] as String,
+                                                width: MediaQuery.of(context).size.width / 7,
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+
                                           ),
+
                                         ),
+                                      ),),
 
-                                      ),
 
+
+                                    ],
+                                  ),
+                                  const SizedBox(height: 35,),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        if(isEnd)
+                                          {
+                                            setState((){
+                                              index =0;
+                                              totalScore=0;
+                                              isEnd=false;
+                                            });
+
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(builder: (context) {
+
+                                              return  voicex();
+                                            }));
+                                          }
+                                        else {
+                                          nextquestion();
+                                          isClicked = false;
+                                        }
+                                      });
+
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: isEnd ? Colors.blueAccent : Colors.green,
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(10))),
+                                      elevation: 2.0,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 25, vertical: 5),
                                     ),
-                                  ),),
+                                    child:  Text(
+                                        isEnd ? "العودة الى التدريب" : 'التالي',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Visibility(
+                                    visible: ShowMsg ,
+                                      child: Text(" * قم بإختيار إجابة قبل الانتقال الى السؤال التالي " ,textDirection: TextDirection.rtl, style: TextStyle(
+                                        color: Colors.red[900],
+                                        fontFamily: "DroidKufi",
 
-
-
+                                      ),)),
                                 ],
                               ),
-                              const SizedBox(height: 35,),
-                              ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    if(isEnd)
-                                      {
-                                        setState((){
-                                          index =0;
-                                          totalScore=0;
-                                          isEnd=false;
-                                        });
-
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(builder: (context) {
-
-                                          return  voicex();
-                                        }));
-                                      }
-                                    else {
-                                      nextquestion();
-                                      isClicked = false;
-                                    }
-                                  });
-
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: isEnd ? Colors.blueAccent : Colors.green,
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                                  elevation: 2.0,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25, vertical: 5),
-                                ),
-                                child:  Text(
-                                    isEnd ? "العودة الى التدريب" : 'التالي',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "DroidKufi",
-                                      fontSize: 18.0,
-                                    )),
-                              ),
-                              SizedBox(height: 10,),
-                              Visibility(
-                                visible: ShowMsg ,
-                                  child: Text(" * قم بإختيار إجابة قبل الانتقال الى السؤال التالي " ,textDirection: TextDirection.rtl, style: TextStyle(
-                                    color: Colors.red[900],
-                                    fontFamily: "DroidKufi",
-
-                                  ),)),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-            )
-          ],
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
-      ),
+        ConfettiWidget(
+          confettiController: Ccontroller,shouldLoop: true,
+          blastDirectionality: BlastDirectionality.explosive,
+          blastDirection: -pi / 2,
+          numberOfParticles: 30,
+          gravity: 0.1,
+
+        ),
+
+      ],
     );
   }
   @override

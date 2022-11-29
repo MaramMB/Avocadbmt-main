@@ -31,6 +31,8 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
 	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($student_id,'$email', '$pass', '$kind', '$active');";
 	$query_user = mysqli_query($db,$insert_user);
+
+
 	
 
 
