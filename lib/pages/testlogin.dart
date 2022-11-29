@@ -58,7 +58,8 @@ class _testlogState extends State<testlog> {
           ShowMsg=false;
         });
         return;
-      } else {
+      }
+      else {
        final SharedPreferences prefs = await SharedPreferences.getInstance();
         if(user['active'] == 'active') {
           await prefs.setString('userKind',user['Kind']);
@@ -87,18 +88,12 @@ class _testlogState extends State<testlog> {
             ShowMs=false;
           });
           return;
-          // Fluttertoast.showToast(
-          //   msg: "الحساب الذي تحاول الدخول اليه معطل",
-          //   toastLength: Toast.LENGTH_LONG,
-          //   // gravity: ToastGravity.CENTER,
-          //   timeInSecForIosWeb: 1,
-          //   backgroundColor: Colors.red,
-          //   textColor: Colors.white70,
-          //   fontSize: 30,
-          // );
         }
       }
-      setState(() {});
+      setState(() {
+        ShowMsg=false;
+        ShowMs=false;
+      });
     }
 
   }
@@ -226,7 +221,7 @@ class _testlogState extends State<testlog> {
                                 hintText: 'كلمة المرور',
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                                    _obscureText ?Icons.visibility_outlined: Icons.visibility_off_outlined  ,
                                     color: _focusNodes[1].hasFocus? Colors.green : Colors.grey,
                                   ),
                                   onPressed: _toggle,

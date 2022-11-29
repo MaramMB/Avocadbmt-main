@@ -315,21 +315,21 @@ class _sptestState extends State<sptest> {
     "ba.png",
     "Desk.jpg",
     "cane.jpg",
-    "mixer.jpg",
+    "mixer.png",
     "leon.png",
     "pomegranate.jpg",
     "chair.jpg",
     "corn.jpg",
-    "envelope.jpg",
+    "envelope.png",
     "Eyeglasses.jpg",
     "frame.jpg",
     "leb.png",
     "pad.png",
     "Water.jpg",
-    "vase.jpg",
+    "vase.png",
     "ticket.jpg",
-    "Street.jpg",
-    "eggs.jpg",
+    "Street.png",
+    "eggs.png",
     "cheese.jpg",
     "Cucumber.png",
     "flo.png",
@@ -345,10 +345,10 @@ class _sptestState extends State<sptest> {
     "rabbit.png",
     "Stea.png",
     "mouse.png",
-    "Fish.jpg",
+    "Fish.png",
     "Figs.jpg",
     "radio.jpg",
-    "snail.jpg",
+    "snail.png",
     "honey.jpg",
     "meat.jpg",
     "hat.jpg",
@@ -356,7 +356,7 @@ class _sptestState extends State<sptest> {
     "ll.png",
     "parrot.jpg",
     "oil.jpg",
-    "airplane.jpg",
+    "airplane.png",
     "ant.jpg",
     "apple.jpg",
     "hand.jpg",
@@ -681,8 +681,10 @@ class _sptestState extends State<sptest> {
   myDiealog() {
     return showDialog(
       context: context,
+      useSafeArea: true,
       builder: (BuildContext context) {
         return AlertDialog(
+
           scrollable: true,
           actions: <Widget>[
             Center(
@@ -754,7 +756,8 @@ class _sptestState extends State<sptest> {
                   ),
                   InkWell(
                       onTap: () {
-                        addresult();
+                        // addresult();
+                        addTestResult();
                         Navigator.of(context).pop();
                       },
                       child: Container(
@@ -813,4 +816,25 @@ class _sptestState extends State<sptest> {
       });
     });
   }
-}
+  addTestResult() async {
+    var url = 'http://localhost/addTestResult.php';
+    final requestBody = {
+      "sid": widget.person.id,
+      "result": truee.length,
+      "note": errors[index],
+    };
+    final response = await http.post(Uri.parse(url), body: requestBody);
+    var data = jsonDecode(response.body);
+    print(data);
+    if (data == 'Success') {
+      // Navigator.of(context, rootNavigator: true).pop();
+      Fluttertoast.showToast(
+          msg: "تم اضافه بنجاح", timeInSecForIosWeb: 1);
+    }
+    else{ Fluttertoast.showToast(
+            msg: "لم يتم الاضافه بنجاح", timeInSecForIosWeb: 1);
+  }
+      }
+    }
+
+
