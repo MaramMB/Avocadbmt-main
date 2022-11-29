@@ -363,7 +363,8 @@ class _lettertestState extends State<lettertest> {
                   repeat: true,
                   child: FloatingActionButton.large(
                     backgroundColor: _isListening? Colors.red : Colors.green,
-                    onPressed: _listen,
+                    onPressed: _listen
+                    ,
                     child: Icon(_isListening ? Icons.mic : Icons.mic_none , size: 50,),
                   ),
                 ),
@@ -447,6 +448,12 @@ class _lettertestState extends State<lettertest> {
               }
               else
                 {
+                  if(played==false){
+                    AssetsAudioPlayer.playAndForget(Audio("audio/wrong.mp3"));
+                    setState(() {
+                      played=true;
+                    });
+                  }
                   print (letters[Lindex]['word']!+" - - - "+_text);
                   _text = '';
                   print ('wrong :| ');

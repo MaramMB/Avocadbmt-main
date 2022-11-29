@@ -90,7 +90,7 @@ class _resultState extends State<result> {
 
   @override
   Widget build(BuildContext context) {
-  if (userLists.isEmpty)
+  if (ulist.isEmpty)
     {
       return Scaffold(
         backgroundColor: green,

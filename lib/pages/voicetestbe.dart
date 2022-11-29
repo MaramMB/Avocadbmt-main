@@ -369,7 +369,8 @@ class _betestState extends State<betest> {
           ),
         ),
         ConfettiWidget(
-          confettiController: Ccontroller,shouldLoop: true,
+
+          confettiController: Ccontroller,shouldLoop: false,
           blastDirectionality: BlastDirectionality.explosive,
           blastDirection: -pi / 2,
           numberOfParticles: 30,
