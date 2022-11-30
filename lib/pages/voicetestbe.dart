@@ -117,7 +117,6 @@ class _betestState extends State<betest> {
   //functions
   void nextquestion()
   {
-    Ccontroller.stop();
     audioPlayer.dispose();
     setState((){
       isCorrect = 0;
@@ -179,7 +178,7 @@ class _betestState extends State<betest> {
       if (score!){
         totalScore++;
         AssetsAudioPlayer.playAndForget(Audio("audio/correct.mp3"));
-        Ccontroller.play();
+        Cstop();
         isCorrect = 1;
 
       }
@@ -390,4 +389,9 @@ class _betestState extends State<betest> {
 
 
 
+}
+Cstop() async {
+Ccontroller.play();
+await Future.delayed(Duration(seconds: 1));
+Ccontroller.stop();
 }

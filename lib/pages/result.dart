@@ -8,6 +8,7 @@ import 'package:flutter_application_1/pages/Characters/characters.dart';
 import 'package:flutter_application_1/pages/models/students.dart';
 import 'package:flutter_application_1/pages/result.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:flutter_application_1/pages/voicetestbe.dart';
 import 'package:flutter_application_1/pages/widgets/person_record.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -23,6 +24,10 @@ String problem = "المشكلة";
 IconData SearchIcon = Icons.search;
 bool isClicked= false;
 var  resList;
+double firstResult = 0.0;
+double spellResult = 0.0;
+double beResult = 0.0;
+double asResult = 0.0;
 int idx=0;
 bool studentChoose = false;
 var resBe ;
@@ -76,7 +81,11 @@ class _resultState extends State<result> {
   late  Future <List<Students>?> list;
   void initState() {
     super.initState();
+    print('init state');
+    ulist = [];
+    userLists = [];
     getStudents(widget.userId).then((val) {
+
       setState(() {
         ulist = val;
         userLists = ulist;
@@ -246,11 +255,11 @@ class _resultState extends State<result> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Text(problem, style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,color: blak),),
-                                        Text('مشكلة الطالب : ', style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,color: HexColor("#7BC155")),),
+                                        Text(problem,textDirection: TextDirection.rtl, style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,color: blak),),
+                                        Text('مشكلة الطالب : ',textDirection: TextDirection.rtl, style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,color: HexColor("#7BC155")),),
                                         Spacer(),
-                                        Text(StName, style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,color: blak),),
-                                        Text('الاسم : ', style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,color: HexColor("#7BC155")),),
+                                        Text(StName,textDirection: TextDirection.rtl, style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,color: blak),),
+                                        Text('الاسم : ', textDirection: TextDirection.rtl,style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,color: HexColor("#7BC155")),),
                                       ],
                                     ),
                                     SizedBox(
@@ -295,11 +304,11 @@ class _resultState extends State<result> {
                                                       animation: true,
                                                       progressColor: HexColor("#7BC155"),
                                                       backgroundColor: Colors.transparent,
-                                                      center: Text(studentChoose ? resSt[0]['result'] : "0"
+                                                      center: Text(studentChoose ? (firstResult*84).toString() : "0"
                                                         ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
                                                       isRTL: true,
 
-                                                      percent: resSt != null?int.parse((resSt[0]['result']))/84 : 0,
+                                                      percent: firstResult,
                                                       lineHeight: 16,
                                                       width: 250,
                                                       barRadius: Radius.circular(10),
@@ -373,11 +382,21 @@ class _resultState extends State<result> {
                                                                       ElevatedButton(
                                                                         onPressed: () {
                                                                           resetResult(idx.toString(), '1');
+                                                                          print('gdsgss');
+                                                                          SearchController.text='';
+                                                                          problem = 'المشكلة';
+                                                                          StName="اسم الطالب";
+                                                                          setState((){
+                                                                            firstResult = 0.0;
+                                                                            spellResult = 0.0;
+                                                                            beResult = 0.0;
+                                                                            asResult = 0.0;
+
+                                                                          });
+
                                                                           Navigator.push(context, MaterialPageRoute (
                                                                             builder: (BuildContext context) => result(userId: widget.userId),
-                                                                          ),
-                                                                          );
-
+                                                                          ),).then((value) => initState());
                                                                         },
                                                                         style: ElevatedButton.styleFrom(
                                                                           backgroundColor: Colors.green,
@@ -467,11 +486,11 @@ class _resultState extends State<result> {
                                                       animation: true,
                                                       progressColor: HexColor("#7BC155"),
                                                       backgroundColor: Colors.transparent,
-                                                      center: Text(studentChoose ? resSp[0]['result'] : "0"
+                                                      center: Text( studentChoose ? (spellResult*28).toString() : "0"
                                                         ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
                                                       isRTL: true,
 
-                                                      percent: resSp != null?int.parse(resSp[0]['result'])/28 : 0,
+                                                      percent: spellResult,
                                                       lineHeight: 16,
                                                       width: 250,
                                                       barRadius: Radius.circular(10),
@@ -507,10 +526,19 @@ class _resultState extends State<result> {
                                                                   ElevatedButton(
                                                                     onPressed: () {
                                                                       resetResult(idx.toString(), '6');
+                                                                      SearchController.text='';
+                                                                      problem = 'المشكلة';
+                                                                      StName="اسم الطالب";
+                                                                      setState((){
+                                                                        firstResult = 0.0;
+                                                                        spellResult = 0.0;
+                                                                        beResult = 0.0;
+                                                                        asResult = 0.0;
+
+                                                                      });
                                                                       Navigator.push(context, MaterialPageRoute (
                                                                         builder: (BuildContext context) => result(userId: widget.userId),
-                                                                      ),
-                                                                      );
+                                                                      ),).then((value) => initState());
 
                                                                     },
                                                                     style: ElevatedButton.styleFrom(
@@ -611,11 +639,11 @@ class _resultState extends State<result> {
                                                       animation: true,
                                                       progressColor: HexColor("#7BC155"),
                                                       backgroundColor: Colors.transparent,
-                                                      center: Text(studentChoose ? resBe[0]['result'] : "0"
+                                                      center: Text(studentChoose ? (beResult*20).toString() : "0"
                                                         ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
                                                       isRTL: true,
 
-                                                      percent: resBe != null?int.parse(resBe[0]['result'])/20 : 0,
+                                                      percent: beResult,
                                                       lineHeight: 16,
                                                       width: 250,
                                                       barRadius: Radius.circular(10),
@@ -650,10 +678,20 @@ class _resultState extends State<result> {
                                                                 children: [
                                                                   ElevatedButton(
                                                                     onPressed: () {
-                                                                      resetResult(idx.toString(), '4');                                                                          Navigator.push(context, MaterialPageRoute (
+                                                                      resetResult(idx.toString(), '4');
+                                                                      SearchController.text='';
+                                                                      problem = 'المشكلة';
+                                                                      StName="اسم الطالب";
+                                                                      setState((){
+                                                                        firstResult = 0.0;
+                                                                        spellResult = 0.0;
+                                                                        beResult = 0.0;
+                                                                        asResult = 0.0;
+
+                                                                      });
+                                                                      Navigator.push(context, MaterialPageRoute (
                                                                         builder: (BuildContext context) => result(userId: widget.userId),
-                                                                      ),
-                                                                      );
+                                                                      ),).then((value) => initState());
 
                                                                     },
                                                                     style: ElevatedButton.styleFrom(
@@ -744,11 +782,11 @@ class _resultState extends State<result> {
                                                       animation: true,
                                                       progressColor: HexColor("#7BC155"),
                                                       backgroundColor: Colors.transparent,
-                                                      center: Text(studentChoose ? resAs[0]['result'] : "0"
+                                                      center: Text(studentChoose ? (asResult*20).toString() : "0"
                                                         ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
                                                       isRTL: true,
 
-                                                      percent: resAs != null?int.parse(resAs[0]['result'])/28 : 0,
+                                                      percent: asResult,
                                                       lineHeight: 16,
                                                       width: 250,
                                                       barRadius: Radius.circular(10),
@@ -784,10 +822,19 @@ class _resultState extends State<result> {
                                                                   ElevatedButton(
                                                                     onPressed: () {
                                                                       resetResult(idx.toString(), '5');
+                                                                      SearchController.text='';
+                                                                      problem = 'المشكلة';
+                                                                      StName="اسم الطالب";
+                                                                      setState((){
+                                                                        firstResult = 0.0;
+                                                                        spellResult = 0.0;
+                                                                        beResult = 0.0;
+                                                                        asResult = 0.0;
+
+                                                                      });
                                                                       Navigator.push(context, MaterialPageRoute (
                                                                         builder: (BuildContext context) => result(userId: widget.userId),
-                                                                      ),
-                                                                      );
+                                                                      ),).then((value) => initState());
 
                                                                     },
                                                                     style: ElevatedButton.styleFrom(
@@ -886,6 +933,10 @@ class _resultState extends State<result> {
                                                 resBe = await getResult(userLists[index].stdId.toString(),'4');
                                                 resSt = await getResult(userLists[index].stdId.toString(),'1');
                                                 resSp = await getResult(userLists[index].stdId.toString(),'6');
+                                                firstResult = resSt != null? int.parse(resSt[0]['result'])/84 : 0;
+                                                spellResult = resSp != null? int.parse(resSp[0]['result'])/28 : 0;
+                                                beResult = resBe != null? int.parse(resBe[0]['result'])/20 : 0;
+                                                asResult = resAs != null? int.parse(resAs[0]['result'])/20 : 0;
                                                 setState(() {
 
                                                   studentChoose =true;
@@ -930,6 +981,11 @@ class _resultState extends State<result> {
 
 
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 }
 List<Students> parseAgents(String responseBody) {
   final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
@@ -957,7 +1013,6 @@ getResult(String id , String tid) async {
   var res = jsonDecode(response.body);
 
   resList = res;
-  print(resList);
   return res;
 
 }
@@ -968,8 +1023,6 @@ resetResult(String id , String tid) async {
   var response = await http.post(Uri.parse(url), body: {
     'sid':id,
     'exid':tid,
-  });
-  var res = jsonDecode(response.body);
-
+  }); 
 
 }
