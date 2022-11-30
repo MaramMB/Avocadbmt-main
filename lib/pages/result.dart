@@ -325,38 +325,44 @@ class _resultState extends State<result> {
                                                 children: [
                                                   TextButton(
                                                       onPressed: (){
-                                                        showDialog(context: context, builder: (context)=>AlertDialog(
-                                                          title: Column(
-                                                            children: [
-                                                              Text(resSt[0]['note'] , style: TextStyle(
-                                                                  fontFamily: "DroidKufi",
-                                                                  fontSize: 20,
-                                                                  fontWeight: FontWeight.bold
-                                                              ),),
-                                                              ElevatedButton(
-                                                                onPressed: () {
-                                                                  Navigator.pop(context);
-                                                                },
-                                                                style: ElevatedButton.styleFrom(
-                                                                  backgroundColor: Colors.green,
-                                                                  shape: const RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                      BorderRadius.all(Radius.circular(10))),
-                                                                  elevation: 2.0,
-                                                                  padding: const EdgeInsets.symmetric(
-                                                                      horizontal: 25, vertical: 5),
-                                                                ),
-                                                                child:  Text( 'العودة',
-                                                                    style: TextStyle(
-                                                                      color: Colors.white,
-                                                                      fontFamily: "DroidKufi",
-                                                                      fontSize: 18.0,
-                                                                    )),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                        if(studentChoose){
+                                                          showDialog(context: context, builder: (context)=>AlertDialog(
+                                                            title: Column(
+                                                              children: [
+                                                                Container(
+                                                                  width: 400,
+                                                                  child: Text(resSt[0]['note'] , style: TextStyle(
+                                                                    fontFamily: "DroidKufi",
+                                                                    fontSize: 17,
 
-                                                        ));
+                                                                  ),),
+                                                                ),
+                                                                ElevatedButton(
+                                                                  onPressed: () {
+                                                                    Navigator.pop(context);
+                                                                  },
+                                                                  style: ElevatedButton.styleFrom(
+                                                                    backgroundColor: Colors.green,
+                                                                    shape: const RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                        BorderRadius.all(Radius.circular(10))),
+                                                                    elevation: 2.0,
+                                                                    padding: const EdgeInsets.symmetric(
+                                                                        horizontal: 25, vertical: 5),
+                                                                  ),
+                                                                  child:  Text( 'العودة',
+                                                                      style: TextStyle(
+                                                                        color: Colors.white,
+                                                                        fontFamily: "DroidKufi",
+                                                                        fontSize: 18.0,
+                                                                      )),
+                                                                ),
+                                                              ],
+                                                            ),
+
+                                                          ));
+                                                        }else return;
+
                                                       }
                                                       , child: Text("عرض الأخطاء",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
                                                   SizedBox(width: 50,),
@@ -391,6 +397,7 @@ class _resultState extends State<result> {
                                                                             spellResult = 0.0;
                                                                             beResult = 0.0;
                                                                             asResult = 0.0;
+                                                                            studentChoose=false;
 
                                                                           });
 
@@ -534,6 +541,8 @@ class _resultState extends State<result> {
                                                                         spellResult = 0.0;
                                                                         beResult = 0.0;
                                                                         asResult = 0.0;
+                                                                        studentChoose=false;
+
 
                                                                       });
                                                                       Navigator.push(context, MaterialPageRoute (
@@ -687,6 +696,8 @@ class _resultState extends State<result> {
                                                                         spellResult = 0.0;
                                                                         beResult = 0.0;
                                                                         asResult = 0.0;
+                                                                        studentChoose=false;
+
 
                                                                       });
                                                                       Navigator.push(context, MaterialPageRoute (
@@ -830,6 +841,8 @@ class _resultState extends State<result> {
                                                                         spellResult = 0.0;
                                                                         beResult = 0.0;
                                                                         asResult = 0.0;
+                                                                        studentChoose=false;
+
 
                                                                       });
                                                                       Navigator.push(context, MaterialPageRoute (

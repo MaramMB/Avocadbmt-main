@@ -1,14 +1,17 @@
 import 'dart:html';
 
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/expl.dart';
 import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/laterss.dart';
 import 'package:flutter_application_1/pages/latertest.dart';
+import 'package:flutter_application_1/pages/latter.dart';
 import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
+import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'manag.dart';
@@ -23,170 +26,170 @@ List<Map<String, String>> letters = const [
   {
     'letter': 'أ',
     'name' : 'الف',
-    'video' : 'http://www.youtube.com/v/Vdch39qe5_0',
+    'video' : 'videos/a.mp4',
 
   },
   {
     'letter': 'ب',
     'name' : 'باء',
-    'video' : 'http://www.youtube.com/v/snBplpE9HPQ',
+    'video' : 'videos/ب.mp4',
 
   },
   {
     'letter': 'ت',
     'name' : 'تاء',
-    'video' : 'http://www.youtube.com/v/NRAHR79_FD8',
+    'video' : 'videos/ت.mp4',
 
   },
   {
     'letter': 'ث',
     'name' : 'ثاء',
-    'video' : 'http://www.youtube.com/v/N9cDgSjmX2E',
+    'video' : 'videos/ث.mp4',
 
   },
   {
     'letter': 'ج',
     'name' : 'جيم',
-    'video' : 'http://www.youtube.com/v/wUX_1m0NJ5o',
+    'video' : 'videos/ج.mp4',
 
   },
   {
     'letter': 'ح',
     'name' : 'حاء',
-    'video' : 'http://www.youtube.com/v/569GkdUjPCo',
+    'video' : 'videos/ح.mp4',
 
   },
   {
     'letter': 'خ',
     'name' : 'خاء',
-    'video' : 'http://www.youtube.com/v/F-a8viuS4Bw',
+    'video' : 'videos/خ.mp4',
 
   },
   {
     'letter': 'د',
     'name' : 'دال',
-    'video' : 'http://www.youtube.com/v/p4mXFsF1FnY',
+    'video' : 'videos/د.mp4',
 
   },
   {
     'letter': 'ذ',
     'name' : 'ذال',
-    'video' : 'http://www.youtube.com/v/SsVVi0EE7ow',
+    'video' : 'videos/ذ.mp4',
 
   },
   {
     'letter': 'ر',
     'name' : 'راء',
-    'video' : 'http://www.youtube.com/v/1ZifdMbGjLE',
+    'video' : 'videos/ر.mp4',
 
   },
   {
     'letter': 'ز',
     'name' : 'زاي',
-    'video' : 'http://www.youtube.com/v/41LRxNKgnjk',
+    'video' : 'videos/ز.mp4',
 
   },
   {
     'letter': 'س',
     'name' : 'سين',
-    'video' : 'http://www.youtube.com/v/0OIh22MQXtM',
+    'video' : 'videos/س.mp4',
 
   },
   {
     'letter': 'ش',
     'name' : 'شين',
-    'video' : 'http://www.youtube.com/v/EXwAa_MiRl0',
+    'video' : 'videos/ش.mp4',
 
   },
   {
     'letter': 'ص',
     'name' : 'صاد',
-    'video' : 'http://www.youtube.com/v/3usY54GS-0o',
+    'video' : 'videos/ص.mp4',
 
   },
   {
     'letter': 'ض',
     'name' : 'ضاد',
-    'video' : 'http://www.youtube.com/v/H6XWY5YiMVU',
+    'video' : 'videos/ض.mp4',
 
   },
   {
     'letter': 'ط',
     'name' : 'طاء',
-    'video' : 'http://www.youtube.com/v/Ueh2dk_sIw8',
+    'video' : 'videos/ط.mp4',
 
   },
   {
     'letter': 'ظ',
     'name' : 'ظاء',
-    'video' : 'http://www.youtube.com/v/QjrWwoRwkfw',
+    'video' : 'videos/ظ.mp4',
 
   },
   {
     'letter': 'ع',
     'name' : 'عين',
-    'video' : 'http://www.youtube.com/v/u_qPMA7fP48',
+    'video' : 'videos/ع.mp4',
 
   },
   {
     'letter': 'غ',
     'name' : 'غين',
-    'video' : 'http://www.youtube.com/v/KXG-u2SOD7M',
+    'video' : 'videos/غ.mp4',
 
   },
   {
     'letter': 'ف',
     'name' : 'فاء',
-    'video' : 'http://www.youtube.com/v/my12d4B8als',
+    'video' : 'videos/ف.mp4',
 
   },
   {
     'letter': 'ق',
     'name' : 'قاف',
-    'video' : 'http://www.youtube.com/v/3vnUEw1L_RQ',
+    'video' : 'videos/ق.mp4',
 
   },
   {
     'letter': 'ك',
     'name' : 'كاف',
-    'video' : 'http://www.youtube.com/v/WsQKd8U7Nnk',
+    'video' : 'videos/ك.mp4',
 
   },
 
   {
     'letter': 'ل',
     'name' : 'لام',
-    'video' : 'http://www.youtube.com/v/lGhEbrUKKwQ',
+    'video' : 'videos/ل.mp4',
 
   },
   {
     'letter': 'م',
     'name' : 'ميم',
-    'video' : 'http://www.youtube.com/v/dtC7i-qBccI',
+    'video' : 'videos/م.mp4',
 
   },
   {
     'letter': 'ن',
     'name' : 'نون',
-    'video' : 'http://www.youtube.com/v/J8R_RWnUf2E',
+    'video' : 'videos/ن.mp4',
 
   },
   {
     'letter': 'ه',
     'name' : 'هاء',
-    'video' : 'http://www.youtube.com/v/0x3OTCpJ4ys',
+    'video' : 'videos/ه.mp4',
 
   },
   {
     'letter': 'و',
     'name' : 'واو',
-    'video' : 'http://www.youtube.com/v/o6__TLsUvxA',
+    'video' : 'videos/و.mp4',
 
   },
   {
     'letter': 'ي',
     'name' : 'ياء',
-    'video' : 'http://www.youtube.com/v/kLiXXdpGwqk',
+    'video' : 'videos/ي.mp4',
 
   },
 
@@ -202,7 +205,7 @@ int search (String s){
   }
   return x;
 }
-
+var flickmanager;
 class lettervideo extends StatefulWidget {
   late String letter;
   lettervideo({
@@ -219,17 +222,7 @@ class _lettervideoState extends State<lettervideo> {
   void initState() {
     super.initState();
     Lindex = search(widget.letter);
-    _controller = YoutubePlayerController(
-
-      params: const YoutubePlayerParams(
-        showControls: true,
-        mute: false,
-        showFullscreenButton: true,
-        loop: false,
-      ),
-    )..onInit = (){
-      _controller.loadVideoByUrl(mediaContentUrl: letters[Lindex]['video']!);
-    };
+     flickmanager = FlickManager(videoPlayerController: VideoPlayerController.asset(letters[Lindex]['video']!) , autoPlay: false);
   }
   @override
   Widget build(BuildContext context) {
@@ -288,13 +281,13 @@ class _lettervideoState extends State<lettervideo> {
                           fontSize: 25,
                           fontFamily: "DroidKufi",
                           fontWeight: FontWeight.w700)),
-                  const SizedBox(height: 10,),
-                  Container(
-                    // color: Colors.green,
-                    width: 592,
-                    height: 300,
-                    child: Center(
-                      child: YoutubePlayer(controller: _controller,)
+                  const SizedBox(height: 20,),
+                  SizedBox(
+                    height: 350,
+                    width: 700,
+                    child: FlickVideoPlayer(
+                      flickManager: flickmanager,
+
                     ),
                   ),
                   SizedBox(height: 30,),

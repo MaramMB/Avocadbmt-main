@@ -90,6 +90,7 @@ List<Map<String, Object>> as = const [
 
 class betest extends StatefulWidget {
    late int type;
+
    betest({required this.type}){
 
      if(type==1)
@@ -316,11 +317,7 @@ class _betestState extends State<betest> {
                                               isEnd=false;
                                             });
 
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(builder: (context) {
-
-                                              return  voicex();
-                                            }));
+                                            Navigator.pop(context);
                                           }
                                         else {
                                           nextquestion();

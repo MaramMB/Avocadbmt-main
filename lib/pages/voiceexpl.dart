@@ -10,7 +10,9 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 class voiceexp extends StatefulWidget {
-  const voiceexp({Key? key}) : super(key: key);
+   voiceexp({Key? key,  required this.UserID, required this.UserKind}) : super(key: key);
+  String UserID;
+  String? UserKind;
 
   @override
   State<voiceexp> createState() => _voiceexpState();
@@ -74,7 +76,7 @@ class _voiceexpState extends State<voiceexp> {
                             onPressed: () {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return const voicex();
+                                return  voicex(UserID: widget.UserID, UserKind: widget.UserKind,);
                               }));
                             },
                             style: ElevatedButton.styleFrom(
