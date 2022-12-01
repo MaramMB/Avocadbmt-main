@@ -35,7 +35,8 @@ var SnameCont = TextEditingController();
 class voicex extends StatefulWidget {
   String? UserID;
   String? UserKind;
-  voicex({Key? key,  required this.UserID, required this.UserKind}) : super(key: key);
+  String? tid;
+  voicex({Key? key,  required this.UserID, required this.UserKind , required this.tid}) : super(key: key);
 
   @override
   State<voicex> createState() => _voicexState();
@@ -80,8 +81,10 @@ class _voicexState extends State<voicex> {
       var data = json.decode(response.body);
       print(data.toString());}
   }
-  Future<List<dynamic>?> getData(int type) async{
+  Future<List<dynamic>?> getData(int type , String? tid) async{
+
     String x;
+
     if(type==1){
       setState(() {
         isA=true;
@@ -97,7 +100,8 @@ class _voicexState extends State<voicex> {
     }
     var url = 'http://localhost/getSound.php';
     var response = await http.post(Uri.parse(url), body :{
-      'type': x
+      'type': x,
+      'tid': tid,
     });
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -141,8 +145,8 @@ class _voicexState extends State<voicex> {
     super.initState();
   }
 
-  late final check=getData(1);
-  late final check2=getData(2);
+  late final check=getData(1,(widget.tid).toString());
+  late final check2=getData(2,(widget.tid).toString());
   @override
   Widget build(BuildContext context) {
     if(isA) {
@@ -264,6 +268,9 @@ class _voicexState extends State<voicex> {
                               Row(
                                 children: [
                                   Visibility(
+                                    maintainState: true,
+                                    maintainAnimation: true,
+                                    maintainSize: true,
                                     visible: widget.UserKind=='teacher'? true : false,
                                     child: FloatingActionButton(backgroundColor: Colors.green, // زر اختيار الصورة
                                         child:Icon(Icons.add_outlined),onPressed: (){
@@ -399,7 +406,7 @@ class _voicexState extends State<voicex> {
 
                                                               SnameCont.clear();
                                                               imageb='';});
-                                                            Navigator.push(context,MaterialPageRoute(builder: (context) => voicex(UserID: widget.UserID, UserKind: widget.UserKind,))).then((value) => (){
+                                                            Navigator.push(context,MaterialPageRoute(builder: (context) => voicex(UserID: widget.UserID, UserKind: widget.UserKind, tid: widget.tid,))).then((value) => (){
                                                               setState(() {
                                                                 secT=true;
                                                               });
@@ -744,6 +751,9 @@ class _voicexState extends State<voicex> {
 
                                 children: [
                                   Visibility(
+                                    maintainState: true,
+                                    maintainAnimation: true,
+                                    maintainSize: true,
                                     visible: widget.UserKind=='teacher'? true : false,
                                     child: FloatingActionButton(backgroundColor: Colors.green, // زر اختيار الصورة
                                         child:Icon(Icons.add_outlined),onPressed: (){
@@ -879,7 +889,7 @@ class _voicexState extends State<voicex> {
 
                                                                       SnameCont.clear();
                                                                       imageb='';});
-                                                                    Navigator.push(context,MaterialPageRoute(builder: (context) => voicex(UserID: widget.UserID, UserKind: widget.UserKind,))).then((value) => (){
+                                                                    Navigator.push(context,MaterialPageRoute(builder: (context) => voicex(UserID: widget.UserID, UserKind: widget.UserKind, tid: widget.tid))).then((value) => (){
                                                                       setState(() {
                                                                         secT=true;
                                                                       });
