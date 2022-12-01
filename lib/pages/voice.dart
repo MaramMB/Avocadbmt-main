@@ -69,13 +69,14 @@ class _voicexState extends State<voicex> {
       });
     });
   }
-  addSound(String x , String img,String type)async{
+  addSound(String x , String img,String type , String? tid)async{
     print (x);
     var url = 'http://localhost/imageStore.php';
     var response = await http.post(Uri.parse(url), body :{
       'word': x,
       'imageByte': img,
       'type': type,
+      'tid': tid,
     });
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -436,7 +437,7 @@ class _voicexState extends State<voicex> {
                                                                 addCheck = false;
 
                                                               });
-                                                              addSound(SnameCont.text,imageb,'A');
+                                                              addSound(SnameCont.text,imageb,'A',widget.UserID);
                                                             }
 
 
@@ -919,7 +920,7 @@ class _voicexState extends State<voicex> {
                                                                         addCheck = false;
 
                                                                       });
-                                                                      addSound(SnameCont.text,imageb,'B');
+                                                                      addSound(SnameCont.text,imageb,'B', widget.UserID);
                                                                     }
 
 
