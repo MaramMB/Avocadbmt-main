@@ -822,7 +822,9 @@ class _sptestState extends State<sptest> {
       "sid": widget.person.id,
       "result": truee.length,
       "note": errors[index],
+      "testid" :'1',
     };
+    print (widget.person.id+ '  -  '+truee.length.toString()+ '   -   ' +errors[index]);
     final response = await http.post(Uri.parse(url), body: requestBody);
     var data = jsonDecode(response.body);
     print(data);

@@ -473,11 +473,18 @@ class _voicexState extends State<voicex> {
                                   TextButton(
                                     // زر بدأ الاختبار
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .push(
-                                          MaterialPageRoute(builder: (context) {
-                                            return betest(type: _selectedType);
-                                          }));
+                                      if (widget.UserKind=='teacher'){
+                                        return;
+                                      }
+                                      else
+                                        {
+                                          Navigator.of(context)
+                                              .push(
+                                              MaterialPageRoute(builder: (context) {
+                                                return betest(type: _selectedType, sid: widget.UserID);
+                                              }));
+                                        }
+
                                     },
                                     style: ButtonStyle(
                                       shape: MaterialStateProperty.all(
@@ -956,11 +963,17 @@ class _voicexState extends State<voicex> {
                                   TextButton(
                                     // زر بدأ الاختبار
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .push(
-                                          MaterialPageRoute(builder: (context) {
-                                            return betest(type: _selectedType);
-                                          }));
+                                      if (widget.UserKind=='teacher'){
+                                        return;
+                                      }
+                                      else
+                                      {
+                                        Navigator.of(context)
+                                            .push(
+                                            MaterialPageRoute(builder: (context) {
+                                              return betest(type: _selectedType, sid: widget.UserID);
+                                            }));
+                                      }
                                     },
                                     style: ButtonStyle(
                                       shape: MaterialStateProperty.all(

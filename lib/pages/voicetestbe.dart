@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:html';
 import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -9,7 +10,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
-
+import 'package:http/http.dart' as http;
 import 'mainpage.dart';
 import 'manag.dart';
 
@@ -90,8 +91,9 @@ List<Map<String, Object>> as = const [
 
 class betest extends StatefulWidget {
    late int type;
+   String? sid;
 
-   betest({required this.type}){
+   betest({super.key, required this.type , required this.sid}){
 
      if(type==1)
      {
@@ -145,7 +147,7 @@ class _betestState extends State<betest> {
 
 
       });
-
+      addTestResult(widget.type);
       // show dialog with the result **
       showDialog(context: context, builder: (context)=> AlertDialog(
         title: Container(
@@ -385,7 +387,27 @@ class _betestState extends State<betest> {
   }
 
 
+  addTestResult(int type) async {
+    print('dsadasdasdasads + '+ widget.sid.toString());
+  String x;
+  if (type == 1)
+    {
+      x='4';
+    }
+  else
+    {
+      x='5';
+    }
+    var url = 'http://localhost/addTestResult.php';
+  print(totalScore);
+    final response = await http.post(Uri.parse(url), body: {
+      "stuid": (widget.sid).toString(),
+      "result": (totalScore).toString(),
+      "note": '** ',
+      "testid" : x,
+    });
 
+  }
 }
 Cstop() async {
 Ccontroller.play();

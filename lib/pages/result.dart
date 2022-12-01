@@ -229,11 +229,21 @@ class _resultState extends State<result> {
                                           },
                                           controller: SearchController,
                                           decoration: InputDecoration(
-                                              suffixIcon: Icon(SearchIcon),
+                                            hintStyle: TextStyle(
+                                              fontFamily: 'Tajawal',
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(20),
+                                                borderSide:  BorderSide(color: green , width: 2),
+
+                                            ),
+                                             suffixIconColor: green,
+                                              suffixIcon: Icon(SearchIcon , color: green,),
                                               hintText: 'ابحث عن طالب ...',
-                                              border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(20),
-                                                  borderSide: const BorderSide(color: Colors.black)
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(15),
+                                                  borderSide:  BorderSide(color: Colors.grey , width: 1.5)
 
                                               )
                                           ),
