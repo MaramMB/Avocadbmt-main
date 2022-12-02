@@ -228,7 +228,7 @@ var IDController = TextEditingController();
 
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return const voiceexp();
+                            return  voiceexp(UserID: userId, UserKind: userKind,);
 
                           }));
                         }

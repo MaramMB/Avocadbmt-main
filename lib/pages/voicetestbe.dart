@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:html';
 import 'dart:math';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -9,7 +10,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
-
+import 'package:http/http.dart' as http;
 import 'mainpage.dart';
 import 'manag.dart';
 
@@ -90,7 +91,9 @@ List<Map<String, Object>> as = const [
 
 class betest extends StatefulWidget {
    late int type;
-   betest({required this.type}){
+   String? sid;
+
+   betest({super.key, required this.type , required this.sid}){
 
      if(type==1)
      {
@@ -117,7 +120,6 @@ class _betestState extends State<betest> {
   //functions
   void nextquestion()
   {
-    Ccontroller.stop();
     audioPlayer.dispose();
     setState((){
       isCorrect = 0;
@@ -145,7 +147,7 @@ class _betestState extends State<betest> {
 
 
       });
-
+      addTestResult(widget.type);
       // show dialog with the result **
       showDialog(context: context, builder: (context)=> AlertDialog(
         title: Container(
@@ -179,7 +181,7 @@ class _betestState extends State<betest> {
       if (score!){
         totalScore++;
         AssetsAudioPlayer.playAndForget(Audio("audio/correct.mp3"));
-        Ccontroller.play();
+        Cstop();
         isCorrect = 1;
 
       }
@@ -317,11 +319,7 @@ class _betestState extends State<betest> {
                                               isEnd=false;
                                             });
 
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(builder: (context) {
-
-                                              return  voicex();
-                                            }));
+                                            Navigator.pop(context);
                                           }
                                         else {
                                           nextquestion();
@@ -369,7 +367,8 @@ class _betestState extends State<betest> {
           ),
         ),
         ConfettiWidget(
-          confettiController: Ccontroller,shouldLoop: true,
+
+          confettiController: Ccontroller,shouldLoop: false,
           blastDirectionality: BlastDirectionality.explosive,
           blastDirection: -pi / 2,
           numberOfParticles: 30,
@@ -388,5 +387,30 @@ class _betestState extends State<betest> {
   }
 
 
+  addTestResult(int type) async {
+    print('dsadasdasdasads + '+ widget.sid.toString());
+  String x;
+  if (type == 1)
+    {
+      x='4';
+    }
+  else
+    {
+      x='5';
+    }
+    var url = 'http://localhost/addTestResult.php';
+  print(totalScore);
+    final response = await http.post(Uri.parse(url), body: {
+      "stuid": (widget.sid).toString(),
+      "result": (totalScore).toString(),
+      "note": '** ',
+      "testid" : x,
+    });
 
+  }
+}
+Cstop() async {
+Ccontroller.play();
+await Future.delayed(Duration(seconds: 1));
+Ccontroller.stop();
 }

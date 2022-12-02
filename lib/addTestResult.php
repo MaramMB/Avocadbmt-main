@@ -12,9 +12,9 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$sid = $_POST['stuid'];
 	$result = $_POST['result'];
 	$note = $_POST['note'];
-	$testid = $_POST['testid'] ?? 1;
+	$testid = $_POST['testid'];
 
-	$insert="INSERT INTO `testsresult`(`id`, `stuid`, `testid`, `result`, `note`) VALUES (Null,'$sid','$testid','$result','$note')";
+	$insert="UPDATE `testsresult` SET `result` = $result , `note` = $note Where stuid = $sid AND testid = $testid";
 
 	$query = mysqli_query($db,$insert);
 	if ($query) {

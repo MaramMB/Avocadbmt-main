@@ -1,10 +1,10 @@
 <?php
 include ('localConnection.php');
-$sql="SELECT * FROM sounds WHERE type='B'";
-$val = isset($_POST["type"]);
+$tid = $_POST["tid"];
+$sql="SELECT * FROM sounds WHERE ( tid = $tid OR newsound = 0) AND type = 'B'";
 if ($_POST["type"]=='A')
 {
-    $sql="SELECT * FROM sounds WHERE type='A'";
+    $sql="SELECT * FROM sounds WHERE ( tid = $tid OR newsound = 0) AND type = 'A'";
 
 }
 $result=$link->query($sql);
