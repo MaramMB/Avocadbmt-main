@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
-import 'package:flutter_application_1/pages/models/students.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/testrecord.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -173,9 +172,7 @@ class _expageState extends State<expage> {
                               if (snapshot.connectionState == ConnectionState.waiting) {
                                 return Container(
                                   width: double.infinity,
-                                  height:
-                                  MediaQuery.of(context).size.height *
-                                      0.4,
+                                  height: MediaQuery.of(context).size.height * 0.4,
                                   child: const SpinKitPulse(
                                     color: Colors.green,
                                     size: 60,
@@ -183,17 +180,11 @@ class _expageState extends State<expage> {
                                 );
                               } else {
                                 var Customers = snapshot.data;
-                                // if (Customers[1]["tid"]==20) {
                                 if (snapshot.data != null) {
-                                  print(Customers[1]["phone"]);
-                                // if (snapshot.data != null && userId==Customers[3]["tid"]) {
                                   return ListView.builder(
                                     itemCount: Customers.length,
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
-                                       // if(userLists[0].tid==userId){
-                                       //   print('helllllo');
-                                       // }
                                           return testRecord(
                                             ID: Customers[index]["id"],
                                             person: Person(
@@ -210,20 +201,24 @@ class _expageState extends State<expage> {
                                           );
 
                                       },
+
                                   );
                                 } else {
                                   return const Center(
                                       child: SizedBox(
                                           height: 40,
                                           // width: 40,
-                                          child:Text("لا يوجد حساب بهذا الاسم", style: TextStyle(
+                                          child:Text("لا يوجد طلاب بهذا الاسم", style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: "DroidKufi",
                                           ),)));
                                 }
 
+
                               }
+
                             },
+
                           ),
 
                         ),
@@ -253,10 +248,11 @@ class _expageState extends State<expage> {
   var searchController = TextEditingController();
 
   searchStudents() async {
-    var url = 'http://localhost/search_student.php';
+    var url = 'http://localhost/testserch.php';
     var response = await http.post(
       Uri.parse(url),
       body: {
+         "id":userId,
         'firstname': searchController.text,
       },
     );
