@@ -90,44 +90,44 @@ class _resultState extends State<result> {
 
   @override
   Widget build(BuildContext context) {
-  if (userLists.isEmpty)
+    if (userLists.isEmpty)
     {
       return Scaffold(
         backgroundColor: green,
         body:Center(
-          child: Column(
-            children: [
-              SelectionButton(),
-              SizedBox(height: 30,),
-              Container(
-                height: MediaQuery.of(context).size.height / 1.2,
-                width: MediaQuery.of(context).size.width / 1.8,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                child: SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: Center(
-                    child: Column
-                      (
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.question_mark_rounded , size: 100, color: Colors.grey,),
-                    Text('لم يتم إضافة طلاب ',style: TextStyle( fontFamily: "DroidKufi", fontWeight: FontWeight.bold, fontSize: 30,color: Colors.grey,),),
+            child: Column(
+              children: [
+                SelectionButton(),
+                SizedBox(height: 30,),
+                Container(
+                  height: MediaQuery.of(context).size.height / 1.2,
+                  width: MediaQuery.of(context).size.width / 1.8,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
+                  child: SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Center(
+                      child: Column
+                        (
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.question_mark_rounded , size: 100, color: Colors.grey,),
+                          Text('لم يتم إضافة طلاب ',style: TextStyle( fontFamily: "DroidKufi", fontWeight: FontWeight.bold, fontSize: 30,color: Colors.grey,),),
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          )
+              ],
+            )
         ),
       );
     }
-  else
+    else
     {
       return Scaffold(
         backgroundColor: backgreen,
@@ -970,6 +970,4 @@ resetResult(String id , String tid) async {
     'exid':tid,
   });
   var res = jsonDecode(response.body);
-
-
 }

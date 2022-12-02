@@ -55,7 +55,6 @@ class SelectionButton extends StatefulWidget {
 
 }
 class SelectionButtonState extends State<SelectionButton> {
-var nameController = TextEditingController();
 var IDController = TextEditingController();
   String? userKind;
   String userId = '';
@@ -395,13 +394,13 @@ var IDController = TextEditingController();
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
-                      nameController.text ,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontFamily: "DroidKufi"),
-                    ),
+                    // Text(
+                    //
+                    //   style: TextStyle(
+                    //       fontSize: 16,
+                    //       color: Colors.white,
+                    //       fontFamily: "DroidKufi"),
+                    // ),
                     SizedBox(
                       width: 5,
                     ),

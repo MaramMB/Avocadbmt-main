@@ -14,7 +14,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$note = $_POST['note'];
 	$testid = $_POST['testid'] ?? 1;
 
-	$insert="INSERT INTO `testsresult`(`id`, `stuid`, `testid`, `result`, `note`) VALUES (Null,'$sid','1','$result','$note')";
+	$insert="INSERT INTO `testsresult`(`id`, `stuid`, `testid`, `result`, `note`) VALUES (Null,'$sid','$testid','$result','$note')";
 
 	$query = mysqli_query($db,$insert);
 	if ($query) {

@@ -820,8 +820,8 @@ class _sptestState extends State<sptest> {
     var url = 'http://localhost/addTestResult.php';
     final requestBody = {
       "sid": widget.person.id,
-      "result": truee.length,
-      "note": errors[index],
+      "result": truee.length.toString(),
+      "note": errors.toString(),
     };
     final response = await http.post(Uri.parse(url), body: requestBody);
     var data = jsonDecode(response.body);
@@ -830,9 +830,11 @@ class _sptestState extends State<sptest> {
       // Navigator.of(context, rootNavigator: true).pop();
       Fluttertoast.showToast(
           msg: "تم اضافه بنجاح", timeInSecForIosWeb: 1);
+      print('mmmmm');
     }
     else{ Fluttertoast.showToast(
             msg: "لم يتم الاضافه بنجاح", timeInSecForIosWeb: 1);
+      print('false');
   }
       }
     }
