@@ -17,6 +17,7 @@ import 'package:flutter_application_1/text22.dart';
 // import 'package:flutter_application_1/pages/mobile/mainmobailepage.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 
 Future main()  async {
@@ -25,7 +26,7 @@ Future main()  async {
 
   await Firebase.initializeApp(
     name: "flutterproject1337",
-    options: kIsWeb || Platform.isAndroid ? FirebaseOptions(
+    options: kIsWeb || Platform.isAndroid ? const FirebaseOptions(
       apiKey: "AIzaSyCHMOTWmG8K5j8A_3fnK5LmM49Lwyw6YmE",
       appId: "1:865215937003:web:c04c8ddca5b010aa1d81ae",
       messagingSenderId: "865215937003",

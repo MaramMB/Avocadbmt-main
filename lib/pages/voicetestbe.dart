@@ -139,6 +139,7 @@ class _betestState extends State<betest> {
     if (index + 1 == testType.length )
     {
       // finished
+      addTestResult(widget.type);
       AssetsAudioPlayer.playAndForget(Audio("audio/result.mp3"));
 
       setState((){
@@ -147,7 +148,6 @@ class _betestState extends State<betest> {
 
 
       });
-      addTestResult(widget.type);
       // show dialog with the result **
       showDialog(context: context, builder: (context)=> AlertDialog(
         title: Container(
@@ -400,11 +400,11 @@ class _betestState extends State<betest> {
     }
     var url = 'http://localhost/addTestResult.php';
   print(totalScore);
-    final response = await http.post(Uri.parse(url), body: {
-      "stuid": (widget.sid).toString(),
-      "result": (totalScore).toString(),
-      "note": '** ',
-      "testid" : x,
+    var response = await http.post(Uri.parse(url), body: {
+      'stuid': (widget.sid).toString(),
+      'result': (totalScore).toString(),
+      'note': '-',
+      'testid': x,
     });
 
   }
