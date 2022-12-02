@@ -20,11 +20,10 @@ class expage extends StatefulWidget {
 
 class _expageState extends State<expage> {
 
-  List<FocusNode> _focusNodess = [
-    FocusNode(),
-    FocusNode(),
-  ];
-
+  late FocusNode focusNode = FocusNode()
+    ..addListener(() {
+      setState(() {});
+    });
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
@@ -45,11 +44,6 @@ class _expageState extends State<expage> {
   }
   void initState() {
     print('testt');
-    _focusNodess.forEach((node){
-      node.addListener(() {
-        setState(() {});
-      });
-    });
     super.initState();
     getUserData();
   }
@@ -128,6 +122,7 @@ class _expageState extends State<expage> {
                                 height: 28,
                                 // width: MediaQuery.of(context).size.width/5,
                                 child: TextFormField(
+                                  focusNode: focusNode,
                                   onChanged: (value) {
                                     if (searchController.text == "") {
                                       setState(() {
@@ -139,15 +134,15 @@ class _expageState extends State<expage> {
                                       });
                                     }
                                   },
-                                  focusNode: _focusNodess[0],
+
                                   controller: searchController,
                                   textAlign: TextAlign.right,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'أدخل اسم المستخدم',
-                                    // prefixIcon: Icon(Icons.search,color: _focusNodess[0].hasFocus? Colors.green : Colors.grey),
-                                    prefixIcon: Icon(Icons.search,color:Colors.green),
+                                    prefixIcon: Icon(Icons.search,color: focusNode.hasFocus ? Colors.green : Colors.grey),
                                   ),
+
                                 ),
                               ),
                             ),
@@ -234,7 +229,10 @@ class _expageState extends State<expage> {
       ),
     );
   }
-
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
   getStudents() async {
     var url = 'http://localhost/teststudent.php';
     var response = await http.post(Uri.parse(url), body: {
