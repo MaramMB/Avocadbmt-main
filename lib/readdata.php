@@ -1,13 +1,17 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST');
-header("Access-Control-Allow-Headers: X-Requested-With");
-// header('Content-Type: applcation/json; charset = utf-8');
-	$db = mysqli_connect('localhost','root','','bdmtproject');
-	$sql="SELECT * FROM teachers";
-	$result=$db->query($sql);
-	while($row=$result->fetch_assoc()){
-	$data[]=$row;
-	}
-	echo json_encode($data);
+include ('localConnection.php');
+$id = $_POST['Id_Num'];
+if(isset($_POST['Id_Num']))
+{
+    $sql="SELECT * FROM teachers Where Id_Num = $id";
+    $result=$link->query($sql);
+    while($row=$result->fetch_assoc()){
+    $data[]=$row;
+
+    }
+    echo json_encode($data,JSON_UNESCAPED_UNICODE);
+}
+else
+echo'error';
+
 ?>

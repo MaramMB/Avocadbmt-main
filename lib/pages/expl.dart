@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
+import 'package:flutter_application_1/pages/models/students.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/testrecord.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,9 +12,6 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 String type="";
-
-// void main() => runApp(const MyApp());
-
 class expage extends StatefulWidget {
   const expage({Key? key}) : super(key: key);
 
@@ -22,6 +20,7 @@ class expage extends StatefulWidget {
 }
 
 class _expageState extends State<expage> {
+
   List<FocusNode> _focusNodess = [
     FocusNode(),
     FocusNode(),
@@ -46,6 +45,7 @@ class _expageState extends State<expage> {
     print(userId);
   }
   void initState() {
+    print('testt');
     _focusNodess.forEach((node){
       node.addListener(() {
         setState(() {});
@@ -54,6 +54,7 @@ class _expageState extends State<expage> {
     super.initState();
     getUserData();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,13 +183,17 @@ class _expageState extends State<expage> {
                                 );
                               } else {
                                 var Customers = snapshot.data;
-                                if (Customers[1]["tid"]==20) {
-                                // if (snapshot.data != null) {
+                                // if (Customers[1]["tid"]==20) {
+                                if (snapshot.data != null) {
+                                  print(Customers[1]["phone"]);
                                 // if (snapshot.data != null && userId==Customers[3]["tid"]) {
                                   return ListView.builder(
                                     itemCount: Customers.length,
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
+                                       // if(userLists[0].tid==userId){
+                                       //   print('helllllo');
+                                       // }
                                           return testRecord(
                                             ID: Customers[index]["id"],
                                             person: Person(
@@ -236,8 +241,10 @@ class _expageState extends State<expage> {
   }
 
   getStudents() async {
-    var url = 'http://localhost/get_students.php';
-    var response = await http.get(Uri.parse(url));
+    var url = 'http://localhost/teststudent.php';
+    var response = await http.post(Uri.parse(url), body: {
+      "id":userId,
+    });
     var res = jsonDecode(response.body);
     return res;
   }

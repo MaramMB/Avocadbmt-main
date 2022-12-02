@@ -5,11 +5,10 @@ header('Access-Control-Allow-Methods: GET, POST');
 header("Access-Control-Allow-Headers: X-Requested-With");
 // header('Content-Type: applcation/json; charset = utf-8');
 	$db = mysqli_connect('localhost','root','','bdmtproject');
+	$id=$_GET['Id'];
+    $sql="SELECT * FROM teachers where id='$id'";
+	$result=$db->query($sql);
 
-	if($db){
-       $id = $_GET["id"];
-       $sql ="SELECT * FROM teachers WHERE id=$id";
-    $result =mysqli_query($db , $sql);
     if($result){
         echo "success";
 

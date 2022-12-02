@@ -1025,7 +1025,6 @@ Future<List<Students>> getStudents(String id) async {
   }catch(e){
     throw Exception(e.toString());
   }
-
 }
 getResult(String id , String tid) async {
   var url = 'http://localhost/getResult.php';

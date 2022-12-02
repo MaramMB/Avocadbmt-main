@@ -80,7 +80,7 @@ var IDController = TextEditingController();
   void initState() {
     super.initState();
     getUserData();
-    getsteudentname();
+    getteachername();
     // getTeacher();
   }
 
@@ -261,37 +261,6 @@ var IDController = TextEditingController();
               ),
             ),
           ),
-          // Container(
-          //   decoration: const BoxDecoration(
-          //     border: Border(
-          //         left: BorderSide(color: Colors.black12, width: 0.5),
-          //         right: BorderSide(color: Colors.black12, width: 0.5)),
-          //   ),
-          //   child: TextButton(
-          //     style: ButtonStyle(
-          //       backgroundColor:
-          //       MaterialStateColor.resolveWith((states) => Colors.white),
-          //       padding: MaterialStateProperty.all(const EdgeInsets.only(
-          //           left: 15.0, right: 15.0, top: 15.0, bottom: 15.0)),
-          //       shape: MaterialStateProperty.all(
-          //         const RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.only(
-          //                 bottomRight: Radius.circular(0.1),
-          //                 bottomLeft: Radius.circular(0.1))),
-          //       ),
-          //     ),
-          //     onPressed: () {
-          //       Navigator.of(context)
-          //           .push(MaterialPageRoute(builder: (context) {
-          //         return const MyApp();
-          //       }));
-          //     },
-          //     child: const Text(
-          //       "إدارة الحسابات",
-          //       style: TextStyle(color: blak, fontFamily: "DroidKufi"),
-          //     ),
-          //   ),
-          // ),
           TextButton(
             style: ButtonStyle(
               backgroundColor:
@@ -396,19 +365,21 @@ var IDController = TextEditingController();
                     SizedBox(
                       width: 5,
                     ),
-                    Text(list[0]['Name']+list[0]['familyname'],
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontFamily: "DroidKufi"),
-                    ),
+                    // Text(
+                    //   list[0]['Name']+list[0]['familyname'],
+                    //   style: TextStyle(
+                    //       fontSize: 16,
+                    //       color: Colors.white,
+                    //       fontFamily: "DroidKufi"),
+                    // ),
                     SizedBox(
                       width: 5,
                     ),
-                    // CircleAvatar(
-                    //   backgroundImage: Image(list[0]['image'],image: null,),
-                    //   radius: 16.7,
-                    // ),
+                    CircleAvatar(
+                      // backgroundImage: Image.memory(base64Decode(base64Decode(list[0].['image']))),
+                      // child: Image.memory(base64Decode(list[0].image)),
+                      radius: 16.7,
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 6,
@@ -426,7 +397,7 @@ var IDController = TextEditingController();
     );
   }
 
-Future getsteudentname() async {
+Future getteachername() async {
   var url = 'http://localhost/readdata.php';
     var response = await http.post(Uri.parse(url));
  if(response.statusCode==200){
