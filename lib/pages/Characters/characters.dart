@@ -539,10 +539,8 @@ class _sptestState extends State<sptest> {
                                           Center(
                                               child: Image.asset(
                                             "img/board.png",
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                1.85,
+                                            height: MediaQuery.of(context).size.height / 1.85,
+                                            width: MediaQuery.of(context).size.width / 2.85,
                                           )),
                                           InkWell(
                                             onTap: () {
@@ -682,6 +680,7 @@ class _sptestState extends State<sptest> {
     return showDialog(
       context: context,
       useSafeArea: true,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
 
@@ -821,10 +820,10 @@ class _sptestState extends State<sptest> {
     final requestBody = {
       "sid": widget.person.id,
       "result": truee.length,
-      "note": errors[index],
+      "note": errors[index].toString(),
       "testid" :'1',
     };
-    print (widget.person.id+ '  -  '+truee.length.toString()+ '   -   ' +errors[index]);
+    print (widget.person.id+ '  -  '+truee.length.toString()+ '   -   ');
     final response = await http.post(Uri.parse(url), body: requestBody);
     var data = jsonDecode(response.body);
     print(data);

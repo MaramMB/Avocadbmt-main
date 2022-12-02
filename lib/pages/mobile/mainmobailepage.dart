@@ -224,10 +224,10 @@ class Page1 extends StatelessWidget {
                           Center(
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (context) {
-                                  return  expage(); // لازم الاي دي هون يتغير حسب الحساب الداخل
-                                }));
+                                // Navigator.of(context)
+                                //     .push(MaterialPageRoute(builder: (context) {
+                                //   return  expage(); // لازم الاي دي هون يتغير حسب الحساب الداخل
+                                // }));
                               },
                               style: ElevatedButton.styleFrom(
                                 alignment: Alignment.bottomCenter,

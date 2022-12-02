@@ -11,7 +11,7 @@ import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
 import 'package:video_player/video_player.dart';
 
-import 'manag.dart';
+
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);

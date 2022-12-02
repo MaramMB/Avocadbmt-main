@@ -10,7 +10,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../manag.dart';
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 bool _passwordInVisible = true;
 class mobilelogin extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Profile/profile.dart';
-import 'package:flutter_application_1/pages/manag.dart';
+import 'package:flutter_application_1/pages/manage.dart';
 import 'package:flutter_application_1/pages/request.dart';
 import 'package:flutter_application_1/pages/mainpage.dart';
 import 'package:http/http.dart' as http;

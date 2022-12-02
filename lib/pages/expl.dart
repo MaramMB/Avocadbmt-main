@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/testrecord.dart';
-import 'package:flutter_application_1/pages/widgets/person_record.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-int _value = 1;
 String type="";
 
 // void main() => runApp(const MyApp());
@@ -23,7 +22,10 @@ class expage extends StatefulWidget {
 }
 
 class _expageState extends State<expage> {
-  int _selectedAccountType = 1;
+  List<FocusNode> _focusNodess = [
+    FocusNode(),
+    FocusNode(),
+  ];
 
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
     color: Colors.black,
@@ -34,9 +36,24 @@ class _expageState extends State<expage> {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
-
+  String userId = '';
   var searchBarController = TextEditingController();
-
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userId = prefs.getString('userId') ?? '';
+    });
+    print(userId);
+  }
+  void initState() {
+    _focusNodess.forEach((node){
+      node.addListener(() {
+        setState(() {});
+      });
+    });
+    super.initState();
+    getUserData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,12 +139,14 @@ class _expageState extends State<expage> {
                                       });
                                     }
                                   },
+                                  focusNode: _focusNodess[0],
                                   controller: searchController,
                                   textAlign: TextAlign.right,
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     hintText: 'أدخل اسم المستخدم',
-                                    prefixIcon: Icon(Icons.search),
+                                    // prefixIcon: Icon(Icons.search,color: _focusNodess[0].hasFocus? Colors.green : Colors.grey),
+                                    prefixIcon: Icon(Icons.search,color:Colors.green),
                                   ),
                                 ),
                               ),
@@ -149,10 +168,8 @@ class _expageState extends State<expage> {
                           child: FutureBuilder(
                             future:
                             search ? searchStudents() : getStudents(),
-                            builder: (BuildContext context,
-                                AsyncSnapshot snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
+                            builder: (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
                                 return Container(
                                   width: double.infinity,
                                   height:
@@ -164,32 +181,30 @@ class _expageState extends State<expage> {
                                   ),
                                 );
                               } else {
-                                if (snapshot.data != null) {
-                                  var Customers = snapshot.data;
+                                var Customers = snapshot.data;
+                                if (Customers[1]["tid"]==20) {
+                                // if (snapshot.data != null) {
+                                // if (snapshot.data != null && userId==Customers[3]["tid"]) {
                                   return ListView.builder(
                                     itemCount: Customers.length,
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
-                                      return testRecord(
-                                        ID: Customers[index]["id"],
-                                        person: Person(
-                                          name: Customers[index]["name"],
-                                          id: Customers[index]
-                                          ["student_id"],
-                                          gender: Customers[index]
-                                          ["gender"] ==
-                                              "female"
-                                              ? Gender.female
-                                              : Gender.male,
-                                          address: Customers[index]
-                                          ["address"],
-                                          phoneNumber: Customers[index]
-                                          ["phone"],
-                                          type: AccountType.teacher,
-                                        ),
-                                        isActive: true,
-                                      );
-                                    },
+                                          return testRecord(
+                                            ID: Customers[index]["id"],
+                                            person: Person(
+                                              name: Customers[index]["name"],
+                                              id: Customers[index]
+                                              ["student_id"],
+                                              gender: Customers[index]
+                                              ["gender"] == "female" ? Gender.female : Gender.male,
+                                              address: Customers[index]["address"],
+                                              phoneNumber: Customers[index]["phone"],
+                                              type: AccountType.student,
+                                            ),
+                                            isActive: true,
+                                          );
+
+                                      },
                                   );
                                 } else {
                                   return const Center(
@@ -201,6 +216,7 @@ class _expageState extends State<expage> {
                                             fontFamily: "DroidKufi",
                                           ),)));
                                 }
+
                               }
                             },
                           ),

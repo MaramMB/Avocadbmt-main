@@ -12,7 +12,7 @@ import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'mainpage.dart';
-import 'manag.dart';
+
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);

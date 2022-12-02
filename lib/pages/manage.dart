@@ -109,9 +109,9 @@ class _adminmanageState extends State<adminmanage> {
           child:  Column(
               children: [
                 // const SelectionButton(),
-            const SizedBox(height: 25,),
-            buildTable(context),
-          ]),
+                const SizedBox(height: 25,),
+                buildTable(context),
+              ]),
         ),
       ),
     );
@@ -125,128 +125,128 @@ class _adminmanageState extends State<adminmanage> {
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 25.0,top: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizedBox(height: 10,),
-              Center(
-                child: const Text('ادارة الحسابات',
+      child: Padding(
+        padding: const EdgeInsets.only(right: 25.0,top: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            SizedBox(height: 10,),
+            Center(
+              child: const Text('ادارة الحسابات',
                   style: TextStyle(
                       color: Colors.green,fontSize: 35,fontFamily: "DroidKufi",fontWeight: FontWeight.w700)
-                ),
               ),
-              SizedBox(height: 15,),
-              const Text('هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
-                  ' من مولد النص العربي.',
-                style: TextStyle(
-                    fontFamily: "DroidKufi",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
-              ),
+            ),
+            SizedBox(height: 15,),
+            const Text('هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
+                ' من مولد النص العربي.',
+              style: TextStyle(
+                  fontFamily: "DroidKufi",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400),
+            ),
 
-              Center(
-                child: Container(
-                  // color: Colors.black38,
-                  height:  MediaQuery.of(context).size.height / 1.41,
-                  width: MediaQuery.of(context).size.width / 2.5,
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Row(
-                            children: [
-                              buildTeacherAccountButton(),
-                              const SizedBox(width: 5),
-                              buildStudentAccountButton(),
-                            ],
-                          ),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            // flex: 1,
+            Center(
+              child: Container(
+                // color: Colors.black38,
+                height:  MediaQuery.of(context).size.height / 1.41,
+                width: MediaQuery.of(context).size.width / 2.5,
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            buildTeacherAccountButton(),
+                            const SizedBox(width: 5),
+                            buildStudentAccountButton(),
+                          ],
+                        ),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          // flex: 1,
+                          child: Container(
+                            padding: const EdgeInsets.only(right:18,bottom: 5,top: 5,left: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(color: Colors.black38),
+                            ),
                             child: Container(
-                              padding: const EdgeInsets.only(right:18,bottom: 5,top: 5,left: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(color: Colors.black38),
-                              ),
-                              child: Container(
-                                height: 28,
-                                // width: MediaQuery.of(context).size.width/5,
-                                child: TextFormField(
-                                  onChanged: (value) {
-                                    setState(() {
-                                      updateListOnSearch(value);
-                                    });
-                                  },
-                                  controller: searchBarController,
-                                  textAlign: TextAlign.right,
+                              height: 28,
+                              // width: MediaQuery.of(context).size.width/5,
+                              child: TextFormField(
+                                onChanged: (value) {
+                                  setState(() {
+                                    updateListOnSearch(value);
+                                  });
+                                },
+                                controller: searchBarController,
+                                textAlign: TextAlign.right,
 
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'أدخل اسم المستخدم',
-                                    prefixIcon: Icon(Icons.search),
-                                  ),
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'أدخل اسم المستخدم',
+                                  prefixIcon: Icon(Icons.search),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Container(
-                        decoration: BoxDecoration(
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
                           color: Colors.black12,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: Colors.black12,
-                          ),
-                        ),
-                        height: MediaQuery.of(context).size.height/1.98,
-                        child: ListView(
-                          scrollDirection: Axis.vertical,
-                          children: displayedList.map((e) => e).toList(),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
+                      height: MediaQuery.of(context).size.height/1.98,
+                      child: ListView(
+                        scrollDirection: Axis.vertical,
+                        children: displayedList.map((e) => e).toList(),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
 
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          padding:
-                          MaterialStateProperty.all(const EdgeInsets.only(top: 8,bottom: 10,right: 18,left: 20)),
-                          backgroundColor: MaterialStateProperty.all(Colors.green),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext ctx) {
-                              return const AddAccountForm();
-                            }),
-                          );
-                        },
-                        child: const Text(
-                          'إضافة حساب جديد',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: "DroidKufi",
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        padding:
+                        MaterialStateProperty.all(const EdgeInsets.only(top: 8,bottom: 10,right: 18,left: 20)),
+                        backgroundColor: MaterialStateProperty.all(Colors.green),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext ctx) {
+                            return const AddAccountForm();
+                          }),
+                        );
+                      },
+                      child: const Text(
+                        'إضافة حساب جديد',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: "DroidKufi",
+                        ),
+                      ),
 
 
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
 
     );
   }

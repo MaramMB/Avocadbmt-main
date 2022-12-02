@@ -5,7 +5,7 @@ import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voice.dart';
 import 'mainpage.dart';
-import 'manag.dart';
+
 import 'package:http/http.dart' as http;
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);

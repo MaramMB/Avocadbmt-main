@@ -18,7 +18,7 @@ import 'Profile/profile.dart';
 import 'Profile/teacher_profile.dart';
 import 'dic.dart';
 import 'mainpage.dart';
-import 'manag.dart';
+
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -55,6 +55,7 @@ class SelectionButton extends StatefulWidget {
 
 }
 class SelectionButtonState extends State<SelectionButton> {
+  List list=[];
 var IDController = TextEditingController();
   String? userKind;
   String userId = '';
@@ -79,6 +80,7 @@ var IDController = TextEditingController();
   void initState() {
     super.initState();
     getUserData();
+    getsteudentname();
     // getTeacher();
   }
 
@@ -383,7 +385,7 @@ var IDController = TextEditingController();
               },
 
               child: SizedBox(
-                width: 175,
+                width: 185,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children:  [
@@ -394,38 +396,22 @@ var IDController = TextEditingController();
                     SizedBox(
                       width: 5,
                     ),
-                    // Text(
-                    //
-                    //   style: TextStyle(
-                    //       fontSize: 16,
-                    //       color: Colors.white,
-                    //       fontFamily: "DroidKufi"),
-                    // ),
+                    Text(list[0]['Name']+list[0]['familyname'],
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontFamily: "DroidKufi"),
+                    ),
                     SizedBox(
                       width: 5,
                     ),
-                    CircleAvatar(
-                      backgroundImage: AssetImage("img/avocado.png"),
-                      radius: 16.7,
-                    ),
-                    // Container(
-                    //   child: CircleAvatar(
-                    //     // backgroundImage: AssetImage("img/avocado.png"),
-                    //     radius: 16.7,
-                    //       child: imagevalue == null
-                    //           ? Image.asset(
-                    //         'img/avocado.png',
-                    //         width: MediaQuery.of(context)
-                    //             .size
-                    //             .width /
-                    //             5.7,
-                    //         fit: BoxFit.fill,
-                    //       )
-                    //           : _image()),
+                    // CircleAvatar(
+                    //   backgroundImage: Image(list[0]['image'],image: null,),
+                    //   radius: 16.7,
                     // ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 10,
+                        horizontal: 6,
                         // vertical: 20
                       ),
                     ),
@@ -439,12 +425,16 @@ var IDController = TextEditingController();
       ),
     );
   }
+
+Future getsteudentname() async {
+  var url = 'http://localhost/readdata.php';
+    var response = await http.post(Uri.parse(url));
+ if(response.statusCode==200){
+   var red=json.decode(response.body);
+   setState(() {
+     list.addAll(red);
+   });
+   print(list);
+ }
 }
-// Future<List<dynamic>?> getStudents(String id) async {
-//   var url = 'http://localhost/getStudents.php';
-//   var response = await http.post(Uri.parse(url), body: {
-//     'id':id,
-//   });
-//   var res = jsonDecode(response.body);
-//   return res;
-// }
+}
