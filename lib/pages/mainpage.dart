@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/expl.dart';
 import 'package:flutter_application_1/pages/faceexpl.dart';
@@ -7,7 +9,7 @@ import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
+import 'package:http/http.dart' as http;
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -163,5 +165,13 @@ class _mainpageState extends State<mainpage> {
         ],
       ),
     );
+  }
+  getResult(String id , String tid) async {
+    var url = 'http://localhost/getResult.php';
+    var response = await http.post(Uri.parse(url), body: {
+      'sid':userId,
+      'exid':'1',
+    });
+    var res = jsonDecode(response.body);
   }
 }

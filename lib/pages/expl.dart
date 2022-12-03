@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
@@ -257,5 +256,4 @@ class _expageState extends State<expage> {
     var res = jsonDecode(response.body);
     return res;
   }
-
 }

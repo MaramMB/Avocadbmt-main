@@ -8,7 +8,6 @@ if(isset($_POST['sid']) && isset($_POST['exid']))
     $result=$link->query($sql);
     while($row=$result->fetch_assoc()){
     $data[]=$row;
-
     }
     echo json_encode($data,JSON_UNESCAPED_UNICODE);
 }

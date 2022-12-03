@@ -80,9 +80,22 @@ var IDController = TextEditingController();
   void initState() {
     super.initState();
     getUserData();
-    getteachername();
-    // getTeacher();
+    // getname();
+    // getteachname();
+      name();
   }
+  void name(){
+    if (userKind == 'student'){
+      getstuname();
+    }
+    else if(userKind=='teacher')
+    {
+      getteachname();
+    }
+    else{
+      print('بتهون');
+    }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -397,15 +410,81 @@ var IDController = TextEditingController();
     );
   }
 
-Future getteachername() async {
-  var url = 'http://localhost/readdata.php';
-    var response = await http.post(Uri.parse(url));
- if(response.statusCode==200){
-   var red=json.decode(response.body);
-   setState(() {
-     list.addAll(red);
-   });
-   print(list);
- }
+Future getteachname() async {
+  var url = 'http://localhost/getname.php';
+  var response = await http.post(Uri.parse(url), body: {
+    "Id_Num":'20',
+  });
+  var user = json.decode(response.body);
+
+  if (response.statusCode == 200) {
+    print(user);
+    if (user == "Error") {
+      return 'h';
+    }
+    else {
+    print(user['Name']+' '+user['familyname']);
+    return user['Name']+' '+user['familyname'];
+    }
+  }
 }
+Future getstuname() async {
+  var url = 'http://localhost/readdata.php';
+  var response = await http.post(Uri.parse(url), body: {
+    "Id_Num":'0',
+  });
+  var user = json.decode(response.body);
+
+  if (response.statusCode == 200) {
+    print(user);
+    if (user == "Error") {
+      return 'h';
+    }
+    else {
+      print(user['firstname']+' '+user['familyname']);
+      return user['firstname']+' '+user['familyname'];
+    }
+  }
+}
+  Future getname() async {
+    if(userKind=='student'){
+    var url = 'http://localhost/readdata.php';
+    var response = await http.post(Uri.parse(url), body: {
+      "Id_Num":userId,
+    });
+    var user = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      print(user);
+      if (user == "Error") {
+        return 'h';
+      }
+      else {
+        print(user['firstname']+' '+user['familyname']);
+        return user['firstname']+' '+user['familyname'];
+      }
+    }
+  }
+    else if(userKind=='teacher')
+      {
+        var url = 'http://localhost/getname.php';
+        var response = await http.post(Uri.parse(url), body: {
+          "Id_Num":userId,
+        });
+        var user = json.decode(response.body);
+
+        if (response.statusCode == 200) {
+          print(user);
+          if (user == "Error") {
+            return 'h';
+          }
+          else {
+            print(user['Name']+' '+user['familyname']);
+            return user['Name']+' '+user['familyname'];
+          }
+        }
+      }
+    else
+      return 'nnnn';
+  }
 }

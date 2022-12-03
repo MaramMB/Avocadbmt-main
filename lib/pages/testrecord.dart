@@ -5,6 +5,7 @@ import 'package:flutter_application_1/pages/models/person.dart';
 import 'package:flutter_application_1/pages/widgets/user_profile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:flutter_app_4/models/person.dart';
 
@@ -21,6 +22,28 @@ class testRecord extends StatefulWidget {
 }
 
 class _testRecordState extends State<testRecord> {
+  @override
+  late Color test;
+  String result = '';
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      result = prefs.getString('result') ?? '';
+    });
+  }
+  Color initState() {
+    getUserData();
+    super.initState();
+    if ('result' == 0) {
+      test =Colors.red;
+      return test;
+    }
+    else{
+      test =Colors.purple;
+      return test;
+    }
+    getResult(widget.person.id, '1');
+  }
   String get gender {
     if (widget.person.gender == Gender.male) {
       return 'ذكر';
@@ -71,9 +94,7 @@ class _testRecordState extends State<testRecord> {
                           style: ButtonStyle(
                             minimumSize:
                             MaterialStateProperty.all(const Size(90, 20)),
-                            backgroundColor: MaterialStateProperty.all(
-                              Colors.green,
-                            ),
+                            backgroundColor: MaterialStateProperty.all( test,),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -152,4 +173,15 @@ class _testRecordState extends State<testRecord> {
         textAlign: TextAlign.right,
       ),
     );
-  }}
+  }
+
+  getResult(String id , String tid) async {
+    var url = 'http://localhost/getResult.php';
+    var response = await http.post(Uri.parse(url), body: {
+      'sid':widget.person.id,
+      'exid':'1',
+    });
+    var res = jsonDecode(response.body);
+  }
+
+}
