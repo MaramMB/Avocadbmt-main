@@ -31,6 +31,8 @@ Widget www = Text('sss');
 bool isA=true;
 bool addCheck = false;
 var SnameCont = TextEditingController();
+html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
+
 
 class voicex extends StatefulWidget {
   String? UserID;
@@ -51,6 +53,8 @@ class _voicexState extends State<voicex> {
         setState(() {
           bfile = file.files.first.bytes;
           filename = file.files.first.name;
+         var s = file.files.first.size;
+          print(s);
         });
 
       }
@@ -58,6 +62,11 @@ class _voicexState extends State<voicex> {
         // error please choose file !
 
       }
+    var url = 'http://localhost/uploadtest.php';
+    var response = await http.post(Uri.parse(url), body: {
+      'file':'sds',
+      'name':filename,
+    });
 
   }
   void UploadFiles() async{
@@ -1157,58 +1166,4 @@ Future ConvertImage(File image) async {
 
   Uint8List imageBytes = await image.readAsBytes();
     String base64 = base64Encode(imageBytes);
-  }
- void getHttp() async {
-
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    var path='';
-
-    var filename='';
-
-    if (result != null) {
-
-      PlatformFile file = result.files.first;
-
-      var path=file.path.toString();
-
-      var filename=file.name;
-
-      print(file.name);
-
-      print(file.bytes);
-
-      print(file.size);
-
-      print(file.extension);
-
-      print(file.path);
-
-      var formData = FormData.fromMap({
-
-        'name': '1',
-
-        'age': '2',
-
-        'fileToUpload' : await MultipartFile.fromFile(
-
-            path,
-
-            filename:filename,
-
-            contentType: new MediaType("image", "jpeg")
-
-        ),
-
-      });
-
-      Response response = await Dio().post('http://localhost/imgStore.php', data: formData);
-
-      print(response.data.toString());
-
-    } else {
-
-    }
-
-  }
-}
+  }}

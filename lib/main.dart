@@ -24,16 +24,19 @@ Future main()  async {
   runApp(StartPoint());
   WidgetsFlutterBinding.ensureInitialized();
 
+  FirebaseOptions defaultOptions = FirebaseOptions(
+    apiKey: "AIzaSyCHMOTWmG8K5j8A_3fnK5LmM49Lwyw6YmE",
+    appId: "1:865215937003:web:c04c8ddca5b010aa1d81ae",
+    messagingSenderId: "865215937003",
+    projectId: "flutterproject1337",
+    storageBucket: "flutterproject1337.appspot.com",
+  );
+
   await Firebase.initializeApp(
     name: "flutterproject1337",
-    options: kIsWeb || Platform.isAndroid ? const FirebaseOptions(
-      apiKey: "AIzaSyCHMOTWmG8K5j8A_3fnK5LmM49Lwyw6YmE",
-      appId: "1:865215937003:web:c04c8ddca5b010aa1d81ae",
-      messagingSenderId: "865215937003",
-      projectId: "flutterproject1337",
-      storageBucket: "flutterproject1337.appspot.com",
-    ):null,
-  );
+    options: defaultOptions,
+    );
+
 }
 class StartPoint extends StatelessWidget {
   @override

@@ -6,9 +6,10 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 // header('Content-Type: applcation/json; charset = utf-8');
 	$db = mysqli_connect('localhost','root','','bdmtproject');
     $id = $_POST['id'];
+    $name = $_POST['firstname'];
 	if($db){
 
-		$name = $_POST['firstname'];
+
         $sql ="SELECT * FROM students WHERE firstname LIKE '%$name%' AND   tid =' $id'";
 
     $result =mysqli_query($db , $sql);
