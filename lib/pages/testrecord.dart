@@ -34,12 +34,12 @@ class _testRecordState extends State<testRecord> {
   Color initState() {
     getUserData();
     super.initState();
-    if ('result' == 0) {
-      test =Colors.red;
+    if ('result' != 0) {
+      test =Colors.blue;
       return test;
     }
     else{
-      test =Colors.purple;
+      test =Colors.green;
       return test;
     }
     getResult(widget.person.id, '1');
