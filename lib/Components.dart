@@ -65,7 +65,7 @@ class soundsWidget extends StatelessWidget {
                               fontFamily: "DroidKufi",
                               fontWeight: FontWeight.w700)),
                       const SizedBox(height: 10,),
-                      audio(path: Spath),
+                      audio(path: "../"+Spath),
                       const SizedBox(height: 15,),
 
                       ElevatedButton(

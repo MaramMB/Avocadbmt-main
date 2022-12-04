@@ -4,10 +4,11 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 
 header("Access-Control-Allow-Headers: X-Requested-With");
-$image = $_POST['file'];
+$audio = $_POST['file'];
 $name = $_POST['name'];
-$file = base64_decode($image);
-file_put_contents($name , $file);
-rename($name , "/del/ffff.mp3");
+$user = get_current_user();
+$file = base64_decode($audio);
+file_put_contents($name, $file);
+rename ($name,"C:/Users/$user/Documents/GitHub/Avocadbmt-main/audio/$name");
 echo 'upload is finished';
 ?>

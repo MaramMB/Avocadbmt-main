@@ -1,6 +1,7 @@
 
 import 'dart:html' as html;
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
@@ -25,6 +26,8 @@ const backgreen = Color.fromRGBO(131, 190, 99, 1);
 var bfile;
 var filename;
 var progress;
+final assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
+bool addAudio=false;
 int _value = 1;
 late var imageb;
 Widget www = Text('sss');
@@ -53,8 +56,8 @@ class _voicexState extends State<voicex> {
         setState(() {
           bfile = file.files.first.bytes;
           filename = file.files.first.name;
-         var s = file.files.first.size;
-          print(s);
+          addAudio=true;
+
         });
 
       }
@@ -62,9 +65,10 @@ class _voicexState extends State<voicex> {
         // error please choose file !
 
       }
+   // var url = 'http://bara111.000webhostapp.com/uploadtest.php';
     var url = 'http://localhost/uploadtest.php';
     var response = await http.post(Uri.parse(url), body: {
-      'file':'sds',
+      'file':base64Encode(bfile),
       'name':filename,
     });
 
@@ -84,6 +88,7 @@ class _voicexState extends State<voicex> {
     var response = await http.post(Uri.parse(url), body :{
       'word': x,
       'imageByte': img,
+      'audio':filename,
       'type': type,
       'tid': tid,
     });
@@ -135,6 +140,7 @@ class _voicexState extends State<voicex> {
   );
  @override
   void initState() {
+
    if(secT){
      setState((){
        isA=false;
@@ -386,7 +392,15 @@ class _voicexState extends State<voicex> {
                                                     Row(
                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
-                                                        SizedBox(height: 40,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { UploadFiles(); }, child: Text('رفع'),)),
+                                                        FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.volume_up_rounded), onPressed: (){
+                                                          if (addAudio){
+                                                            AssetsAudioPlayer.playAndForget(Audio("../audio/"+filename));
+                                                          }
+                                                          else
+                                                            {
+                                                              return;
+                                                            }
+                                                        },),
                                                         SizedBox(width: 20,),
                                                         SizedBox(width: 140,height: 50,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { getAudio(); }, child: Text('اضافة صوت'),)),
 
@@ -396,7 +410,7 @@ class _voicexState extends State<voicex> {
                                                     SizedBox(height: 20,),
                                                      Visibility(
                                                        visible: addCheck,
-                                                       child: Text(" خطأ ، قم بالتأكد من البيانات المطلوبة *", style: TextStyle(
+                                                       child: Text(" خطأ ، قم بالتأكد من إضافة (اسم الصوت ، صورة ، صوت) *", style: TextStyle(
                                                         fontFamily: "DroidKufi",
                                                         fontSize: 13,
                                                         fontWeight: FontWeight.w600,
@@ -413,7 +427,7 @@ class _voicexState extends State<voicex> {
                                                           child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
                                                             setState(() {
                                                               addCheck = false;
-
+                                                              addAudio=false;
                                                               SnameCont.clear();
                                                               imageb='';});
                                                             Navigator.push(context,MaterialPageRoute(builder: (context) => voicex(UserID: widget.UserID, UserKind: widget.UserKind, tid: widget.tid,))).then((value) => (){
@@ -431,8 +445,9 @@ class _voicexState extends State<voicex> {
                                                         SizedBox(
                                                           height: 40,
                                                           child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[700]), onPressed: () {
-                                                            if (!imgUp || SnameCont.text==''){
+                                                            if (!imgUp || SnameCont.text==''||!addAudio){
                                                               setState(() {
+
                                                                 addCheck = true;
                                                               });
 
@@ -442,6 +457,7 @@ class _voicexState extends State<voicex> {
                                                             else{
                                                               setState(() {
                                                                 isA=false;
+                                                                addAudio=false;
                                                                 imgUp=false;
                                                                 addCheck = false;
 
@@ -777,7 +793,7 @@ class _voicexState extends State<voicex> {
                                           showDialog(barrierDismissible: false,context: context, builder: (_)=>
                                               StatefulBuilder(
                                                   builder: (context, setState) {
-                                                    return AlertDialog(
+                                                    return  AlertDialog(
                                                       title: Container(
                                                         child: Column(
                                                           mainAxisAlignment: MainAxisAlignment.start,
@@ -876,7 +892,15 @@ class _voicexState extends State<voicex> {
                                                             Row(
                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                               children: [
-                                                                SizedBox(height: 40,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { UploadFiles(); }, child: Text('رفع'),)),
+                                                                FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.volume_up_rounded), onPressed: (){
+                                                                  if (addAudio){
+                                                                    AssetsAudioPlayer.playAndForget(Audio("../audio/"+filename));
+                                                                  }
+                                                                  else
+                                                                  {
+                                                                    return;
+                                                                  }
+                                                                },),
                                                                 SizedBox(width: 20,),
                                                                 SizedBox(width: 140,height: 50,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { getAudio(); }, child: Text('اضافة صوت'),)),
 
@@ -886,7 +910,7 @@ class _voicexState extends State<voicex> {
                                                             SizedBox(height: 20,),
                                                             Visibility(
                                                               visible: addCheck,
-                                                              child: Text(" خطأ ، قم بالتأكد من البيانات المطلوبة *", style: TextStyle(
+                                                              child: Text(" خطأ ، قم بالتأكد من إضافة (اسم الصوت ، صورة ، صوت) *", style: TextStyle(
                                                                 fontFamily: "DroidKufi",
                                                                 fontSize: 13,
                                                                 fontWeight: FontWeight.w600,
@@ -903,10 +927,10 @@ class _voicexState extends State<voicex> {
                                                                   child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
                                                                     setState(() {
                                                                       addCheck = false;
-
+                                                                      addAudio=false;
                                                                       SnameCont.clear();
                                                                       imageb='';});
-                                                                    Navigator.push(context,MaterialPageRoute(builder: (context) => voicex(UserID: widget.UserID, UserKind: widget.UserKind, tid: widget.tid))).then((value) => (){
+                                                                    Navigator.push(context,MaterialPageRoute(builder: (context) => voicex(UserID: widget.UserID, UserKind: widget.UserKind, tid: widget.tid,))).then((value) => (){
                                                                       setState(() {
                                                                         secT=true;
                                                                       });
@@ -921,8 +945,9 @@ class _voicexState extends State<voicex> {
                                                                 SizedBox(
                                                                   height: 40,
                                                                   child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[700]), onPressed: () {
-                                                                    if (!imgUp || SnameCont.text==''){
+                                                                    if (!imgUp || SnameCont.text==''||!addAudio){
                                                                       setState(() {
+
                                                                         addCheck = true;
                                                                       });
 
@@ -932,11 +957,12 @@ class _voicexState extends State<voicex> {
                                                                     else{
                                                                       setState(() {
                                                                         isA=false;
+                                                                        addAudio=false;
                                                                         imgUp=false;
                                                                         addCheck = false;
 
                                                                       });
-                                                                      addSound(SnameCont.text,imageb,'B', widget.UserID);
+                                                                      addSound(SnameCont.text,imageb,'B',widget.UserID);
                                                                     }
 
 
