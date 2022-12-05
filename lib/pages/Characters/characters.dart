@@ -817,24 +817,25 @@ class _sptestState extends State<sptest> {
   }
   addTestResult() async {
     var url = 'http://localhost/addTestResult.php';
-    final requestBody = {
-      "sid": widget.person.id,
-      "result": truee.length,
-      "note": errors[index].toString(),
-      "testid" :'1',
-    };
     print (widget.person.id+ '  -  '+truee.length.toString()+ '   -   ');
-    final response = await http.post(Uri.parse(url), body: requestBody);
-    var data = jsonDecode(response.body);
-    print(data);
-    if (data == 'Success') {
-      // Navigator.of(context, rootNavigator: true).pop();
-      Fluttertoast.showToast(
-          msg: "تم اضافه بنجاح", timeInSecForIosWeb: 1);
-    }
-    else{ Fluttertoast.showToast(
-            msg: "لم يتم الاضافه بنجاح", timeInSecForIosWeb: 1);
-  }
+    print (errors);
+    // print (errors[index]);
+    final response = await http.post(Uri.parse(url), body: {
+      'stuid': (widget.person.id).toString(),
+      'result': (truee.length).toString(),
+      'note': errors.toString(),
+      'testid' :'1',
+    });
+    // var data = jsonDecode(response.body);
+    // print(data);
+  //   if (data == 'Success') {
+  //     // Navigator.of(context, rootNavigator: true).pop();
+  //     Fluttertoast.showToast(
+  //         msg: "تم اضافه بنجاح", timeInSecForIosWeb: 1);
+  //   }
+  //   else{ Fluttertoast.showToast(
+  //           msg: "لم يتم الاضافه بنجاح", timeInSecForIosWeb: 1);
+  // }
       }
     }
 

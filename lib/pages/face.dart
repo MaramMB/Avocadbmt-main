@@ -189,7 +189,6 @@ class _faceexState extends State<faceex> {
                                           flickManager: myfilk[index],
 
                                         ),
-
                                         // SizedBox(height: 10,),
                                         // IconButton(
                                         //     onPressed: () {

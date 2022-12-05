@@ -81,21 +81,21 @@ var IDController = TextEditingController();
     super.initState();
     getUserData();
     // getname();
-    // getteachname();
-      name();
+    getteachname();
+      // name();
   }
-  void name(){
-    if (userKind == 'student'){
-      getstuname();
-    }
-    else if(userKind=='teacher')
-    {
-      getteachname();
-    }
-    else{
-      print('بتهون');
-    }
-}
+//   void name(){
+//     if (userKind == 'student'){
+//       getstuname();
+//     }
+//     else if(userKind=='teacher')
+//     {
+//       getteachname();
+//     }
+//     else{
+//       print('بتهون');
+//     }
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -472,7 +472,6 @@ Future getstuname() async {
           "Id_Num":userId,
         });
         var user = json.decode(response.body);
-
         if (response.statusCode == 200) {
           print(user);
           if (user == "Error") {
