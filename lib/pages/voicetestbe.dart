@@ -26,7 +26,7 @@ int totalScore=0;
 int isCorrect = 0;
 final Ccontroller = ConfettiController();
 late List<Map<String, Object>> testType;
-List<Map<String, Object>> be = const [
+List<Map<String, Object>> as = const [
   {
     'audio': 'audio/rain.mp3',
     'answers': [
@@ -57,7 +57,7 @@ List<Map<String, Object>> be = const [
     ],
   },
 ];
-List<Map<String, Object>> as = const [
+List<Map<String, Object>> be = const [
   {
     'audio': 'audio/rain.mp3',
     'answers': [
@@ -91,7 +91,7 @@ List<Map<String, Object>> as = const [
 
 class betest extends StatefulWidget {
    late int type;
-   String? sid;
+   String sid;
 
    betest({super.key, required this.type , required this.sid}){
 
@@ -113,6 +113,7 @@ class _betestState extends State<betest> {
 
 
   void initState() {
+    print('id : '+widget.sid);
     super.initState();
     _progressValue = 0.0;
   }

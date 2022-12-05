@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Characters/characters.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
+import 'package:flutter_application_1/pages/voice.dart';
+import 'package:flutter_application_1/pages/voicetestbe.dart';
 import 'package:flutter_application_1/pages/widgets/user_profile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
@@ -11,11 +13,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class testRecord extends StatefulWidget {
   testRecord(
-      {Key? key, required this.person, this.ID, required this.isActive})
+      {Key? key, required this.person, this.ID, required this.isActive, this.exID})
       : super(key: key);
   final Person person;
   final ID;
   late bool isActive;
+  final exID;
 
   @override
   State<testRecord> createState() => _testRecordState();
@@ -86,10 +89,27 @@ class _testRecordState extends State<testRecord> {
                         const SizedBox(width: 5),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return sptest(person: widget.person, id: widget.ID);
-                            }));
+                            if (widget.exID=='1')
+                            {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return sptest(person: widget.person, id: widget.ID);
+                              }));
+                            }
+                            else if (widget.exID=='4')
+                            {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return betest(type: 1, sid: widget.person.id);
+                              }));
+                            }
+                            else if (widget.exID=='5')
+                            {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return betest(type: 2, sid: widget.person.id);
+                              }));
+                            }
                           },
                           style: ButtonStyle(
                             minimumSize:
@@ -179,7 +199,7 @@ class _testRecordState extends State<testRecord> {
     var url = 'http://localhost/getResult.php';
     var response = await http.post(Uri.parse(url), body: {
       'sid':widget.person.id,
-      'exid':'1',
+      'exid':widget.exID,
     });
     var res = jsonDecode(response.body);
   }
