@@ -8,8 +8,9 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
 	if($db){
 
-       
-        $sql ="select * from students";
+        $id=$_GET['id'];
+
+        $sql ="SELECT * FROM students LEFT JOIN usersacounts ON students.Students_Id = usersacounts.Id_Num Where students.socid = $id";
         
     $result =mysqli_query($db , $sql);
     if($result){
@@ -24,6 +25,9 @@ header("Access-Control-Allow-Headers: X-Requested-With");
             $response[$i]["father_name"]=$row["secname"];
             $response[$i]["ptype"]=$row["ptype"];
             $response[$i]["student_id"]=$row["Students_Id"];
+            $response[$i]["active"]=$row["active"];
+            $response[$i]["Email"]=$row["Email"];
+            $response[$i]["Password"]=$row["Passward"];
             $i++;
         }
         echo json_encode($response , JSON_PRETTY_PRINT);

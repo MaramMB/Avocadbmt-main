@@ -40,98 +40,100 @@ class _PersonRecordState extends State<PersonRecord> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      // crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 13,
-            // vertical: 5,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: SizedBox(
-                  width: 210,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const SizedBox(width: 5),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return UserProfile(
-                                  person: widget.person, id: widget.ID);
-                            }));
-                          },
-                          style: ButtonStyle(
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(90, 40)),
-                            backgroundColor: MaterialStateProperty.all(
-                              Colors.lightBlue,
-                            ),
-                          ),
-                          child: const Text(
-                            'الملف الشخصي',
-                            style: TextStyle(
-                              fontFamily: "Tajawal",
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        widget.isActive
-                            ? buildDisableButton()
-                            : buildEnableButton(),
-                        // SizedBox(width: 20,),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              // SizedBox(width: 20,),
-              Container(
-                height: 65,
-                width: MediaQuery.of(context).size.width / 5.8,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ListTile(
-                    trailing: const CircleAvatar(
-                      backgroundColor: Color(75747400),
-                      child: Icon(
-                        Icons.account_circle_outlined,
-                        size: 60,
-                        color: Colors.green,
-                      ),
-                      // child: ClipOval(),
-                    ),
-                    title: Padding(
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 13,
+              // vertical: 5,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: SizedBox(
+                    width: 210,
+                    child: Padding(
                       padding: const EdgeInsets.only(top: 12.0),
-                      child: Text(
-                        widget.person.name,
-                        textAlign: TextAlign.right,
-                        style: const TextStyle(
-                          fontFamily: "DroidKufi",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const SizedBox(width: 5),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return UserProfile(
+                                    person: widget.person, id: widget.ID);
+                              }));
+                            },
+                            style: ButtonStyle(
+                              minimumSize:
+                                  MaterialStateProperty.all(const Size(90, 40)),
+                              backgroundColor: MaterialStateProperty.all(
+                                Colors.lightBlue,
+                              ),
+                            ),
+                            child: const Text(
+                              'الملف الشخصي',
+                              style: TextStyle(
+                                fontFamily: "Tajawal",
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          widget.isActive
+                              ? buildDisableButton()
+                              : buildEnableButton(),
+                          // SizedBox(width: 20,),
+                        ],
                       ),
                     ),
-                    subtitle:
-                        Text(widget.person.id, textAlign: TextAlign.right),
                   ),
                 ),
-              ),
-            ],
+                // SizedBox(width: 20,),
+                Container(
+                  height: 65,
+                  width: MediaQuery.of(context).size.width / 5.8,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: ListTile(
+                      trailing: const CircleAvatar(
+                        backgroundColor: Color(75747400),
+                        child: Icon(
+                          Icons.account_circle_outlined,
+                          size: 60,
+                          color: Colors.green,
+                        ),
+                        // child: ClipOval(),
+                      ),
+                      title: Padding(
+                        padding: const EdgeInsets.only(top: 12.0),
+                        child: Text(
+                          widget.person.name,
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                            fontFamily: "DroidKufi",
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      subtitle:
+                          Text(widget.person.id, textAlign: TextAlign.right),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        const Divider(color: Colors.black12),
-      ],
+          const Divider(color: Colors.black12),
+        ],
+      ),
     );
   }
 
@@ -213,7 +215,7 @@ class _PersonRecordState extends State<PersonRecord> {
       final response = await http.post(
         Uri.parse(url),
         body: {
-          "Id_Num": widget.ID.toString(),
+          "Id_Num": widget.person.id.toString(),
           "active": toggle ? "active" : "inactive",
         },
       );

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, use_build_context_synchronously, non_constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../rowbar.dart';
 import '../../widgets/manage_accounts.dart';
@@ -27,7 +30,6 @@ class AddTeacheAccount extends StatefulWidget {
 }
 
 class _AddTeacheAccountState extends State<AddTeacheAccount> {
-
   String gender = '';
   int _selectedType = 2;
   TextStyle unselectedTypeTextStyle = const TextStyle(
@@ -56,17 +58,16 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
-      body: Container(
-        child: Column(
-          children: [
-            // const SelectionButton(),
-            const SizedBox(
-              height: 30,
-            ),
-            Center(
-              child: Container(
+      body: Center(
+        child: Container(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
                 height: MediaQuery.of(context).size.height / 1.1,
-                width: MediaQuery.of(context).size.width / 1.8,
+                width: MediaQuery.of(context).size.width / 1.6,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -75,55 +76,62 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                   padding: const EdgeInsets.all(10.0),
                   child: SingleChildScrollView(
                     child: Column(
-                      // textDirection: TextDirection.rtl,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text("اضافه معلم",
                             style: TextStyle(
                                 color: Colors.green,
-                                fontSize: 30,
+                                fontSize: 35,
                                 fontFamily: "DroidKufi",
                                 fontWeight: FontWeight.w700)),
-                        const SizedBox(
-                          height: 15,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20.0, left: 20),
+                          child: teacherwidget(),
                         ),
-                        teacherwidget(),
-
                       ],
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-
   addTeacher() async {
     if (nameController.text == "" ||
+        secondnameController.text == "" ||
+        thirdnameController.text == "" ||
+        lastnameController.text == "" ||
         accountnumberController.text == "" ||
         phoneController.text == "" ||
+        IDTeacherController.text == "" ||
+        passController.text == "" ||
+        confirmPassController.text == "" ||
         emailController.text == "" ||
         specificController.text == "") {
-        msgDialog('الرجاء تعبئه جميع الفراغات');
-    }
-    else {
-      var url = 'http://localhost/add_teacher.php';
+      msgDialog('الرجاء تعبئه جميع الفراغات');
+    } else {
+      final SharedPreferences pref = await SharedPreferences.getInstance();
+      String? socId = pref.getString('userId');
 
-      Navigator.of(context, rootNavigator: true).pop();
+      var url = 'http://localhost/add_teacher.php';
 
       final response = await http.post(
         Uri.parse(url),
         body: {
           "Name": nameController.text,
+          "secname": secondnameController.text,
+          "thirdname": thirdnameController.text,
+          "familyname": lastnameController.text,
           "gender": _character.toString().split('.').last,
           "specialization": specificController.text,
           "Phone_Num": phoneController.text,
           "accountnum": accountnumberController.text,
           "Id_Num": IDTeacherController.text,
+          "Society_Id": socId,
           "email": emailController.text,
           "password": passController.text,
         },
@@ -133,10 +141,12 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
 
       if (data == 'Success') {
         clearData();
-        Fluttertoast.showToast(
-            msg: "تم اضافه المعلم بنجاح");
+        Fluttertoast.showToast(msg: "تم اضافه المعلم بنجاح");
+      } else if (data == 'email') {
+        msgDialog(
+            'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر');
       } else {
-        Navigator.of(context, rootNavigator: true).pop();
+        msgDialog('حدثت مشكلة اثناء اضافة معلم');
       }
     }
   }
@@ -144,67 +154,19 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   void clearData() {
     setState(() {
       nameController.clear();
+      secondnameController.clear();
+      thirdnameController.clear();
+      lastnameController.clear();
       dateinput.clear();
       accountnumberController.clear();
       emailController.clear();
       specificController.clear();
       dateAppliedController.clear();
       IDTeacherController.clear();
+      passController.clear();
       confirmPassController.clear();
       phoneController.clear();
     });
-  }
-
-
-  void confirm() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
-          actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                    onTap: () {
-                      Navigator.of(context, rootNavigator: true).pop();
-                      addTeacher();
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 40,
-                        width: 100,
-                        child: const Center(
-                            child: Text(
-                              "نعم",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, color: Colors.white),
-                            )))),
-                InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 40,
-                        width: 100,
-                        child: const Center(
-                            child: Text(
-                              "لا",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, color: Colors.white),
-                            )))),
-              ],
-            ),
-          ],
-        );
-      },
-    );
   }
 
   // Controllers for Teachers
@@ -218,6 +180,9 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   var passController = TextEditingController();
   var confirmPassController = TextEditingController();
   var dateAppliedController = TextEditingController();
+  var secondnameController = TextEditingController();
+  var thirdnameController = TextEditingController();
+  var lastnameController = TextEditingController();
 
   SingingCharacterTeacher? _character = SingingCharacterTeacher.Female;
   SingingCharacterStudent? _characterstudent = SingingCharacterStudent.Female;
@@ -226,18 +191,61 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   Widget teacherwidget() {
     return Form(
       key: _formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          namefield(field: "اسم المعلم"),
-          textfieldwidget(
-            type: TextInputType.name,
-            ontap: () {},
-            wid: 300,
-            hei: 40,
-            nameController: nameController,
-            text: "أسم المعلم",
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Column(
+                children: [
+                  textfieldwidget(
+                    type: TextInputType.name,
+                    ontap: () {},
+                    wid: 155,
+                    hei: 40,
+                    nameController: nameController,
+                    text: "الأسم الأول",
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  textfieldwidget(
+                    type: TextInputType.name,
+                    ontap: () {},
+                    wid: 155,
+                    hei: 40,
+                    nameController: secondnameController,
+                    text: "الأسم الثاني",
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  textfieldwidget(
+                    type: TextInputType.name,
+                    ontap: () {},
+                    wid: 155,
+                    hei: 40,
+                    nameController: thirdnameController,
+                    text: "الأسم الثالث",
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  textfieldwidget(
+                    type: TextInputType.name,
+                    ontap: () {},
+                    wid: 155,
+                    hei: 40,
+                    nameController: lastnameController,
+                    text: "الأسم الأخير",
+                  ),
+                ],
+              ),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -273,15 +281,23 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                         textAlign: TextAlign.right,
                         controller: accountnumberController,
                         obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
+                        decoration: const InputDecoration(
+                          hintStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'DroidKufi',
+                            fontSize: 15,
+                            color: Colors.black38,
                           ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.black38, width: 2.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(width: 2.0, color: backgreen),
-                          ),
+                              borderSide:
+                                  BorderSide(width: 1.5, color: Colors.black38),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
                           hintText: "رقم الحساب",
                         ),
                       ),
@@ -312,15 +328,23 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                         textAlign: TextAlign.right,
                         controller: phoneController,
                         obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xff34568B), width: 2.0),
+                        decoration: const InputDecoration(
+                          hintStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'DroidKufi',
+                            fontSize: 15,
+                            color: Colors.black38,
                           ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.black38, width: 2.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(width: 2.0, color: backgreen),
-                          ),
+                              borderSide:
+                                  BorderSide(width: 1.5, color: Colors.black38),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
                           hintText: "رقم الهاتف",
                         ),
                       ),
@@ -384,53 +408,128 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _confirmPassword,
               _password,
+              _confirmPassword,
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _dateApplied,
               _email,
+              _dateApplied,
             ],
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20),
-            child: InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const AlertDialog(
-                      content: SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: Center(child: CircularProgressIndicator())),
-                    );
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    final isValid = _formKey.currentState!.validate();
+                    if (!isValid ||
+                        confirmPassController.text != passController.text) {
+                      return;
+                    }
+
+                    confirmDialog();
                   },
-                );
-                confirm();
-              },
-              child: Container(
-                width: 200,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: backgreen, borderRadius: BorderRadius.circular(10)),
-                child: const Center(
-                  child: Text(
-                    "اضافه معلم",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.white),
+                  child: Container(
+                    width: 200,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: backgreen,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Center(
+                      child: Text(
+                        "اضافه معلم",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: backgreen,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    elevation: 2.0,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 35, vertical: 10),
+                  ),
+                  child: const Text("العودة",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "DroidKufi",
+                        fontSize: 18.0,
+                      )),
+                ),
+              ],
             ),
           )
         ],
       ),
+    );
+  }
+
+  void confirmDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: const Text("هل تريد بالتأكيد حفظ البيانات ؟ "),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).pop();
+
+                      addTeacher();
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        height: 40,
+                        width: 100,
+                        child: const Center(
+                            child: Text(
+                          "نعم",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        )))),
+                InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        height: 40,
+                        width: 100,
+                        child: const Center(
+                            child: Text(
+                          "لا",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        )))),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -473,107 +572,110 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   }
 
   Widget get _email => Column(
-    children: [
-      namefield(field: "البريد الالكتروني"),
-      customTextFieldWidget(
-        type: TextInputType.name,
-        ontap: () {},
-        wid: 300,
-        hei: 40,
-        validation: (Val) => validateEmail(emailController.text),
-        nameController: emailController,
-        text: "bara@gmail.com :مثال", readOnly: false,
-      ),
-    ],
-  );
-
-  Widget get _password => Column(
-    children: [
-      namefield(field: "كلمة المرور"),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          visibleIcon,
+          namefield(field: "البريد الالكتروني"),
           customTextFieldWidget(
             type: TextInputType.name,
             ontap: () {},
-            wid: 250,
+            wid: 300,
             hei: 40,
-            hideShow: _passwordVisible,
-            nameController: passController,
-            text: "مكونة من 8 أحرف و أرقام", readOnly: false,
+            validation: (Val) => validateEmail(emailController.text),
+            nameController: emailController,
+            text: "bara@gmail.com :مثال",
+            readOnly: false,
           ),
         ],
-      ),
-    ],
-  );
+      );
+
+  Widget get _password => Column(
+        children: [
+          namefield(field: "كلمة المرور"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              customTextFieldWidget(
+                type: TextInputType.name,
+                ontap: () {},
+                wid: 240,
+                hei: 35,
+                hideShow: _passwordVisible,
+                nameController: passController,
+                text: "مكونة من 8 أحرف و أرقام",
+                readOnly: false,
+              ),
+              visibleIcon,
+            ],
+          ),
+        ],
+      );
 
   Widget get visibleIcon => IconButton(
-    icon: Icon(
-      // Based on passwordVisible state choose the icon
-      !_passwordVisible ? Icons.visibility : Icons.visibility_off,
-      color: Theme.of(context).primaryColorDark,
-    ),
-    onPressed: () {
-      // Update the state i.e. toogle the state of passwordVisible variable
-      setState(() {
-        _passwordVisible = !_passwordVisible;
-      });
-    },
-  );
+        icon: Icon(
+          // Based on passwordVisible state choose the icon
+          !_passwordVisible ? Icons.visibility : Icons.visibility_off,
+          color: Theme.of(context).primaryColorDark,
+        ),
+        onPressed: () {
+          // Update the state i.e. toogle the state of passwordVisible variable
+          setState(() {
+            _passwordVisible = !_passwordVisible;
+          });
+        },
+      );
 
   Widget get _dateApplied => Column(
-    children: [
-      namefield(field: "تاريخ الانضمام"),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          InkWell(
-            onTap: setCurrentDate,
-            child: Container(
-              padding: const EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(6)),
-              child: const Icon(
-                Icons.calendar_month,
-                color: Colors.white,
-                size: 30,
+          namefield(field: "تاريخ الانضمام"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              customTextFieldWidget(
+                type: TextInputType.name,
+                ontap: setCurrentDate,
+                wid: 250,
+                hei: 35,
+                nameController: dateAppliedController,
+                text: "تاريخ الانضمام",
               ),
-            ),
-          ),
-          const SizedBox(
-            width: 2.0,
-          ),
-          customTextFieldWidget(
-            type: TextInputType.name,
-            ontap: setCurrentDate,
-            wid: 250,
-            hei: 40,
-            readOnly: true,
-            nameController: dateAppliedController,
-            text: "تاريخ الانضمام",
+              const SizedBox(
+                width: 2.0,
+              ),
+              InkWell(
+                onTap: setCurrentDate,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: const Icon(
+                    Icons.calendar_month,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
-      ),
-    ],
-  );
+      );
 
   Widget get _confirmPassword => Column(
-    children: [
-      namefield(field: "تأكيد كلمة المرور"),
-      customTextFieldWidget(
-        type: TextInputType.name,
-        ontap: () {},
-        wid: 300,
-        hei: 40,
-        validation: (Val) => passValidation(),
-        nameController: confirmPassController,
-        text: "", readOnly: false,
-      ),
-    ],
-  );
+        children: [
+          namefield(field: "تأكيد كلمة المرور"),
+          customTextFieldWidget(
+            type: TextInputType.name,
+            ontap: () {},
+            wid: 300,
+            hei: 35,
+            hideShow: _passwordVisible,
+            validation: (Val) => passValidation(),
+            nameController: confirmPassController,
+            text: "",
+            readOnly: false,
+          ),
+        ],
+      );
   void setCurrentDate() {
     setState(() {
       dateAppliedController.text =
@@ -592,7 +694,7 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   String? passValidation() {
     RegExp regex = RegExp(r'^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$');
     return !regex.hasMatch(passController.text) &&
-        passController.text == confirmPassController.text
+            passController.text == confirmPassController.text
         ? null
         : "كلمة المرور خاطئة, الرجاء ادخال كلمة مطابقة و صحيحة";
   }
@@ -636,28 +738,37 @@ class textfieldwidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
       child: Container(
-        height: hei,
+        height: 40,
         width: wid,
         child: TextField(
-          keyboardType: type,
-          onTap: () {
-            ontap();
-          },
-          textAlign: TextAlign.right,
-          controller: nameController,
-          obscureText: false,
-          decoration: InputDecoration(
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff34568B), width: 2.0),
+            keyboardType: type,
+            onTap: () {
+              ontap();
+            },
+            textAlign: TextAlign.right,
+            controller: nameController,
+            obscureText: false,
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontFamily: 'DroidKufi',
+              fontSize: 15,
             ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 2.0, color: backgreen),
-            ),
-            hintText: text,
-          ),
-        ),
+            decoration: InputDecoration(
+              hintStyle: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontFamily: 'DroidKufi',
+                fontSize: 15,
+                color: Colors.black38,
+              ),
+              focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black38, width: 2.0),
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(width: 1.5, color: Colors.black38),
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              hintText: text,
+            )),
       ),
     );
   }
-
 }

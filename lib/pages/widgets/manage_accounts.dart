@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Account_Managment/Add_Account/addteacher.dart';
-import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/widgets/societies.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Account_Managment/Add_Account/add_account_form.dart';
 import '../models/person.dart';
 import 'person_record.dart';
@@ -14,7 +13,7 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
-String type="";
+String type = "";
 
 // void main() => runApp(const MyApp());
 
@@ -87,7 +86,6 @@ class _managepageState extends State<managepage> {
         padding: const EdgeInsets.only(right: 25.0, top: 10),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               const Text('ادارة الحسابات',
                   style: TextStyle(
@@ -116,14 +114,6 @@ class _managepageState extends State<managepage> {
                     children: [
                       Row(
                         children: [
-                          Row(
-                            children: [
-                              buildTeacherAccountButton(),
-                              const SizedBox(width: 5),
-                              buildStudentAccountButton(),
-                            ],
-                          ),
-                          const SizedBox(width: 6),
                           Expanded(
                             // flex: 1,
                             child: Container(
@@ -159,6 +149,14 @@ class _managepageState extends State<managepage> {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 6),
+                          Row(
+                            children: [
+                              buildStudentAccountButton(),
+                              const SizedBox(width: 5),
+                              buildTeacherAccountButton(),
+                            ],
+                          ),
                         ],
                       ),
                       const SizedBox(height: 10),
@@ -174,7 +172,8 @@ class _managepageState extends State<managepage> {
                           height: 370,
                           child: teacher
                               ? FutureBuilder(
-                                  future: getTeachers(),
+                                  future:
+                                      search ? searchTeachers() : getTeachers(),
                                   builder: (BuildContext context,
                                       AsyncSnapshot snapshot) {
                                     if (snapshot.connectionState ==
@@ -197,7 +196,7 @@ class _managepageState extends State<managepage> {
                                           itemCount: Customers.length,
                                           shrinkWrap: true,
                                           physics:
-                                              const NeverScrollableScrollPhysics(),
+                                              const AlwaysScrollableScrollPhysics(),
                                           itemBuilder: (context, index) {
                                             return PersonRecord(
                                               ID: Customers[index]["id"],
@@ -209,25 +208,39 @@ class _managepageState extends State<managepage> {
                                                         "female"
                                                     ? Gender.female
                                                     : Gender.male,
-                                                address: " - ",
+                                                address: Customers[index]
+                                                    ["spec"],
                                                 phoneNumber: Customers[index]
                                                     ["phone"],
+                                                fatherName: Customers[index]
+                                                    ["fatherName"],
+                                                email: Customers[index]
+                                                    ["Email"],
+                                                password: Customers[index]
+                                                    ["Password"],
                                                 type: AccountType.teacher,
                                               ),
-                                              isActive: true,
+                                              isActive: Customers[index]
+                                                          ["active"] ==
+                                                      "active"
+                                                  ? true
+                                                  : false,
                                             );
                                           },
                                         );
                                       } else {
                                         return const Center(
                                             child: SizedBox(
-                                                height: 40,
-                                                width: 40,
-                                                child:Text('لا يوجد حساب بهذا الاسم', style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontFamily: "DroidKufi",
-                                                ),),
-                                            ));
+                                          height: 40,
+                                          child: Text(
+                                            overflow: TextOverflow.visible,
+                                            'لا يوجد حساب بهذا الاسم',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily: "DroidKufi",
+                                            ),
+                                          ),
+                                        ));
                                       }
                                     }
                                   },
@@ -271,9 +284,17 @@ class _managepageState extends State<managepage> {
                                                     ["address"],
                                                 phoneNumber: Customers[index]
                                                     ["phone"],
-                                                type: AccountType.teacher,
+                                                type: AccountType.student,
+                                                email: Customers[index]
+                                                    ["Email"],
+                                                password: Customers[index]
+                                                    ["Password"],
                                               ),
-                                              isActive: true,
+                                              isActive: Customers[index]
+                                                          ["active"] ==
+                                                      "active"
+                                                  ? true
+                                                  : false,
                                             );
                                           },
                                         );
@@ -282,10 +303,13 @@ class _managepageState extends State<managepage> {
                                             child: SizedBox(
                                                 height: 40,
                                                 // width: 40,
-                                                child:Text("لا يوجد حساب بهذا الاسم", style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontFamily: "DroidKufi",
-                                                ),)));
+                                                child: Text(
+                                                  "لا يوجد حساب بهذا الاسم",
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontFamily: "DroidKufi",
+                                                  ),
+                                                )));
                                       }
                                     }
                                   },
@@ -307,29 +331,11 @@ class _managepageState extends State<managepage> {
                               MaterialStateProperty.all(Colors.green),
                         ),
                         onPressed: () {
-                          // if(teacher == true)
-                          //   {
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(builder: (BuildContext ctx) {
-                          //     return  AddAccountForm();
-                          //   }),
-                          // );
-                          //
-                          //   }
-                          // else
-                          //   {
-                          //     Navigator.of(context).push(
-                          //       MaterialPageRoute(builder: (BuildContext ctx) {
-                          //         return  AddTeacheAccount();
-                          //       }),
-                          //     );
-                          //   }
-
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
                             return teacher == false
-                                ? AddAccountForm()
-                                : AddTeacheAccount();
+                                ? const AddAccountForm()
+                                : const AddTeacheAccount();
                           }));
                         },
                         child: const Text(
@@ -352,7 +358,11 @@ class _managepageState extends State<managepage> {
   }
 
   getStudents() async {
-    var url = 'http://localhost/get_students.php';
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? userId = pref.getString('userId');
+
+    var url =
+        'http://localhost/get_students.php?id=$userId';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;
@@ -362,10 +372,14 @@ class _managepageState extends State<managepage> {
   var searchController = TextEditingController();
 
   searchStudents() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? userId = pref.getString('userId');
+
     var url = 'http://localhost/search_student.php';
     var response = await http.post(
       Uri.parse(url),
       body: {
+        'id': userId,
         'firstname': searchController.text,
       },
     );
@@ -374,8 +388,28 @@ class _managepageState extends State<managepage> {
   }
 
   getTeachers() async {
-    var url = 'http://localhost/get_teachers.php';
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? userId = pref.getString('userId');
+
+    var url =
+        'http://localhost/get_teachers.php?id=$userId';
     var response = await http.get(Uri.parse(url));
+    var res = jsonDecode(response.body);
+    return res;
+  }
+
+  searchTeachers() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? userId = pref.getString('userId');
+
+    var url = 'http://localhost/search_teacher.php';
+    var response = await http.post(
+      Uri.parse(url),
+      body: {
+        'firstname': searchController.text,
+        'id': userId,
+      },
+    );
     var res = jsonDecode(response.body);
     return res;
   }
@@ -441,7 +475,7 @@ class _managepageState extends State<managepage> {
   }
 
   Widget get _noSocietyFound => const Center(
-        child: const Text(
+        child: Text(
           "لا توجد جمعيات مضافة",
           style: TextStyle(
             fontSize: 16,

@@ -13,7 +13,8 @@ class customTextFieldWidget extends StatelessWidget {
       required this.hei,
       required this.type,
       this.validation,
-      this.hideShow = false, required bool readOnly})
+      this.hideShow = false,
+      this.readOnly = false})
       : super(key: key);
 
   final TextEditingController nameController;
@@ -21,7 +22,7 @@ class customTextFieldWidget extends StatelessWidget {
   final String? Function(String?)? validation;
   Function ontap;
   final double wid;
-  final bool hideShow;
+  final bool hideShow, readOnly;
   final double hei;
   final TextInputType type;
 
@@ -39,22 +40,20 @@ class customTextFieldWidget extends StatelessWidget {
           textAlign: TextAlign.right,
           controller: nameController,
           obscureText: hideShow,
+          readOnly: readOnly,
           decoration: InputDecoration(
             hintStyle: const TextStyle(
               fontWeight: FontWeight.w500,
               fontFamily: 'DroidKufi',
               fontSize: 15,
-              color:Colors.black38,
+              color: Colors.black38,
             ),
-
             focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color:Colors.black38, width: 2.0),
-                borderRadius: BorderRadius.all(Radius.circular(15))
-            ),
+                borderSide: BorderSide(color: Colors.black38, width: 2.0),
+                borderRadius: BorderRadius.all(Radius.circular(15))),
             enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(width: 1.5, color:Colors.black38),
-                borderRadius: BorderRadius.all(Radius.circular(15))
-            ),
+                borderSide: BorderSide(width: 1.5, color: Colors.black38),
+                borderRadius: BorderRadius.all(Radius.circular(15))),
             hintText: text,
           ),
         ),

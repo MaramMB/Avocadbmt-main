@@ -21,6 +21,13 @@
 	$kind = $_POST['kind'] ?? 'manager';
 	$active = $_POST['active'] ?? 'active';
 
+	$select = mysqli_query($db, "SELECT * FROM `usersacounts` WHERE `Email`= '$email'");
+
+	if(mysqli_num_rows($select)) {
+		echo json_encode("email");
+		exit();
+	}
+
 
 	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($sid,'$email', '$pass', '$kind', '$active');";
 	$query_user = mysqli_query($db,$insert_user);

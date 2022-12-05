@@ -1,17 +1,11 @@
 // ignore_for_file: prefer_final_fields, use_build_context_synchronously
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-
-enum SingingCharacterGender { Male, Female }
-
-enum SingingCharacterProblem { hear, pron }
 
 class AddScociety extends StatefulWidget {
   const AddScociety({Key? key}) : super(key: key);
@@ -21,7 +15,6 @@ class AddScociety extends StatefulWidget {
 }
 
 class _AddScocietyState extends State<AddScociety> {
-  String gender = '';
   TextStyle unselectedTypeTextStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
@@ -79,7 +72,6 @@ class _AddScocietyState extends State<AddScociety> {
                 child: SingleChildScrollView(
                   child: Form(
                     key: _form,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -128,10 +120,10 @@ class _AddScocietyState extends State<AddScociety> {
                         width: 100,
                         child: const Center(
                             child: Text(
-                              "نعم",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, color: Colors.white),
-                            )))),
+                          "نعم",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        )))),
                 InkWell(
                     onTap: () {
                       Navigator.of(context).pop();
@@ -144,10 +136,10 @@ class _AddScocietyState extends State<AddScociety> {
                         width: 100,
                         child: const Center(
                             child: Text(
-                              "لا",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, color: Colors.white),
-                            )))),
+                          "لا",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        )))),
               ],
             ),
           ],
@@ -162,7 +154,7 @@ class _AddScocietyState extends State<AddScociety> {
         emailController.text == "" ||
         addressController.text == "" ||
         passController.text == "" ||
-        dateController.text == "" ||
+        confirmPassController.text == "" ||
         dateAppliedController.text == "" ||
         managerController.text == "") {
       msgDialog('الرجاء تعبئه جميع الفراغات');
@@ -188,8 +180,11 @@ class _AddScocietyState extends State<AddScociety> {
       if (data == 'Success') {
         clearData();
         Fluttertoast.showToast(msg: "تم اضافة الجمعية بنجاح");
+      } else if (data == 'email') {
+        msgDialog(
+            'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر');
       } else {
-        Navigator.of(context, rootNavigator: true).pop();
+        msgDialog('حدثت مشكلة اثناء اضافة جمعية');
       }
     }
   }
@@ -301,14 +296,23 @@ class _AddScocietyState extends State<AddScociety> {
                       textAlign: TextAlign.right,
                       controller: phoneController,
                       obscureText: false,
-                      decoration: InputDecoration(
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                          BorderSide(color: Color(0xff34568B), width: 2.0),
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'DroidKufi',
+                          fontSize: 15,
+                          color: Colors.black38,
                         ),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black38, width: 2.0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2.0, color: backgreen),
-                        ),
+                            borderSide:
+                                BorderSide(width: 1.5, color: Colors.black38),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
                         hintText: "رقم الهاتف",
                       ),
                     ),
@@ -323,52 +327,14 @@ class _AddScocietyState extends State<AddScociety> {
           children: [
             Column(
               children: [
-                namefield(field: "تاريخ الجمعيه"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: _pickDate,
-                      child: Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(6)),
-                        child: const Icon(
-                          Icons.calendar_month,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    customTextFieldWidget(
-                      type: TextInputType.datetime,
-                      ontap: () => _pickDate(),
-                      nameController: dateController,
-                      wid: 250,
-                      hei: 40,
-                      readOnly: true,
-                      text: "تاريخ الجمعيه",
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                namefield(field: "أسم المدير"),
+                namefield(field: "اسم المدير الشخصي"),
                 customTextFieldWidget(
                   type: TextInputType.text,
                   ontap: () {},
                   wid: 300,
                   hei: 40,
                   nameController: managerController,
-                  text: "أسم المدير",
-                  readOnly: false,
+                  text: "اسم المدير الشخصي",
                 ),
               ],
             ),
@@ -377,149 +343,183 @@ class _AddScocietyState extends State<AddScociety> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _confirmPassword,
             _password,
+            _confirmPassword,
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _dateApplied,
             _email,
+            _dateApplied,
           ],
         ),
         Padding(
           padding: const EdgeInsets.only(top: 20),
-          child: InkWell(
-            onTap: () {
-              confirm();
-            },
-            child: Container(
-              width: 200,
-              height: 40,
-              decoration: BoxDecoration(
-                  color: backgreen, borderRadius: BorderRadius.circular(10)),
-              child: const Center(
-                child: Text(
-                  "اضافه جمعيه",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.white),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  final isValid = _form.currentState!.validate();
+                  if (!isValid ||
+                      confirmPassController.text != passController.text) {
+                    return;
+                  }
+
+                  confirm();
+                },
+                child: Container(
+                  width: 200,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: backgreen,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Center(
+                    child: Text(
+                      "اضافه جمعيه",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: backgreen,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  elevation: 2.0,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+                ),
+                child: const Text("العودة",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: "DroidKufi",
+                      fontSize: 18.0,
+                    )),
+              ),
+            ],
           ),
-        )
+        ),
       ],
     );
   }
 
   Widget get _email => Column(
-    children: [
-      namefield(field: "البريد الالكتروني"),
-      customTextFieldWidget(
-        type: TextInputType.name,
-        ontap: () {},
-        wid: 300,
-        hei: 40,
-        validation: (Val) => validateEmail(emailController.text),
-        nameController: emailController,
-        text: "bara@gmail.com :مثال",
-        readOnly: false,
-      ),
-    ],
-  );
-
-  Widget get _password => Column(
-    children: [
-      namefield(field: "كلمة المرور"),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          visibleIcon,
+          namefield(field: "البريد الالكتروني"),
           customTextFieldWidget(
             type: TextInputType.name,
             ontap: () {},
-            wid: 250,
+            wid: 300,
             hei: 40,
-            hideShow: _passwordVisible,
-            nameController: passController,
-            text: "مكونة من 8 أحرف و أرقام",
+            validation: (Val) => validateEmail(emailController.text),
+            nameController: emailController,
+            text: "bara@gmail.com :مثال",
             readOnly: false,
           ),
         ],
-      ),
-    ],
-  );
+      );
 
-  Widget get visibleIcon => IconButton(
-    icon: Icon(
-      // Based on passwordVisible state choose the icon
-      !_passwordVisible ? Icons.visibility : Icons.visibility_off,
-      color: Theme.of(context).primaryColorDark,
-    ),
-    onPressed: () {
-      // Update the state i.e. toogle the state of passwordVisible variable
-      setState(() {
-        _passwordVisible = !_passwordVisible;
-      });
-    },
-  );
-
-  Widget get _dateApplied => Column(
-    children: [
-      namefield(field: "تاريخ الانضمام"),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+  Widget get _password => Column(
         children: [
-          InkWell(
-            onTap: setCurrentDate,
-            child: Container(
-              padding: const EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(6)),
-              child: const Icon(
-                Icons.calendar_month,
-                color: Colors.white,
-                size: 30,
+          namefield(field: "كلمة المرور"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              customTextFieldWidget(
+                type: TextInputType.name,
+                ontap: () {},
+                wid: 250,
+                hei: 40,
+                hideShow: _passwordVisible,
+                nameController: passController,
+                text: "مكونة من 8 أحرف و أرقام",
+                readOnly: false,
               ),
-            ),
-          ),
-          const SizedBox(
-            width: 2.0,
-          ),
-          customTextFieldWidget(
-            type: TextInputType.name,
-            ontap: setCurrentDate,
-            wid: 250,
-            hei: 40,
-            readOnly: true,
-            nameController: dateAppliedController,
-            text: "تاريخ الانضمام",
+              visibleIcon,
+            ],
           ),
         ],
-      ),
-    ],
-  );
+      );
+
+  Widget get visibleIcon => IconButton(
+        icon: Icon(
+          // Based on passwordVisible state choose the icon
+          !_passwordVisible ? Icons.visibility : Icons.visibility_off,
+          color: Theme.of(context).primaryColorDark,
+        ),
+        onPressed: () {
+          // Update the state i.e. toogle the state of passwordVisible variable
+          setState(() {
+            _passwordVisible = !_passwordVisible;
+          });
+        },
+      );
+
+  Widget get _dateApplied => Column(
+        children: [
+          namefield(field: "تاريخ الانضمام"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              customTextFieldWidget(
+                type: TextInputType.name,
+                ontap: setCurrentDate,
+                wid: 240,
+                hei: 40,
+                nameController: dateAppliedController,
+                text: "تاريخ الانضمام",
+              ),
+              const SizedBox(
+                width: 2.0,
+              ),
+              InkWell(
+                onTap: setCurrentDate,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: const Icon(
+                    Icons.calendar_month,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
 
   Widget get _confirmPassword => Column(
-    children: [
-      namefield(field: "تأكيد كلمة المرور"),
-      customTextFieldWidget(
-        type: TextInputType.name,
-        ontap: () {},
-        wid: 300,
-        hei: 40,
-        hideShow: _passwordVisible,
-        validation: (Val) => passValidation(),
-        nameController: confirmPassController,
-        text: "", readOnly: false,
-      ),
-    ],
-  );
+        children: [
+          namefield(field: "تأكيد كلمة المرور"),
+          customTextFieldWidget(
+            type: TextInputType.name,
+            ontap: () {},
+            wid: 300,
+            hei: 40,
+            hideShow: _passwordVisible,
+            validation: (Val) => passValidation(),
+            nameController: confirmPassController,
+            text: "",
+            readOnly: false,
+          ),
+        ],
+      );
   void setCurrentDate() {
     setState(() {
       dateAppliedController.text =
@@ -538,7 +538,7 @@ class _AddScocietyState extends State<AddScociety> {
   String? passValidation() {
     RegExp regex = RegExp(r'^(.{0,7}|[^0-9]|[^A-Z]|[^a-z]|[a-zA-Z0-9])$');
     return !regex.hasMatch(passController.text) &&
-        passController.text == confirmPassController.text
+            passController.text == confirmPassController.text
         ? null
         : "كلمة المرور خاطئة, الرجاء ادخال كلمة مطابقة و صحيحة";
   }

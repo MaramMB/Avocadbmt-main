@@ -13,8 +13,6 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 
-// void main() => runApp(const MyApp());
-
 class Socieites extends StatefulWidget {
   const Socieites({Key? key}) : super(key: key);
 
@@ -32,6 +30,7 @@ class _SocieitesState extends State<Socieites> {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
+  bool search = false;
 
   var searchBarController = TextEditingController();
 
@@ -66,7 +65,6 @@ class _SocieitesState extends State<Socieites> {
         padding: const EdgeInsets.only(right: 25.0, top: 10),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               const Text('اداره الجمعيات',
                   style: TextStyle(
@@ -107,9 +105,15 @@ class _SocieitesState extends State<Socieites> {
                                 // width: MediaQuery.of(context).size.width/5,
                                 child: TextFormField(
                                   onChanged: (value) {
-                                    // setState(() {
-                                    //   updateListOnSearch(value);
-                                    // });
+                                    if (searchBarController.text == "") {
+                                      setState(() {
+                                        search = false;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        search = true;
+                                      });
+                                    }
                                   },
                                   controller: searchBarController,
                                   textAlign: TextAlign.right,
@@ -136,7 +140,8 @@ class _SocieitesState extends State<Socieites> {
                             ),
                             height: 380,
                             child: FutureBuilder(
-                              future: getSocieties(),
+                              future:
+                                  search ? searchStudents() : getSocieties(),
                               builder: (BuildContext context,
                                   AsyncSnapshot snapshot) {
                                 if (snapshot.connectionState ==
@@ -159,7 +164,7 @@ class _SocieitesState extends State<Socieites> {
                                       itemCount: Customers.length,
                                       shrinkWrap: true,
                                       physics:
-                                          const NeverScrollableScrollPhysics(),
+                                          const AlwaysScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
                                         return PersonRecord(
                                           ID: Customers[index]["id"],
@@ -172,9 +177,20 @@ class _SocieitesState extends State<Socieites> {
                                                 ["Society_Address"],
                                             phoneNumber: Customers[index]
                                                 ["Society_Phone"],
-                                            type: AccountType.teacher,
+                                            type: AccountType.manager,
+                                            date: Customers[index]
+                                                ["Participation_Date"],
+                                            email: Customers[index]["Email"],
+                                            managerName: Customers[index]
+                                                ["Society_Manager"],
+                                            password: Customers[index]
+                                                ["Password"],
                                           ),
-                                          isActive: true,
+                                          isActive: Customers[index]
+                                                      ["active"] ==
+                                                  "active"
+                                              ? true
+                                              : false,
                                         );
                                       },
                                     );
@@ -183,12 +199,13 @@ class _SocieitesState extends State<Socieites> {
                                         child: SizedBox(
                                             height: 40,
                                             width: 40,
-                                            child:Text('لا يوجد حساب بهذا الاسم', style: TextStyle(
-                                              fontSize: 16,
-                                              fontFamily: "DroidKufi",
-                                            ),)
-                                        )
-                                    );
+                                            child: Text(
+                                              'لا يوجد حساب بهذا الاسم',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily: "DroidKufi",
+                                              ),
+                                            )));
                                   }
                                 }
                               },
@@ -241,63 +258,15 @@ class _SocieitesState extends State<Socieites> {
     return res;
   }
 
-  TextButton buildTeacherAccountButton() {
-    return TextButton(
-      onPressed: () {
-        setState(() {
-          teacher = true;
-        });
+  searchStudents() async {
+    var url = 'http://localhost/search_society.php';
+    var response = await http.post(
+      Uri.parse(url),
+      body: {
+        'name': searchBarController.text,
       },
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
-        minimumSize: MaterialStateProperty.all(const Size(85, 42)),
-        textStyle: MaterialStateProperty.all(
-            const TextStyle(fontFamily: "Tajawal", fontSize: 16)),
-        backgroundColor: MaterialStateProperty.all(
-          teacher ? Colors.green : Colors.grey,
-        ),
-      ),
-      child: Text(
-        'معلم',
-        style: teacher
-            ? selectedAccountTypeTextStyle
-            : unselectedAccountTypeTextStyle,
-      ),
     );
-  }
-
-  bool teacher = false;
-
-  TextButton buildStudentAccountButton() {
-    return TextButton(
-      onPressed: () {
-        setState(() {
-          teacher = false;
-        });
-      },
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        minimumSize: MaterialStateProperty.all(const Size(85, 42)),
-        textStyle: MaterialStateProperty.all(
-            const TextStyle(fontFamily: "Tajawal", fontSize: 16)),
-        backgroundColor: MaterialStateProperty.all(
-          teacher == false ? Colors.green : Colors.grey,
-        ),
-      ),
-      child: Text(
-        'طالب',
-        style: teacher == false
-            ? selectedAccountTypeTextStyle
-            : unselectedAccountTypeTextStyle,
-      ),
-    );
+    var res = jsonDecode(response.body);
+    return res;
   }
 }

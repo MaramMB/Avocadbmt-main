@@ -5,7 +5,8 @@ import 'package:flutter_application_1/pages/rowbar.dart';
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key, required this.person, required this.id}) : super(key: key);
+  const UserProfile({Key? key, required this.person, required this.id})
+      : super(key: key);
   final Person person;
   final String id;
 
@@ -31,7 +32,7 @@ class UserProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
-      body: Container(
+      body: Center(
         child: Column(
           children: [
             const SizedBox(
@@ -59,22 +60,9 @@ class UserProfile extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          _idNumber,
-                          _vGap,
-                          _name,
-                          _vGap,
-                          _phone,
-                          _vGap,
-                          _address,
-                          _vGap,
-                          _gender,
-                          _vGap,
-                          _type
-                        ],
-                      ),
+                      person.type == AccountType.manager
+                          ? _societyFormat
+                          : _teacherFormat,
                       const SizedBox(
                         height: 15,
                       ),
@@ -116,21 +104,21 @@ class UserProfile extends StatelessWidget {
       );
 
   Widget get _idNumber => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(id,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-                fontFamily: "DroidKufi",
-                fontSize: 19.0,
-              )),
-          const Text(" : رقم الهوية   ",
+          const Text("رقم الهوية : ",
               style: TextStyle(
                 color: Colors.green,
                 fontFamily: "DroidKufi",
                 fontSize: 19.0,
                 fontWeight: FontWeight.bold,
+              )),
+          Text(person.id,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
               )),
           const SizedBox(
             height: 12,
@@ -139,21 +127,21 @@ class UserProfile extends StatelessWidget {
       );
 
   Widget get _name => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const Text("الاسم : ",
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
+                fontWeight: FontWeight.bold,
+              )),
           Text(person.name,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
                 fontFamily: "DroidKufi",
                 fontSize: 19.0,
-              )),
-          const Text(" : الاسم   ",
-              style: TextStyle(
-                color: Colors.green,
-                fontFamily: "DroidKufi",
-                fontSize: 19.0,
-                fontWeight: FontWeight.bold,
               )),
           const SizedBox(
             height: 12,
@@ -162,21 +150,21 @@ class UserProfile extends StatelessWidget {
       );
 
   Widget get _phone => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const Text("رقم الهاتف : ",
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
+                fontWeight: FontWeight.bold,
+              )),
           Text(person.phoneNumber,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
                 fontFamily: "DroidKufi",
                 fontSize: 19.0,
-              )),
-          const Text(" : رقم الهاتف   ",
-              style: TextStyle(
-                color: Colors.green,
-                fontFamily: "DroidKufi",
-                fontSize: 19.0,
-                fontWeight: FontWeight.bold,
               )),
           const SizedBox(
             height: 12,
@@ -185,21 +173,21 @@ class UserProfile extends StatelessWidget {
       );
 
   Widget get _address => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const Text("العنوان : ",
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
+                fontWeight: FontWeight.bold,
+              )),
           Text(person.address,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
                 fontFamily: "DroidKufi",
                 fontSize: 19.0,
-              )),
-          const Text(" : العنوان   ",
-              style: TextStyle(
-                color: Colors.green,
-                fontFamily: "DroidKufi",
-                fontSize: 19.0,
-                fontWeight: FontWeight.bold,
               )),
           const SizedBox(
             height: 12,
@@ -208,21 +196,21 @@ class UserProfile extends StatelessWidget {
       );
 
   Widget get _gender => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const Text("الجنس :",
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
+                fontWeight: FontWeight.bold,
+              )),
           Text(gender,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
                 fontFamily: "DroidKufi",
                 fontSize: 19.0,
-              )),
-          const Text(" : الجنس   ",
-              style: TextStyle(
-                color: Colors.green,
-                fontFamily: "DroidKufi",
-                fontSize: 19.0,
-                fontWeight: FontWeight.bold,
               )),
           const SizedBox(
             height: 12,
@@ -231,8 +219,15 @@ class UserProfile extends StatelessWidget {
       );
 
   Widget get _type => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const Text(" نوع الحساب : ",
+              style: TextStyle(
+                color: Colors.green,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
+                fontWeight: FontWeight.bold,
+              )),
           Text(type,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
@@ -240,17 +235,89 @@ class UserProfile extends StatelessWidget {
                 fontFamily: "DroidKufi",
                 fontSize: 19.0,
               )),
-          const Text(" : نوع الحساب   ",
-              style: TextStyle(
+          const SizedBox(
+            height: 12,
+          ),
+        ],
+      );
+
+  Widget _rowData(String title, String data) => Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(title,
+              style: const TextStyle(
                 color: Colors.green,
                 fontFamily: "DroidKufi",
                 fontSize: 19.0,
                 fontWeight: FontWeight.bold,
+              )),
+          Text(data,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+                fontFamily: "DroidKufi",
+                fontSize: 19.0,
               )),
           const SizedBox(
             height: 12,
           ),
         ],
       );
-}
 
+  Widget get _teacherFormat => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _idNumber,
+          _vGap,
+          _name,
+          _vGap,
+          _rowData("اسم الأب : ", person.fatherName ?? ''),
+          _vGap,
+          _phone,
+          person.type == AccountType.student ? _parentData : _vGap,
+          person.type == AccountType.student
+              ? _address
+              : _rowData("التخصص : ", person.address),
+          _vGap,
+          _gender,
+          _vGap,
+          _type,
+          _vGap,
+          _rowData("البريد الإلكتروني : ", person.email ?? ''),
+          _vGap,
+          _rowData("كلمة المرور : ", person.password ?? ''),
+        ],
+      );
+
+  Widget get _parentData => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _vGap,
+          _rowData("اسم الأم : ", person.motherName ?? ''),
+          _vGap,
+          _rowData("وظيفة الأب : ", person.fatherjob ?? ''),
+          _vGap,
+        ],
+      );
+
+  Widget get _societyFormat => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _rowData("اسم الجمعية : ", person.name),
+          _vGap,
+          _rowData("رقم الترخيص : ", person.id),
+          _vGap,
+          _rowData("اسم المدير : ", person.managerName ?? ''),
+          _vGap,
+          _rowData("رقم الهاتف : ", person.phoneNumber),
+          _vGap,
+          _rowData("العنوان : ", person.address),
+          _vGap,
+          _rowData("تاريخ الإنضمام : ", person.date ?? ''),
+          _vGap,
+          _rowData("البريد الإلكتروني : ", person.email ?? ''),
+          _vGap,
+          _rowData("كلمة المرور : ", person.password ?? ''),
+        ],
+      );
+}

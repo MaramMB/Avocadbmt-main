@@ -1,7 +1,10 @@
-enum AccountType { student, teacher }
-enum Gender {male, female}
+enum AccountType { student, teacher, manager }
+
+enum Gender { male, female }
+
 class Person {
   String name, id, address, phoneNumber;
+  String? date, managerName, fatherName, fatherjob, motherName, email, password;
   AccountType type;
   Gender gender;
   Person({
@@ -11,5 +14,12 @@ class Person {
     required this.address,
     required this.phoneNumber,
     required this.type,
+    this.date,
+    this.managerName,
+    this.motherName,
+    this.fatherjob,
+    this.fatherName,
+    this.email,
+    this.password,
   });
 }

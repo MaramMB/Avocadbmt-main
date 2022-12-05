@@ -7,9 +7,10 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$db = mysqli_connect('localhost','root','','bdmtproject');
 
 	if($db){
+        $id=$_POST['id'];
 
 		$name = $_POST['firstname'];
-        $sql ="SELECT * FROM students WHERE firstname LIKE '%$name%'";
+        $sql ="SELECT students.* FROM students LEFT JOIN usersacounts ON students.Students_Id = usersacounts.Id_Num WHERE firstname LIKE '%$name%' AND students.socid = $id";
         
     $result =mysqli_query($db , $sql);
     if($result){
