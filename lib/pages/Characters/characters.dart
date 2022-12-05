@@ -830,8 +830,7 @@ class _sptestState extends State<sptest> {
     // print(data);
   //   if (data == 'Success') {
   //     // Navigator.of(context, rootNavigator: true).pop();
-  //     Fluttertoast.showToast(
-  //         msg: "تم اضافه بنجاح", timeInSecForIosWeb: 1);
+      Fluttertoast.showToast(msg: "تم اضافه بنجاح", timeInSecForIosWeb: 1);
   //   }
   //   else{ Fluttertoast.showToast(
   //           msg: "لم يتم الاضافه بنجاح", timeInSecForIosWeb: 1);
