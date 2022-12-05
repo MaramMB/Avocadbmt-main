@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import '../Components.dart';
@@ -45,9 +46,9 @@ class _letterexState extends State<letterex> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        letter(L1: 'ج',L2: 'ش',L3: 'ض',L4: '', title: 'الحروف الشجرية',),
-                        letter(L1: 'ق',L2: 'ك',L3: '',L4: '', title: 'الحروف اللهوية',),
-                        letter(L1: 'ع',L2: 'غ',L3: 'ح',L4: 'خ', title: 'الحروف الحلقية',),
+                        FadeInRightBig(child: letter(L1: 'ج',L2: 'ش',L3: 'ض',L4: '', title: 'الحروف الشجرية',)),
+                        FadeInRightBig(child: letter(L1: 'ق',L2: 'ك',L3: '',L4: '', title: 'الحروف اللهوية',)),
+                        FadeInRightBig(child: letter(L1: 'ع',L2: 'غ',L3: 'ح',L4: 'خ', title: 'الحروف الحلقية',)),
 
 
 
@@ -58,9 +59,9 @@ class _letterexState extends State<letterex> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        letter(L1: 'ظ',L2: 'ذ',L3: 'ث',L4: '', title: 'الحروف اللثوية',),
-                        letter(L1: 'ط',L2: 'ت',L3: 'د',L4: '', title: 'الحروف النطعية',),
-                        letter(L1: 'ز',L2: 'س',L3: 'ص',L4: '', title: 'الحروف الأسلية',),
+                        FadeIn(child: letter(L1: 'ظ',L2: 'ذ',L3: 'ث',L4: '', title: 'الحروف اللثوية',)),
+                        FadeIn(child: letter(L1: 'ط',L2: 'ت',L3: 'د',L4: '', title: 'الحروف النطعية',)),
+                        FadeIn(child: letter(L1: 'ز',L2: 'س',L3: 'ص',L4: '', title: 'الحروف الأسلية',)),
                       ],
                     ),
                     SizedBox(height: 17,),
@@ -68,9 +69,9 @@ class _letterexState extends State<letterex> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        letter(L1: 'ا',L2: 'و',L3: 'ي',L4: 'ء', title: 'الحروف الهوائية',),
-                        letter(L1: 'ف',L2: 'ب',L3: 'م',L4: '', title: 'الحروف الشفوية',),
-                        letter(L1: 'ر',L2: 'ل',L3: 'ن',L4: '', title: 'الحروف اللهوية',),
+                        FadeInLeftBig(child: letter(L1: 'ا',L2: 'و',L3: 'ي',L4: 'ء', title: 'الحروف الهوائية',)),
+                        FadeInLeftBig(child: letter(L1: 'ف',L2: 'ب',L3: 'م',L4: '', title: 'الحروف الشفوية',)),
+                        FadeInLeftBig(child: letter(L1: 'ر',L2: 'ل',L3: 'ن',L4: '', title: 'الحروف اللهوية',)),
                       ],
                     ),
                   ],

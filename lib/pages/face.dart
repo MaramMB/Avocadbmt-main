@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Videos/single_video.dart';
@@ -157,12 +158,14 @@ class _faceexState extends State<faceex> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children:  [
                             Center(
-                              child: Text("التدريبات الحركية للفم",
-                                  style: TextStyle(
-                                      color: Colors.green,
-                                      fontSize: 25,
-                                      fontFamily: "DroidKufi",
-                                      fontWeight: FontWeight.w700)),
+                              child: FadeInDown(
+                                child: Text("التدريبات الحركية للفم",
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 25,
+                                        fontFamily: "DroidKufi",
+                                        fontWeight: FontWeight.w700)),
+                              ),
 
                             ),
                             SizedBox(height: 10,),
@@ -179,59 +182,63 @@ class _faceexState extends State<faceex> {
                               ),
                               itemCount: 12,
                               itemBuilder: (BuildContext context, int index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: AspectRatio(
-                                    aspectRatio: 5.5,
-                                    child: flickManager != null ?  Column(
-                                      children: [
-                                        FlickVideoPlayer(
-                                          flickManager: myfilk[index],
+                                return FadeInUpBig(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: AspectRatio(
+                                      aspectRatio: 5.5,
+                                      child: flickManager != null ?  SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            FlickVideoPlayer(
+                                              flickManager: myfilk[index],
 
-                                        ),
-                                        // SizedBox(height: 10,),
-                                        // IconButton(
-                                        //     onPressed: () {
-                                        //       Navigator.push(
-                                        //           context,
-                                        //           MaterialPageRoute(
-                                        //               builder: (context) => SingleVideo(index: index,)));
-                                        //     },
-                                        //     icon: Icon(
-                                        //       Icons.start,
-                                        //       size: 20,
-                                        //       color: Colors.green,
-                                        //     )),
-                                        SizedBox(height: 7,),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(builder: (context) {
-                                              return  facevideo(index: index,);
-                                            }));
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            alignment: Alignment.bottomCenter,
-                                            backgroundColor: Colors.green,
-                                            shape: const RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.all(Radius.circular(14))),
-                                            elevation: 2.0,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 18, vertical: 10),
-                                          ),
-                                          child: const Text("انتقل للتدريب",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "DroidKufi",
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.w600,
+                                            ),
+                                            // SizedBox(height: 10,),
+                                            // IconButton(
+                                            //     onPressed: () {
+                                            //       Navigator.push(
+                                            //           context,
+                                            //           MaterialPageRoute(
+                                            //               builder: (context) => SingleVideo(index: index,)));
+                                            //     },
+                                            //     icon: Icon(
+                                            //       Icons.start,
+                                            //       size: 20,
+                                            //       color: Colors.green,
+                                            //     )),
+                                            SizedBox(height: 7,),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context)
+                                                    .push(MaterialPageRoute(builder: (context) {
+                                                  return  facevideo(index: index,);
+                                                }));
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                alignment: Alignment.bottomCenter,
+                                                backgroundColor: Colors.green,
+                                                shape: const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.all(Radius.circular(14))),
+                                                elevation: 2.0,
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 18, vertical: 10),
+                                              ),
+                                              child: const Text("انتقل للتدريب",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "DroidKufi",
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.w600,
 
-                                              )),
+                                                  )),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    )
-                                        : Center(child: CircularProgressIndicator()),
+                                      )
+                                          : Center(child: CircularProgressIndicator()),
+                                    ),
                                   ),
                                 );
                               },
