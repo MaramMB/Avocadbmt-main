@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/pages/rowbar.dart';
@@ -52,725 +53,733 @@ class _dicState extends State<dic> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    const Text("قاموس لغة الاشارة",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "DroidKufi",
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25.0,
-                        )),
+                     FadeIn(
+                       child: Text("قاموس لغة الاشارة",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "DroidKufi",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25.0,
+                          )),
+                     ),
                     const SizedBox(
                       height: 5,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "الملابس",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/clothes.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 6,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("الملابس",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "المأكولات",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/eat.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 6,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("المأكولات",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "المشروبات",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/drinks.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 6,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("المشروبات",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "المنزل",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/home.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 6,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("المنزل",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "المواصلات",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/transportation.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("المواصلات",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        // SizedBox(height: 17,),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "الألوان",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/colors.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("الألوان",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos28(
-                                      name: "الحروف",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/characters.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("الحروف",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "الأرقام",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/numbers.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 6,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("الأرقام",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "العائله",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/family.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 6,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("العائله",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "المهن",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/jobs.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("المهن",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        // SizedBox(height: 17,),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Videos(
-                                      name: "الطبيعه",
-                                    )));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/nature.jpeg",
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width:
-                                    MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("الطبيعه",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            Stack(
+                    SlideInRight(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "الملابس",
+                                      )));
+                            },
+                            child: Column(
                               children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(25),
-                                    child: Image.asset(
-                                      "img/animals.jpeg",
-                                      width: MediaQuery.of(context).size.width /
-                                          11,
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/clothes.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
                                       height:
-                                      MediaQuery.of(context).size.height /
-                                          6,
-                                      fit: BoxFit.fill,
-                                    )),
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 11,
-                                  height:
-                                  MediaQuery.of(context).size.height / 6,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: const Color(0x34E7E4E4),
-                                  ),
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("الملابس",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
                               ],
                             ),
-                            const SizedBox(
-                              height: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "المأكولات",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/eat.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("المأكولات",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
                             ),
-                            Container(
-                              width: 120,
-                              height: 35,
-                              child: Center(
-                                child: Text("الحيوانات",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "DroidKufi",
-                                      fontSize: 18.0,
-                                    )),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "المشروبات",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/drinks.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("المشروبات",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "المنزل",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/home.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("المنزل",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SlideInLeft(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "المواصلات",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/transportation.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("المواصلات",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                          // SizedBox(height: 17,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "الألوان",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/colors.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("الألوان",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos28(
+                                        name: "الحروف",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/characters.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("الحروف",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "الأرقام",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/numbers.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("الأرقام",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SlideInRight(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "العائله",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/family.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("العائله",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "المهن",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/jobs.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("المهن",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                          // SizedBox(height: 17,),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Videos(
+                                        name: "الطبيعه",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/nature.jpeg",
+                                          width:
+                                          MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("الطبيعه",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: Image.asset(
+                                        "img/animals.jpeg",
+                                        width: MediaQuery.of(context).size.width /
+                                            11,
+                                        height:
+                                        MediaQuery.of(context).size.height /
+                                            6,
+                                        fit: BoxFit.fill,
+                                      )),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width / 11,
+                                    height:
+                                    MediaQuery.of(context).size.height / 6,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: const Color(0x34E7E4E4),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(10)),
-                            )
-                          ],
-                        ),
-                      ],
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                width: 120,
+                                height: 35,
+                                child: Center(
+                                  child: Text("الحيوانات",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "DroidKufi",
+                                        fontSize: 18.0,
+                                      )),
+                                ),
+                                decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/expl.dart';
 import 'package:flutter_application_1/pages/faceexpl.dart';
@@ -74,89 +75,132 @@ class _mainpageState extends State<mainpage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text("قائمة التدريبات",
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 25,
-                              fontFamily: "DroidKufi",
-                              fontWeight: FontWeight.w700)),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
-                      const Text("قائمة التدريبات",
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 25,
-                              fontFamily: "DroidKufi",
-                              fontWeight: FontWeight.w700)),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
-                      const Text("قائمة التدريبات",
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 25,
-                              fontFamily: "DroidKufi",
-                              fontWeight: FontWeight.w700)),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
-                      const Text(
-                          "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                          style: TextStyle(fontFamily: "DroidKufi")),
+                      FadeIn(
+                        child: const Text("قائمة التدريبات",
+                            style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 25,
+                                fontFamily: "DroidKufi",
+                                fontWeight: FontWeight.w700)),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ),
+                      FadeIn(
+                        child: const Text("قائمة التدريبات",
+                            style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 25,
+                                fontFamily: "DroidKufi",
+                                fontWeight: FontWeight.w700)),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ), FadeIn(
+                        child: const Text("قائمة التدريبات",
+                            style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 25,
+                                fontFamily: "DroidKufi",
+                                fontWeight: FontWeight.w700)),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ),
+                      FadeIn(
+                        duration: Duration(milliseconds: 800),
+
+                        child: const Text(
+                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
+                            style: TextStyle(fontFamily: "DroidKufi")),
+                      ),
                       const SizedBox(
                         height: 40,
                       ),
                       Visibility(
                         visible: showbtn(),
                         child: Center(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return  expage(exid: "1",);
-                              }));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              alignment: Alignment.bottomCenter,
-                              backgroundColor: Colors.green,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                              elevation: 2.0,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 25, vertical: 12),
+                          child: SlideInUp(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                  return  expage(exid: "1",);
+                                }));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                alignment: Alignment.bottomCenter,
+                                backgroundColor: Colors.green,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                                elevation: 2.0,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 12),
+                              ),
+                              child: const Text("بدأ الاختبار الاولي للنطق",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "DroidKufi",
+                                    fontSize: 16.0,
+                                  )),
                             ),
-                            child: const Text("بدأ الاختبار الاولي للنطق",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "DroidKufi",
-                                  fontSize: 16.0,
-                                )),
                           ),
                         ),
                       ),
                     ],
                   ),
                   Stack(alignment: Alignment.bottomLeft, children: [
-                    Image.asset("img/boytalk.png",
-                        alignment: Alignment.bottomLeft,
-                        height: MediaQuery.of(context).size.height / 1.9)
+                    FadeInLeft(
+                      duration: Duration(milliseconds: 800),
+                      child: Image.asset("img/boytalk.png",
+                          alignment: Alignment.bottomLeft,
+                          height: MediaQuery.of(context).size.height / 1.9),
+                    )
                   ]),
                 ],
               ),

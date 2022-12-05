@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/contact.dart';
@@ -104,9 +105,11 @@ class _scrollhomeState extends State<scrollhome> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Image.asset(
-                                    'img/boy.png',
-                                    height: 600,
+                                  FadeInLeftBig(
+                                    child: Image.asset(
+                                      'img/boy.png',
+                                      height: 600,
+                                    ),
                                   ),
 
                                   IconButton(
@@ -129,28 +132,36 @@ class _scrollhomeState extends State<scrollhome> {
                                       // crossAxisAlignment: CrossAxisAlignment.end,
 
                                       children: [
-                                        const Text(
-                                          "مرحباً بك",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: "Tajawal",
-                                            fontSize: 70,
-                                            fontWeight: FontWeight.bold,
+                                        FadeInRightBig(
+                                          child: const Text(
+                                            "مرحباً بك",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Tajawal",
+                                              fontSize: 70,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
-                                        const Text(
-                                          "في افضـل منـصـة تعلـيـمـية",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 35),
+                                        FadeInRightBig(
+                                          delay: Duration(seconds: 1),
+                                          child: const Text(
+                                            "في افضـل منـصـة تعلـيـمـية",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "DroidKufi",
+                                                fontSize: 35),
+                                          ),
                                         ),
-                                        const Text(
-                                          "للتأهيل السمعي واللفظي",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "DroidKufi",
-                                              fontSize: 35),
+                                        FadeInRightBig(
+                                          delay: Duration(seconds: 2),
+                                          child: const Text(
+                                            "للتأهيل السمعي واللفظي",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "DroidKufi",
+                                                fontSize: 35),
+                                          ),
                                         ),
                                       ],
                                     ),
