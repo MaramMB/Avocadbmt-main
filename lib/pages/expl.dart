@@ -11,14 +11,15 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 String type="";
 class expage extends StatefulWidget {
-  const expage({Key? key}) : super(key: key);
+  const expage({Key? key, required this.exid}) : super(key: key);
+  final exid;
 
   @override
   State<expage> createState() => _expageState();
 }
 
 class _expageState extends State<expage> {
-
+  String testName='';
   late FocusNode focusNode = FocusNode()
     ..addListener(() {
       setState(() {});
@@ -42,6 +43,22 @@ class _expageState extends State<expage> {
     print(userId);
   }
   void initState() {
+    if (widget.exid=='1')
+      {
+        testName='الاختبار الاولي';
+      }
+    else if (widget.exid=='4')
+      {
+        testName='اختبار الاصوات البيئية';
+      }
+    else if (widget.exid=='5')
+    {
+      testName='اختبار الاصوات الاستيعابية';
+    }
+    else if (widget.exid=='6')
+    {
+      testName='اختبار نطق الحروف';
+    }
     print('testt');
     super.initState();
     getUserData();
@@ -80,7 +97,7 @@ class _expageState extends State<expage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text('الاختبار الاولي',
+               Text(testName,
                   style: TextStyle(
                       color: Colors.green,
                       fontSize: 25,
@@ -90,11 +107,10 @@ class _expageState extends State<expage> {
                 height: 10,
               ),
               const Text(
-                'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
-                    ' من مولد النص العربي.',
+                'قم بإختيار الطالب المراد عمل الاختبار له ، سيتم تخزين نتيجة الاختبار في سجل الطالب الذي تم اختياره ',
                 style: TextStyle(
                     fontFamily: "DroidKufi",
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w400),
               ),
               Center(
@@ -138,7 +154,7 @@ class _expageState extends State<expage> {
                                   textAlign: TextAlign.right,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'أدخل اسم المستخدم',
+                                    hintText: 'البحث عن طالب ...',
                                     prefixIcon: Icon(Icons.search,color: focusNode.hasFocus ? Colors.green : Colors.grey),
                                   ),
 
@@ -180,8 +196,8 @@ class _expageState extends State<expage> {
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
                                           return testRecord(
-                                            ID: Customers[index]["id"],
-                                            person: Person(
+                                              ID: Customers[index]["id"],
+                                              person: Person(
                                               name: Customers[index]["name"],
                                               id: Customers[index]
                                               ["student_id"],
@@ -191,6 +207,7 @@ class _expageState extends State<expage> {
                                               phoneNumber: Customers[index]["phone"],
                                               type: AccountType.student,
                                             ),
+                                            exID: widget.exid,
                                             isActive: true,
                                           );
 

@@ -4,6 +4,8 @@ import 'dart:html' as html;
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_application_1/pages/expl.dart';
+import 'package:flutter_application_1/pages/testrecord.dart';
 import 'package:path/path.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +40,7 @@ html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
 
 
 class voicex extends StatefulWidget {
-  String? UserID;
+  String UserID;
   String? UserKind;
   String? tid;
   voicex({Key? key,  required this.UserID, required this.UserKind , required this.tid}) : super(key: key);
@@ -499,14 +501,19 @@ class _voicexState extends State<voicex> {
                                     // زر بدأ الاختبار
                                     onPressed: () {
                                       if (widget.UserKind=='teacher'){
-                                        return;
+                                        Navigator.push (
+                                          context,
+                                          MaterialPageRoute (
+                                            builder: (BuildContext context) =>  expage(exid: '5'),
+                                          ),
+                                        );
                                       }
                                       else
                                         {
                                           Navigator.of(context)
                                               .push(
                                               MaterialPageRoute(builder: (context) {
-                                                return betest(type: _selectedType, sid: widget.UserID);
+                                                return betest(type: 2, sid: widget.UserID);
                                               }));
                                         }
 
@@ -999,14 +1006,19 @@ class _voicexState extends State<voicex> {
                                     // زر بدأ الاختبار
                                     onPressed: () {
                                       if (widget.UserKind=='teacher'){
-                                        return;
+                                        Navigator.push (
+                                          context,
+                                          MaterialPageRoute (
+                                            builder: (BuildContext context) =>  expage(exid: '4'),
+                                          ),
+                                        );
                                       }
                                       else
                                       {
                                         Navigator.of(context)
                                             .push(
                                             MaterialPageRoute(builder: (context) {
-                                              return betest(type: _selectedType, sid: widget.UserID);
+                                              return betest(type: 1, sid: widget.UserID);
                                             }));
                                       }
                                     },
