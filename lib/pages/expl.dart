@@ -44,13 +44,13 @@ class _expageState extends State<expage> {
   }
   void initState() {
     if (widget.exid=='1')
-    {
-      testName='الاختبار الاولي';
-    }
+      {
+        testName='الاختبار الاولي';
+      }
     else if (widget.exid=='4')
-    {
-      testName='اختبار الاصوات البيئية';
-    }
+      {
+        testName='اختبار الاصوات البيئية';
+      }
     else if (widget.exid=='5')
     {
       testName='اختبار الاصوات الاستيعابية';
@@ -97,7 +97,7 @@ class _expageState extends State<expage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(testName,
+               Text(testName,
                   style: TextStyle(
                       color: Colors.green,
                       fontSize: 25,
@@ -195,23 +195,23 @@ class _expageState extends State<expage> {
                                     itemCount: Customers.length,
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
-                                      return testRecord(
-                                        ID: Customers[index]["id"],
-                                        person: Person(
-                                          name: Customers[index]["name"],
-                                          id: Customers[index]
-                                          ["student_id"],
-                                          gender: Customers[index]
-                                          ["gender"] == "female" ? Gender.female : Gender.male,
-                                          address: Customers[index]["address"],
-                                          phoneNumber: Customers[index]["phone"],
-                                          type: AccountType.student,
-                                        ),
-                                        exID: widget.exid,
-                                        isActive: true,
-                                      );
+                                          return testRecord(
+                                              ID: Customers[index]["id"],
+                                              person: Person(
+                                              name: Customers[index]["name"],
+                                              id: Customers[index]
+                                              ["student_id"],
+                                              gender: Customers[index]
+                                              ["gender"] == "female" ? Gender.female : Gender.male,
+                                              address: Customers[index]["address"],
+                                              phoneNumber: Customers[index]["phone"],
+                                              type: AccountType.student,
+                                            ),
+                                            exID: widget.exid,
+                                            isActive: true,
+                                          );
 
-                                    },
+                                      },
 
                                   );
                                 } else {
@@ -266,7 +266,7 @@ class _expageState extends State<expage> {
     var response = await http.post(
       Uri.parse(url),
       body: {
-        'id' : userId,
+         'id' : userId,
         'firstname': searchController.text,
       },
     );
