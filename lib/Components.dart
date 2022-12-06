@@ -4,18 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/audio.dart';
 import 'package:flutter_application_1/pages/laterss.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+
 
 class soundsWidget extends StatelessWidget {
   late String Spath; //sound path
   late String Ipath;// Image path
   late String Name; // name of the sound
   late String s;
+  late String id;
 
   soundsWidget({
     required this.Spath ,
     required this.Ipath ,
     required this.Name,
     required this.s,
+    required this.id,
   });
 
   @override
@@ -42,53 +47,144 @@ class soundsWidget extends StatelessWidget {
               builder: (_) =>  AlertDialog(
                 contentPadding: const EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
                 content: Container(
-                  width: MediaQuery.of(context).size.width/3.7,
+                  width: MediaQuery.of(context).size.width/3.9,
                   height: MediaQuery.of(context).size.height/1.6,
-                  child: Column(
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.green, width: 3),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: Image.memory(base64Decode(s),width: MediaQuery.of(context).size.width / 5,
-                            height: MediaQuery.of(context).size.height / 3.0,
-                            fit: BoxFit.fill,),
-                        ),
-                      ),
-                       Text(Name,
-                          style: const TextStyle(
-                              color: Colors.green,
-                              fontSize: 25,
-                              fontFamily: "DroidKufi",
-                              fontWeight: FontWeight.w700)),
-                      const SizedBox(height: 10,),
-                      audio(path: "../"+Spath),
-                      const SizedBox(height: 15,),
 
-                      ElevatedButton(
-                        onPressed: () {
-                          audioPlayer.dispose();
-                          Navigator.of(context, rootNavigator: true).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10))),
-                          elevation: 2.0,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 5),
-                        ),
-                        child: const Text("العودة",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "DroidKufi",
-                              fontSize: 22.0,
-                            )),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.green, width: 3),
+                                borderRadius: BorderRadius.circular(30)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(25),
+                              child: Image.memory(base64Decode(s),width: MediaQuery.of(context).size.width / 5,
+                                height: MediaQuery.of(context).size.height / 3.0,
+                                fit: BoxFit.fill,),
+                            ),
+                          ),
+                          Text(Name,
+                              style: const TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 25,
+                                  fontFamily: "DroidKufi",
+                                  fontWeight: FontWeight.w700)),
+                          const SizedBox(height: 10,),
+                          audio(path: "../"+Spath),
+                          const SizedBox(height: 15,),
+
+                          ElevatedButton(
+                            onPressed: () {
+                              audioPlayer.dispose();
+                              Navigator.of(context, rootNavigator: true).pop();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                              elevation: 2.0,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
+                            ),
+                            child: const Text("العودة",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "DroidKufi",
+                                  fontSize: 22.0,
+                                )),
+                          ),
+                        ],
                       ),
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+
+                            FloatingActionButton(backgroundColor: Colors.redAccent,onPressed: (){
+                              showDialog(context: context, builder: (context)=>AlertDialog(
+                                title: Container(
+                                  color: Colors.white,
+                                  child: Column(
+                                    children: [
+                                      Text('هل أنت متأكد من حذف التدريب ؟', style: TextStyle(
+                                        fontFamily: "DroidKufi",
+                                        fontSize: 20,
+                                      ),),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                            deleteSound(id);
+                                            Fluttertoast.showToast(msg: "تمت عملية الحذف بنجاح");
+                                            var count = 0;
+                                            Navigator.popUntil(context, (route) {
+                                              return count++ == 2;
+                                            });
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.green,
+                                              shape: const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.all(Radius.circular(10))),
+                                              elevation: 2.0,
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 25, vertical: 5),
+                                            ),
+                                            child:  Text( 'نعم',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "DroidKufi",
+                                                  fontSize: 18.0,
+                                                )),
+                                          ),
+                                          SizedBox(width: 30,),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.red,
+                                              shape: const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.all(Radius.circular(10))),
+                                              elevation: 2.0,
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 25, vertical: 5),
+                                            ),
+                                            child:  Text( 'لا',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "DroidKufi",
+                                                  fontSize: 18.0,
+                                                )),
+                                          ),
+
+
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ));
+
+
+                            },  child: Icon(Icons.delete_forever_rounded),),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10,),
                     ],
                   ),
                 ),
@@ -112,6 +208,15 @@ class soundsWidget extends StatelessWidget {
 
       ),
     );
+  }
+
+  Future<void> deleteSound(String id) async {
+
+    var url = 'http://localhost/deleteSound.php';
+    var response = await http.post(Uri.parse(url), body: {
+      'id':id,
+    });
+
   }
 }
 

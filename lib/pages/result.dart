@@ -1375,8 +1375,6 @@ getResult(String id , String tid) async {
 
 }
 resetResult(String id , String tid , int isHome) async {
-  print (id+' - - - -hh');
-  print (tid+' - - - -hh');
   var url = 'http://localhost/resetResult.php';
   var response = await http.post(Uri.parse(url), body: {
     'sid':id,

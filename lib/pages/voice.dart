@@ -198,6 +198,8 @@ class _voicexState extends State<voicex> {
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
                               s: snapshot.data![index]['imageByte'],
+                              id: snapshot.data![index]['sound_id'],
+
                             );
                           },),
 
@@ -235,6 +237,7 @@ class _voicexState extends State<voicex> {
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
                               s: snapshot.data![index]['imageByte'],
+                              id: snapshot.data![index]['sound_id'],
                             );
                           },),
 
@@ -702,6 +705,7 @@ class _voicexState extends State<voicex> {
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
                               s: snapshot.data![index]['imageByte'],
+                              id: snapshot.data![index]['sound_id'],
                             );
                           },),
 
@@ -739,6 +743,8 @@ class _voicexState extends State<voicex> {
                               Ipath: snapshot.data![index]['image'],
                               Spath: snapshot.data![index]['audio'],
                               s: snapshot.data![index]['imageByte'],
+                              id: snapshot.data![index]['sound_id'],
+
                             );
                           },),
 
