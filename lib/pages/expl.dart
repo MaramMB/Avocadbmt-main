@@ -40,7 +40,7 @@ class _expageState extends State<expage> {
     setState(() {
       userId = prefs.getString('userId') ?? '';
     });
-    print(userId);
+    // print(userId);
   }
   void initState() {
     if (widget.exid=='1')
@@ -59,7 +59,7 @@ class _expageState extends State<expage> {
     {
       testName='اختبار نطق الحروف';
     }
-    print('testt');
+    // print('testt');
     super.initState();
     getUserData();
   }
@@ -198,7 +198,7 @@ class _expageState extends State<expage> {
                                 );
                               } else {
                                 var Customers = snapshot.data;
-                                print(Customers[0]['image']);
+                                // print(Customers[0]['image']);
                                 if (snapshot.data != null) {
                                   return ListView.builder(
                                     itemCount: Customers.length,

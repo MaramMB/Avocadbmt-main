@@ -1,15 +1,9 @@
 import 'dart:convert';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/expl.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
-import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
-import 'package:flutter_application_1/pages/voiceexpl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:http/http.dart' as http;
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
