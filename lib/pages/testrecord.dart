@@ -100,14 +100,14 @@ class _testRecordState extends State<testRecord> {
                             {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return betest(type: 1, sid: widget.person.id);
+                                return betest(type: 1, sid: widget.person.id, isTeacher: true,);
                               }));
                             }
                             else if (widget.exID=='5')
                             {
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
-                                return betest(type: 2, sid: widget.person.id);
+                                return betest(type: 2, sid: widget.person.id, isTeacher: true,);
                               }));
                             }
                           },

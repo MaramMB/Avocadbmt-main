@@ -28,12 +28,15 @@ double firstResult = 0.0;
 double spellResult = 0.0;
 double beResult = 0.0;
 double asResult = 0.0;
+double homeAs = 0.0;
+double homeBe = 0.0;
 int idx=0;
 bool studentChoose = false;
 var resBe ;
 var resAs ;
 var resSp;
 var resSt;
+
 List<Students> ulist = [];
 List<Students> userLists = [];
 
@@ -140,15 +143,15 @@ class _resultState extends State<result> {
     {
       return Scaffold(
         backgroundColor: backgreen,
-        body:  SingleChildScrollView(
-          child: Column(
-            children: [
-              SelectionButton(),
+        body:  Column(
+          children: [
+            SelectionButton(),
 
-              const SizedBox(
-                height: 30,
-              ),
-              Center(
+            const SizedBox(
+              height: 30,
+            ),
+            Center(
+              child: SingleChildScrollView(
                 child: Container(
                   height: MediaQuery.of(context).size.height / 1.2,
                   width: MediaQuery.of(context).size.width / 1.8,
@@ -170,18 +173,28 @@ class _resultState extends State<result> {
                                   fontSize: 25,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
-                          const Text(
-                            'يمكنك في هذه الصفحة الإطلاع على سجلات التقدم ونتائج الطلاب الذين تشرف عليهم . \n قم بالبحث عن الطالب لعرض النتائج الخاصة به',
-                            textDirection: TextDirection.rtl,
-                            style: TextStyle(
 
-                                fontFamily: "DroidKufi",
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
+                          Directionality(
+
+                            textDirection: TextDirection.rtl,
+                            child: RichText(
+                                text:  TextSpan(text: 'يمكنك في هذه الصفحة الإطلاع على سجلات التقدم ونتائج الطلاب الذين تشرف عليهم . \nتعرض النتائج المدرسية ',
+                                    style: TextStyle(
+                                  color: blak,
+                                    fontFamily: "DroidKufi",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400),
+                                    children:[
+                                      TextSpan(text: 'باللون الأخضر',style: TextStyle(color: HexColor("#7BC155"),fontWeight: FontWeight.w600)),
+                                      TextSpan(text: ' أما النتائج البيتية تعرض'),
+                                      TextSpan(text: ' باللون الأزرق',style: TextStyle(color: Colors.blue[700], fontWeight: FontWeight.w600),),
+                                    ] ),
+
+                            ),
                           ),
                           Container(
                             // color: Colors.black38,
-                            height: 400,
+                            height: 480,
                             width: 600,
                             padding: const EdgeInsets.only(top: 20),
                             child: Stack(
@@ -261,7 +274,7 @@ class _resultState extends State<result> {
                                   children: [
 
 
-                                    const SizedBox(height: 70),
+                                    const SizedBox(height: 60),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
@@ -283,7 +296,7 @@ class _resultState extends State<result> {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(height: 30),
+                                    const SizedBox(height: 20),
                                     Directionality(
                                       textDirection: TextDirection.rtl,
                                       child: Row(
@@ -397,7 +410,7 @@ class _resultState extends State<result> {
                                                                     children: [
                                                                       ElevatedButton(
                                                                         onPressed: () {
-                                                                          resetResult(idx.toString(), '1');
+                                                                          resetResult(idx.toString(), '1',0);
                                                                           print('gdsgss');
                                                                           SearchController.text='';
                                                                           problem = 'المشكلة';
@@ -407,6 +420,8 @@ class _resultState extends State<result> {
                                                                             spellResult = 0.0;
                                                                             beResult = 0.0;
                                                                             asResult = 0.0;
+                                                                            homeAs=0.0;
+                                                                            homeBe=0.0;
                                                                             studentChoose=false;
 
                                                                           });
@@ -542,7 +557,7 @@ class _resultState extends State<result> {
                                                                 children: [
                                                                   ElevatedButton(
                                                                     onPressed: () {
-                                                                      resetResult(idx.toString(), '6');
+                                                                      resetResult(idx.toString(), '6',0);
                                                                       SearchController.text='';
                                                                       problem = 'المشكلة';
                                                                       StName="اسم الطالب";
@@ -551,6 +566,8 @@ class _resultState extends State<result> {
                                                                         spellResult = 0.0;
                                                                         beResult = 0.0;
                                                                         asResult = 0.0;
+                                                                        homeAs=0.0;
+                                                                        homeBe=0.0;
                                                                         studentChoose=false;
 
 
@@ -627,7 +644,7 @@ class _resultState extends State<result> {
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(height: 50),
+                                    const SizedBox(height: 20),
                                     Directionality(
                                       textDirection: TextDirection.rtl,
                                       child: Row(
@@ -697,7 +714,7 @@ class _resultState extends State<result> {
                                                                 children: [
                                                                   ElevatedButton(
                                                                     onPressed: () {
-                                                                      resetResult(idx.toString(), '4');
+                                                                      resetResult(idx.toString(), '4',0);
                                                                       SearchController.text='';
                                                                       problem = 'المشكلة';
                                                                       StName="اسم الطالب";
@@ -706,6 +723,8 @@ class _resultState extends State<result> {
                                                                         spellResult = 0.0;
                                                                         beResult = 0.0;
                                                                         asResult = 0.0;
+                                                                        homeAs=0.0;
+                                                                        homeBe=0.0;
                                                                         studentChoose=false;
 
 
@@ -842,7 +861,321 @@ class _resultState extends State<result> {
                                                                 children: [
                                                                   ElevatedButton(
                                                                     onPressed: () {
-                                                                      resetResult(idx.toString(), '5');
+                                                                      resetResult(idx.toString(), '5',0);
+                                                                      SearchController.text='';
+                                                                      problem = 'المشكلة';
+                                                                      StName="اسم الطالب";
+                                                                      setState((){
+                                                                        firstResult = 0.0;
+                                                                        spellResult = 0.0;
+                                                                        beResult = 0.0;
+                                                                        asResult = 0.0;
+                                                                        homeAs=0.0;
+                                                                        homeBe=0.0;
+                                                                        studentChoose=false;
+
+
+                                                                      });
+                                                                      Navigator.push(context, MaterialPageRoute (
+                                                                        builder: (BuildContext context) => result(userId: widget.userId),
+                                                                      ),).then((value) => initState());
+
+                                                                    },
+                                                                    style: ElevatedButton.styleFrom(
+                                                                      backgroundColor: Colors.green,
+                                                                      shape: const RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                          BorderRadius.all(Radius.circular(10))),
+                                                                      elevation: 2.0,
+                                                                      padding: const EdgeInsets.symmetric(
+                                                                          horizontal: 25, vertical: 5),
+                                                                    ),
+                                                                    child:  Text( 'نعم',
+                                                                        style: TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontFamily: "DroidKufi",
+                                                                          fontSize: 18.0,
+                                                                        )),
+                                                                  ),
+                                                                  SizedBox(width: 30,),
+                                                                  ElevatedButton(
+                                                                    onPressed: () {
+                                                                      Navigator.pop(context);
+                                                                    },
+                                                                    style: ElevatedButton.styleFrom(
+                                                                      backgroundColor: Colors.red,
+                                                                      shape: const RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                          BorderRadius.all(Radius.circular(10))),
+                                                                      elevation: 2.0,
+                                                                      padding: const EdgeInsets.symmetric(
+                                                                          horizontal: 25, vertical: 5),
+                                                                    ),
+                                                                    child:  Text( 'لا',
+                                                                        style: TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontFamily: "DroidKufi",
+                                                                          fontSize: 18.0,
+                                                                        )),
+                                                                  ),
+
+
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ));
+                                                    }
+                                                    else {
+                                                      return;
+                                                    }
+                                                    setState(() {
+
+                                                    });
+
+                                                  }, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
+
+                                                ],
+                                              ),
+
+                                            ],
+                                          ),
+
+
+
+
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20.0,
+
+                                      child: Center(
+                                        child: Container(
+
+                                          height: 1,
+                                          color: Colors.black26,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Directionality(
+                                      textDirection: TextDirection.rtl,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+
+                                                children: [
+
+                                                  Text('الاصوات البيئية', style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,fontSize: 17,color: Colors.blue[500] ),),
+                                                  SizedBox(width: 150,)
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    height: 25,
+
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.blue,style: BorderStyle.solid,width: 2),
+                                                        borderRadius: BorderRadius.circular(15)
+                                                    ),
+                                                    child: LinearPercentIndicator(
+                                                      animation: true,
+                                                      progressColor: Colors.blue[500],
+                                                      backgroundColor: Colors.transparent,
+                                                      center: Text(studentChoose ? (homeBe*20).toString() : "0"
+                                                        ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
+                                                      isRTL: true,
+
+                                                      percent: homeBe,
+                                                      lineHeight: 16,
+                                                      width: 250,
+                                                      barRadius: Radius.circular(10),
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 10,),
+                                                  Text('20', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
+
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(width: 170,),
+                                                  TextButton(onPressed: (){
+                                                    if(studentChoose)
+                                                    {
+                                                      showDialog(context: context, builder: (context)=>AlertDialog(
+                                                        title: Container(
+                                                          color: Colors.white,
+                                                          child: Column(
+                                                            children: [
+                                                              Text('أنت الان على وشك تصفير النتيجة ، هل تريد المتابعة ؟', style: TextStyle(
+                                                                fontFamily: "DroidKufi",
+                                                                fontSize: 20,
+                                                              ),),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                              Row(
+                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                children: [
+                                                                  ElevatedButton(
+                                                                    onPressed: () {
+                                                                      resetResult(idx.toString(), '4',1);
+                                                                      SearchController.text='';
+                                                                      problem = 'المشكلة';
+                                                                      StName="اسم الطالب";
+                                                                      setState((){
+                                                                        firstResult = 0.0;
+                                                                        spellResult = 0.0;
+                                                                        beResult = 0.0;
+                                                                        asResult = 0.0;
+                                                                        homeAs=0.0;
+                                                                        homeBe=0.0;
+                                                                        studentChoose=false;
+
+
+                                                                      });
+                                                                      Navigator.push(context, MaterialPageRoute (
+                                                                        builder: (BuildContext context) => result(userId: widget.userId),
+                                                                      ),).then((value) => initState());
+
+                                                                    },
+                                                                    style: ElevatedButton.styleFrom(
+                                                                      backgroundColor: Colors.green,
+                                                                      shape: const RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                          BorderRadius.all(Radius.circular(10))),
+                                                                      elevation: 2.0,
+                                                                      padding: const EdgeInsets.symmetric(
+                                                                          horizontal: 25, vertical: 5),
+                                                                    ),
+                                                                    child:  Text( 'نعم',
+                                                                        style: TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontFamily: "DroidKufi",
+                                                                          fontSize: 18.0,
+                                                                        )),
+                                                                  ),
+                                                                  SizedBox(width: 30,),
+                                                                  ElevatedButton(
+                                                                    onPressed: () {
+                                                                      Navigator.pop(context);
+                                                                    },
+                                                                    style: ElevatedButton.styleFrom(
+                                                                      backgroundColor: Colors.red,
+                                                                      shape: const RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                          BorderRadius.all(Radius.circular(10))),
+                                                                      elevation: 2.0,
+                                                                      padding: const EdgeInsets.symmetric(
+                                                                          horizontal: 25, vertical: 5),
+                                                                    ),
+                                                                    child:  Text( 'لا',
+                                                                        style: TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontFamily: "DroidKufi",
+                                                                          fontSize: 18.0,
+                                                                        )),
+                                                                  ),
+
+
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ));
+                                                    }
+                                                    else {
+                                                      return;
+                                                    }
+                                                    setState(() {
+
+                                                    });
+
+                                                  }, child: Text("إعادة التعيين",style: TextStyle(fontFamily: "DroidKufi",fontSize: 14))),
+
+                                                ],
+                                              ),
+
+                                            ],
+                                          ),
+                                          Spacer(flex: 1,),
+
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+
+                                                children: [
+
+                                                  Text('الاصوات الاستيعابية', style: TextStyle(fontFamily: "DroidKufi",fontWeight: FontWeight.bold,fontSize: 17,color: Colors.blue[500]),),
+
+                                                  SizedBox(width: 120,)
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.blue,style: BorderStyle.solid,width: 2),
+                                                        borderRadius: BorderRadius.circular(15)
+                                                    ),
+                                                    child: LinearPercentIndicator(
+                                                      animation: true,
+                                                      progressColor: Colors.blue[500],
+                                                      backgroundColor: Colors.transparent,
+                                                      center: Text(studentChoose ? (homeAs*20).toString() : "0"
+                                                        ,style: TextStyle(color: blak , fontSize: 12, fontWeight: FontWeight.bold),),// if half or more change color to white
+                                                      isRTL: true,
+
+                                                      percent: homeAs,
+                                                      lineHeight: 16,
+                                                      width: 250,
+                                                      barRadius: Radius.circular(10),
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 10,),
+                                                  Text('20', style: TextStyle(fontFamily: "DroidKufi",fontSize: 16,color: Colors.black),),
+
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(width: 170,),
+                                                  TextButton(onPressed: (){
+                                                    if(studentChoose)
+                                                    {
+                                                      showDialog(context: context, builder: (context)=>AlertDialog(
+                                                        title: Container(
+                                                          color: Colors.white,
+                                                          child: Column(
+                                                            children: [
+                                                              Text('أنت الان على وشك تصفير النتيجة ، هل تريد المتابعة ؟', style: TextStyle(
+                                                                fontFamily: "DroidKufi",
+                                                                fontSize: 20,
+                                                              ),),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                              Row(
+                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                children: [
+                                                                  ElevatedButton(
+                                                                    onPressed: () {
+                                                                      resetResult(idx.toString(), '5', 1);
                                                                       SearchController.text='';
                                                                       problem = 'المشكلة';
                                                                       StName="اسم الطالب";
@@ -928,6 +1261,7 @@ class _resultState extends State<result> {
                                       ),
                                     ),
 
+
                                   ],
                                 ),
                                 Visibility(
@@ -960,6 +1294,8 @@ class _resultState extends State<result> {
                                                 spellResult = resSp != null? int.parse(resSp[0]['result'])/28 : 0;
                                                 beResult = resBe != null? int.parse(resBe[0]['result'])/20 : 0;
                                                 asResult = resAs != null? int.parse(resAs[0]['result'])/20 : 0;
+                                                homeAs = resAs != null? int.parse(resAs[0]['homeResult'])/20 : 0;
+                                                homeBe = resAs != null? int.parse(resBe[0]['homeResult'])/20 : 0;
                                                 setState(() {
 
                                                   studentChoose =true;
@@ -996,8 +1332,8 @@ class _resultState extends State<result> {
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     }
@@ -1038,13 +1374,14 @@ getResult(String id , String tid) async {
   return res;
 
 }
-resetResult(String id , String tid) async {
+resetResult(String id , String tid , int isHome) async {
   print (id+' - - - -hh');
   print (tid+' - - - -hh');
   var url = 'http://localhost/resetResult.php';
   var response = await http.post(Uri.parse(url), body: {
     'sid':id,
     'exid':tid,
+    'home':isHome.toString(),
   }); 
 
 }
