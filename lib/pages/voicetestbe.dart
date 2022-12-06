@@ -92,8 +92,9 @@ List<Map<String, Object>> be = const [
 class betest extends StatefulWidget {
    late int type;
    String sid;
+   bool isTeacher = false;
 
-   betest({super.key, required this.type , required this.sid}){
+   betest({super.key, required this.type , required this.sid , required this.isTeacher}){
 
      if(type==1)
      {
@@ -391,6 +392,7 @@ class _betestState extends State<betest> {
   addTestResult(int type) async {
     print('dsadasdasdasads + '+ widget.sid.toString());
   String x;
+  int kind;
   if (type == 1)
     {
       x='4';
@@ -399,6 +401,14 @@ class _betestState extends State<betest> {
     {
       x='5';
     }
+  if (widget.isTeacher)
+    {
+      kind = 0;
+    }
+  else
+    {
+      kind = 1;
+    }
     var url = 'http://localhost/addTestResult.php';
   print(totalScore);
     var response = await http.post(Uri.parse(url), body: {
@@ -406,6 +416,7 @@ class _betestState extends State<betest> {
       'result': (totalScore).toString(),
       'note': '-',
       'testid': x,
+      'home' : kind.toString(),
     });
 
   }

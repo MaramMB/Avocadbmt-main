@@ -513,7 +513,7 @@ class _voicexState extends State<voicex> {
                                           Navigator.of(context)
                                               .push(
                                               MaterialPageRoute(builder: (context) {
-                                                return betest(type: 2, sid: widget.UserID);
+                                                return betest(type: 2, sid: widget.UserID, isTeacher: false, );
                                               }));
                                         }
 
@@ -1018,7 +1018,7 @@ class _voicexState extends State<voicex> {
                                         Navigator.of(context)
                                             .push(
                                             MaterialPageRoute(builder: (context) {
-                                              return betest(type: 1, sid: widget.UserID);
+                                              return betest(type: 1, sid: widget.UserID, isTeacher: false,);
                                             }));
                                       }
                                     },
