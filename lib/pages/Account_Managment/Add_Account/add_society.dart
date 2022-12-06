@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -51,48 +52,61 @@ class _AddScocietyState extends State<AddScociety> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgreen,
-      body: Column(
-        children: [
-          // const SelectionButton(),
-          const SizedBox(
-            height: 30,
-          ),
-          Center(
-            child: Container(
-              height: MediaQuery.of(context).size.height / 1.1,
-              width: MediaQuery.of(context).size.width / 1.6,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: _form,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text("اضافه جمعيه",
-                            style: TextStyle(
-                                color: Colors.green,
-                                fontSize: 30,
-                                fontFamily: "DroidKufi",
-                                fontWeight: FontWeight.w700)),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        societieWidget()
-                      ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales
+      ],
+      locale: const Locale(
+          'ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales,
+      home: Scaffold(
+        backgroundColor: backgreen,
+        body: Column(
+          children: [
+            // const SelectionButton(),
+            const SizedBox(
+              height: 30,
+            ),
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height / 1.1,
+                width: MediaQuery.of(context).size.width / 1.6,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: _form,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text("اضافه جمعيه",
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 30,
+                                  fontFamily: "DroidKufi",
+                                  fontWeight: FontWeight.w700)),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          societieWidget()
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

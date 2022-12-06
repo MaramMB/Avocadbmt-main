@@ -2,8 +2,11 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/game/homp.dart';
 import 'package:flutter_application_1/pages/mobile/homepagemobile.dart';
+import 'package:flutter_application_1/pages/result.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
+import 'package:flutter_application_1/scroll.dart';
 // import 'package:flutter_application_1/pages/mobile/mainmobailepage.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -30,17 +33,6 @@ class StartPoint extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // localizationsDelegates: const [
-      //   GlobalCupertinoLocalizations.delegate,
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-      // ],
-      // supportedLocales: const [
-      //   Locale('ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales
-      // ],
-      // locale: const Locale(
-      //     'ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales,
-
       title: 'BDTM',
       theme: ThemeData.light(),
       home: ScreenTypeLayout.builder(
@@ -51,8 +43,9 @@ class StartPoint extends StatelessWidget {
         tablet: (BuildContext context) => const HomemobailPage(
           uname: null,
         ),
-        desktop: (BuildContext context) => testlog(),
-        // desktop: (BuildContext context) => result(userId: '1337',),
+        // desktop: (BuildContext context) => scrollhome(),
+        // desktop: (BuildContext context) => game(),
+        desktop: (BuildContext context) => result(userId: '20',),
       ),
     );
   }

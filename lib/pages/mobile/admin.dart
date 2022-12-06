@@ -177,7 +177,7 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
                                             ["Society_Address"],
                                             phoneNumber: Customers[index]
                                             ["Society_Phone"],
-                                            type: AccountType.teacher,
+                                            type: AccountType.teacher, familyname: '', image: '',
                                           ),
                                           isActive: true,
                                         );

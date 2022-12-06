@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Account_Managment/Add_Account/addteacher.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,10 +39,12 @@ class managepage extends StatefulWidget {
 
   @override
   State<managepage> createState() => _managepageState();
+
 }
 
 class _managepageState extends State<managepage> {
   int _selectedAccountType = 1;
+
 
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
     color: Colors.black,
@@ -56,18 +59,35 @@ class _managepageState extends State<managepage> {
   var searchBarController = TextEditingController();
 
   @override
+  void initState() {
+
+    super.initState();
+  }
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgreen,
-      body: Center(
-        child: Container(
-          child: Column(children: [
-            // const SelectionButton(),
-            const SizedBox(
-              height: 25,
-            ),
-            buildTable(context),
-          ]),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales
+      ],
+      locale: const Locale(
+          'ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales,
+      home: Scaffold(
+        backgroundColor: backgreen,
+        body: Center(
+          child: Container(
+            child: Column(children: [
+              // const SelectionButton(),
+              const SizedBox(
+                height: 25,
+              ),
+              buildTable(context),
+            ]),
+          ),
         ),
       ),
     );
@@ -218,7 +238,7 @@ class _managepageState extends State<managepage> {
                                                     ["Email"],
                                                 password: Customers[index]
                                                     ["Password"],
-                                                type: AccountType.teacher,
+                                                type: AccountType.teacher, familyname:  Customers[index]["familyname"], image: Customers[index]["image"],
                                               ),
                                               isActive: Customers[index]
                                                           ["active"] ==
@@ -288,11 +308,10 @@ class _managepageState extends State<managepage> {
                                                 email: Customers[index]
                                                     ["Email"],
                                                 password: Customers[index]
-                                                    ["Password"],
+                                                    ["Password"], familyname: Customers[index]["familyname"], image: Customers[index]["image"],
                                               ),
                                               isActive: Customers[index]
-                                                          ["active"] ==
-                                                      "active"
+                                                          ["active"] == "active"
                                                   ? true
                                                   : false,
                                             );

@@ -16,26 +16,25 @@ class game extends StatefulWidget {
 class _gameState extends State<game> {
   // dino variables (out of 2)
   double dinoX = -0.5;
-  double dinoY = 1;
+  double dinoY = 1.05;
   double dinoWidth = 0.2;
   double dinoHeight = 0.4;
 
   // barrier variables (out of 2)
   double barrierX = 1;
-  double barrierY = 1;
-  double barrierWidth = 0.2;
-  double barrierHeight = 0.4;
+  double barrierY = 1.2;
+  double barrierWidth = 0.25;
+  double barrierHeight = 0.5;
 
   // jump variables
   double time = 0;
   double height = 0;
-  double gravity = 9.8; // gravity in real life is 9.8
+  double gravity = 7.5;
   double velocity = 5; // how strong the jump is
 
   // game settings
   bool gameHasStarted = false;
-  bool midJump =
-  false; // this prevents a double jump and also stops user from starting too many timers!! will crash our app
+  bool midJump = false;
   bool gameOver = false;
   int score = 0;
   int highscore = 0;

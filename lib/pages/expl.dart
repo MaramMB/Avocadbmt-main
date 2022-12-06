@@ -92,26 +92,32 @@ class _expageState extends State<expage> {
         borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(right: 25.0, top: 10),
+        padding: const EdgeInsets.only( top: 10),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-               Text(testName,
+               Padding(
+                 padding: const EdgeInsets.only(right: 25.0),
+                 child: Text(testName,
+                    style: const TextStyle(
+                        color: Colors.green,
+                        fontSize: 25,
+                        fontFamily: "DroidKufi",
+                        fontWeight: FontWeight.w700)),
+               ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              const Padding(
+                padding:  EdgeInsets.only(right: 25.0),
+                child:  Text(
+                  'قم بإختيار الطالب المراد عمل الاختبار له ، سيتم تخزين نتيجة الاختبار في سجل الطالب الذي تم اختياره ',
                   style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 25,
                       fontFamily: "DroidKufi",
-                      fontWeight: FontWeight.w700)),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'قم بإختيار الطالب المراد عمل الاختبار له ، سيتم تخزين نتيجة الاختبار في سجل الطالب الذي تم اختياره ',
-                style: TextStyle(
-                    fontFamily: "DroidKufi",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
               Center(
                 child: Container(
@@ -123,42 +129,44 @@ class _expageState extends State<expage> {
                     children: [
                       Row(
                         children: [
-                          const SizedBox(width: 6),
+                          // const SizedBox(width: 6),
                           Expanded(
                             // flex: 1,
                             child: Container(
-                              padding: const EdgeInsets.only(
-                                  right: 18, bottom: 5, top: 5, left: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(color: Colors.black38),
-                              ),
-                              child: Container(
-                                height: 28,
-                                // width: MediaQuery.of(context).size.width/5,
-                                child: TextFormField(
-                                  focusNode: focusNode,
-                                  onChanged: (value) {
-                                    if (searchController.text == "") {
-                                      setState(() {
-                                        search = false;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        search = true;
-                                      });
-                                    }
-                                  },
+                              // padding: const EdgeInsets.only(
+                              //     right: 8, bottom: 1, top: 1, left: 5),
+                              height: 45,
+                              // width: MediaQuery.of(context).size.width/5,
+                              child: TextFormField(
 
-                                  controller: searchController,
-                                  textAlign: TextAlign.right,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'البحث عن طالب ...',
-                                    prefixIcon: Icon(Icons.search,color: focusNode.hasFocus ? Colors.green : Colors.grey),
+                                focusNode: focusNode,
+                                onChanged: (value) {
+                                  if (searchController.text == "") {
+                                    setState(() {
+                                      search = false;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      search = true;
+                                    });
+                                  }
+                                },
+                                controller: searchController,
+                                textAlign: TextAlign.right,
+                                decoration: InputDecoration(
+                                  // border: InputBorder.none,
+                                  hintText: '... البحث عن طالب',
+                                  prefixIcon: Icon(Icons.search,color: focusNode.hasFocus ? Colors.green : Colors.grey),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                                    borderSide: BorderSide(color: Colors.green, width: 2.5),
                                   ),
-
+                                  fillColor: Colors.white,
+                                  border: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(20))
+                                  ),
                                 ),
+
                               ),
                             ),
                           ),
@@ -174,7 +182,7 @@ class _expageState extends State<expage> {
                               color: Colors.black12,
                             ),
                           ),
-                          height: 370,
+                          height: MediaQuery.of(context).size.height/1.8,
                           child: FutureBuilder(
                             future:
                             search ? searchStudents() : getStudents(),
@@ -190,6 +198,7 @@ class _expageState extends State<expage> {
                                 );
                               } else {
                                 var Customers = snapshot.data;
+                                print(Customers[0]['image']);
                                 if (snapshot.data != null) {
                                   return ListView.builder(
                                     itemCount: Customers.length,
@@ -206,6 +215,7 @@ class _expageState extends State<expage> {
                                               address: Customers[index]["address"],
                                               phoneNumber: Customers[index]["phone"],
                                               type: AccountType.student,
+                                                familyname: Customers[index]["familyname"], image: Customers[index]["image"],
                                             ),
                                             exID: widget.exid,
                                             isActive: true,

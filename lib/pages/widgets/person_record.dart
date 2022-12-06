@@ -102,19 +102,15 @@ class _PersonRecordState extends State<PersonRecord> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: ListTile(
-                      trailing: const CircleAvatar(
+                      trailing:  CircleAvatar(
                         backgroundColor: Color(75747400),
-                        child: Icon(
-                          Icons.account_circle_outlined,
-                          size: 60,
-                          color: Colors.green,
-                        ),
+                        child: Image.memory(base64.decode(widget.person.image)),
                         // child: ClipOval(),
                       ),
                       title: Padding(
                         padding: const EdgeInsets.only(top: 12.0),
                         child: Text(
-                          widget.person.name,
+                          widget.person.name+ " "+widget.person.familyname,
                           textAlign: TextAlign.right,
                           style: const TextStyle(
                             fontFamily: "DroidKufi",
@@ -277,4 +273,5 @@ class _PersonRecordState extends State<PersonRecord> {
       ),
     );
   }
+
 }

@@ -18,7 +18,7 @@ import 'Profile/profile.dart';
 import 'Profile/teacher_profile.dart';
 import 'dic.dart';
 import 'mainpage.dart';
-
+String TeacherName='';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -81,21 +81,22 @@ var IDController = TextEditingController();
     super.initState();
     getUserData();
     // getname();
-    getteachname();
-      // name();
+    //getteachname();
+       name();
   }
-//   void name(){
-//     if (userKind == 'student'){
-//       getstuname();
-//     }
-//     else if(userKind=='teacher')
-//     {
-//       getteachname();
-//     }
-//     else{
-//       print('بتهون');
-//     }
-// }
+  void name(){
+    print(userKind);
+    if (userKind == 'student'){
+      getstuname();
+    }
+    else if(userKind=='teacher')
+    {
+      getteachname();
+    }
+    else{
+      print('بتهون');
+    }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -378,13 +379,13 @@ var IDController = TextEditingController();
                     SizedBox(
                       width: 5,
                     ),
-                    // Text(
-                    //   list[0]['Name']+list[0]['familyname'],
-                    //   style: TextStyle(
-                    //       fontSize: 16,
-                    //       color: Colors.white,
-                    //       fontFamily: "DroidKufi"),
-                    // ),
+                    Text(
+                      TeacherName,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontFamily: "DroidKufi"),
+                    ),
                     SizedBox(
                       width: 5,
                     ),
@@ -418,17 +419,17 @@ Future getteachname() async {
   var user = json.decode(response.body);
 
   if (response.statusCode == 200) {
-    print(user);
+   // print(user);
     if (user == "Error") {
       return 'h';
     }
     else {
-    print(user['Name']+' '+user['familyname']);
-    return user['Name']+' '+user['familyname'];
+   // print(user['Name']+' '+user['familyname']);
+      TeacherName= await user[0]['firstname']+' '+user[0]['familyname'];
     }
   }
 }
-Future getstuname() async {
+ getstuname() async {
   var url = 'http://localhost/readdata.php';
   var response = await http.post(Uri.parse(url), body: {
     "Id_Num":'0',
@@ -436,13 +437,13 @@ Future getstuname() async {
   var user = json.decode(response.body);
 
   if (response.statusCode == 200) {
-    print(user);
+   // print(user);
     if (user == "Error") {
       return 'h';
     }
     else {
-      print(user['firstname']+' '+user['familyname']);
-      return user['firstname']+' '+user['familyname'];
+      //print(user['firstname']+' '+user['familyname']);
+      TeacherName= await user['firstname']+' '+user['familyname'];
     }
   }
 }
@@ -455,12 +456,12 @@ Future getstuname() async {
     var user = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      print(user);
+     // print(user);
       if (user == "Error") {
         return 'h';
       }
       else {
-        print(user['firstname']+' '+user['familyname']);
+       // print(user['firstname']+' '+user['familyname']);
         return user['firstname']+' '+user['familyname'];
       }
     }

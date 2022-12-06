@@ -141,19 +141,11 @@ class _testRecordState extends State<testRecord> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: ListTile(
-                    trailing: const CircleAvatar(
-                      backgroundColor: Color(75747400),
-                      child: Icon(
-                        Icons.account_circle_outlined,
-                        size: 60,
-                        color: Colors.green,
-                      ),
-                      // child: ClipOval(),
-                    ),
+                    trailing:  ClipRRect( borderRadius: BorderRadius.circular(50),child: Image.memory(base64.decode(widget.person.image))),
                     title: Padding(
                       padding: const EdgeInsets.only(top: 12.0),
                       child: Text(
-                        widget.person.name,
+                        widget.person.name+' '+widget.person.familyname,
                         textAlign: TextAlign.right,
                         style: const TextStyle(
                           fontFamily: "DroidKufi",

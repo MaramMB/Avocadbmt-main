@@ -224,7 +224,7 @@ class _managemobileState extends State<managemobile> {
                                           address: " - ",
                                           phoneNumber: Customers[index]
                                           ["phone"],
-                                          type: AccountType.teacher,
+                                          type: AccountType.teacher, familyname: '', image: '',
                                         ),
                                         isActive: true,
                                       );
@@ -282,7 +282,7 @@ class _managemobileState extends State<managemobile> {
                                           ["address"],
                                           phoneNumber: Customers[index]
                                           ["phone"],
-                                          type: AccountType.teacher,
+                                          type: AccountType.teacher, familyname: '', image: '',
                                         ),
                                         isActive: true,
                                       );

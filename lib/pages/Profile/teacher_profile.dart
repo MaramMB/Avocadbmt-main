@@ -587,7 +587,7 @@ class TeacherProfileState extends State<TeacherProfile> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: const Text('الرجاء اضافه البريد الالكتروني  و رقم الهاتف'),
+            content: const Text('الرجاء اضافه البريد الالكتروني صحيح'),
             actions: <Widget>[
               InkWell(
                 onTap: () {

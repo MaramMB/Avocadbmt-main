@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -56,44 +57,57 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgreen,
-      body: Center(
-        child: Container(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height / 1.1,
-                width: MediaQuery.of(context).size.width / 1.6,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales
+      ],
+      locale: const Locale(
+          'ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales,
+      home: Scaffold(
+        backgroundColor: backgreen,
+        body: Center(
+          child: Container(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text("اضافه معلم",
-                            style: TextStyle(
-                                color: Colors.green,
-                                fontSize: 35,
-                                fontFamily: "DroidKufi",
-                                fontWeight: FontWeight.w700)),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20.0, left: 20),
-                          child: teacherwidget(),
-                        ),
-                      ],
+                Container(
+                  height: MediaQuery.of(context).size.height / 1.1,
+                  width: MediaQuery.of(context).size.width / 1.6,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text("اضافه معلم",
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 35,
+                                  fontFamily: "DroidKufi",
+                                  fontWeight: FontWeight.w700)),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20.0, left: 20),
+                            child: teacherwidget(),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

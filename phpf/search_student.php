@@ -25,6 +25,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
             $response[$i]["father_name"]=$row["secname"];
             $response[$i]["ptype"]=$row["ptype"];
             $response[$i]["student_id"]=$row["Students_Id"];
+            $response[$i]["familyname"]=$row["familyname"];
             $i++;
         }
         echo json_encode($response , JSON_PRETTY_PRINT);

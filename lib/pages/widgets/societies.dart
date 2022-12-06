@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_society.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import '../models/person.dart';
@@ -36,17 +37,30 @@ class _SocieitesState extends State<Socieites> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgreen,
-      body: Container(
-        child: Center(
-          child: Column(children: [
-            // const SelectionButton(),
-            const SizedBox(
-              height: 25,
-            ),
-            buildTable(context),
-          ]),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales
+      ],
+      locale: const Locale(
+          'ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales,
+      home: Scaffold(
+        backgroundColor: backgreen,
+        body: Container(
+          child: Center(
+            child: Column(children: [
+              // const SelectionButton(),
+              const SizedBox(
+                height: 25,
+              ),
+              buildTable(context),
+            ]),
+          ),
         ),
       ),
     );
@@ -184,7 +198,7 @@ class _SocieitesState extends State<Socieites> {
                                             managerName: Customers[index]
                                                 ["Society_Manager"],
                                             password: Customers[index]
-                                                ["Password"],
+                                                ["Password"], familyname: Customers[index]['familyname'], image: '',
                                           ),
                                           isActive: Customers[index]
                                                       ["active"] ==
