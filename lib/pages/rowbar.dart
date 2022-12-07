@@ -61,7 +61,6 @@ var IDController = TextEditingController();
   String userId = '';
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     setState(() {
       userKind = prefs.getString('userKind') ?? '';
       userId = prefs.getString('userId') ?? '';
@@ -80,6 +79,7 @@ var IDController = TextEditingController();
   void initState() {
     super.initState();
     getUserData();
+
     // getname();
     //getteachname();
        name();
@@ -443,7 +443,7 @@ Future getteachname() async {
     }
     else {
       //print(user['firstname']+' '+user['familyname']);
-      TeacherName= await user['firstname']+' '+user['familyname'];
+      TeacherName = await user['firstname']+' '+user['familyname'];
     }
   }
 }

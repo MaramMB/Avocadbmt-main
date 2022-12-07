@@ -14,6 +14,7 @@ class soundsWidget extends StatelessWidget {
   late String Name; // name of the sound
   late String s;
   late String id;
+  late String state;
 
   soundsWidget({
     required this.Spath ,
@@ -21,6 +22,7 @@ class soundsWidget extends StatelessWidget {
     required this.Name,
     required this.s,
     required this.id,
+    required this.state,
   });
 
   @override
@@ -108,79 +110,82 @@ class soundsWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
 
-                            FloatingActionButton(backgroundColor: Colors.redAccent,onPressed: (){
-                              showDialog(context: context, builder: (context)=>AlertDialog(
-                                title: Container(
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Text('هل أنت متأكد من حذف التدريب ؟', style: TextStyle(
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 20,
-                                      ),),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                            deleteSound(id);
-                                            Fluttertoast.showToast(msg: "تمت عملية الحذف بنجاح");
-                                            var count = 0;
-                                            Navigator.popUntil(context, (route) {
-                                              return count++ == 2;
-                                            });
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.green,
-                                              shape: const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.all(Radius.circular(10))),
-                                              elevation: 2.0,
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 25, vertical: 5),
+                            Visibility(
+                              visible: state =='0' ? false : true,
+                              child: FloatingActionButton(backgroundColor: Colors.redAccent,onPressed: (){
+                                showDialog(context: context, builder: (context)=>AlertDialog(
+                                  title: Container(
+                                    color: Colors.white,
+                                    child: Column(
+                                      children: [
+                                        Text('هل أنت متأكد من حذف التدريب ؟', style: TextStyle(
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 20,
+                                        ),),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () {
+                                              deleteSound(id);
+                                              Fluttertoast.showToast(msg: "تمت عملية الحذف بنجاح");
+                                              var count = 0;
+                                              Navigator.popUntil(context, (route) {
+                                                return count++ == 2;
+                                              });
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.green,
+                                                shape: const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.all(Radius.circular(10))),
+                                                elevation: 2.0,
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 25, vertical: 5),
+                                              ),
+                                              child:  Text( 'نعم',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "DroidKufi",
+                                                    fontSize: 18.0,
+                                                  )),
                                             ),
-                                            child:  Text( 'نعم',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "DroidKufi",
-                                                  fontSize: 18.0,
-                                                )),
-                                          ),
-                                          SizedBox(width: 30,),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.red,
-                                              shape: const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.all(Radius.circular(10))),
-                                              elevation: 2.0,
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 25, vertical: 5),
+                                            SizedBox(width: 30,),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                                shape: const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.all(Radius.circular(10))),
+                                                elevation: 2.0,
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 25, vertical: 5),
+                                              ),
+                                              child:  Text( 'لا',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "DroidKufi",
+                                                    fontSize: 18.0,
+                                                  )),
                                             ),
-                                            child:  Text( 'لا',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontFamily: "DroidKufi",
-                                                  fontSize: 18.0,
-                                                )),
-                                          ),
 
 
-                                        ],
-                                      )
-                                    ],
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ));
+                                ));
 
 
-                            },  child: Icon(Icons.delete_forever_rounded),),
+                              },  child: Icon(Icons.delete_forever_rounded),),
+                            ),
                           ],
                         ),
                       ),

@@ -87,6 +87,7 @@ dependencies:
   flutter_keyboard_visibility: ^5.4.0
   confetti: ^0.7.0
   animate_do: ^3.0.2
+  email_auth: ^1.0.0
 #  wave_progress_bars: ^0.1.0
 #  wave_progress_bars: ^0.0.1
 dev_dependencies:

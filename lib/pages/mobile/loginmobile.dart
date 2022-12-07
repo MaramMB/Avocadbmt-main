@@ -276,7 +276,7 @@ class _mobileloginState extends State<mobilelogin> {
                           onPressed: () {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
-                              return const forgetpassw();
+                              return  forgetpassw();
                             }));
                           },
                           child: const Text(
