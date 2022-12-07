@@ -32,7 +32,6 @@ class _SocieitesState extends State<Socieites> {
     fontWeight: FontWeight.bold,
   );
   bool search = false;
-
   var searchBarController = TextEditingController();
 
   @override
@@ -198,7 +197,7 @@ class _SocieitesState extends State<Socieites> {
                                             managerName: Customers[index]
                                                 ["Society_Manager"],
                                             password: Customers[index]
-                                                ["Password"], familyname: Customers[index]['familyname'], image: '',
+                                                ["Password"], familyname:'', image:Customers[index]["image"],
                                           ),
                                           isActive: Customers[index]
                                                       ["active"] ==

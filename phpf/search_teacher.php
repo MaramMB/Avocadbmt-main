@@ -25,6 +25,10 @@ header("Access-Control-Allow-Headers: X-Requested-With");
             $response[$i]["phone"]=$row["Phone_Num"];
             $response[$i]["Society_Id "]=$row["Society_Id"];
             $response[$i]["active"]=$row["active"];
+            $response[$i]["familyname"]=$row["familyname"];
+
+            $response[$i]["image"]=$row["image"];
+
             $i++;
     }
         echo json_encode($response , JSON_PRETTY_PRINT);

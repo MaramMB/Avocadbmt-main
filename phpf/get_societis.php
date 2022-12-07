@@ -23,6 +23,8 @@ $db = mysqli_connect('localhost','root','','bdmtproject');
                 $response[$i]["active"]=$row["active"];
                 $response[$i]["Email"]=$row["Email"];
                 $response[$i]["Password"]=$row["Passward"];
+                $response[$i]["image"]=$row["image"];
+
                 $i++;
             }
             echo json_encode($response , JSON_PRETTY_PRINT);

@@ -310,8 +310,7 @@ class _managepageState extends State<managepage> {
                                                 password: Customers[index]
                                                     ["Password"], familyname: Customers[index]["familyname"], image: Customers[index]["image"],
                                               ),
-                                              isActive: Customers[index]
-                                                          ["active"] == "active"
+                                              isActive: Customers[index]["active"] == "active"
                                                   ? true
                                                   : false,
                                             );

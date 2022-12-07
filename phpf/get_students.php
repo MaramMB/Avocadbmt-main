@@ -28,6 +28,9 @@ header("Access-Control-Allow-Headers: X-Requested-With");
             $response[$i]["active"]=$row["active"];
             $response[$i]["Email"]=$row["Email"];
             $response[$i]["Password"]=$row["Passward"];
+            $response[$i]["familyname"]=$row["familyname"];
+            $response[$i]["image"]=$row["image"];
+
             $i++;
         }
         echo json_encode($response , JSON_PRETTY_PRINT);

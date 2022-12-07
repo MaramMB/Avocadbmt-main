@@ -23,6 +23,8 @@ header("Access-Control-Allow-Headers: X-Requested-With");
             $response[$i]["Society_Address"]=$row["Society_Address"];
             $response[$i]["Society_Manager"]=$row["Society_Manager"];
             $response[$i]["active"]=$row["active"];
+            $response[$i]["image"]=$row["image"];
+
             $i++;
         }
         echo json_encode($response , JSON_PRETTY_PRINT);

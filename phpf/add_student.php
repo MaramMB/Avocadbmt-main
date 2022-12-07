@@ -19,7 +19,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$address = $_POST['Address'];
 	$ptype = $_POST['ptype'];
 	$student_id = $_POST['Students_Id'];
-	$imgs = $_POST['img'];
+	$imgs = $_POST['image'];
 	$teatcher_id = $_POST['teatcher_id'];
 	$Society_Id = $_POST['Society_Id'];
 
