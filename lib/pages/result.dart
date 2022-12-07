@@ -153,7 +153,7 @@ class _resultState extends State<result> {
             Center(
               child: SingleChildScrollView(
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 1.2,
+                  height: MediaQuery.of(context).size.height / 1.15,
                   width: MediaQuery.of(context).size.width / 1.8,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -194,7 +194,7 @@ class _resultState extends State<result> {
                           ),
                           Container(
                             // color: Colors.black38,
-                            height: 480,
+                            height: 450,
                             width: 600,
                             padding: const EdgeInsets.only(top: 20),
                             child: Stack(
