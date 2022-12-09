@@ -52,6 +52,21 @@ class voicex extends StatefulWidget {
 class _voicexState extends State<voicex> {
   File? image;
   var audio;
+
+  Future<List<dynamic>?> getAllSound(String type) async {
+
+    var url = 'http://localhost/getSound.php';
+    var response = await http.post(Uri.parse(url), body :{
+      'type': type,
+      'tid':widget.UserID,
+    });
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      return data;
+
+    }
+  }
+
  Future getAudio () async {
     FilePickerResult? file = await FilePicker.platform.pickFiles(type: FileType.audio, allowMultiple: false);
       if (file!=null) {
@@ -200,6 +215,7 @@ class _voicexState extends State<voicex> {
                               s: snapshot.data![index]['imageByte'],
                               id: snapshot.data![index]['sound_id'],
                               state: snapshot.data![index]['newsound'],
+                              tid: widget.UserID,
 
                             );
                           },),
@@ -240,6 +256,7 @@ class _voicexState extends State<voicex> {
                               s: snapshot.data![index]['imageByte'],
                               id: snapshot.data![index]['sound_id'],
                               state: snapshot.data![index]['newsound'],
+                              tid: widget.UserID,
 
                             );
                           },),
@@ -337,7 +354,7 @@ class _voicexState extends State<voicex> {
                                                       mainAxisAlignment: MainAxisAlignment.center,
 
                                                       children: [
-                                                        FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
+                                                        FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.remove_red_eye),onPressed: (){
 
 
                                                           showDialog(barrierDismissible: true,context: context, builder: (_) {
@@ -410,15 +427,127 @@ class _voicexState extends State<voicex> {
                                                             }
                                                         },),
                                                         SizedBox(width: 20,),
-                                                        SizedBox(width: 140,height: 50,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { getAudio(); }, child: Text('اضافة صوت'),)),
+                                                        SizedBox(width: 140,height: 50,child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () { getAudio(); },
+                                                          child: Row(
+                                                            children: [
+                                                              Text('اضافة صوت',style: TextStyle(
+                                                                fontFamily: 'DroidKufi',
+                                                              ),),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Icon(Icons.music_note),
+                                                            ],
+                                                          ),)),
 
 
                                                       ],
                                                     ),
                                                     SizedBox(height: 20,),
+                                                     SizedBox(
+                                                       height: 50,
+                                                       child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () async {
+                                                          var allList = await getAllSound('A1');
+
+                                                         showDialog(context: context, builder: (_){
+                                                           return AlertDialog(
+                                                             title: Container(
+                                                               child: Container(
+                                                                 width: 600,
+                                                                 height: 500,
+                                                                 child: SingleChildScrollView(
+                                                                   child: Column(
+                                                                     children: [
+                                                                       Column(
+                                                                         mainAxisAlignment: MainAxisAlignment.start,
+                                                                         children: [
+                                                                           Row(
+                                                                             children: [
+                                                                               Spacer(flex: 2,),
+                                                                               Text('اختر الصوت الذي تريد إضافته', style: TextStyle(color: Colors.green,fontFamily: 'DroidKufi',fontWeight: FontWeight.bold,fontSize: 25),),
+                                                                               Spacer(),
+                                                                               SizedBox(
+                                                                                 height: 50,
+                                                                                 child: FloatingActionButton(backgroundColor:Colors.green,onPressed: (){
+                                                                                   Navigator.pop(context);
+                                                                                 }, child: Icon(Icons.navigate_next_rounded,size: 30,)),
+                                                                               ),
+
+                                                                             ],
+                                                                           ),
+                                                                           SizedBox(height: 30,),
+                                                                           Padding(
+                                                                             padding: const EdgeInsets.symmetric(horizontal: 40),
+                                                                             child: Wrap(
+                                                                               crossAxisAlignment: WrapCrossAlignment.center,
+                                                                               alignment: WrapAlignment.start,
+                                                                               spacing: 35,
+                                                                               runAlignment: WrapAlignment.start,
+                                                                               runSpacing: 25,
+                                                                               children: [
+                                                                                 GridView.builder(
+                                                                                   shrinkWrap: true,
+                                                                                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                                                                       mainAxisSpacing: 20,
+                                                                                       crossAxisCount: 3,
+                                                                                       crossAxisSpacing: 20),
+                                                                                   itemCount: allList?.length, itemBuilder: (context, index) {
+                                                                                   return soundsWidget(
+                                                                                     Name: allList?[index]['word'],
+                                                                                     Ipath: allList?[index]['image'],
+                                                                                     Spath: allList?[index]['audio'],
+                                                                                     s: allList?[index]['imageByte'],
+                                                                                     id: allList?[index]['sound_id'],
+                                                                                     state: allList?[index]['newsound'],
+                                                                                     type: 'A1',
+                                                                                     tid: widget.UserID,
+                                                                                     //remove audio/ from it
+
+                                                                                   );
+                                                                                 },),
+
+                                                                               ],
+
+                                                                             ),
+                                                                           ),
+
+
+                                                                         ],
+                                                                       ),
+                                                                       SizedBox(
+                                                                         height: 30,
+                                                                       ),
+
+                                                                     ],
+                                                                   ),
+                                                                 ),
+                                                               ),
+                                                             ),
+
+
+
+
+                                                           );
+                                                         });
+
+                                                         },
+                                                         child: Row(
+                                                           mainAxisAlignment: MainAxisAlignment.center,
+                                                           children: [
+                                                             Text('مكتبة الاصوات المتوفرة',style: TextStyle(
+                                                               fontFamily: 'DroidKufi',
+                                                             ),),
+                                                             SizedBox(
+                                                               width: 10,
+                                                             ),
+                                                             Icon(Icons.library_music),
+                                                           ],
+                                                         ),),
+                                                     ),
+                                                    SizedBox(height: 20,),
                                                      Visibility(
                                                        visible: addCheck,
-                                                       child: Text(" خطأ ، قم بالتأكد من إضافة (اسم الصوت ، صورة ، صوت) *", style: TextStyle(
+                                                       child: Text(" خطأ ، قم بالتأكد من إضافة:\n اسم الصوت ، صورة ، صوت", style: TextStyle(
                                                         fontFamily: "DroidKufi",
                                                         fontSize: 13,
                                                         fontWeight: FontWeight.w600,
@@ -710,6 +839,7 @@ class _voicexState extends State<voicex> {
                               s: snapshot.data![index]['imageByte'],
                               id: snapshot.data![index]['sound_id'],
                               state: snapshot.data![index]['newsound'],
+                              tid: widget.UserID,
 
                             );
                           },),
@@ -750,6 +880,7 @@ class _voicexState extends State<voicex> {
                               s: snapshot.data![index]['imageByte'],
                               id: snapshot.data![index]['sound_id'],
                               state: snapshot.data![index]['newsound'],
+                              tid: widget.UserID,
 
 
                             );
@@ -849,7 +980,7 @@ class _voicexState extends State<voicex> {
                                                               mainAxisAlignment: MainAxisAlignment.center,
 
                                                               children: [
-                                                                FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.remove_red_eye_outlined),onPressed: (){
+                                                                FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.remove_red_eye),onPressed: (){
 
 
                                                                   showDialog(barrierDismissible: true,context: context, builder: (_) {
@@ -928,9 +1059,110 @@ class _voicexState extends State<voicex> {
                                                               ],
                                                             ),
                                                             SizedBox(height: 20,),
+                                                            SizedBox(
+                                                              height: 50,
+                                                              child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green), onPressed: () async {
+                                                                var allList = await getAllSound('B1');
+
+                                                                showDialog(context: context, builder: (_){
+                                                                  return AlertDialog(
+                                                                    title: Container(
+                                                                      child: Container(
+                                                                        width: 600,
+                                                                        height: 500,
+                                                                        child: SingleChildScrollView(
+                                                                          child: Column(
+                                                                            children: [
+                                                                              Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                children: [
+                                                                                  Row(
+                                                                                    children: [
+                                                                                      Spacer(flex: 2,),
+                                                                                      Text('اختر الصوت الذي تريد إضافته', style: TextStyle(color: Colors.green,fontFamily: 'DroidKufi',fontWeight: FontWeight.bold,fontSize: 25),),
+                                                                                      Spacer(),
+                                                                                      SizedBox(
+                                                                                        height: 50,
+                                                                                        child: FloatingActionButton(backgroundColor:Colors.green,onPressed: (){
+                                                                                          Navigator.pop(context);
+                                                                                        }, child: Icon(Icons.navigate_next_rounded,size: 30,)),
+                                                                                      ),
+
+                                                                                    ],
+                                                                                  ),
+                                                                                  SizedBox(height: 30,),
+                                                                                  Padding(
+                                                                                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                                                                                    child: Wrap(
+                                                                                      crossAxisAlignment: WrapCrossAlignment.center,
+                                                                                      alignment: WrapAlignment.start,
+                                                                                      spacing: 35,
+                                                                                      runAlignment: WrapAlignment.start,
+                                                                                      runSpacing: 25,
+                                                                                      children: [
+                                                                                        GridView.builder(
+                                                                                          shrinkWrap: true,
+                                                                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                                                                              mainAxisSpacing: 20,
+                                                                                              crossAxisCount: 3,
+                                                                                              crossAxisSpacing: 20),
+                                                                                          itemCount: allList?.length, itemBuilder: (context, index) {
+                                                                                          return soundsWidget(
+                                                                                            Name: allList?[index]['word'],
+                                                                                            Ipath: allList?[index]['image'],
+                                                                                            Spath: allList?[index]['audio'],
+                                                                                            s: allList?[index]['imageByte'],
+                                                                                            id: allList?[index]['sound_id'],
+                                                                                            state: allList?[index]['newsound'],
+                                                                                            type: 'B1',
+                                                                                            tid: widget.UserID,
+                                                                                            //remove audio/ from it
+
+                                                                                          );
+                                                                                        },),
+
+                                                                                      ],
+
+                                                                                    ),
+                                                                                  ),
+
+
+                                                                                ],
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 30,
+                                                                              ),
+
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+
+
+
+
+                                                                  );
+                                                                });
+
+                                                              },
+                                                                child: Row(
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Text('مكتبة الاصوات المتوفرة',style: TextStyle(
+                                                                      fontFamily: 'DroidKufi',
+                                                                    ),),
+                                                                    SizedBox(
+                                                                      width: 10,
+                                                                    ),
+                                                                    Icon(Icons.library_music),
+                                                                  ],
+                                                                ),),
+                                                            ),
+                                                            SizedBox(height: 20,),
                                                             Visibility(
                                                               visible: addCheck,
-                                                              child: Text(" خطأ ، قم بالتأكد من إضافة (اسم الصوت ، صورة ، صوت) *", style: TextStyle(
+                                                              child: Text(" خطأ ، قم بالتأكد من إضافة اسم الصوت ، صورة ، صوت", style: TextStyle(
                                                                 fontFamily: "DroidKufi",
                                                                 fontSize: 13,
                                                                 fontWeight: FontWeight.w600,
@@ -1217,4 +1449,7 @@ Future ConvertImage(File image) async {
 
   Uint8List imageBytes = await image.readAsBytes();
     String base64 = base64Encode(imageBytes);
-  }}
+  }
+
+
+}
