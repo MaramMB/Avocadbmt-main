@@ -88,7 +88,7 @@ dependencies:
   confetti: ^0.7.0
   animate_do: ^3.0.2
   email_auth: ^1.0.0
-  email_validator: ^2.1.17
+  url_launcher: ^6.1.7
 #  wave_progress_bars: ^0.1.0
 #  wave_progress_bars: ^0.0.1
 dev_dependencies:

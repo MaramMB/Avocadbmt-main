@@ -121,7 +121,7 @@ var IDController = TextEditingController();
             ),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const chat();
+                return  chat(userId: userId, userKind: userKind,);
               }));
             },
             child: const Text(

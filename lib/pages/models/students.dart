@@ -13,12 +13,14 @@ class Students{
    final String tid;
    final String problem;
    final String image;
+    final String email;
 const Students( {
   required this.id,required this.sname, required this.tname, required this.lname, required this.stdId, required this.socId,required  this.phone,required this.dob,
   required this.gender, required this.address, required  this.tid,
 required this.fname,
 required this.problem,
 required this.image,
+  required this.email,
 });
    factory Students.fromJson(Map<String, dynamic> json) => Students(
      id: json['Id'],
@@ -35,6 +37,7 @@ required this.image,
      fname: json['firstname'],
      problem: json['ptype'],
      image: json['image'],
+     email:json['Email'],
 
    );
 
