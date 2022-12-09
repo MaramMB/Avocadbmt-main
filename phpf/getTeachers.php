@@ -16,8 +16,9 @@ header("Access-Control-Allow-Headers: X-Requested-With");
     if($result){
         $i=0;
         while ($row=mysqli_fetch_assoc($result)){
-            $response[$i]["id"]=$row["Id_Num"];
+            $response[$i]["Id_Num"]=$row["Id_Num"];
             $response[$i]["email"]=$row["Email"];
+            $response[$i]["family"]=$row["familyname"];
             $response[$i]["name"]=$row["Name"];
             $response[$i]["gender"]=$row["gender"];
             $response[$i]["phone"]=$row["Phone_Num"];

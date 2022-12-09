@@ -58,36 +58,29 @@ class _faceexState extends State<faceex> {
     super.initState();
     flickManager = FlickManager(
       autoPlay: false,
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
       videoPlayerController:VideoPlayerController.network('https://st.depositphotos.com/2923991/56603/v/600/depositphotos_566038476-stock-video-boy-of-9-years-is.mp4'),
     );
     flickManager1 = FlickManager(
       autoPlay: false,
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController:VideoPlayerController.network('https://st.depositphotos.com/2923991/56603/v/600/depositphotos_566038564-stock-video-boy-of-9-years-is.mp4'),
     );    flickManager2 = FlickManager(
       autoPlay: false,
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56609/v/600/depositphotos_566092608-stock-video-boy-of-9-years-is.mp4'),
     );
     flickManager3 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56609/v/600/depositphotos_566092908-stock-video-boy-of-9-years-is.mp4'),
       autoPlay: false,
     );
     flickManager4 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56710/v/600/depositphotos_567103784-stock-video-boy-of-9-years-is.mp4'),
       autoPlay: false,
     );
     flickManager5 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56919/v/600/depositphotos_569198438-stock-video-boy-of-9-years-is.mp4'),
       autoPlay: false,
     );
     flickManager6 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController:VideoPlayerController.asset('dic/home/Bed.mp4'),
       autoPlay: false,
     );
     flickManager7 = FlickManager(
@@ -175,8 +168,8 @@ class _faceexState extends State<faceex> {
                               shrinkWrap: true,
                               gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisSpacing: 9,
-                                childAspectRatio: 1.35,
+                                crossAxisSpacing: 12,
+                                childAspectRatio: 1.2,
                                 mainAxisSpacing: 0,
                                 crossAxisCount: 3,
                               ),
@@ -194,19 +187,6 @@ class _faceexState extends State<faceex> {
                                               flickManager: myfilk[index],
 
                                             ),
-                                            // SizedBox(height: 10,),
-                                            // IconButton(
-                                            //     onPressed: () {
-                                            //       Navigator.push(
-                                            //           context,
-                                            //           MaterialPageRoute(
-                                            //               builder: (context) => SingleVideo(index: index,)));
-                                            //     },
-                                            //     icon: Icon(
-                                            //       Icons.start,
-                                            //       size: 20,
-                                            //       color: Colors.green,
-                                            //     )),
                                             SizedBox(height: 7,),
                                             ElevatedButton(
                                               onPressed: () {

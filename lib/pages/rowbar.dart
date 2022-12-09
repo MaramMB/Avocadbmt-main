@@ -61,12 +61,12 @@ class SelectionButtonState extends State<SelectionButton> {
 var IDController = TextEditingController();
   String? userKind;
   String userId = '';
-  Future<void> getUserData() async {
+   getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
+    // setState(() {
       userKind = prefs.getString('userKind') ?? '';
       userId = prefs.getString('userId') ?? '';
-    });
+    // });
   }
   bool showbtn  (){
     if (userKind == 'student'){

@@ -118,6 +118,8 @@ flutter:
     - img/
     - audio/
     - assets/videos/
+    - dic/home/
+    - dic/color/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

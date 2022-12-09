@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Videos/colours.dart';
 
 import 'package:flutter_application_1/pages/rowbar.dart';
 
@@ -377,7 +378,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Colours(
                                         name: "الألوان",
                                       )));
                             },

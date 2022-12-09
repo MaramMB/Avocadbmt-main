@@ -201,7 +201,6 @@ class TeacherProfileState extends State<TeacherProfile> {
                                           setState(() {
                                             email = !email;
                                             if(email){
-
                                             Navigator.pushReplacement(
                                                 context,
                                                 MaterialPageRoute(
@@ -660,21 +659,21 @@ class TeacherProfileState extends State<TeacherProfile> {
 
   getTeacher() async {
     var url = 'http://localhost/getTeachers.php?id=${widget.userId}';
-
+    print(widget.userId);
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     var bytes = base64Decode(res[0]["image"]);
     var ints = bytes.buffer.asUint8List();
-
+    print(res[0]);
     setState(() {
-      emailController.text = res[widget.userId]["email"] ?? "";
-      phoneController.text = res[widget.userId]["phone"] ?? "";
+      emailController.text = res[0]["email"] ?? "";
+      phoneController.text = res[0]["phone"] ?? "";
       imagevalue = ints.isEmpty ? null : ints;
-      IDController.text = res[widget.userId]["id"] ?? "";
-      nameController.text = res[widget.userId]["name"] ?? "";
-      genderController.text = res[widget.userId]["gender"] == "male" ? "ذكر" : "انثى";
-      specialistController.text = res[widget.userId]["spec"];
-      accountNumController.text = res[widget.userId]["accountnum"];
+      IDController.text = res[0]["Id_Num"] ?? "";
+      nameController.text = res[0]["name"]+' '+res[0]["family"] ?? "";
+      genderController.text = res[0]["gender"] == "male" ? "ذكر" : "انثى";
+      specialistController.text = res[0]["spec"];
+      accountNumController.text = res[0]["accountnum"];
     });
 
   }

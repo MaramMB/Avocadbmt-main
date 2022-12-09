@@ -191,7 +191,7 @@ class _mainpageState extends State<mainpage> {
                   Stack(alignment: Alignment.bottomLeft, children: [
                     FadeInLeft(
                       duration: Duration(milliseconds: 800),
-                      child: Image.asset("img/boytalk.png",
+                      child: Image.asset("img/boywavecut.png",
                           alignment: Alignment.bottomLeft,
                           height: MediaQuery.of(context).size.height / 1.9),
                     )

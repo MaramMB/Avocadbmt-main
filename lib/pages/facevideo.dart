@@ -55,6 +55,7 @@ class _facevideoState extends State<facevideo> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                        SizedBox(height:5,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -73,7 +74,7 @@ class _facevideoState extends State<facevideo> {
                         )
                       ],
                     ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 12,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -105,53 +106,19 @@ class _facevideoState extends State<facevideo> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            setState(() {
-                              if(widget.index!=0){
-                                widget.index --;
-                              }
-                            });
-                            // if (widget.index == 0) {
-                            //   Fluttertoast.showToast(msg: "No Videos");
-                            // } else {
-                            //   setState(() {
-                            //     widget.index = widget.index - 1;
-                            //   });
-                            // }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            alignment: Alignment.bottomCenter,
-                            backgroundColor: Colors.green,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(14))),
-                            elevation: 2.0,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 12),
-                          ),
-                          child: const Text(" السابق ",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "DroidKufi",
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w600,
-
-                              )),
-                        ),
-                        SizedBox(width: 45,),
-                        ElevatedButton(
-                          onPressed: () {
+                              print(widget.index);
                             setState(() {
                               if(widget.index != 11){
                                 widget.index ++;
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) => super.widget));
                               }
+                            else {
+                              Fluttertoast.showToast(msg: "Doen");
+                            }
                             });
-                            // if (widget.index == 11) {
-                            //   Fluttertoast.showToast(msg: "Doen");
-                            // } else {
-                            //   setState(() {
-                            //     widget.index++;
-                            //   });
-                            // }
                           },
                           style: ElevatedButton.styleFrom(
                             alignment: Alignment.bottomCenter,
@@ -172,6 +139,44 @@ class _facevideoState extends State<facevideo> {
 
                               )),
                         ),
+                        SizedBox(width: 45,),
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              print(widget.index);
+                              if(widget.index!=0){
+                                widget.index --;
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) => super.widget));
+                              }
+                              else{
+                              Fluttertoast.showToast(msg: "No Videos");
+
+                              }
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            alignment: Alignment.bottomCenter,
+                            backgroundColor: Colors.green,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(14))),
+                            elevation: 2.0,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                          ),
+                          child: const Text(" السابق ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "DroidKufi",
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+
+                              )),
+                        ),
+
                       ],
                     ),
                   ],
@@ -217,31 +222,25 @@ class _facevideoState extends State<facevideo> {
     super.initState();
     flickManager = FlickManager(
       autoPlay: false,
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
       videoPlayerController:VideoPlayerController.network('https://st.depositphotos.com/2923991/56603/v/600/depositphotos_566038476-stock-video-boy-of-9-years-is.mp4'),
     );
     flickManager1 = FlickManager(
       autoPlay: false,
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4',videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: true)),
+      videoPlayerController:VideoPlayerController.network('https://st.depositphotos.com/2923991/56603/v/600/depositphotos_566038564-stock-video-boy-of-9-years-is.mp4'),
     );    flickManager2 = FlickManager(
       autoPlay: false,
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56609/v/600/depositphotos_566092608-stock-video-boy-of-9-years-is.mp4'),
     );
     flickManager3 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56609/v/600/depositphotos_566092908-stock-video-boy-of-9-years-is.mp4'),
       autoPlay: false,
     );
     flickManager4 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56710/v/600/depositphotos_567103784-stock-video-boy-of-9-years-is.mp4'),
       autoPlay: false,
     );
     flickManager5 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56919/v/600/depositphotos_569198438-stock-video-boy-of-9-years-is.mp4'),
       autoPlay: false,
     );
     flickManager6 = FlickManager(
