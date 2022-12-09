@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/audio.dart';
 import 'package:flutter_application_1/pages/laterss.dart';
+import 'package:flutter_application_1/pages/voice.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
-
+var cc ;
 class soundsWidget extends StatelessWidget {
   late String Spath; //sound path
   late String Ipath;// Image path
@@ -15,6 +16,8 @@ class soundsWidget extends StatelessWidget {
   late String s;
   late String id;
   late String state;
+  late String type;
+  late String tid;
 
   soundsWidget({
     required this.Spath ,
@@ -23,9 +26,12 @@ class soundsWidget extends StatelessWidget {
     required this.s,
     required this.id,
     required this.state,
+    this.type='',
+    required this.tid,
   });
 
   @override
+
   Widget build(BuildContext context) {
     return Container(
 
@@ -50,7 +56,7 @@ class soundsWidget extends StatelessWidget {
                 contentPadding: const EdgeInsets.only(top: 30,right: 20,left: 20,bottom: 15),
                 content: Container(
                   width: MediaQuery.of(context).size.width/3.9,
-                  height: MediaQuery.of(context).size.height/1.6,
+                  height: MediaQuery.of(context).size.height/1.5,
                   child: Stack(
                     alignment: AlignmentDirectional.center,
                     children: [
@@ -83,8 +89,17 @@ class soundsWidget extends StatelessWidget {
 
                           ElevatedButton(
                             onPressed: () {
-                              audioPlayer.dispose();
-                              Navigator.of(context, rootNavigator: true).pop();
+                              if(type=='A1' || type=='B1')
+                                {
+                                  addSound();
+                                  Fluttertoast.showToast(msg: 'تم إضافة الصوت بنجاح');
+                                  Navigator.of(context, rootNavigator: true).pop();
+                                  
+                                }
+                              else{
+                                audioPlayer.dispose();
+                                Navigator.of(context, rootNavigator: true).pop();
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
@@ -95,13 +110,42 @@ class soundsWidget extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 5),
                             ),
-                            child: const Text("العودة",
+                            child: Text((type!='A1' && type!='B1')?"العودة":"إضافة الصوت",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: "DroidKufi",
                                   fontSize: 22.0,
                                 )),
                           ),
+                          const SizedBox(height: 15,),
+
+                          Visibility(
+                            visible:(type=='A1' || type=='B1')?true:false,
+                            child: ElevatedButton(
+                              onPressed: () {
+
+                                  audioPlayer.dispose();
+                                  Navigator.of(context, rootNavigator: true).pop();
+
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                                elevation: 2.0,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 5),
+                              ),
+                              child: Text("العودة",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "DroidKufi",
+                                    fontSize: 22.0,
+                                  )),
+                            ),
+                          ),
+
                         ],
                       ),
                       Align(
@@ -111,7 +155,7 @@ class soundsWidget extends StatelessWidget {
                           children: [
 
                             Visibility(
-                              visible: state =='0' ? false : true,
+                              visible: (state =='0' || (type=='A1'||type=='B1')) ? false : true,
                               child: FloatingActionButton(backgroundColor: Colors.redAccent,onPressed: (){
                                 showDialog(context: context, builder: (context)=>AlertDialog(
                                   title: Container(
@@ -129,13 +173,16 @@ class soundsWidget extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             ElevatedButton(
-                                              onPressed: () {
+                                              onPressed: () async {
                                               deleteSound(id);
                                               Fluttertoast.showToast(msg: "تمت عملية الحذف بنجاح");
-                                              var count = 0;
-                                              Navigator.popUntil(context, (route) {
-                                                return count++ == 2;
-                                              });
+
+                                              Navigator.push (
+                                                context,
+                                                MaterialPageRoute (
+                                                  builder: (BuildContext context) => voicex(UserID: tid, UserKind: 'teacher', tid: tid),
+                                                ),
+                                              );
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor: Colors.green,
@@ -213,10 +260,27 @@ class soundsWidget extends StatelessWidget {
 
       ),
     );
+
   }
-
-  Future<void> deleteSound(String id) async {
-
+  addSound()async{
+    var x;
+    if (type=='A1')x='A';
+    else x ='B';
+    var url = 'http://localhost/imageStore.php';
+    print('tid is '+tid);
+    var response = await http.post(Uri.parse(url), body :{
+      'word': Name,
+      'imageByte': s,
+      'audio':Spath,
+      'type': x,
+      'tid': tid,
+      'isAdd':'yes',
+    });
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      print(data.toString());}
+  }
+  deleteSound(String id) async {
     var url = 'http://localhost/deleteSound.php';
     var response = await http.post(Uri.parse(url), body: {
       'id':id,
