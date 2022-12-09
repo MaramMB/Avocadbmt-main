@@ -1314,7 +1314,11 @@ class _resultState extends State<result> {
                                                 });
                                               },
                                               leading: ClipOval(child: Image.memory(base64Decode(userLists[index].image), width: 50, height: 50,)),
-                                              title: Text(Fname),
+                                              title: Text(Fname, style: TextStyle(
+                                                color: blak,
+                                                fontFamily: "DroidKufi",
+                                                fontSize: 15,
+                                              ),),
                                             ),
                                           ),
                                         );
