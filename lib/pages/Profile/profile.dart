@@ -646,7 +646,7 @@ class _personalState extends State<personal> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: const Text('الرجاء اضافه البريد الالكتروني  و رقم الهاتف'),
+            content: const Text('الرجاء اضافه البريد الالكتروني '),
             actions: <Widget>[
               InkWell(
                 onTap: () {

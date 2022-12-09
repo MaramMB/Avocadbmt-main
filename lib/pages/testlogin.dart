@@ -67,20 +67,20 @@ class _testlogState extends State<testlog> {
           await prefs.setString('userId',user['Id_Num']);
           if (user['Kind'] == 'manager') {
             Navigator.push(context, MaterialPageRoute(builder: (context) =>  managepage(),),);
-            print(user['Kind']);
-            print(user['active']);
+            // print(user['Kind']);
+            // print(user['active']);
           } else if (user['Kind'] == 'admin') {
             Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Socieites(),),);
-            print(user['Kind']);
+            // print(user['Kind']);
           } else if (user['Kind'] == 'student') {
             Navigator.push(
               context, MaterialPageRoute(builder: (context) => const mainpage(),),);
-            print(user['Kind']);
+            // print(user['Kind']);
           } else {
             Navigator.push(
               context, MaterialPageRoute(builder: (context) => const mainpage(),),);
-            print(user['Kind']);
+            // print(user['Kind']);
           }
         }
         else{
@@ -101,6 +101,11 @@ class _testlogState extends State<testlog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 50,
+        elevation: 0,
+        backgroundColor: const Color.fromRGBO(131, 190, 99, 1),
+      ),
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(

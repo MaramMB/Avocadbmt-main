@@ -218,7 +218,7 @@ class _facevideoState extends State<facevideo> {
     flickManager = FlickManager(
       autoPlay: false,
       // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
+      videoPlayerController:VideoPlayerController.network('https://st.depositphotos.com/2923991/56603/v/600/depositphotos_566038476-stock-video-boy-of-9-years-is.mp4'),
     );
     flickManager1 = FlickManager(
       autoPlay: false,

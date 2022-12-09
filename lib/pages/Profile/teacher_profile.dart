@@ -200,6 +200,13 @@ class TeacherProfileState extends State<TeacherProfile> {
                                         onPressed: () {
                                           setState(() {
                                             email = !email;
+                                            if(email){
+
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext context) => super.widget));
+                                            }
                                           });
                                         },
                                         icon: const Icon(
@@ -497,13 +504,19 @@ class TeacherProfileState extends State<TeacherProfile> {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return const AlertDialog(
-                                    content: SizedBox(
-                                        height: 100,
-                                        width: 100,
-                                        child: Center(
-                                            child:
-                                            CircularProgressIndicator())),
+                                  return  AlertDialog(
+                                    content: Text( 'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر'),
+                                    actions: <Widget>[
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text(
+                                          'حسنا',
+                                          style: TextStyle(color: Color(0xff34568B)),
+                                        ),
+                                      ),
+                                    ],
                                   );
                                 },
                               );
@@ -566,6 +579,7 @@ class TeacherProfileState extends State<TeacherProfile> {
   );
 
   bool validateEmail(String? value) {
+    String end;
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regExp = new RegExp(pattern);
@@ -573,7 +587,11 @@ class TeacherProfileState extends State<TeacherProfile> {
       return true;
     } else if (!regExp.hasMatch(value!)) {
       return true;
-    } else {
+    }
+  //   else if (end.length<4) {
+  //     return true;
+  // }
+    else {
       return false;
     }
   }
@@ -621,7 +639,12 @@ class TeacherProfileState extends State<TeacherProfile> {
         });
         Navigator.of(context, rootNavigator: true).pop();
         Fluttertoast.showToast(msg: "تم تعديل بيانات الطالب بنجاح");
-      } else {
+      }
+      // else if (data == "email") {
+      //   Fluttertoast.showToast(msg: 'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر');
+      // }
+      else {
+        // Fluttertoast.showToast(msg: 'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر');
         Navigator.of(context, rootNavigator: true).pop();
       }
     }
@@ -644,15 +667,16 @@ class TeacherProfileState extends State<TeacherProfile> {
     var ints = bytes.buffer.asUint8List();
 
     setState(() {
-      emailController.text = res[0]["email"] ?? "";
-      phoneController.text = res[0]["phone"] ?? "";
+      emailController.text = res[widget.userId]["email"] ?? "";
+      phoneController.text = res[widget.userId]["phone"] ?? "";
       imagevalue = ints.isEmpty ? null : ints;
-      IDController.text = res[0]["id"] ?? "";
-      nameController.text = res[0]["name"] ?? "";
-      genderController.text = res[0]["gender"] == "male" ? "ذكر" : "انثى";
-      specialistController.text = res[0]["spec"];
-      accountNumController.text = res[0]["accountnum"];
+      IDController.text = res[widget.userId]["id"] ?? "";
+      nameController.text = res[widget.userId]["name"] ?? "";
+      genderController.text = res[widget.userId]["gender"] == "male" ? "ذكر" : "انثى";
+      specialistController.text = res[widget.userId]["spec"];
+      accountNumController.text = res[widget.userId]["accountnum"];
     });
+
   }
 
   Uint8List? imagevalue;

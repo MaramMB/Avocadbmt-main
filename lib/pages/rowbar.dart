@@ -7,6 +7,7 @@ import 'package:flutter_application_1/pages/Profile/teacher_profile.dart';
 import 'package:flutter_application_1/pages/chat.dart';
 import 'package:flutter_application_1/pages/face.dart';
 import 'package:flutter_application_1/pages/result.dart';
+import 'package:flutter_application_1/resetpass.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/latterexpl.dart';
@@ -19,6 +20,7 @@ import 'Profile/teacher_profile.dart';
 import 'dic.dart';
 import 'mainpage.dart';
 String TeacherName='';
+String image='';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -79,19 +81,17 @@ var IDController = TextEditingController();
   void initState() {
     super.initState();
     getUserData();
-
-    // getname();
-    //getteachname();
-       name();
+    name();
   }
-  void name(){
-    print(userKind);
+  name() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    userKind = prefs.getString('userKind') ?? '';
     if (userKind == 'student'){
-      getstuname();
+     await getstuname();
     }
     else if(userKind=='teacher')
     {
-      getteachname();
+     await getteachname();
     }
     else{
       print('بتهون');
@@ -322,6 +322,27 @@ var IDController = TextEditingController();
                   ),
                 ),
                 PopupMenuItem(
+                  value: 3,
+                  child: Row(
+                    textDirection: TextDirection.rtl,
+                    children: const [
+                      Icon(
+                        Icons.settings,
+                        color: Colors.black87,
+                        size: 20,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        "اعدادات كلمة المرور",
+                        style: TextStyle(
+                            fontSize: 14, color: blak, fontFamily: "DroidKufi"),
+                      ),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
                   value: 2,
                   child: Row(
                     textDirection: TextDirection.rtl,
@@ -350,6 +371,8 @@ var IDController = TextEditingController();
               onSelected: (value) async {
                 // if value 1 show dialog
                 if (value == 1) {
+                  print(userId);
+                  print(userKind);
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return userKind == 'student'
@@ -363,6 +386,12 @@ var IDController = TextEditingController();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                           builder: (c) => scrollhome()),
+                          (r) => false);
+                } else if (value == 3) {
+                  // await AuthClient.internal().signOut();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (c) => reset(userId: userId)),
                           (r) => false);
                 }
               },
@@ -392,7 +421,9 @@ var IDController = TextEditingController();
                     CircleAvatar(
                       // backgroundImage: Image.memory(base64Decode(base64Decode(list[0].['image']))),
                       // child: Image.memory(base64Decode(list[0].image)),
-                      radius: 16.7,
+                     child: ClipRRect(child: Image.memory(base64.decode(image)),borderRadius: BorderRadius.circular(20)),
+                      radius: 17.7,
+                      backgroundColor: Colors.transparent,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
@@ -414,7 +445,7 @@ var IDController = TextEditingController();
 Future getteachname() async {
   var url = 'http://localhost/getname.php';
   var response = await http.post(Uri.parse(url), body: {
-    "Id_Num":'20',
+    "Id_Num":userId,
   });
   var user = json.decode(response.body);
 
@@ -425,14 +456,15 @@ Future getteachname() async {
     }
     else {
    // print(user['Name']+' '+user['familyname']);
-      TeacherName= await user[0]['firstname']+' '+user[0]['familyname'];
+      TeacherName= await user['Name']+' '+user['familyname'];
+      image=user['image'];
     }
   }
 }
  getstuname() async {
   var url = 'http://localhost/readdata.php';
   var response = await http.post(Uri.parse(url), body: {
-    "Id_Num":'0',
+    "Id_Num":userId,
   });
   var user = json.decode(response.body);
 
@@ -444,47 +476,9 @@ Future getteachname() async {
     else {
       //print(user['firstname']+' '+user['familyname']);
       TeacherName = await user['firstname']+' '+user['familyname'];
+      image=user['image'];
     }
   }
 }
-  Future getname() async {
-    if(userKind=='student'){
-    var url = 'http://localhost/readdata.php';
-    var response = await http.post(Uri.parse(url), body: {
-      "Id_Num":userId,
-    });
-    var user = json.decode(response.body);
 
-    if (response.statusCode == 200) {
-     // print(user);
-      if (user == "Error") {
-        return 'h';
-      }
-      else {
-       // print(user['firstname']+' '+user['familyname']);
-        return user['firstname']+' '+user['familyname'];
-      }
-    }
-  }
-    else if(userKind=='teacher')
-      {
-        var url = 'http://localhost/getname.php';
-        var response = await http.post(Uri.parse(url), body: {
-          "Id_Num":userId,
-        });
-        var user = json.decode(response.body);
-        if (response.statusCode == 200) {
-          print(user);
-          if (user == "Error") {
-            return 'h';
-          }
-          else {
-            print(user['Name']+' '+user['familyname']);
-            return user['Name']+' '+user['familyname'];
-          }
-        }
-      }
-    else
-      return 'nnnn';
-  }
 }
