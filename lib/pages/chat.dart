@@ -409,13 +409,16 @@ class _chatState extends State<chat> {
                                                   fontFamily: "DroidKufi",
                                                   fontSize: 16,
                                                 ),),
-                                                trailing: ElevatedButton(onPressed: (){
+                                                trailing: Visibility(
+                                                  visible: widget.userKind!='student',
+                                                  child: ElevatedButton(onPressed: (){
 
-                                                  html.window.open('https://mail.google.com/mail/u/1/?&to=${userLists[index].email}&tf=cm', '');
+                                                    html.window.open('https://mail.google.com/mail/u/1/?&to=${userLists[index].email}&tf=cm', '');
 
 
 
-                                                }, child: Icon(Icons.email_outlined, size: 25,), style: ElevatedButton.styleFrom(backgroundColor: green),),
+                                                  }, child: Icon(Icons.email_outlined, size: 25,), style: ElevatedButton.styleFrom(backgroundColor: green),),
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -476,6 +479,12 @@ Future<List<Students>> getStudents(String id ,String? type) async {
         getSociety();
       }
     }
+  else
+    {
+      teacher = await getTeacher(x);
+      getSociety();
+
+    }
 
   try{ var response = await http.post(Uri.parse(url), body: {
     'id':x,
@@ -498,7 +507,7 @@ getTeacher(String tid)async {
   }
 }
 getSociety() async{
-  if(teacher!=null){
+
     var url3 = 'http://localhost/teacherSociety.php';
     var response = await http.post(Uri.parse(url3), body :{
       'id': teacher['Society_Id'],
@@ -507,7 +516,7 @@ getSociety() async{
       var data = json.decode(response.body);
 
       society = await data[0];
-    }
+
   }
 }
 
