@@ -1,8 +1,10 @@
 import 'dart:html';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/pages/audio.dart';
@@ -21,6 +23,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
+final Ccontroller = ConfettiController();
 int _value = 1;
 bool played=false;
 
@@ -28,171 +31,171 @@ bool played=false;
 List<Map<String, String>> letters = const [
   {
     'letter': 'أ',
-    'word' : 'أرنب',
-    'img' : 'https://static.vecteezy.com/system/resources/previews/008/022/211/non_2x/cartoon-rabbit-holding-carrot-vector.jpg',
+    'word' : 'ارنب',
+    'img' : 'img/rabbit.png',
 
   },
   {
     'letter': 'ب',
-    'word' : 'بطاطا',
-    'img' : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjglG7JgaQtWBY6DWrmnuuG3Z0JNW2oi3FUg&usqp=CAU',
+    'word' : 'بطيخ',
+    'img' : 'img/waterm.png',
 
   },
   {
     'letter': 'ت',
-    'word' : 'تاء',
-    'img' : 'https://youtu.be/NRAHR79_FD8',
+    'word' : 'تفاحة',
+    'img' : 'img/apple.jpg',
 
   },
   {
     'letter': 'ث',
-    'word' : 'ثاء',
-    'img' : 'https://youtu.be/N9cDgSjmX2E',
+    'word' : 'ثعلب',
+    'img' : 'img/fox.png',
 
   },
   {
     'letter': 'ج',
-    'word' : 'جيم',
-    'img' : 'https://youtu.be/wUX_1m0NJ5o',
+    'word' : 'جرس',
+    'img' : 'img/bell.png',
 
   },
   {
     'letter': 'ح',
-    'word' : 'حاء',
-    'img' : 'https://youtu.be/569GkdUjPCo',
+    'word' : 'حلزون',
+    'img' : 'img/snail.png',
 
   },
   {
     'letter': 'خ',
-    'word' : 'خاء',
-    'img' : 'https://youtu.be/F-a8viuS4Bw',
+    'word' : 'خيار',
+    'img' : 'img/Cucumber.png',
 
   },
   {
     'letter': 'د',
-    'word' : 'دال',
-    'img' : 'https://youtu.be/p4mXFsF1FnY',
+    'word' : 'دجاجة',
+    'img' : 'img/dag.png',
 
   },
   {
     'letter': 'ذ',
-    'word' : 'ذال',
-    'img' : 'https://youtu.be/SsVVi0EE7ow',
+    'word' : 'ذرة',
+    'img' : 'img/corn.jpg',
 
   },
   {
     'letter': 'ر',
-    'word' : 'راء',
-    'img' : 'https://youtu.be/1ZifdMbGjLE',
+    'word' : 'رسالة',
+    'img' : 'img/envelope.png',
 
   },
   {
     'letter': 'ز',
-    'word' : 'زاي',
-    'img' : 'https://youtu.be/41LRxNKgnjk',
+    'word' : 'زيت',
+    'img' : 'img/oil.jpg',
 
   },
   {
     'letter': 'س',
-    'word' : 'سين',
-    'img' : 'https://youtu.be/0OIh22MQXtM',
+    'word' : 'سلم',
+    'img' : 'img/ladder.jpg',
 
   },
   {
     'letter': 'ش',
-    'word' : 'شين',
-    'img' : 'https://youtu.be/EXwAa_MiRl0',
+    'word' : 'شجرة',
+    'img' : 'img/tree.jpg',
 
   },
   {
-    'letter': 'ص',
-    'word' : 'صاد',
-    'img' : 'https://youtu.be/3usY54GS-0o',
+    'letter': 'ص ',
+    'word' : 'صندوق',
+    'img' : 'img/treas.png',
 
   },
   {
     'letter': 'ض',
-    'word' : 'ضاد',
-    'img' : 'https://youtu.be/H6XWY5YiMVU',
+    'word' : 'ضفدع',
+    'img' : 'img/frog.jpg',
 
   },
   {
     'letter': 'ط',
-    'word' : 'طاء',
-    'img' : 'https://youtu.be/Ueh2dk_sIw8',
+    'word' : 'طائرة',
+    'img' : 'img/airplane.png',
 
   },
   {
     'letter': 'ظ',
-    'word' : 'ظاء',
-    'img' : 'https://youtu.be/QjrWwoRwkfw',
+    'word' : 'ظبي',
+    'img' : 'img/antelope.jpg',
 
   },
   {
     'letter': 'ع',
-    'word' : 'عين',
-    'img' : 'https://youtu.be/u_qPMA7fP48',
+    'word' : 'عسل',
+    'img' : 'img/honey.jpg',
 
   },
   {
     'letter': 'غ',
-    'word' : 'غين',
-    'img' : 'https://youtu.be/KXG-u2SOD7M',
+    'word' : 'غراب',
+    'img' : 'img/cr.png',
 
   },
   {
     'letter': 'ف',
-    'word' : 'فاء',
-    'img' : 'https://youtu.be/my12d4B8als',
+    'word' : 'فأر',
+    'img' : 'img/mouse.png',
 
   },
   {
     'letter': 'ق',
-    'word' : 'قاف',
-    'img' : 'https://youtu.be/3vnUEw1L_RQ',
+    'word' : 'قبعة',
+    'img' : 'img/hat.jpg',
 
   },
   {
     'letter': 'ك',
-    'word' : 'كاف',
-    'img' : 'https://youtu.be/WsQKd8U7Nnk',
+    'word' : 'كأس',
+    'img' : 'img/leb.png',
 
   },
 
   {
     'letter': 'ل',
-    'word' : 'لام',
-    'img' : 'https://youtu.be/lGhEbrUKKwQ',
+    'word' : 'لحمة',
+    'img' : 'img/meat.jpg',
 
   },
   {
     'letter': 'م',
-    'word' : 'ميم',
-    'img' : 'https://youtu.be/dtC7i-qBccI',
+    'word' : 'مذياع',
+    'img' : 'img/radio.jpg',
 
   },
   {
     'letter': 'ن',
-    'word' : 'نون',
-    'img' : 'https://youtu.be/J8R_RWnUf2E',
+    'word' : 'نملة',
+    'img' : 'img/ant.jpg',
 
   },
   {
     'letter': 'ه',
-    'word' : 'هاء',
-    'img' : 'https://youtu.be/0x3OTCpJ4ys',
+    'word' : 'هدية',
+    'img' : 'img/gift.jpg',
 
   },
   {
     'letter': 'و',
-    'word' : 'واو',
-    'img' : 'https://youtu.be/o6__TLsUvxA',
+    'word' : 'وسادة',
+    'img' : 'img/Pillow.jpg',
 
   },
   {
     'letter': 'ي',
-    'word' : 'ياء',
-    'img' : 'https://youtu.be/kLiXXdpGwqk',
+    'word' : 'يد',
+    'img' : 'img/hand.jpg',
 
   },
 
@@ -304,7 +307,9 @@ class _lettertestState extends State<lettertest> {
             ),
             child: Column(
               children:   [
-
+                SizedBox(
+                  height: 30,
+                ),
                 Stack(
                   alignment: Alignment.center,
                     children: [
@@ -324,7 +329,7 @@ class _lettertestState extends State<lettertest> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top:10.0),
-                                child: Image.network(letters[Lindex]['img']!,
+                                child: Image.asset(letters[Lindex]['img']!,
                                     height: MediaQuery.of(context).size.height / 4,
                                     alignment: Alignment.center
                                 ),
@@ -351,6 +356,16 @@ class _lettertestState extends State<lettertest> {
                               ),
                             ],
                           )),
+                      ConfettiWidget(
+
+                        confettiController: Ccontroller,shouldLoop: false,
+                        blastDirectionality: BlastDirectionality.explosive,
+                        blastDirection: - pi / 2,
+                        numberOfParticles: 30,
+                        gravity: 0.1,
+
+                      ),
+
                 ]),
                 AvatarGlow(
                   animate: _isListening,
@@ -438,9 +453,8 @@ class _lettertestState extends State<lettertest> {
                   sendData(letters[Lindex]['letter']!,'true');
                   isCorrect=true;
                   Status = "عمل رائع !";
-                  _isListening = false;
                   _text='';
-
+                  Cstop();
 
                 });
               }
@@ -482,3 +496,8 @@ class _lettertestState extends State<lettertest> {
 }
 
 
+Cstop() async {
+  Ccontroller.play();
+  await Future.delayed(Duration(seconds: 1));
+  Ccontroller.stop();
+}

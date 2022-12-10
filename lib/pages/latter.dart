@@ -69,7 +69,7 @@ class _letterexState extends State<letterex> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        FadeInLeftBig(child: letter(L1: 'ا',L2: 'و',L3: 'ي',L4: 'ء', title: 'الحروف الهوائية',)),
+                        FadeInLeftBig(child: letter(L1: 'ا',L2: 'و',L3: 'ي',L4: '', title: 'الحروف الهوائية',)),
                         FadeInLeftBig(child: letter(L1: 'ف',L2: 'ب',L3: 'م',L4: '', title: 'الحروف الشفوية',)),
                         FadeInLeftBig(child: letter(L1: 'ر',L2: 'ل',L3: 'ن',L4: '', title: 'الحروف اللهوية',)),
                       ],
