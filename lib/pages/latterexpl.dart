@@ -58,15 +58,15 @@ class _latterexpState extends State<latterexp> {
                         SizedBox(
                           height: 20,
                         ),
-                        const Text(
-                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                            style: TextStyle(fontFamily: "DroidKufi")),
-                        const Text(
-                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات ",
-                            style: TextStyle(fontFamily: "DroidKufi")),
-                        const Text(
-                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات ",
-                            style: TextStyle(fontFamily: "DroidKufi")),
+                        FadeIn(
+                          child: const SizedBox(
+                            width: 500,
+                            child:  Text(" تحتوي هذه الواجهة على الحروف العربية مقسمة الى 9 مجموعات على حسب المخرج الخاص بالحرف يقوم الطفل بإختيار مجموعة معينة للبدأ بها ثم يقوم بإختيار الحرف المراد التدرب عليه وبعد ذلك يظهر فيديو يوضح كيفية نطق الحرف و مخرج الحرف ثم ينتقل الطفل الى التدريب والمطلوب منه الضغط على زر التسجيل ثم نطق الكلمة الظاهرة وثم يقوم النظام بعرض ما اذا قام الطفل بنطق الكلمة بشكل صحيح ام لا  ", textDirection: TextDirection.rtl,
+                                style: TextStyle(fontFamily: "DroidKufi", height: 3, fontSize: 15)),
+                          ),
+                        ),
+                        Spacer(),
+
 
                         const SizedBox(
                           height: 30,

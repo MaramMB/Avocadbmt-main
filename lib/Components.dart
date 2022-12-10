@@ -8,8 +8,8 @@ import 'package:flutter_application_1/pages/voice.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
-var cc ;
-class soundsWidget extends StatelessWidget {
+
+class soundsWidget extends StatefulWidget {
   late String Spath; //sound path
   late String Ipath;// Image path
   late String Name; // name of the sound
@@ -30,6 +30,11 @@ class soundsWidget extends StatelessWidget {
     required this.tid,
   });
 
+  @override
+  State<soundsWidget> createState() => _soundsWidgetState();
+}
+
+class _soundsWidgetState extends State<soundsWidget> {
   @override
 
   Widget build(BuildContext context) {
@@ -72,24 +77,24 @@ class soundsWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30)),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(25),
-                              child: Image.memory(base64Decode(s),width: MediaQuery.of(context).size.width / 5,
+                              child: Image.memory(base64Decode(widget.s),width: MediaQuery.of(context).size.width / 5,
                                 height: MediaQuery.of(context).size.height / 3.0,
                                 fit: BoxFit.fill,),
                             ),
                           ),
-                          Text(Name,
+                          Text(widget.Name,
                               style: const TextStyle(
                                   color: Colors.green,
                                   fontSize: 25,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                           const SizedBox(height: 10,),
-                          audio(path: "../"+Spath),
+                          audio(path: "../"+widget.Spath),
                           const SizedBox(height: 15,),
 
                           ElevatedButton(
                             onPressed: () {
-                              if(type=='A1' || type=='B1')
+                              if(widget.type=='A1' || widget.type=='B1')
                                 {
                                   addSound();
                                   Fluttertoast.showToast(msg: 'تم إضافة الصوت بنجاح');
@@ -110,7 +115,7 @@ class soundsWidget extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 5),
                             ),
-                            child: Text((type!='A1' && type!='B1')?"العودة":"إضافة الصوت",
+                            child: Text((widget.type!='A1' && widget.type!='B1')?"العودة":"إضافة الصوت",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: "DroidKufi",
@@ -120,7 +125,7 @@ class soundsWidget extends StatelessWidget {
                           const SizedBox(height: 15,),
 
                           Visibility(
-                            visible:(type=='A1' || type=='B1')?true:false,
+                            visible:(widget.type=='A1' || widget.type=='B1')?true:false,
                             child: ElevatedButton(
                               onPressed: () {
 
@@ -155,7 +160,7 @@ class soundsWidget extends StatelessWidget {
                           children: [
 
                             Visibility(
-                              visible: (state =='0' || (type=='A1'||type=='B1')) ? false : true,
+                              visible: (widget.state =='0' || (widget.type=='A1'||widget.type=='B1')) ? false : true,
                               child: FloatingActionButton(backgroundColor: Colors.redAccent,onPressed: (){
                                 showDialog(context: context, builder: (context)=>AlertDialog(
                                   title: Container(
@@ -174,15 +179,15 @@ class soundsWidget extends StatelessWidget {
                                           children: [
                                             ElevatedButton(
                                               onPressed: () async {
-                                              deleteSound(id);
+                                              deleteSound(widget.id);
                                               Fluttertoast.showToast(msg: "تمت عملية الحذف بنجاح");
 
                                               Navigator.push (
                                                 context,
                                                 MaterialPageRoute (
-                                                  builder: (BuildContext context) => voicex(UserID: tid, UserKind: 'teacher', tid: tid),
+                                                  builder: (BuildContext context) => voicex(UserID: widget.tid, UserKind: 'teacher', tid: widget.tid),
                                                 ),
-                                              );
+                                              ).then((value) => setState((){}));
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor: Colors.green,
@@ -250,7 +255,7 @@ class soundsWidget extends StatelessWidget {
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(25),
-          child: Image.memory(base64Decode(s),width: MediaQuery.of(context).size.width / 9,
+          child: Image.memory(base64Decode(widget.s),width: MediaQuery.of(context).size.width / 9,
             fit: BoxFit.fill,),/* Image.asset(
             Ipath,
             width: MediaQuery.of(context).size.width / 9,
@@ -262,24 +267,26 @@ class soundsWidget extends StatelessWidget {
     );
 
   }
+
   addSound()async{
     var x;
-    if (type=='A1')x='A';
+    if (widget.type=='A1')x='A';
     else x ='B';
     var url = 'http://localhost/imageStore.php';
-    print('tid is '+tid);
+    print('tid is '+widget.tid);
     var response = await http.post(Uri.parse(url), body :{
-      'word': Name,
-      'imageByte': s,
-      'audio':Spath,
+      'word': widget.Name,
+      'imageByte': widget.s,
+      'audio':widget.Spath,
       'type': x,
-      'tid': tid,
+      'tid': widget.tid,
       'isAdd':'yes',
     });
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       print(data.toString());}
   }
+
   deleteSound(String id) async {
     var url = 'http://localhost/deleteSound.php';
     var response = await http.post(Uri.parse(url), body: {

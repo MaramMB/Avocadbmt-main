@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
@@ -57,29 +58,32 @@ class _voiceexpState extends State<voiceexp> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Center(
-                            child: Text("تدريب الاصوات",
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontSize: 30,
-                                    fontFamily: "DroidKufi",
-                                    fontWeight: FontWeight.w700))),
+                         Center(
+                            child: FadeInDownBig(
+                              child: Text("تدريب الاصوات البيئية والاستيعابية",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 30,
+                                      fontFamily: "DroidKufi",
+                                      fontWeight: FontWeight.w700)),
+                            )),
                         SizedBox(
                           height: 20,
                         ),
-                        const Text(
-                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات الحركية والنطقية والسمعية",
-                            style: TextStyle(fontFamily: "DroidKufi")),
-                        const Text(
-                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات ",
-                            style: TextStyle(fontFamily: "DroidKufi")),
-                        const Text(
-                            "تحتوي هده الواجهة على ثلاثة انواع من التدريبات التدريبات ",
-                            style: TextStyle(fontFamily: "DroidKufi")),
+                        FadeIn(
+                          child: SizedBox(
+                            width: 500,
+                            child: const Text(
+                                "تحتوي هذه الواجهة على الأصوات البيئية والاستيعابية حيث أن الاصوات البيئية هي الاصوات الموجودة في البيئة حولنا ومهم للطفل أن يقوم بتميز هذه الاصوات عن غيرها أما عن الاصوات الإستيعابية هي أن يتعرف الطفل على اسماء الاشياء المحيطة به ، كل قسم يحتوي على عدة صور وعند الضغط عليها تنبثق نافذة يظهر بها صورة تعبر عن الصوت و اسم الصوت و الصوت المراد الاستماع اليه عندما ينتهي الطفل من التعرف على الاصوات يستطيع البدأ في اختبار لما تعلمه حيث يظهر له 3 صور ويجب أن يختار الصورة المناسبة على حسب الصوت الموجود لكل سؤال",
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(fontFamily: "DroidKufi", height: 3, fontSize: 15)),
+                          ),
+                        ),
 
                         const SizedBox(
                           height: 30,
                         ),
+                        Spacer(),
                         Center(
                           child: ElevatedButton(
                             onPressed: ()  async {
