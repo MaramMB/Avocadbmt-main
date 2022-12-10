@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -74,7 +75,7 @@ class _ColoursState extends State<Colours> {
                                 child: Container(
                                   child: Center(
                                     child: Icon(
-                                      Icons.arrow_back,
+                                      Icons.arrow_forward_sharp,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -94,27 +95,23 @@ class _ColoursState extends State<Colours> {
                             gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisSpacing: 12,
-                              childAspectRatio: 1.39,
+                              childAspectRatio: 1.2,
                               mainAxisSpacing: 0,
                               crossAxisCount: 3,
                             ),
-                            itemCount: 12,
+                            itemCount: 15,
                             itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Column(
-                                  children: [
-                                    AspectRatio(
-                                      aspectRatio: 2.0,
-                                      child: flickManager != null
-                                          ?     FlickVideoPlayer(
-                                        flickManager: myfilk[index],
+                              return FadeInUpBig(
+                                  child: Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                              child: AspectRatio(
+                              aspectRatio: 5.5,
+                              child: flickManager != null ?  Column(
+                              children: [
+                              FlickVideoPlayer(
+                              flickManager: myfilk[index],
 
-                                      )
-                                          : Center(
-                                          child:
-                                          CircularProgressIndicator()),
-                                    ),
+                              ),
                                     SizedBox(
                                       height: 3,
                                     ),
@@ -126,8 +123,9 @@ class _ColoursState extends State<Colours> {
                                           fontSize: 16,
                                           color: Colors.white),
                                     )
-                                  ],
-                                ),
+                                  ],)
+                                      : Center(child: CircularProgressIndicator()),
+                                ),),
                               );
                             },
                           ),
@@ -162,7 +160,6 @@ class _ColoursState extends State<Colours> {
     "غامق",
   ];
 
-  int i = 0;
   late FlickManager flickManager;
   late FlickManager flickManager1;
   late FlickManager flickManager2;
@@ -200,64 +197,65 @@ class _ColoursState extends State<Colours> {
   void initState() {
     super.initState();
     flickManager = FlickManager(
+
       autoPlay: false,
-      videoPlayerController:VideoPlayerController.asset('dic/color/Colors.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Colors.mp4'),
     );
     flickManager1 = FlickManager(
       autoPlay: false,
-      videoPlayerController:VideoPlayerController.asset('dic/color/Yellow.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Yellow.mp4'),
     );
     flickManager2 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/White.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/White.mp4'),
       autoPlay: false,
     );
     flickManager3 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Black.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Black.mp4'),
       autoPlay: false,
     );
     flickManager4 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Red.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Red.mp4'),
       autoPlay: false,
     );
     flickManager5 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Purple.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Purple.mp4'),
 
       autoPlay: false,
     );
     flickManager6 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Pink.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Pink.mp4'),
       autoPlay: false,
     );
     flickManager7 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Orange.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Orange.mp4'),
       autoPlay: false,
     );
     flickManager8 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Green.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Green.mp4'),
       autoPlay: false,
     );
     flickManager9 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Gray.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Gray.mp4'),
       autoPlay: false,
     );
     flickManager10 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Gold.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Gold.mp4'),
       autoPlay: false,
     );
     flickManager11 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Silver.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Silver.mp4'),
       autoPlay: false,
     );
     flickManager12 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Blue.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Blue.mp4'),
 
       autoPlay: false,
     );    flickManager13 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/Brown.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/Brown.mp4'),
 
       autoPlay: false,
     );    flickManager14 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/color/dark.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/color/dark.mp4'),
 
       autoPlay: false,
     );

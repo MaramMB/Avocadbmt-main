@@ -1,6 +1,15 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Videos/animals.dart';
+import 'package:flutter_application_1/pages/Videos/clothes.dart';
 import 'package:flutter_application_1/pages/Videos/colours.dart';
+import 'package:flutter_application_1/pages/Videos/drinks.dart';
+import 'package:flutter_application_1/pages/Videos/eat.dart';
+import 'package:flutter_application_1/pages/Videos/family.dart';
+import 'package:flutter_application_1/pages/Videos/job.dart';
+import 'package:flutter_application_1/pages/Videos/nature.dart';
+import 'package:flutter_application_1/pages/Videos/numbers.dart';
+import 'package:flutter_application_1/pages/Videos/transport.dart';
 
 import 'package:flutter_application_1/pages/rowbar.dart';
 
@@ -76,7 +85,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Clothes(
                                         name: "الملابس",
                                       )));
                             },
@@ -134,7 +143,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Eat(
                                         name: "المأكولات",
                                       )));
                             },
@@ -192,7 +201,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Drinks(
                                         name: "المشروبات",
                                       )));
                             },
@@ -319,7 +328,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Transprot(
                                         name: "المواصلات",
                                       )));
                             },
@@ -494,7 +503,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Numbers(
                                         name: "الأرقام",
                                       )));
                             },
@@ -563,7 +572,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Family(
                                         name: "العائله",
                                       )));
                             },
@@ -621,7 +630,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Job(
                                         name: "المهن",
                                       )));
                             },
@@ -680,7 +689,7 @@ class _dicState extends State<dic> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Videos(
+                                      builder: (context) => Nature(
                                         name: "الطبيعه",
                                       )));
                             },
@@ -733,51 +742,61 @@ class _dicState extends State<dic> {
                               ],
                             ),
                           ),
-                          Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Image.asset(
-                                        "img/animals.jpeg",
-                                        width: MediaQuery.of(context).size.width /
-                                            11,
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            6,
-                                        fit: BoxFit.fill,
-                                      )),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width / 11,
-                                    height:
-                                    MediaQuery.of(context).size.height / 6,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: const Color(0x34E7E4E4),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Animals(
+                                        name: "الحيوانات",
+                                      )));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.asset(
+                                          "img/animals.jpeg",
+                                          width: MediaQuery.of(context).size.width /
+                                              11,
+                                          height:
+                                          MediaQuery.of(context).size.height /
+                                              6,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width / 11,
+                                      height:
+                                      MediaQuery.of(context).size.height / 6,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: const Color(0x34E7E4E4),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 120,
-                                height: 35,
-                                child: Center(
-                                  child: Text("الحيوانات",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "DroidKufi",
-                                        fontSize: 18.0,
-                                      )),
+                                  ],
                                 ),
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10)),
-                              )
-                            ],
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  width: 120,
+                                  height: 35,
+                                  child: Center(
+                                    child: Text("الحيوانات",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(10)),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),

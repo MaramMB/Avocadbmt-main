@@ -1,3 +1,4 @@
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
@@ -73,7 +74,7 @@ class _JobState extends State<Job> {
                                 child: Container(
                                   child: Center(
                                     child: Icon(
-                                      Icons.arrow_back,
+                                      Icons.arrow_forward_sharp,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -91,13 +92,13 @@ class _JobState extends State<Job> {
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisSpacing: 5,
                               childAspectRatio: 1.3,
                               mainAxisSpacing: 0,
-                              crossAxisCount: 4,
+                              crossAxisCount: 3,
                             ),
-                            itemCount: 12,
+                            itemCount: 15,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
                                 padding: const EdgeInsets.only(top: 20),
@@ -105,12 +106,13 @@ class _JobState extends State<Job> {
                                   children: [
                                     AspectRatio(
                                       aspectRatio: 2.0,
-                                      child: _controller != null
-                                          ? YoutubePlayerIFrame(
-                                              controller: myControllers[index])
+                                      child: flickManager != null
+                                          ?     FlickVideoPlayer(
+                                        flickManager: myfilk[index],
+                                      )
                                           : Center(
-                                              child:
-                                                  CircularProgressIndicator()),
+                                          child:
+                                          CircularProgressIndicator()),
                                     ),
                                     SizedBox(
                                       height: 2,
@@ -119,7 +121,8 @@ class _JobState extends State<Job> {
                                       names[index],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 15,
+                                          fontFamily:"DroidKufi" ,
+                                          fontSize: 16,
                                           color: Colors.white),
                                     )
                                   ],
@@ -131,111 +134,135 @@ class _JobState extends State<Job> {
                       ),
                     ),
                   ),
-                ),
+                )
               )
-            ],
-          ),
-        ),
-      ),
+            ])))
     );
   }
 
   var names = [
-    "معلم/ة",
-    "شرطي",
-    "طيار",
-    "ممرض/ة",
-    "محامي",
-    "صحفي",
-    "كوافير",
-    "بقال",
-    "مزارع",
-    "طبيب",
-    "طباخ",
+    "ممثل",
+    "رسام",
+    "مكانيني سيارات",
     "نجار",
+    "طباخ",
+    "طبيب",
+    "مزارع",
+    "بقال",
+    "كوافير",
+    "صحفي",
+    "محامي",
+    "ممرضة",
+    "طيار",
+    "شرطي",
+    "مُعلم",
   ];
 
-  late YoutubePlayerController _controller;
-  late YoutubePlayerController _controller1;
-  late YoutubePlayerController _controller2;
-  late YoutubePlayerController _controller3;
-  late YoutubePlayerController _controller4;
-  late YoutubePlayerController _controller5;
-  late YoutubePlayerController _controller6;
-  late YoutubePlayerController _controller7;
-  late YoutubePlayerController _controller8;
-  late YoutubePlayerController _controller9;
-  late YoutubePlayerController _controller10;
-  late YoutubePlayerController _controller11;
+  late FlickManager flickManager;
+  late FlickManager flickManager1;
+  late FlickManager flickManager2;
+  late FlickManager flickManager3;
+  late FlickManager flickManager4;
+  late FlickManager flickManager5;
+  late FlickManager flickManager6;
+  late FlickManager flickManager7;
+  late FlickManager flickManager8;
+  late FlickManager flickManager9;
+  late FlickManager flickManager10;
+  late FlickManager flickManager11;
+  late FlickManager flickManager12;
+  late FlickManager flickManager13;
+  late FlickManager flickManager14;
 
-  late List<YoutubePlayerController> myControllers = [
-    _controller,
-    _controller1,
-    _controller2,
-    _controller3,
-    _controller4,
-    _controller5,
-    _controller6,
-    _controller7,
-    _controller8,
-    _controller9,
-    _controller10,
-    _controller11,
+
+  late List<FlickManager> myfilk = [
+    flickManager,
+    flickManager1,
+    flickManager2,
+    flickManager3,
+    flickManager4,
+    flickManager5,
+    flickManager6,
+    flickManager7,
+    flickManager8,
+    flickManager9,
+    flickManager10,
+    flickManager11,
+    flickManager12,
+    flickManager13,
+    flickManager14,
+
   ];
-
   bool autoPlay = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = YoutubePlayerController()
-      ..onInit = () {
-        _controller.loadVideoById(videoId: 'ev1mazcRxak', startSeconds: 30);
-      };
-    _controller1 = YoutubePlayerController()
-      ..onInit = () {
-        _controller1.loadVideoById(videoId: 'f8kNBXbY47I', startSeconds: 30);
-      };
-    _controller2 = YoutubePlayerController()
-      ..onInit = () {
-        _controller2.loadVideoById(videoId: 'l6O1EMrYbRk', startSeconds: 30);
-      };
-    _controller3 = YoutubePlayerController()
-      ..onInit = () {
-        _controller3.loadVideoById(videoId: '8JO9ghQ6SrY', startSeconds: 30);
-      };
-    _controller4 = YoutubePlayerController()
-      ..onInit = () {
-        _controller4.loadVideoById(videoId: 'CoQol9hWVvw', startSeconds: 30);
-      };
-    _controller5 = YoutubePlayerController()
-      ..onInit = () {
-        _controller5.loadVideoById(videoId: 'C7-ORKiRFwc', startSeconds: 30);
-      };
-    _controller6 = YoutubePlayerController()
-      ..onInit = () {
-        _controller6.loadVideoById(videoId: '7O3Piby0AkA', startSeconds: 30);
-      };
-    _controller7 = YoutubePlayerController()
-      ..onInit = () {
-        _controller7.loadVideoById(videoId: 'xXDyJiFfp0U', startSeconds: 30);
-      };
-    _controller8 = YoutubePlayerController()
-      ..onInit = () {
-        _controller8.loadVideoById(videoId: '3BIpzwyw1mQ', startSeconds: 30);
-      };
-    _controller9 = YoutubePlayerController()
-      ..onInit = () {
-        _controller9.loadVideoById(videoId: 'n-bDCtVlldE', startSeconds: 30);
-      };
-    _controller10 = YoutubePlayerController()
-      ..onInit = () {
-        _controller10.loadVideoById(videoId: '3WflWRgzZbU', startSeconds: 30);
-      };
-    _controller11 = YoutubePlayerController()
-      ..onInit = () {
-        _controller11.loadVideoById(videoId: 'dQmfIvFZP5g', startSeconds: 30);
-      };
+    flickManager = FlickManager(
+
+      autoPlay: false,
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Actor.mp4'),
+    );
+    flickManager1 = FlickManager(
+      autoPlay: false,
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Artist.mp4'),
+    );
+    flickManager2 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/AutoMechanic.mp4'),
+      autoPlay: false,
+    );
+    flickManager3 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Carpenter.mp4'),
+      autoPlay: false,
+    );
+    flickManager4 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Cook.mp4'),
+      autoPlay: false,
+    );
+    flickManager5 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Doctor.mp4'),
+
+      autoPlay: false,
+    );
+    flickManager6 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Farmer.mp4'),
+      autoPlay: false,
+    );
+    flickManager7 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Grocer.mp4'),
+      autoPlay: false,
+    );
+    flickManager8 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Hairdresser.mp4'),
+      autoPlay: false,
+    );
+    flickManager9 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Journalist.mp4'),
+      autoPlay: false,
+    );
+    flickManager10 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Lawyer.mp4'),
+      autoPlay: false,
+    );
+    flickManager11 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Nurse.mp4'),
+      autoPlay: false,
+    );
+    flickManager12 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Pilot.mp4'),
+
+      autoPlay: false,
+    );    flickManager13 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Police.mp4'),
+
+      autoPlay: false,
+    );
+    flickManager14 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/job/Teacher.mp4'),
+      autoPlay: false,
+    );
   }
 }
+
+

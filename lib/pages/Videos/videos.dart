@@ -65,7 +65,7 @@ class _VideosState extends State<Videos> {
                                     color: Colors.white,
                                     fontFamily: "DroidKufi",
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 25.0,
+                                    fontSize: 30.0,
                                   )),
                               InkWell(
                                 onTap: () {
@@ -74,7 +74,7 @@ class _VideosState extends State<Videos> {
                                 child: Container(
                                   child: Center(
                                     child: Icon(
-                                      Icons.arrow_back,
+                                      Icons.arrow_forward_sharp,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -192,52 +192,52 @@ class _VideosState extends State<Videos> {
     super.initState();
     flickManager = FlickManager(
       autoPlay: false,
-      videoPlayerController:VideoPlayerController.asset('dic/home/Bed.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Bed.mp4'),
 
     );
     flickManager1 = FlickManager(
       autoPlay: false,
-      videoPlayerController:VideoPlayerController.asset('dic/home/Chair.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Chair.mp4'),
     );    flickManager2 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Closet.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Closet.mp4'),
       autoPlay: false,
     );
     flickManager3 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Table.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Table.mp4'),
       autoPlay: false,
     );
     flickManager4 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Door.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Door.mp4'),
 
       autoPlay: false,
     );
     flickManager5 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/GuestRoom.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/GuestRoom.mp4'),
 
       autoPlay: false,
     );
     flickManager6 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Key.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Key.mp4'),
       autoPlay: false,
     );
     flickManager7 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Kitchen.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Kitchen.mp4'),
       autoPlay: false,
     );
     flickManager8 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Pillow.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Pillow.mp4'),
       autoPlay: false,
     );
     flickManager9 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Room.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Room.mp4'),
       autoPlay: false,
     );
     flickManager10 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Soap.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Soap.mp4'),
       autoPlay: false,
     );
     flickManager11 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Stairs.mp4'),
+      videoPlayerController:VideoPlayerController.asset('assets/dic/home/Stairs.mp4'),
       autoPlay: false,
     );
   }

@@ -118,8 +118,18 @@ flutter:
     - img/
     - audio/
     - assets/videos/
-    - dic/home/
-    - dic/color/
+    - assets/dic/home/
+    - assets/dic/color/
+    - assets/dic/drink/
+    - assets/dic/family/
+    - assets/dic/later/
+    - assets/dic/number/
+    - assets/dic/nature/
+    - assets/dic/animal/
+    - assets/dic/clothes/
+    - assets/dic/food/
+    - assets/dic/job/
+    - assets/dic/transport/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

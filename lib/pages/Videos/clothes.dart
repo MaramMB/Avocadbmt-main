@@ -1,3 +1,4 @@
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
@@ -73,7 +74,7 @@ class _ClothesState extends State<Clothes> {
                                 child: Container(
                                   child: Center(
                                     child: Icon(
-                                      Icons.arrow_back,
+                                      Icons.arrow_forward_sharp,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -91,13 +92,13 @@ class _ClothesState extends State<Clothes> {
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisSpacing: 5,
                               childAspectRatio: 1.3,
                               mainAxisSpacing: 0,
-                              crossAxisCount: 4,
+                              crossAxisCount: 3,
                             ),
-                            itemCount: 12,
+                            itemCount: 18,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
                                 padding: const EdgeInsets.only(top: 20),
@@ -105,12 +106,13 @@ class _ClothesState extends State<Clothes> {
                                   children: [
                                     AspectRatio(
                                       aspectRatio: 2.0,
-                                      child: _controller != null
-                                          ? YoutubePlayerIFrame(
-                                              controller: myControllers[index])
+                                      child: flickManager != null
+                                          ?     FlickVideoPlayer(
+                                        flickManager: myfilk[index],
+                                      )
                                           : Center(
-                                              child:
-                                                  CircularProgressIndicator()),
+                                          child:
+                                          CircularProgressIndicator()),
                                     ),
                                     SizedBox(
                                       height: 2,
@@ -119,7 +121,8 @@ class _ClothesState extends State<Clothes> {
                                       names[index],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 15,
+                                          fontFamily:"DroidKufi" ,
+                                          fontSize: 16,
                                           color: Colors.white),
                                     )
                                   ],
@@ -131,111 +134,151 @@ class _ClothesState extends State<Clothes> {
                       ),
                     ),
                   ),
-                ),
+                )
               )
-            ],
-          ),
-        ),
-      ),
+            ])))
     );
   }
 
   var names = [
-    "يسبيسبسي",
-    "name2",
-    "name3",
-    "name4",
-    "name5",
-    "name6",
-    "name7",
-    "name8",
-    "name9",
-    "name10",
-    "name11",
-    "name12",
+    "بوت رياضة",
+    "بلوزة",
+    "جرابات",
+    "تنورة",
+    "حذاء",
+    "قميص",
+    "بنطلون",
+    "كوفية",
+    "جلباب",
+    "منديل للرأس",
+    "قبعة",
+    "حزام",
+    "ملابس",
+    "دشاشة",
+    "فستان",
+    "نظارة",
+    "كفوف",
+    "محرمة",
   ];
 
-  late YoutubePlayerController _controller;
-  late YoutubePlayerController _controller1;
-  late YoutubePlayerController _controller2;
-  late YoutubePlayerController _controller3;
-  late YoutubePlayerController _controller4;
-  late YoutubePlayerController _controller5;
-  late YoutubePlayerController _controller6;
-  late YoutubePlayerController _controller7;
-  late YoutubePlayerController _controller8;
-  late YoutubePlayerController _controller9;
-  late YoutubePlayerController _controller10;
-  late YoutubePlayerController _controller11;
+  late FlickManager flickManager;
+  late FlickManager flickManager1;
+  late FlickManager flickManager2;
+  late FlickManager flickManager3;
+  late FlickManager flickManager4;
+  late FlickManager flickManager5;
+  late FlickManager flickManager6;
+  late FlickManager flickManager7;
+  late FlickManager flickManager8;
+  late FlickManager flickManager9;
+  late FlickManager flickManager10;
+  late FlickManager flickManager11;
+  late FlickManager flickManager12;
+  late FlickManager flickManager13;
+  late FlickManager flickManager14;
+  late FlickManager flickManager15;
+  late FlickManager flickManager16;
+  late FlickManager flickManager17;
 
-  late List<YoutubePlayerController> myControllers = [
-    _controller,
-    _controller1,
-    _controller2,
-    _controller3,
-    _controller4,
-    _controller5,
-    _controller6,
-    _controller7,
-    _controller8,
-    _controller9,
-    _controller10,
-    _controller11,
+  late List<FlickManager> myfilk = [
+    flickManager,
+    flickManager1,
+    flickManager2,
+    flickManager3,
+    flickManager4,
+    flickManager5,
+    flickManager6,
+    flickManager7,
+    flickManager8,
+    flickManager9,
+    flickManager10,
+    flickManager11,
+    flickManager12,
+    flickManager13,
+    flickManager14,
+    flickManager15,
+    flickManager16,
+    flickManager17,
   ];
-
   bool autoPlay = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = YoutubePlayerController()
-      ..onInit = () {
-        _controller.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller1 = YoutubePlayerController()
-      ..onInit = () {
-        _controller1.loadVideoById(videoId: 'HHjSdy9l7Kc', startSeconds: 30);
-      };
-    _controller2 = YoutubePlayerController()
-      ..onInit = () {
-        _controller2.loadVideoById(videoId: 'LTA9bwp-RrU', startSeconds: 30);
-      };
-    _controller3 = YoutubePlayerController()
-      ..onInit = () {
-        _controller3.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller4 = YoutubePlayerController()
-      ..onInit = () {
-        _controller4.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller5 = YoutubePlayerController()
-      ..onInit = () {
-        _controller5.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller6 = YoutubePlayerController()
-      ..onInit = () {
-        _controller6.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller7 = YoutubePlayerController()
-      ..onInit = () {
-        _controller7.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller8 = YoutubePlayerController()
-      ..onInit = () {
-        _controller8.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller9 = YoutubePlayerController()
-      ..onInit = () {
-        _controller9.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller10 = YoutubePlayerController()
-      ..onInit = () {
-        _controller10.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
-    _controller11 = YoutubePlayerController()
-      ..onInit = () {
-        _controller11.loadVideoById(videoId: 'mxHICfk1Hj0', startSeconds: 30);
-      };
+    flickManager = FlickManager(
+
+      autoPlay: false,
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Trainers.mp4'),
+    );
+    flickManager1 = FlickManager(
+      autoPlay: false,
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Tshirt.mp4'),
+    );
+    flickManager2 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Socks.mp4'),
+      autoPlay: false,
+    );
+    flickManager3 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Skirt.mp4'),
+      autoPlay: false,
+    );
+    flickManager4 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Shoes.mp4'),
+      autoPlay: false,
+    );
+    flickManager5 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Shirt.mp4'),
+
+      autoPlay: false,
+    );
+    flickManager6 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Pants.mp4'),
+      autoPlay: false,
+    );
+    flickManager7 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/PalestinianheadCover.mp4'),
+      autoPlay: false,
+    );
+    flickManager8 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Jilbab.mp4'),
+      autoPlay: false,
+    );
+    flickManager9 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/HeadScarf.mp4'),
+      autoPlay: false,
+    );
+    flickManager10 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Hat.mp4'),
+      autoPlay: false,
+    );
+    flickManager11 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Belt.mp4'),
+      autoPlay: false,
+    );
+    flickManager12 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Clothes.mp4'),
+
+      autoPlay: false,
+    );    flickManager13 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Dishdash.mp4'),
+
+      autoPlay: false,
+    );
+    flickManager14 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Dress.mp4'),
+      autoPlay: false,
+    );    flickManager15 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Glasses.mp4'),
+      autoPlay: false,
+    );    flickManager16 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Gloves.mp4'),
+      autoPlay: false,
+    );    flickManager17 = FlickManager(
+      videoPlayerController:VideoPlayerController.asset('assets/dic/clothes/Handkerchief.mp4'),
+      autoPlay: false,
+    );
   }
 }
+
+
