@@ -1115,7 +1115,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
     var res = jsonDecode(response.body);
     return res;
   }
-
   Widget get _teacherDropDowList => Column(
         children: [
           namefield(field: "اختر معلم"),
