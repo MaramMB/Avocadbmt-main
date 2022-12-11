@@ -32,145 +32,162 @@ class _scrollhomeState extends State<scrollhome> {
                             image: AssetImage('img/1.png'),
                             fit: BoxFit.cover,
                           )),
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 45.0, top: 10, left: 30),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 1.0),
-                                  child: Text(
-                                    "LOGO",
-                                    style:
-                                    TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                                  ),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border(bottom: BorderSide(
+                                width: 1,
+                                color: Colors.grey,
+                              )),
+                              boxShadow: [
+                                 BoxShadow(
+                                  color: Colors.white70,
                                 ),
-                                const Spacer(),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(builder: (context) {
-                                      return const contact();
-                                    }));
-                                  },
-                                  child: const Text(
-                                    "تواصل معنا",
-                                    style: TextStyle(color: blak, fontFamily: "DroidKufi"),
-                                  ),
-                                ),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.only(right: 20, left: 20),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(builder: (context) {
-                                      return testlog();
-                                    }));
-                                  },
-                                  child: const Text(
-                                    "تسجيل الدخول",
-                                    style: TextStyle(color: blak, fontFamily: "DroidKufi"),
-                                  ),
-                                ),
-                                OutlinedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                    MaterialStateColor.resolveWith((states) => gren),
-                                    padding: MaterialStateProperty.all(
-                                        const EdgeInsets.only(left: 18.0, right: 18.0)),
-                                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12))),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(builder: (context) {
-                                      return const joinus();
-                                    }));
-                                  },
-                                  child: const Text(
-                                    "انـضـــم لــنــا",
-                                    style: TextStyle(
-                                        color: Colors.white, fontFamily: "DroidKufi"),
-                                  ),
+                                 BoxShadow(
+                                  color: Colors.black,
+                                  spreadRadius: -5.0,
+                                  blurRadius: 12.0,
                                 ),
                               ],
+
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 30.0, top: 5, left: 30),
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  FadeInLeftBig(
-                                    child: Image.asset(
-                                      'img/boy.png',
-                                      height: 600,
+                                   Padding(
+                                    padding: EdgeInsets.only(left: 1.0),
+                                    child: Image.asset('img/nabralogo.png',width: 80,height: 50,),
+                                  ),
+                                  const Spacer(),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(builder: (context) {
+                                        return const contact();
+                                      }));
+                                    },
+                                    child: const Text(
+                                      "تواصل معنا",
+                                      style: TextStyle(color: blak, fontFamily: "DroidKufi"),
                                     ),
                                   ),
-
-                                  IconButton(
-                                      padding: EdgeInsets.only(right: 120, bottom: 50),
-                                      onPressed: () {
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(builder: (context) {
-                                          return scrollhome();
-                                        }));
-                                      },
-                                      icon: const Icon(
-                                        Icons.expand_more,
-                                        color: Colors.white,
-                                        size: 90,
-                                      )),
-                                  // SizedBox(width: 30,),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 80.0),
-                                    child: Column(
-                                      // crossAxisAlignment: CrossAxisAlignment.end,
-
-                                      children: [
-                                        FadeInRightBig(
-                                          child: const Text(
-                                            "مرحباً بك",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Tajawal",
-                                              fontSize: 70,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        FadeInRightBig(
-                                          delay: Duration(seconds: 1),
-                                          child: const Text(
-                                            "في افضـل منـصـة تعلـيـمـية",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "DroidKufi",
-                                                fontSize: 35),
-                                          ),
-                                        ),
-                                        FadeInRightBig(
-                                          delay: Duration(seconds: 2),
-                                          child: const Text(
-                                            "للتأهيل السمعي واللفظي",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "DroidKufi",
-                                                fontSize: 35),
-                                          ),
-                                        ),
-                                      ],
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      padding: const EdgeInsets.only(right: 20, left: 20),
                                     ),
-                                  )
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(builder: (context) {
+                                        return testlog();
+                                      }));
+                                    },
+                                    child: const Text(
+                                      "تسجيل الدخول",
+                                      style: TextStyle(color: blak, fontFamily: "DroidKufi"),
+                                    ),
+                                  ),
+                                  OutlinedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                      MaterialStateColor.resolveWith((states) => gren),
+                                      padding: MaterialStateProperty.all(
+                                          const EdgeInsets.only(left: 18.0, right: 18.0)),
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12))),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(builder: (context) {
+                                        return const joinus();
+                                      }));
+                                    },
+                                    child: const Text(
+                                      "انـضـــم لــنــا",
+                                      style: TextStyle(
+                                          color: Colors.white, fontFamily: "DroidKufi"),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top:60.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                FadeInLeftBig(
+                                  child: Image.asset(
+                                    'img/boy.png',
+                                    height: 600,
+                                  ),
+                                ),
+
+                                IconButton(
+                                    padding: EdgeInsets.only(right: 120, bottom: 50),
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(builder: (context) {
+                                        return scrollhome();
+                                      }));
+                                    },
+                                    icon: const Icon(
+                                      Icons.expand_more,
+                                      color: Colors.white,
+                                      size: 90,
+                                    )),
+                                // SizedBox(width: 30,),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 45.0, top: 10, left: 30 , bottom: 80),
+                                  child: Column(
+                                    // crossAxisAlignment: CrossAxisAlignment.end,
+
+                                    children: [
+                                      FadeInRightBig(
+                                        child: const Text(
+                                          "مرحباً بك",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Tajawal",
+                                            fontSize: 70,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      FadeInRightBig(
+                                        delay: Duration(seconds: 1),
+                                        child: const Text(
+                                          "في افضـل منـصـة تعلـيـمـية",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 35),
+                                        ),
+                                      ),
+                                      FadeInRightBig(
+                                        delay: Duration(seconds: 2),
+                                        child: const Text(
+                                          "للتأهيل السمعي واللفظي",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "DroidKufi",
+                                              fontSize: 35),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                       // child: Text(
                       //   "Page $index",
@@ -268,7 +285,7 @@ class _scrollhomeState extends State<scrollhome> {
               Stack(
                 children: [
                   SizedBox(
-      height: MediaQuery.of(context).size.height,
+                    height: MediaQuery.of(context).size.height,
                     child: PageView.builder(
                       controller: controller,
                       // itemCount: pages.length,
