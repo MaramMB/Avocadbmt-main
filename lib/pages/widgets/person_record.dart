@@ -5,7 +5,6 @@ import 'package:flutter_application_1/pages/widgets/user_profile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import '../models/person.dart';
-// import 'package:flutter_app_4/models/person.dart';
 
 class PersonRecord extends StatefulWidget {
   PersonRecord(
@@ -102,11 +101,14 @@ class _PersonRecordState extends State<PersonRecord> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: ListTile(
-                      trailing:  ClipRRect( borderRadius: BorderRadius.circular(50),child: Image.memory(base64.decode(widget.person.image))),
+                      trailing: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child:
+                              Image.memory(base64.decode(widget.person.image))),
                       title: Padding(
                         padding: const EdgeInsets.only(top: 12.0),
                         child: Text(
-                          widget.person.name+' '+widget.person.familyname,
+                          '${widget.person.name} ${widget.person.familyname}',
                           textAlign: TextAlign.right,
                           style: const TextStyle(
                             fontFamily: "DroidKufi",
@@ -116,7 +118,7 @@ class _PersonRecordState extends State<PersonRecord> {
                         ),
                       ),
                       subtitle:
-                      Text(widget.person.id, textAlign: TextAlign.right),
+                          Text(widget.person.id, textAlign: TextAlign.right),
                     ),
                   ),
                 ),
@@ -269,5 +271,4 @@ class _PersonRecordState extends State<PersonRecord> {
       ),
     );
   }
-
 }

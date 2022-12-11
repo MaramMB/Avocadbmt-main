@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/pages/models/person.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
@@ -9,7 +10,11 @@ import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AddScociety extends StatefulWidget {
-  const AddScociety({Key? key}) : super(key: key);
+  final bool isUpdateForm;
+  final Person? user;
+
+  const AddScociety({Key? key, this.isUpdateForm = false, this.user})
+      : super(key: key);
 
   @override
   State<AddScociety> createState() => _AddScocietyState();
@@ -46,8 +51,55 @@ class _AddScocietyState extends State<AddScociety> {
   @override
   void initState() {
     super.initState();
-    setCurrentDate();
+    widget.isUpdateForm ? setUserData() : setCurrentDate();
     _passwordVisible = true;
+  }
+
+  void setUserData() {
+    nameController.text = widget.user?.name ?? '';
+    phoneController.text = widget.user?.phoneNumber ?? '';
+    addressController.text = widget.user?.address ?? '';
+    managerController.text = widget.user?.managerName ?? '';
+    emailController.text = widget.user?.email ?? '';
+  }
+
+  Future<void> _updateSociety() async {
+    if (nameController.text == "" ||
+        phoneController.text == "" ||
+        emailController.text == "" ||
+        addressController.text == "" ||
+        managerController.text == "") {
+      msgDialog('الرجاء تعبئه جميع الفراغات');
+    } else {
+      var url =
+          'http://localhost/update_society.php';
+
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          "name": nameController.text,
+          "sid": widget.user!.id,
+          "manager": managerController.text,
+          "email": emailController.text,
+          "phone": phoneController.text,
+          "address": addressController.text,
+        },
+      );
+
+      var data = jsonDecode(response.body);
+
+      if (data == 'Success') {
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+        clearData();
+        Fluttertoast.showToast(msg: "تم تعديل الجمعية بنجاح");
+      } else if (data == 'email') {
+        msgDialog(
+            'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر');
+      } else {
+        msgDialog('حدثت مشكلة اثناء تعديل بيانات جمعية');
+      }
+    }
   }
 
   @override
@@ -88,8 +140,11 @@ class _AddScocietyState extends State<AddScociety> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text("اضافه جمعيه",
-                              style: TextStyle(
+                          Text(
+                              widget.isUpdateForm
+                                  ? "تعديل الجمعية"
+                                  : "اضافه جمعيه",
+                              style: const TextStyle(
                                   color: Colors.green,
                                   fontSize: 30,
                                   fontFamily: "DroidKufi",
@@ -122,8 +177,12 @@ class _AddScocietyState extends State<AddScociety> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
-                    onTap: () {
+                    onTap: () async {
                       Navigator.of(context, rootNavigator: true).pop();
+                      if (widget.isUpdateForm) {
+                        await _updateSociety();
+                        return;
+                      }
                       addSocietie();
                     },
                     child: Container(
@@ -210,6 +269,7 @@ class _AddScocietyState extends State<AddScociety> {
       managerController.clear();
       dateController.clear();
       emailController.clear();
+      addressController.clear();
       passController.clear();
       confirmPassController.clear();
       phoneController.clear();
@@ -237,6 +297,7 @@ class _AddScocietyState extends State<AddScociety> {
       },
     );
   }
+  
 
   Widget societieWidget() {
     return Column(
@@ -259,20 +320,22 @@ class _AddScocietyState extends State<AddScociety> {
                 ),
               ],
             ),
-            Column(
-              children: [
-                namefield(field: "رقم الجمعيه"),
-                customTextFieldWidget(
-                  type: TextInputType.name,
-                  ontap: () {},
-                  wid: 300,
-                  hei: 40,
-                  nameController: idController,
-                  text: "رقم الجمعيه",
-                  readOnly: false,
-                ),
-              ],
-            ),
+            widget.isUpdateForm
+                ? Container()
+                : Column(
+                    children: [
+                      namefield(field: "رقم الترخيص"),
+                      customTextFieldWidget(
+                        type: TextInputType.name,
+                        ontap: () {},
+                        wid: 300,
+                        hei: 40,
+                        nameController: idController,
+                        text: "رقم الترخيص",
+                        readOnly: false,
+                      ),
+                    ],
+                  ),
           ],
         ),
         Row(
@@ -354,18 +417,20 @@ class _AddScocietyState extends State<AddScociety> {
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _password,
-            _confirmPassword,
-          ],
-        ),
+        widget.isUpdateForm
+            ? Container()
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _password,
+                  _confirmPassword,
+                ],
+              ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _email,
-            _dateApplied,
+            widget.isUpdateForm ? Container() : _dateApplied,
           ],
         ),
         Padding(
@@ -374,7 +439,7 @@ class _AddScocietyState extends State<AddScociety> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                onTap: () {
+                onTap: () async {
                   final isValid = _form.currentState!.validate();
                   if (!isValid ||
                       confirmPassController.text != passController.text) {
@@ -389,10 +454,10 @@ class _AddScocietyState extends State<AddScociety> {
                   decoration: BoxDecoration(
                       color: backgreen,
                       borderRadius: BorderRadius.circular(10)),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      "اضافه جمعيه",
-                      style: TextStyle(
+                      widget.isUpdateForm ? "تعديل الجمعية" : "اضافه جمعيه",
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                           color: Colors.white),

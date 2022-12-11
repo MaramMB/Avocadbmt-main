@@ -39,12 +39,10 @@ class managepage extends StatefulWidget {
 
   @override
   State<managepage> createState() => _managepageState();
-
 }
 
 class _managepageState extends State<managepage> {
   int _selectedAccountType = 1;
-
 
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
     color: Colors.black,
@@ -60,9 +58,9 @@ class _managepageState extends State<managepage> {
 
   @override
   void initState() {
-
     super.initState();
   }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -228,8 +226,7 @@ class _managepageState extends State<managepage> {
                                                         "female"
                                                     ? Gender.female
                                                     : Gender.male,
-                                                address: Customers[index]
-                                                    ["spec"],
+                                                address: '',
                                                 phoneNumber: Customers[index]
                                                     ["phone"],
                                                 fatherName: Customers[index]
@@ -238,7 +235,20 @@ class _managepageState extends State<managepage> {
                                                     ["Email"],
                                                 password: Customers[index]
                                                     ["Password"],
-                                                type: AccountType.teacher, familyname:  Customers[index]["familyname"], image: Customers[index]["image"],
+                                                type: AccountType.teacher,
+                                                familyname: Customers[index]
+                                                    ["familyname"],
+                                                image: Customers[index]
+                                                    ["image"],
+                                                accountNumber: Customers[index]
+                                                        ["accountnumber"] ??
+                                                    '',
+                                                grandName: Customers[index]
+                                                        ["thirdname"] ??
+                                                    '',
+                                                specific: Customers[index]
+                                                        ["spec"] ??
+                                                    '',
                                               ),
                                               isActive: Customers[index]
                                                           ["active"] ==
@@ -296,21 +306,52 @@ class _managepageState extends State<managepage> {
                                                 id: Customers[index]
                                                     ["student_id"],
                                                 gender: Customers[index]
-                                                            ["gender"] ==
+                                                                ["Gender"]
+                                                            .toString()
+                                                            .toLowerCase() ==
                                                         "female"
                                                     ? Gender.female
                                                     : Gender.male,
                                                 address: Customers[index]
                                                     ["address"],
                                                 phoneNumber: Customers[index]
-                                                    ["phone"],
+                                                        ["phone"] ??
+                                                    '',
                                                 type: AccountType.student,
                                                 email: Customers[index]
                                                     ["Email"],
-                                                password: Customers[index]
-                                                    ["Password"], familyname: Customers[index]["familyname"], image: Customers[index]["image"],
+                                                familyname: Customers[index]
+                                                        ["familyname"] ??
+                                                    '',
+                                                image: Customers[index]
+                                                    ["image"],
+                                                motherName: Customers[index]
+                                                        ["mothername"] ??
+                                                    '',
+                                                fatherjob: Customers[index]
+                                                        ["work"] ??
+                                                    '',
+                                                grandName: Customers[index]
+                                                        ["thirdname"] ??
+                                                    '',
+                                                fatherDob: Customers[index]
+                                                        ["fatherDob"] ??
+                                                    '',
+                                                ptype: Customers[index]
+                                                        ["ptype"] ??
+                                                    '',
+                                                fatherName: Customers[index]
+                                                        ["father_name"] ??
+                                                    '',
+                                                teatcherId: Customers[index]
+                                                        ["tid"] ??
+                                                    '',
+                                                date: Customers[index]["dob"] ??
+                                                    '',
                                               ),
-                                              isActive: Customers[index]["active"] == "active"
+                                              isActive: Customers[index]
+                                                          ["active"] ==
+                                                      "active"
                                                   ? true
                                                   : false,
                                             );

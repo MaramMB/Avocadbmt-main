@@ -26,26 +26,34 @@ class testRecord extends StatefulWidget {
 
 class _testRecordState extends State<testRecord> {
   @override
-  late Color test;
+
+   late Color test;
   String result = '';
+  String msg = '';
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       result = prefs.getString('result') ?? '';
+      // print(result);
     });
   }
-  Color initState() {
-    getUserData();
-    super.initState();
-    if ('result' != 0) {
+   testresult() async {
+    if (result == '0') {
       test =Colors.blue;
-      return test;
+      msg='';
+      // return test;
     }
     else{
       test =Colors.green;
-      return test;
+
     }
+  }
+
+  void initState() {
+    getUserData();
+    super.initState();
     getResult(widget.person.id, '1');
+    testresult();
   }
   String get gender {
     if (widget.person.gender == Gender.male) {
@@ -91,10 +99,82 @@ class _testRecordState extends State<testRecord> {
                           onPressed: () {
                             if (widget.exID=='1')
                             {
+                              if(result=='0'){
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
                                 return sptest(person: widget.person, id: widget.ID);
                               }));
+                              }else{
+                                showDialog(context: context, builder: (context)=>AlertDialog(
+                                  title: Container(
+                                    color: Colors.white,
+                                    child: Column(
+                                      children: [
+                                        Text('هذا الطالب اجرى الاختبار من قبل هل تريد اعادة الاختبار له ؟', style: TextStyle(
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18,
+                                        ),),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                Navigator.push (
+                                                  context,
+                                                  MaterialPageRoute (
+                                                    builder: (BuildContext context) => sptest(person: widget.person, id: widget.ID),
+                                                  ),
+                                                );
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.green,
+                                                shape: const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.all(Radius.circular(10))),
+                                                elevation: 2.0,
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 25, vertical: 5),
+                                              ),
+                                              child:  Text( 'نعم',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "DroidKufi",
+                                                    fontSize: 18.0,
+                                                  )),
+                                            ),
+                                            SizedBox(width: 30,),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.red,
+                                                shape: const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.all(Radius.circular(10))),
+                                                elevation: 2.0,
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 30, vertical: 5),
+                                              ),
+                                              child:  Text( 'لا',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontFamily: "DroidKufi",
+                                                    fontSize: 18.0,
+                                                  )),
+                                            ),
+
+
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ));
+                              }
                             }
                             else if (widget.exID=='4')
                             {

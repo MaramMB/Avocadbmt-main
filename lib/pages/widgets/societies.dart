@@ -153,8 +153,7 @@ class _SocieitesState extends State<Socieites> {
                             ),
                             height: 380,
                             child: FutureBuilder(
-                              future:
-                                  search ? searchStudents() : getSocieties(),
+                              future: search ? searchSociey() : getSocieties(),
                               builder: (BuildContext context,
                                   AsyncSnapshot snapshot) {
                                 if (snapshot.connectionState ==
@@ -191,13 +190,16 @@ class _SocieitesState extends State<Socieites> {
                                             phoneNumber: Customers[index]
                                                 ["Society_Phone"],
                                             type: AccountType.manager,
-                                            date: Customers[index]
-                                                ["Participation_Date"],
+                                            date: _remainingDays(
+                                                Customers[index]
+                                                    ["Participation_Date"]),
                                             email: Customers[index]["Email"],
                                             managerName: Customers[index]
                                                 ["Society_Manager"],
                                             password: Customers[index]
-                                                ["Password"], familyname:'', image:Customers[index]["image"],
+                                                ["Password"],
+                                            familyname: '',
+                                            image: Customers[index]["image"],
                                           ),
                                           isActive: Customers[index]
                                                       ["active"] ==
@@ -264,6 +266,16 @@ class _SocieitesState extends State<Socieites> {
     );
   }
 
+  String _remainingDays(var days) {
+    DateTime date = DateTime.parse(days);
+    DateTime nextYear = DateTime((date.year + 1), date.month, date.day);
+    DateTime now= DateTime.now();
+
+    final difference = nextYear.toUtc().difference(now.toUtc()).inDays;
+
+    return '$difference';
+  }
+
   getSocieties() async {
     var url = 'http://localhost/get_societis.php';
     var response = await http.get(Uri.parse(url));
@@ -271,7 +283,7 @@ class _SocieitesState extends State<Socieites> {
     return res;
   }
 
-  searchStudents() async {
+  searchSociey() async {
     var url = 'http://localhost/search_society.php';
     var response = await http.post(
       Uri.parse(url),

@@ -188,7 +188,7 @@ class _chatState extends State<chat> {
                             ),
                           ),
 
-                         Container(
+                          Container(
                             height: 60,
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -380,52 +380,52 @@ class _chatState extends State<chat> {
                             child: Column(
                               children: [
 
-                            SingleChildScrollView(
-                              child: SizedBox(
-                                      width: 500,
-                                      height: 200,
-                                      child: ListView.builder(itemCount: userLists.length,itemBuilder: (BuildContext context, int index)
-                                      {
-                                        String Fname =userLists[index].fname+' '+userLists[index].sname+' '+userLists[index].tname+' '+userLists[index].lname;
-                                        return Container(
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border: Border(bottom: BorderSide(color: Colors.black26)),
-                                          ),
-                                          child: Center(
-                                            child: Directionality(
-                                              textDirection: TextDirection.rtl,
-                                              child:ListTile(
-                                                dense: true,
-                                                mouseCursor: SystemMouseCursors.contextMenu,
+                                SingleChildScrollView(
+                                  child: SizedBox(
+                                    width: 500,
+                                    height: 200,
+                                    child: ListView.builder(itemCount: userLists.length,itemBuilder: (BuildContext context, int index)
+                                    {
+                                      String Fname =userLists[index].fname+' '+userLists[index].sname+' '+userLists[index].tname+' '+userLists[index].lname;
+                                      return Container(
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border(bottom: BorderSide(color: Colors.black26)),
+                                        ),
+                                        child: Center(
+                                          child: Directionality(
+                                            textDirection: TextDirection.rtl,
+                                            child:ListTile(
+                                              dense: true,
+                                              mouseCursor: SystemMouseCursors.contextMenu,
 
-                                                onTap: ()async{
+                                              onTap: ()async{
 
-                                                },
-                                                leading: ClipRRect(borderRadius: BorderRadius.circular(50),child: Image.memory(base64Decode(userLists[index].image), width: 50, height: 50, fit: BoxFit.fill,)),
-                                                title: Text(Fname, style: TextStyle(
-                                                  color: blak,
-                                                  fontFamily: "DroidKufi",
-                                                  fontSize: 16,
-                                                ),),
-                                                trailing: Visibility(
-                                                  visible: widget.userKind!='student',
-                                                  child: ElevatedButton(onPressed: (){
+                                              },
+                                              leading: ClipRRect(borderRadius: BorderRadius.circular(50),child: Image.memory(base64Decode(userLists[index].image), width: 50, height: 50, fit: BoxFit.fill,)),
+                                              title: Text(Fname, style: TextStyle(
+                                                color: blak,
+                                                fontFamily: "DroidKufi",
+                                                fontSize: 16,
+                                              ),),
+                                              trailing: Visibility(
+                                                visible: widget.userKind!='student',
+                                                child: ElevatedButton(onPressed: (){
 
-                                                    html.window.open('https://mail.google.com/mail/u/1/?&to=${userLists[index].email}&tf=cm', '');
+                                                  html.window.open('https://mail.google.com/mail/u/1/?&to=${userLists[index].email}&tf=cm', '');
 
 
 
-                                                  }, child: Icon(Icons.email_outlined, size: 25,), style: ElevatedButton.styleFrom(backgroundColor: green),),
-                                                ),
+                                                }, child: Icon(Icons.email_outlined, size: 25,), style: ElevatedButton.styleFrom(backgroundColor: green),),
                                               ),
                                             ),
                                           ),
-                                        );
-                                      },),
-                                    ),
-                            ),
+                                        ),
+                                      );
+                                    },),
+                                  ),
+                                ),
 
 
 
@@ -465,26 +465,26 @@ Future<List<Students>> getStudents(String id ,String? type) async {
   var url = 'http://localhost/getStudents.php';
   var x = id;
   if (type == 'student')
-    {
-      var url2 = 'http://localhost/getTid.php';
-      var response = await http.post(Uri.parse(url2), body :{
-        'id': id,
-      });
-      if (response.statusCode == 200) {
-        var data = json.decode(response.body);
+  {
+    var url2 = 'http://localhost/getTid.php';
+    var response = await http.post(Uri.parse(url2), body :{
+      'id': id,
+    });
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
 
-        x = data[0]['tid'];
+      x = data[0]['tid'];
 
-        teacher = await getTeacher(x);
-        getSociety();
-      }
-    }
-  else
-    {
       teacher = await getTeacher(x);
       getSociety();
-
     }
+  }
+  else
+  {
+    teacher = await getTeacher(x);
+    getSociety();
+
+  }
 
   try{ var response = await http.post(Uri.parse(url), body: {
     'id':x,
@@ -508,15 +508,14 @@ getTeacher(String tid)async {
 }
 getSociety() async{
 
-    var url3 = 'http://localhost/teacherSociety.php';
-    var response = await http.post(Uri.parse(url3), body :{
-      'id': teacher['Society_Id'],
-    });
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
+  var url3 = 'http://localhost/teacherSociety.php';
+  var response = await http.post(Uri.parse(url3), body :{
+    'id': teacher['Society_Id'],
+  });
+  if (response.statusCode == 200) {
+    var data = json.decode(response.body);
 
-      society = await data[0];
+    society = await data[0];
 
   }
 }
-

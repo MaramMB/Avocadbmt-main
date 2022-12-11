@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_account_form.dart';
+import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_society.dart';
+import 'package:flutter_application_1/pages/Account_Managment/Add_Account/addteacher.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
-import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
@@ -79,27 +81,71 @@ class UserProfile extends StatelessWidget {
                         const SizedBox(
                           height: 15,
                         ),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                              elevation: 2.0,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 35, vertical: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext ctx) {
+                                    return person.type == AccountType.manager
+                                        ? AddScociety(
+                                            isUpdateForm: true,
+                                            user: person,
+                                          )
+                                        : (person.type == AccountType.teacher
+                                            ? AddTeacheAccount(
+                                                isUpdateForm: true,
+                                                user: person,
+                                              )
+                                            : AddAccountForm(
+                                                isUpdateForm: true,
+                                                user: person,
+                                              ));
+                                  }),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                elevation: 2.0,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 35, vertical: 10),
+                              ),
+                              child: const Text("تعديل البيانات",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "DroidKufi",
+                                    fontSize: 18.0,
+                                  )),
                             ),
-                            child: const Text("العودة",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "DroidKufi",
-                                  fontSize: 18.0,
-                                )),
-                          ),
+                            const SizedBox(
+                              width: 5.0,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                elevation: 2.0,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 35, vertical: 10),
+                              ),
+                              child: const Text("العودة",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "DroidKufi",
+                                    fontSize: 18.0,
+                                  )),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -291,15 +337,18 @@ class UserProfile extends StatelessWidget {
           person.type == AccountType.student ? _parentData : _vGap,
           person.type == AccountType.student
               ? _address
-              : _rowData("التخصص : ", person.address),
+              : _rowData("التخصص : ", person.specific ?? ''),
           _vGap,
           _gender,
+          _vGap,
+          person.type == AccountType.student
+              ? _rowData("المشكلة : ",
+                  person.ptype == "hear" ? "مشكله بالسمع" : "مشكله بالنطق")
+              : Container(),
           _vGap,
           _type,
           _vGap,
           _rowData("البريد الإلكتروني : ", person.email ?? ''),
-          _vGap,
-          _rowData("كلمة المرور : ", person.password ?? ''),
         ],
       );
 
@@ -310,6 +359,8 @@ class UserProfile extends StatelessWidget {
           _rowData("اسم الأم : ", person.motherName ?? ''),
           _vGap,
           _rowData("وظيفة الأب : ", person.fatherjob ?? ''),
+          _vGap,
+          _rowData("تاريخ ميلاد الأب : ", person.fatherDob ?? ''),
           _vGap,
         ],
       );
@@ -327,11 +378,9 @@ class UserProfile extends StatelessWidget {
           _vGap,
           _rowData("العنوان : ", person.address),
           _vGap,
-          _rowData("تاريخ الإنضمام : ", person.date ?? ''),
+          _rowData("عدد الايام المتبقي للاشتراك : ", "${person.date} يوم"),
           _vGap,
           _rowData("البريد الإلكتروني : ", person.email ?? ''),
-          _vGap,
-          _rowData("كلمة المرور : ", person.password ?? ''),
         ],
       );
 }

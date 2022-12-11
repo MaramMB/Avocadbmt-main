@@ -1,19 +1,14 @@
 // ignore_for_file: unused_local_variable, use_build_context_synchronously, non_constant_identifier_names
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/pages/models/person.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../rowbar.dart';
-import '../../widgets/manage_accounts.dart';
-// import 'package:intl/intl.dart';
 
 enum SingingCharacterTeacher { Male, Female }
 
@@ -24,7 +19,11 @@ enum SingingCharacterStudent { Male, Female }
 enum SingingCharacterProblem { hear, pron }
 
 class AddTeacheAccount extends StatefulWidget {
-  const AddTeacheAccount({Key? key}) : super(key: key);
+  final bool isUpdateForm;
+  final Person? user;
+
+  const AddTeacheAccount({Key? key, this.isUpdateForm = false, this.user})
+      : super(key: key);
 
   @override
   State<AddTeacheAccount> createState() => _AddTeacheAccountState();
@@ -32,7 +31,6 @@ class AddTeacheAccount extends StatefulWidget {
 
 class _AddTeacheAccountState extends State<AddTeacheAccount> {
   String gender = '';
-  int _selectedType = 2;
   TextStyle unselectedTypeTextStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
@@ -48,11 +46,74 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   var height16 = const SizedBox(height: 16);
   bool _passwordVisible = true;
 
+  SingingCharacterTeacher get _genderType =>
+      widget.user?.gender.name == "female"
+          ? SingingCharacterTeacher.Female
+          : SingingCharacterTeacher.Male;
+
   @override
   void initState() {
     super.initState();
-    setCurrentDate();
+    widget.isUpdateForm ? setUserData() : setCurrentDate();
     _passwordVisible = true;
+  }
+
+  void setUserData() {
+    nameController.text = widget.user?.name ?? '';
+    secondnameController.text = widget.user?.fatherName ?? '';
+    thirdnameController.text = widget.user?.grandName ?? '';
+    lastnameController.text = widget.user?.familyname ?? '';
+    _character = _genderType;
+    accountnumberController.text = widget.user?.accountNumber ?? '';
+    specificController.text = widget.user?.specific ?? '';
+    emailController.text = widget.user?.email ?? '';
+    phoneController.text = widget.user?.phoneNumber ?? '';
+  }
+
+  Future<void> _updateTeatcher() async {
+    if (nameController.text == "" ||
+        secondnameController.text == "" ||
+        thirdnameController.text == "" ||
+        lastnameController.text == "" ||
+        accountnumberController.text == "" ||
+        specificController.text == "" ||
+        phoneController.text == "" ||
+        emailController.text == "") {
+      msgDialog('الرجاء تعبئه جميع الفراغات');
+    } else {
+      var url =
+          'http://localhost/Update_teacher.php';
+
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          "Name": nameController.text,
+          "secname": secondnameController.text,
+          "thirdname": thirdnameController.text,
+          "familyname": lastnameController.text,
+          "gender": _character.toString().split('.').last,
+          "specialization": specificController.text,
+          "Phone_Num": phoneController.text,
+          "accountnum": accountnumberController.text,
+          "Id_Num": widget.user!.id,
+          "email": emailController.text,
+        },
+      );
+
+      var data = jsonDecode(response.body);
+
+      if (data == 'Success') {
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+        clearData();
+        Fluttertoast.showToast(msg: "تم تعديل المعلم بنجاح");
+      } else if (data == 'email') {
+        msgDialog(
+            'الايميل الذي تحاول تحديثه فيه موجود مسبقاً, الرجاء اختيار ايميل اخر');
+      } else {
+        msgDialog('حدثت مشكلة اثناء تعديل المعلم');
+      }
+    }
   }
 
   @override
@@ -91,14 +152,16 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text("اضافه معلم",
-                              style: TextStyle(
+                          Text(
+                              widget.isUpdateForm ? "تعديل معلم" : "اضافه معلم",
+                              style: const TextStyle(
                                   color: Colors.green,
                                   fontSize: 35,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                           Padding(
-                            padding: const EdgeInsets.only(right: 20.0, left: 20),
+                            padding:
+                                const EdgeInsets.only(right: 20.0, left: 20),
                             child: teacherwidget(),
                           ),
                         ],
@@ -199,8 +262,6 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   var lastnameController = TextEditingController();
 
   SingingCharacterTeacher? _character = SingingCharacterTeacher.Female;
-  SingingCharacterStudent? _characterstudent = SingingCharacterStudent.Female;
-  SingingCharacterProblem? pro = SingingCharacterProblem.hear;
 
   Widget teacherwidget() {
     return Form(
@@ -264,19 +325,21 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  namefield(field: "رقم الهويه"),
-                  textfieldwidget(
-                    type: TextInputType.name,
-                    ontap: () {},
-                    wid: 300,
-                    hei: 40,
-                    nameController: IDTeacherController,
-                    text: "رقم الهويه",
-                  ),
-                ],
-              ),
+              widget.isUpdateForm
+                  ? Container()
+                  : Column(
+                      children: [
+                        namefield(field: "رقم الهويه"),
+                        textfieldwidget(
+                          type: TextInputType.name,
+                          ontap: () {},
+                          wid: 300,
+                          hei: 40,
+                          nameController: IDTeacherController,
+                          text: "رقم الهويه",
+                        ),
+                      ],
+                    ),
               Column(
                 children: [
                   namefield(field: "رقم الحساب"),
@@ -419,18 +482,20 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _password,
-              _confirmPassword,
-            ],
-          ),
+          widget.isUpdateForm
+              ? Container()
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _password,
+                    _confirmPassword,
+                  ],
+                ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _email,
-              _dateApplied,
+              widget.isUpdateForm ? Container() : _dateApplied,
             ],
           ),
           Padding(
@@ -440,12 +505,15 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
               children: [
                 InkWell(
                   onTap: () {
+                    if (widget.isUpdateForm) {
+                      confirmDialog();
+                      return;
+                    }
                     final isValid = _formKey.currentState!.validate();
                     if (!isValid ||
                         confirmPassController.text != passController.text) {
                       return;
                     }
-
                     confirmDialog();
                   },
                   child: Container(
@@ -454,10 +522,10 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                     decoration: BoxDecoration(
                         color: backgreen,
                         borderRadius: BorderRadius.circular(10)),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        "اضافه معلم",
-                        style: TextStyle(
+                        widget.isUpdateForm ? "تعديل معلم" : "اضافه معلم",
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: Colors.white),
@@ -508,8 +576,7 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                 InkWell(
                     onTap: () {
                       Navigator.of(context, rootNavigator: true).pop();
-
-                      addTeacher();
+                      widget.isUpdateForm ? _updateTeatcher() : addTeacher();
                     },
                     child: Container(
                         decoration: BoxDecoration(
@@ -545,22 +612,6 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
         );
       },
     );
-  }
-
-  _pickDate() async {
-    DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2101));
-    if (pickedDate != null) {
-      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-      setState(() {
-        dateinput.text = formattedDate; //set output date to TextField value.
-      });
-    } else {
-      // print("Date is not selected");
-    }
   }
 
   void msgDialog(String msg) {
