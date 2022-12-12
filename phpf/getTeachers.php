@@ -10,7 +10,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
        $id = $_GET["id"];
 
-       $sql ="SELECT teachers.*, usersacounts.Email FROM teachers LEFT JOIN usersacounts ON teachers.Id_Num = usersacounts.Id_Num AND teachers.Id_Num = $id";
+       $sql ="SELECT teachers.*, usersacounts.Email FROM teachers LEFT JOIN usersacounts ON teachers.Id_Num = usersacounts.Id_Num WHERE teachers.Id_Num = $id";
 
     $result =mysqli_query($db , $sql);
     if($result){

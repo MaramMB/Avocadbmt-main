@@ -12,7 +12,7 @@ $data = json_decode($json, true);
     $email = $data["email"];
     $phone = $data["phone"];
 
-	$query_std = "UPDATE students SET phone = '$phone' WHERE id = $id";
+	$query_std = "UPDATE students SET phone = '$phone' WHERE Id_Num = $id";
 
 	$query_user ="UPDATE usersacounts SET Email = '$email' WHERE Id_Num = $id";
 
@@ -23,6 +23,7 @@ $data = json_decode($json, true);
 	if ($result_std && $result_user) {
 		echo json_encode("Success");
 	}
+
 
 
 ?>
