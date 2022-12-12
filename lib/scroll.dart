@@ -126,7 +126,7 @@ class _scrollhomeState extends State<scrollhome> {
                                 FadeInLeftBig(
                                   child: Image.asset(
                                     'img/boy.png',
-                                    height: 600,
+                                    height: 532,
                                   ),
                                 ),
 

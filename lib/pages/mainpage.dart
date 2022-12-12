@@ -74,7 +74,7 @@ class _mainpageState extends State<mainpage> {
                           child: const Text("اختبار النطق الأولي",
                               style: TextStyle(
                                   color: Colors.green,
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                         ),
@@ -92,7 +92,7 @@ class _mainpageState extends State<mainpage> {
                           child: const Text("تدريب نطق الحروف",
                               style: TextStyle(
                                   color: Colors.green,
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                         ),
@@ -108,7 +108,7 @@ class _mainpageState extends State<mainpage> {
                           child: const Text("التدريبات الصوتية",
                               style: TextStyle(
                                   color: Colors.green,
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                         ),
@@ -123,7 +123,7 @@ class _mainpageState extends State<mainpage> {
                           child: const Text("تدريبات الوجه",
                               style: TextStyle(
                                   color: Colors.green,
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                         ),
@@ -138,7 +138,7 @@ class _mainpageState extends State<mainpage> {
                           child: const Text("التدريبات الصوتية",
                               style: TextStyle(
                                   color: Colors.green,
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
                         ),
@@ -150,7 +150,7 @@ class _mainpageState extends State<mainpage> {
                               style: TextStyle(fontFamily: "DroidKufi")),
                         ),
                         const SizedBox(
-                          height: 16,
+                          height: 10,
                         ),
                         Visibility(
                           visible: showbtn(),
@@ -171,7 +171,7 @@ class _mainpageState extends State<mainpage> {
                                       BorderRadius.all(Radius.circular(10))),
                                   elevation: 2.0,
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 25, vertical: 12),
+                                      horizontal: 20, vertical: 8),
                                 ),
                                 child: const Text("بدأ الاختبار الاولي للنطق",
                                     style: TextStyle(

@@ -81,7 +81,7 @@ class _voiceexpState extends State<voiceexp> {
                         ),
 
                         const SizedBox(
-                          height: 30,
+                          height: 20,
                         ),
                         Spacer(),
                         Center(

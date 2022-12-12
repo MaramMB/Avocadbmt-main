@@ -108,7 +108,7 @@ List<Map<String, String>> letters = const [
 
   },
   {
-    'letter': 'ص ',
+    'letter': 'ص',
     'word' : 'صندوق',
     'img' : 'img/treas.png',
 
