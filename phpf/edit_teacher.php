@@ -23,6 +23,11 @@ $data = json_decode($json, true);
 	if ($result_std && $result_user) {
 		echo json_encode("Success");
 	}
+	else
+	{
+		echo json_encode('error');
+	}
+
 
 
 ?>
