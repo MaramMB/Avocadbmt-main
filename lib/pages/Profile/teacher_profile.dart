@@ -15,6 +15,7 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
+String code='';
 
 class TeacherProfile extends StatefulWidget {
   const TeacherProfile({Key? key, required this.userId}) : super(key: key);
@@ -33,6 +34,7 @@ var phoneController = TextEditingController();
 var IDController = TextEditingController();
 var accountNumController = TextEditingController();
 var specialistController = TextEditingController();
+var EcodeController = TextEditingController();
 
 // Booleans for check if edit or view
 bool email = true;
@@ -40,9 +42,12 @@ bool phone = true;
 bool image = true;
 bool date = true;
 
+
 html.File? _cloudFile;
 var _fileBytes;
 Image? _imageWidget;
+bool errCode=false;
+bool emailError=false;
 
 class TeacherProfileState extends State<TeacherProfile> {
   @override
@@ -500,26 +505,140 @@ class TeacherProfileState extends State<TeacherProfile> {
                         child: Center(
                           child: ElevatedButton(
                             onPressed: () async {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return  AlertDialog(
-                                    content: Text( 'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر'),
-                                    actions: <Widget>[
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text(
-                                          'حسنا',
-                                          style: TextStyle(color: Color(0xff34568B)),
-                                        ),
-                                      ),
-                                    ],
+
+
+                              if(!email)
+                              {
+                                ChangeEmail();
+
+                                showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return  StatefulBuilder(
+                                      builder: (context,setState){
+                                       return AlertDialog(
+                                          title: Center(
+                                            child: Container(
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Center(child:
+                                                  Text('تم إرسال رمز تحقق الى البريد الالكتروني الجديد',style: TextStyle(fontFamily: 'DroidKufi',fontSize: 15),)),
+                                                  Text(' يرجى إدخال الرمز المكون من 6 ارقام لتأكيد البريد الالكتروني',style: TextStyle(fontFamily: 'DroidKufi',fontSize: 15),),
+                                                  SizedBox(height: 20,),
+                                                  SizedBox(
+                                                    width: 200,
+                                                    child: Directionality(
+                                                      textDirection: TextDirection.rtl,
+                                                      child: TextField(
+                                                        textDirection: TextDirection.rtl,
+                                                        style: TextStyle(
+                                                          fontFamily: "DroidKufi",
+                                                          fontWeight: FontWeight.w500,
+                                                        ),
+                                                        controller: EcodeController,
+                                                        autofocus: true,
+                                                        maxLength: 6,
+                                                        decoration: InputDecoration(
+                                                          hintText: '• • • • •',
+                                                          enabledBorder:OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Colors.green, width: 2),
+                                                          ),
+                                                          border: OutlineInputBorder(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10,),
+
+                                                  Visibility(
+                                                      visible: errCode,
+                                                      child: Text('خطأ في رمز التأكيد ! تحقق من الرمز',style: TextStyle(color: Colors.red,fontFamily: 'DroidKufi',fontSize: 15),)),
+                                                  SizedBox(height: 10,),
+                                                  Visibility(
+                                                      visible: emailError,
+                                                      child: Text('خطأ ، البريد موجود مسبقاً',style: TextStyle(color: Colors.red,fontFamily: 'DroidKufi',fontSize: 15),)),
+                                                  SizedBox(height: 10,),
+
+                                                  Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 50,
+                                                        child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                                                            onPressed: (){
+                                                              setState(() {
+                                                                errCode = false;
+                                                              });
+                                                              Navigator.pop(context);
+
+                                                            }, child: Text('الغاء',style: TextStyle(fontFamily: 'DroidKufi'),)),
+                                                      ),
+                                                      SizedBox(width: 30,),
+                                                      SizedBox(
+                                                        height: 50,
+                                                        child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                                                            onPressed: (){
+                                                              if (EcodeController.text==code)
+                                                              {
+                                                                updateTeatcher();
+                                                                setState(() {
+                                                                  errCode = false;
+                                                                });
+                                                              }
+                                                              else
+                                                              {
+                                                                setState(() {
+                                                                  errCode = true;
+                                                                });
+                                                              }
+
+
+
+                                                            }, child: Text('تأكيد البريد الإلكتروني',style: TextStyle(fontFamily: 'DroidKufi'),)),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+
+                                    );
+                                  },
+                                );
+                              }
+                              else
+                                {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return  AlertDialog(
+                                        content: Text( 'الايميل الذي تحاول إضافته موجود مسبقاً, الرجاء اختيار ايميل اخر'),
+                                        actions: <Widget>[
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text(
+                                              'حسنا',
+                                              style: TextStyle(color: Color(0xff34568B)),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   );
-                                },
-                              );
-                              await updateTeatcher();
+                                  await updateTeatcher();
+
+                                }
+
+
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
@@ -631,20 +750,24 @@ class TeacherProfileState extends State<TeacherProfile> {
       );
 
       var data = jsonDecode(response.body);
+      if (data == 'error') {
+        setState(() {
+          emailError=true;
+
+        });}
       if (data == 'Success') {
         setState(() {
           email = true;
           phone = true;
         });
         Navigator.of(context, rootNavigator: true).pop();
-        Fluttertoast.showToast(msg: "تم تعديل بيانات الطالب بنجاح");
+        Fluttertoast.showToast(msg: "تم تعديل بيانات الحساب بنجاح");
       }
       // else if (data == "email") {
       //   Fluttertoast.showToast(msg: 'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر');
       // }
       else {
         // Fluttertoast.showToast(msg: 'الايميل الذي تحاول التسجيل فيه موجود مسبقاً, الرجاء اختيار ايميل اخر');
-        Navigator.of(context, rootNavigator: true).pop();
       }
     }
   }
@@ -711,6 +834,16 @@ class TeacherProfileState extends State<TeacherProfile> {
       // User canceled the picker
       return;
     }
+  }
+  ChangeEmail()async{
+    print(emailController.text);
+    var url = 'http://localhost/changeEmail.php';
+    var response = await http.post(Uri.parse(url), body :{
+     'Email':emailController.text
+    });
+      var data = await response.body;
+       code = data;
+
   }
 
   Widget _image() {

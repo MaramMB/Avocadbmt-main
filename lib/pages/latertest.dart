@@ -108,7 +108,7 @@ List<Map<String, String>> letters = const [
 
   },
   {
-    'letter': 'ص ',
+    'letter': 'ص',
     'word' : 'صندوق',
     'img' : 'img/treas.png',
 
@@ -453,6 +453,7 @@ class _lettertestState extends State<lettertest> {
                   sendData(letters[Lindex]['letter']!,'true');
                   isCorrect=true;
                   Status = "عمل رائع !";
+                  _isListening = false;
                   _text='';
                   Cstop();
 
@@ -461,7 +462,6 @@ class _lettertestState extends State<lettertest> {
               else
                 {
                   if(played==false){
-                    AssetsAudioPlayer.playAndForget(Audio("audio/wrong.mp3"));
                     setState(() {
                       played=true;
                     });
@@ -478,7 +478,7 @@ class _lettertestState extends State<lettertest> {
                 _confidence = val.confidence;
               }
             }),
-            localeId: 'Ar-JO'
+            localeId: 'Ar-SA'
                 ''
         );
       }
