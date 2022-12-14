@@ -40,7 +40,7 @@ class StartPoint extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'BDTM',
+      title: 'نـبـرة - Nabra',
       theme: ThemeData.light(),
       home: ScreenTypeLayout.builder(
         // mobile: (BuildContext context) => const HomemobailPage(uname: null,),
