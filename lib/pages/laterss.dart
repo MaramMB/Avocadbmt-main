@@ -20,13 +20,14 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 class letterss extends StatefulWidget {
-  late String L1,L2,L3,L4,title; // L = letter
+  late String L1,L2,L3,L4,title;
+  final String userId;// L = letter
   letterss({
     required this.L1,
     required this.L2,
     required this.L3,
     required this.L4,
-    required this.title,
+    required this.title, required this.userId,
   });
   @override
   State<letterss> createState() => _letterssState();
@@ -36,7 +37,9 @@ class _letterssState extends State<letterss> {
 
   Future<List<dynamic>?> getData() async{
     var url = 'http://localhost/getSpell.php';
-    http.Response response = await http.get(Uri.parse(url));
+    http.Response response = await http.post(Uri.parse(url),body: {
+      'id':widget.userId,
+    });
     var data = jsonDecode(response.body);
 
     print(data.toString());
@@ -153,7 +156,7 @@ class _letterssState extends State<letterss> {
                                   onTap: () {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(builder: (context) {
-                                      return  lettervideo(letter : widget.L4);
+                                      return  lettervideo(letter : widget.L4,userId: widget.userId,);
                                     }));
                                   },
                                   child: Stack(
@@ -222,7 +225,7 @@ class _letterssState extends State<letterss> {
                                   onTap: () {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(builder: (context) {
-                                      return lettervideo(letter : widget.L3);
+                                      return lettervideo(letter : widget.L3, userId: widget.userId,);
                                     }));
                                   },
                                   child: Stack(
@@ -292,7 +295,7 @@ class _letterssState extends State<letterss> {
                                   onTap: () {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(builder: (context) {
-                                      return lettervideo(letter : widget.L2);
+                                      return lettervideo(letter : widget.L2,userId: widget.userId);
                                     }));
                                   },
                                   child: Stack(
@@ -364,7 +367,7 @@ class _letterssState extends State<letterss> {
                                   onTap: () {
                                     Navigator.of(context)
                                         .push(MaterialPageRoute(builder: (context) {
-                                      return lettervideo(letter : widget.L1);
+                                      return lettervideo(letter : widget.L1,userId: widget.userId);
                                     }));
                                   },
                                   child: Stack(

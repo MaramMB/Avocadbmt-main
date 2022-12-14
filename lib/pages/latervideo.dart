@@ -208,8 +208,9 @@ int search (String s){
 var flickmanager;
 class lettervideo extends StatefulWidget {
   late String letter;
+  final String userId;
   lettervideo({
-    required this.letter,
+    required this.letter, required this.userId,
   });
   @override
 
@@ -296,7 +297,7 @@ class _lettervideoState extends State<lettervideo> {
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return  lettertest(letter: letters[Lindex]['letter']!,);
+                          return  lettertest(letter: letters[Lindex]['letter']!, userId: widget.userId,);
                         }));
                       },
                       style: ElevatedButton.styleFrom(

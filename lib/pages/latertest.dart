@@ -230,8 +230,9 @@ int search (String s){
 }
 class lettertest extends StatefulWidget {
  late String letter;
+ final String userId;
   lettertest({
-    required this.letter,
+    required this.letter, required this.userId,
 });
 
   @override
@@ -246,6 +247,7 @@ class _lettertestState extends State<lettertest> {
     var res = await http.post(Uri.parse(phpurl), body: {
       "letter": letter,
       "result": result,
+      'id':widget.userId,
     }); //sending post request with header data
 
     if (res.statusCode == 200) {
