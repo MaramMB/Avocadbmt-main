@@ -11,6 +11,8 @@ import 'package:flutter_application_1/pages/mainpage.dart';
 import 'package:flutter_application_1/pages/mobile/homepagemobile.dart';
 import 'package:flutter_application_1/pages/result.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
+import 'package:flutter_application_1/pages/widgets/societies.dart';
+import 'package:flutter_application_1/resetpass.dart';
 import 'package:flutter_application_1/scroll.dart';
 // import 'package:flutter_application_1/pages/mobile/mainmobailepage.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -48,9 +50,9 @@ class StartPoint extends StatelessWidget {
         tablet: (BuildContext context) => const HomemobailPage(
           uname: null,
         ),
-        desktop: (BuildContext context) => scrollhome(),
+        // desktop: (BuildContext context) => reset(userId: '20',),
         // desktop: (BuildContext context) => game(),
-        // desktop: (BuildContext context) => result(userId: '20',),
+        desktop: (BuildContext context) => result(userId: '20',),
       ),
     );
   }

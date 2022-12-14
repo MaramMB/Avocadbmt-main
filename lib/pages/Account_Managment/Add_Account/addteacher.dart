@@ -646,7 +646,7 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
             hei: 40,
             validation: (Val) => validateEmail(emailController.text),
             nameController: emailController,
-            text: "bara@gmail.com :مثال",
+            text: "مثال : rakan@gmail.com ",
             readOnly: false,
           ),
         ],
@@ -757,7 +757,7 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
   }
 
   String? passValidation() {
-    RegExp regex = RegExp(r'^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$');
+    RegExp regex = RegExp(r'^(.{0,7}|[^0-9]|[^A-Z]|[^a-z]|[a-zA-Z0-9])$');
     return !regex.hasMatch(passController.text) &&
             passController.text == confirmPassController.text
         ? null

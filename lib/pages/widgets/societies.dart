@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_society.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
@@ -50,15 +51,34 @@ class _SocieitesState extends State<Socieites> {
           'ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales,
       home: Scaffold(
         backgroundColor: backgreen,
+
         body: Container(
-          child: Center(
-            child: Column(children: [
-              // const SelectionButton(),
-              const SizedBox(
-                height: 25,
+          
+          child: Stack(
+            children: [
+              InkWell(
+                onTap: (){
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (BuildContext ctx) {
+                      return testlog();
+                    }),
+                  );
+                },
+                child:Padding(
+                  padding: const EdgeInsets.only(top: 10,bottom: 15,right: 25),
+                  child: Icon(Icons.keyboard_backspace_sharp,color: Colors.white,size: 40,),
+                ),
               ),
-              buildTable(context),
-            ]),
+              Center(
+                child: Column(children: [
+                  // const SelectionButton(),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  buildTable(context),
+                ]),
+              ),
+            ],
           ),
         ),
       ),
@@ -96,9 +116,9 @@ class _SocieitesState extends State<Socieites> {
               Center(
                 child: Container(
                   // color: Colors.black38,
-                  height: 510,
+                  height: 504,
                   width: 600,
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(18),
                   child: Column(
                     children: [
                       Row(
@@ -108,7 +128,7 @@ class _SocieitesState extends State<Socieites> {
                             // flex: 1,
                             child: Container(
                               padding: const EdgeInsets.only(
-                                  right: 18, bottom: 5, top: 5, left: 5),
+                                  right: 18, bottom: 2, top: 5, left: 5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 border: Border.all(color: Colors.black38),

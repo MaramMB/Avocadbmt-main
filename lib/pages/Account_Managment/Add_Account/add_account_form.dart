@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
@@ -17,7 +18,7 @@ const backgreen = Color.fromRGBO(131, 190, 99, 1);
 
 enum SingingCharacterStudent { Male, Female }
 
-enum SingingCharacterProblem { hear, pron }
+enum SingingCharacterProblem { hear, pron ,both}
 
 class AddAccountForm extends StatefulWidget {
   final bool isUpdateForm;
@@ -430,7 +431,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
             child: Text(
               "البريد الالكتروني",
               style: TextStyle(
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w600,
                 fontSize: 18,
                 color: Colors.black87,
                 fontFamily: 'DroidKufi',
@@ -444,7 +445,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
             hei: 50,
             validation: (Val) => validateEmail(emailController.text),
             nameController: emailController,
-            text: "bara@gmail.com :مثال",
+            text: "مثال : rakan@gmail.com ",
             readOnly: false,
           ),
         ],
@@ -458,7 +459,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
             child: Text(
               "كلمة المرور",
               style: TextStyle(
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w600,
                 fontSize: 18,
                 color: Colors.black87,
                 fontFamily: 'DroidKufi',
@@ -477,6 +478,18 @@ class _AddAccountFormState extends State<AddAccountForm> {
                 nameController: passController,
                 text: "مكونة من 8 أحرف و أرقام",
                 readOnly: false,
+                validation: (value) {
+                  String patttern = r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$)';
+                  RegExp regExp = new RegExp(patttern);
+                  if (value!.isEmpty) {
+                    return "يرجى تعبئة كلمة المرور ";
+                  }
+                  else if (value.length < 8) {
+                    return "يجب أن لا تقل كلمة المرور عن ثمانية أرقام او حروف";
+                  }
+
+                  return null;
+                },
               ),
               visibleIcon,
             ],
@@ -506,7 +519,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
             child: Text(
               "تاريخ الانضمام",
               style: TextStyle(
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w600,
                 fontSize: 18,
                 color: Colors.black87,
                 fontFamily: 'DroidKufi',
@@ -556,7 +569,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
             child: Text(
               "تأكيد كلمة المرور",
               style: TextStyle(
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w600,
                 fontSize: 18,
                 color: Colors.black87,
                 fontFamily: 'DroidKufi',
@@ -588,15 +601,15 @@ class _AddAccountFormState extends State<AddAccountForm> {
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
     return regex.hasMatch(value)
         ? null
-        : "InValid Email, Please enter in Right Form";
+        : "البريد المستخدم غير صالح";
   }
 
   String? passValidation() {
-    // RegExp regex = RegExp(r'^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$');
-    // return !regex.hasMatch(passController.text) &&
-    //     passController.text == confirmPassController.text
-    //     ? null
-    //     : "كلمة المرور خاطئة, الرجاء ادخال كلمة مطابقة و صحيحة";
+    RegExp regex = RegExp(r'^(.{0,7}|[^0-9]|[^A-Z]|[^a-z]|[a-zA-Z0-9])$');
+    return !regex.hasMatch(passController.text) &&
+        passController.text == confirmPassController.text
+        ? null
+        : "كلمة المرور خاطئة, الرجاء ادخال كلمة مطابقة و صحيحة";
   }
 
   Widget studentwidget() {
@@ -676,7 +689,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                       child: Text(
                         'العنوان',
                         style: TextStyle(
-                          fontWeight: FontWeight.w900,
+                          fontWeight: FontWeight.w600,
                           fontSize: 18,
                           color: Colors.black87,
                           fontFamily: 'DroidKufi',
@@ -704,7 +717,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                           child: Text(
                             'رقم هويه الطالب',
                             style: TextStyle(
-                              fontWeight: FontWeight.w900,
+                              fontWeight: FontWeight.w600,
                               fontSize: 18,
                               color: Colors.black87,
                               fontFamily: 'DroidKufi',
@@ -774,7 +787,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     child: Text(
                       'الجنس',
                       style: TextStyle(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
                         fontSize: 18,
                         color: Colors.black87,
                         fontFamily: 'DroidKufi',
@@ -791,7 +804,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                             activeColor: backgreen,
                             title: const Text("ذكر",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w900,
+                                  fontWeight: FontWeight.w600,
                                   fontSize: 18,
                                   color: Colors.black87,
                                   fontFamily: 'DroidKufi',
@@ -815,7 +828,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                               title: const Text(
                                 "انثى",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w900,
+                                  fontWeight: FontWeight.w600,
                                   fontSize: 18,
                                   color: Colors.black87,
                                   fontFamily: 'DroidKufi',
@@ -847,7 +860,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     child: Text(
                       'تاريخ الميلاد',
                       style: TextStyle(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
                         fontSize: 18,
                         color: Colors.black87,
                         fontFamily: 'DroidKufi',
@@ -899,7 +912,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     child: Text(
                       'المشكله لديه',
                       style: TextStyle(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
                         fontSize: 18,
                         color: Colors.black87,
                         fontFamily: 'DroidKufi',
@@ -911,13 +924,13 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     children: [
                       SizedBox(
                         height: 50,
-                        width: 200,
+                        width: 119,
                         child: RadioListTile(
                             activeColor: backgreen,
                             title: const Text("سمع",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
                                   color: Colors.black87,
                                   fontFamily: 'DroidKufi',
                                 )),
@@ -932,14 +945,14 @@ class _AddAccountFormState extends State<AddAccountForm> {
                       ),
                       SizedBox(
                         height: 50,
-                        width: 150,
+                        width: 118,
                         child: Center(
                           child: RadioListTile(
                               activeColor: backgreen,
                               title: const Text("نطق",
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
                                     color: Colors.black87,
                                     fontFamily: 'DroidKufi',
                                   )),
@@ -953,13 +966,34 @@ class _AddAccountFormState extends State<AddAccountForm> {
                               }),
                         ),
                       ),
+                      SizedBox(
+                        height: 50,
+                        width: 134,
+                        child: RadioListTile(
+                            activeColor: backgreen,
+                            title: const Text("كلاهما",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  color: Colors.black87,
+                                  fontFamily: 'DroidKufi',
+                                )),
+                            value: SingingCharacterProblem.both,
+                            groupValue: pro,
+                            selected: pro == SingingCharacterProblem.both,
+                            onChanged: (SingingCharacterProblem? value) {
+                              setState(() {
+                                pro = value;
+                              });
+                            }),
+                      ),
                     ],
                   ),
                 ],
               ),
-              const SizedBox(
-                width: 15.0,
-              ),
+              // const SizedBox(
+              //   width: 5.0,
+              // ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -968,7 +1002,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     child: Text(
                       'رقم هاتف الأهل',
                       style: TextStyle(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
                         fontSize: 18,
                         color: Colors.black87,
                         fontFamily: 'DroidKufi',
@@ -979,7 +1013,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
                     child: Container(
                       height: 45,
-                      width: 340,
+                      width: 338,
                       child: TextField(
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
@@ -1059,17 +1093,18 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     confirmDialog(isTeacher: false);
                   },
                   child: Container(
-                    width: 200,
+                    width: 150,
                     height: 40,
                     decoration: BoxDecoration(
-                        color: backgreen,
+                        color: Colors.green,
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                       child: Text(
                         widget.isUpdateForm ? "تعديل الطالب" : "اضافه طالب",
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 18,
+                            fontFamily: "DroidKufi",
                             color: Colors.white),
                       ),
                     ),
@@ -1083,7 +1118,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                     Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: backgreen,
+                    backgroundColor: Colors.green,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     elevation: 2.0,
@@ -1117,7 +1152,18 @@ class _AddAccountFormState extends State<AddAccountForm> {
   }
   Widget get _teacherDropDowList => Column(
         children: [
-          namefield(field: "اختر معلم"),
+         Padding(
+           padding: EdgeInsets.only(right: 18.0, top: 25),
+           child: Text(
+              "اختر معلم",
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+                color: Colors.black87,
+                fontFamily: 'DroidKufi',
+              ),
+            ),
+         ),
           SizedBox(
             width: 300,
             child: FutureBuilder(

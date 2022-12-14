@@ -14,6 +14,7 @@ class contact extends StatelessWidget {
         toolbarHeight: 50,
         elevation: 0,
         backgroundColor: const Color.fromRGBO(131, 190, 99, 1),
+        // iconTheme: IconThemeData.lerp(null, null, 90),
       ),
       body: Container(
         color: backgreen,
@@ -78,7 +79,7 @@ class contact extends StatelessWidget {
                                   size: 25,),
                               ),
                               const Text(
-                                "  BDMT202@gmail.com ",
+                                "  nabraa.ps@gmail.com ",
                                 style: TextStyle(
                                     decoration: TextDecoration.none,
                                     color: Colors.black87,

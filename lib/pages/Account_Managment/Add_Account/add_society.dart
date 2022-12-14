@@ -149,9 +149,7 @@ class _AddScocietyState extends State<AddScociety> {
                                   fontSize: 30,
                                   fontFamily: "DroidKufi",
                                   fontWeight: FontWeight.w700)),
-                          const SizedBox(
-                            height: 20,
-                          ),
+
                           societieWidget()
                         ],
                       ),
@@ -307,8 +305,20 @@ class _AddScocietyState extends State<AddScociety> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                namefield(field: "اسم الجمعيه"),
+                const Padding(
+                  padding: EdgeInsets.only(right: 18.0, top: 25),
+                  child: Text(
+                    "اسم الجمعيه",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: Colors.black87,
+                      fontFamily: 'DroidKufi',
+                    ),
+                  ),
+                ),
                 customTextFieldWidget(
                   type: TextInputType.name,
                   ontap: () {},
@@ -323,8 +333,20 @@ class _AddScocietyState extends State<AddScociety> {
             widget.isUpdateForm
                 ? Container()
                 : Column(
-                    children: [
-                      namefield(field: "رقم الترخيص"),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(right: 18.0, top: 25),
+                  child: Text(
+                    "رقم الترخيص",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: Colors.black87,
+                      fontFamily: 'DroidKufi',
+                    ),
+                  ),
+                ),
                       customTextFieldWidget(
                         type: TextInputType.name,
                         ontap: () {},
@@ -342,8 +364,20 @@ class _AddScocietyState extends State<AddScociety> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                namefield(field: "العنوان"),
+                const Padding(
+                  padding: EdgeInsets.only(right: 18.0, top: 25),
+                  child: Text(
+                    "العنوان",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: Colors.black87,
+                      fontFamily: 'DroidKufi',
+                    ),
+                  ),
+                ),
                 customTextFieldWidget(
                   type: TextInputType.name,
                   ontap: () {},
@@ -356,8 +390,20 @@ class _AddScocietyState extends State<AddScociety> {
               ],
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                namefield(field: "رقم الهاتف"),
+                const Padding(
+                  padding: EdgeInsets.only(right: 18.0, top: 25),
+                  child: Text(
+                    "رقم الهاتف",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: Colors.black87,
+                      fontFamily: 'DroidKufi',
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
                   child: Container(
@@ -403,8 +449,20 @@ class _AddScocietyState extends State<AddScociety> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                namefield(field: "اسم المدير الشخصي"),
+                const Padding(
+                  padding: EdgeInsets.only(right: 18.0, top: 25),
+                  child: Text(
+                    "اسم المدير الشخصي",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: Colors.black87,
+                      fontFamily: 'DroidKufi',
+                    ),
+                  ),
+                ),
                 customTextFieldWidget(
                   type: TextInputType.text,
                   ontap: () {},
@@ -449,18 +507,19 @@ class _AddScocietyState extends State<AddScociety> {
                   confirm();
                 },
                 child: Container(
-                  width: 200,
+                  width: 140,
                   height: 40,
                   decoration: BoxDecoration(
-                      color: backgreen,
+                      color: Colors.green,
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                     child: Text(
                       widget.isUpdateForm ? "تعديل الجمعية" : "اضافه جمعيه",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: "DroidKufi",
+                            color: Colors.white),
                     ),
                   ),
                 ),
@@ -473,7 +532,7 @@ class _AddScocietyState extends State<AddScociety> {
                   Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: backgreen,
+                  backgroundColor: Colors.green,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   elevation: 2.0,
@@ -495,8 +554,20 @@ class _AddScocietyState extends State<AddScociety> {
   }
 
   Widget get _email => Column(
-        children: [
-          namefield(field: "البريد الالكتروني"),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+          const Padding(
+            padding: EdgeInsets.only(right: 18.0, top: 25),
+            child: Text(
+              "البريد الالكتروني",
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                color: Colors.black87,
+                fontFamily: 'DroidKufi',
+              ),
+            ),
+          ),
           customTextFieldWidget(
             type: TextInputType.name,
             ontap: () {},
@@ -504,15 +575,27 @@ class _AddScocietyState extends State<AddScociety> {
             hei: 40,
             validation: (Val) => validateEmail(emailController.text),
             nameController: emailController,
-            text: "bara@gmail.com :مثال",
+            text: "مثال : rakan@gmail.com ",
             readOnly: false,
           ),
         ],
       );
 
   Widget get _password => Column(
-        children: [
-          namefield(field: "كلمة المرور"),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Padding(
+        padding: EdgeInsets.only(right: 18.0, top: 25),
+        child: Text(
+          "كلمة المرور",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            color: Colors.black87,
+            fontFamily: 'DroidKufi',
+          ),
+        ),
+      ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -525,6 +608,18 @@ class _AddScocietyState extends State<AddScociety> {
                 nameController: passController,
                 text: "مكونة من 8 أحرف و أرقام",
                 readOnly: false,
+                validation: (value) {
+                  String patttern = r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$)';
+                  RegExp regExp = new RegExp(patttern);
+                  if (value!.isEmpty) {
+                    return "يرجى تعبئة كلمة المرور ";
+                  }
+                  else if (value.length < 8) {
+                    return "يجب أن لا تقل كلمة المرور عن ثمانية أرقام او حروف";
+                  }
+
+                  return null;
+                },
               ),
               visibleIcon,
             ],
@@ -547,8 +642,20 @@ class _AddScocietyState extends State<AddScociety> {
       );
 
   Widget get _dateApplied => Column(
-        children: [
-          namefield(field: "تاريخ الانضمام"),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Padding(
+        padding: EdgeInsets.only(right: 18.0, top: 25),
+        child: Text(
+          "تاريخ الانضمام",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            color: Colors.black87,
+            fontFamily: 'DroidKufi',
+          ),
+        ),
+      ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -584,8 +691,20 @@ class _AddScocietyState extends State<AddScociety> {
       );
 
   Widget get _confirmPassword => Column(
-        children: [
-          namefield(field: "تأكيد كلمة المرور"),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Padding(
+        padding: EdgeInsets.only(right: 18.0, top: 25),
+        child: Text(
+          "تأكيد كلمة المرور",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            color: Colors.black87,
+            fontFamily: 'DroidKufi',
+          ),
+        ),
+      ),
           customTextFieldWidget(
             type: TextInputType.name,
             ontap: () {},

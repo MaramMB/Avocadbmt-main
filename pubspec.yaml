@@ -89,6 +89,9 @@ dependencies:
   animate_do: ^3.0.2
   email_auth: ^1.0.0
   url_launcher: ^6.1.7
+  supercharged: ^2.1.1
+  simple_animations: ^4.0.1
+  cached_network_image: ^3.1.0
 #  wave_progress_bars: ^0.1.0
 #  wave_progress_bars: ^0.0.1
 dev_dependencies:

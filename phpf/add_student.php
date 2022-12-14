@@ -19,7 +19,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$address = $_POST['Address'];
 	$ptype = $_POST['ptype'];
 	$student_id = $_POST['Students_Id'];
-	$imgs = $_POST['image'];
+	// $imgs = $_POST['image'];
 	$teatcher_id = $_POST['teatcher_id'];
 	$Society_Id = $_POST['Society_Id'];
 
@@ -34,7 +34,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$father_job = $_POST['father_job'];
 	$father_dob = $_POST['father_dob'];
 	$mother_name = $_POST['mother_name'];
-	
+
 
 	$select = mysqli_query($db, "SELECT * FROM `usersacounts` WHERE `Email`= '$email'");
 
@@ -47,7 +47,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$query_user = mysqli_query($db,$insert_user);
 
 	if($query_user){
-		$insert="INSERT INTO `students`(`Id`, `firstname`, `secname`, `thirdname`, `familyname`, `Students_Id`, `phone`, `DOB`, `Gender`, `Address`, `tid`, `ptype`, `image`,`socid`) VALUES (Null,'$name','$father_name','$thirdname','$familyname',$student_id,$phone,'$dob','$gender','$address',$teatcher_id,'$ptype','$imgs',$Society_Id)";
+		$insert="INSERT INTO `students`(`Id`, `firstname`, `secname`, `thirdname`, `familyname`, `Students_Id`, `phone`, `DOB`, `Gender`, `Address`, `tid`, `ptype`,`socid`) VALUES (Null,'$name','$father_name','$thirdname','$familyname',$student_id,$phone,'$dob','$gender','$address',$teatcher_id,'$ptype',$Society_Id)";
 		$query = mysqli_query($db,$insert);
 		$initResult1 = "INSERT INTO testsresult Values ($student_id , '1' , '0','0' ,' ')";
 	    $query_res1 = mysqli_query($db,$initResult1);

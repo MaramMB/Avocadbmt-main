@@ -54,7 +54,7 @@ class UserProfile extends StatelessWidget {
                 height: 30,
               ),
               Container(
-                height: MediaQuery.of(context).size.height / 1.2,
+                height: MediaQuery.of(context).size.height / 1.1,
                 width: MediaQuery.of(context).size.width / 1.8,
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -81,71 +81,77 @@ class UserProfile extends StatelessWidget {
                         const SizedBox(
                           height: 15,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext ctx) {
-                                    return person.type == AccountType.manager
-                                        ? AddScociety(
-                                            isUpdateForm: true,
-                                            user: person,
-                                          )
-                                        : (person.type == AccountType.teacher
-                                            ? AddTeacheAccount(
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Align(
+                          alignment: Alignment.bottomCenter,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (BuildContext ctx) {
+                                        return person.type == AccountType.manager
+                                            ? AddScociety(
                                                 isUpdateForm: true,
                                                 user: person,
                                               )
-                                            : AddAccountForm(
-                                                isUpdateForm: true,
-                                                user: person,
-                                              ));
-                                  }),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                elevation: 2.0,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 35, vertical: 10),
+                                            : (person.type == AccountType.teacher
+                                                ? AddTeacheAccount(
+                                                    isUpdateForm: true,
+                                                    user: person,
+                                                  )
+                                                : AddAccountForm(
+                                                    isUpdateForm: true,
+                                                    user: person,
+                                                  ));
+                                      }),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(10))),
+                                    elevation: 2.0,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 35, vertical: 10),
+                                  ),
+                                  child: const Text("تعديل البيانات",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "DroidKufi",
+                                        fontSize: 18.0,
+                                      )),
+                                ),
                               ),
-                              child: const Text("تعديل البيانات",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "DroidKufi",
-                                    fontSize: 18.0,
-                                  )),
-                            ),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                elevation: 2.0,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 35, vertical: 10),
+                              const SizedBox(
+                                width: 5.0,
                               ),
-                              child: const Text("العودة",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "DroidKufi",
-                                    fontSize: 18.0,
-                                  )),
-                            ),
-                          ],
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10))),
+                                  elevation: 2.0,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 35, vertical: 10),
+                                ),
+                                child: const Text("العودة",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "DroidKufi",
+                                      fontSize: 18.0,
+                                    )),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

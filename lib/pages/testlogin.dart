@@ -261,12 +261,10 @@ class _testlogState extends State<testlog> {
                                   if (value!.isEmpty) {
                                     return "يرجى تعبئة كلمة المرور ";
                                   }
-                                  else if (value.length < 6) {
+                                  else if (value.length < 8) {
                                     return "يجب أن لا تقل كلمة المرور عن ستة أرقام";
                                   }
-                                  // else if (!regExp.hasMatch(value)) {
-                                  //   return "يجب ان تحتوي كلمة المرور على حر كبير وحرف صغير على الاقل";
-                                  // }
+
                                   return null;
                                 },
 
