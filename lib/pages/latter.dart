@@ -6,7 +6,8 @@ const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 class letterex extends StatefulWidget {
-  const letterex({Key? key}) : super(key: key);
+  const letterex({Key? key, required this.userId}) : super(key: key);
+  final String userId;
   @override
   State<letterex> createState() => _letterexState();
 }
@@ -46,9 +47,9 @@ class _letterexState extends State<letterex> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        FadeInRightBig(child: letter(L1: 'ج',L2: 'ش',L3: 'ض',L4: '', title: 'الحروف الشجرية',)),
-                        FadeInRightBig(child: letter(L1: 'ق',L2: 'ك',L3: '',L4: '', title: 'الحروف اللهوية',)),
-                        FadeInRightBig(child: letter(L1: 'ع',L2: 'غ',L3: 'ح',L4: 'خ', title: 'الحروف الحلقية',)),
+                        FadeInRightBig(child: letter(L1: 'ج',L2: 'ش',L3: 'ض',L4: '', title: 'الحروف الشجرية', userId: widget.userId,)),
+                        FadeInRightBig(child: letter(L1: 'ق',L2: 'ك',L3: '',L4: '', title: 'الحروف اللهوية',userId: widget.userId)),
+                        FadeInRightBig(child: letter(L1: 'ع',L2: 'غ',L3: 'ح',L4: 'خ', title: 'الحروف الحلقية',userId: widget.userId)),
 
 
 
@@ -59,9 +60,9 @@ class _letterexState extends State<letterex> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        FadeIn(child: letter(L1: 'ظ',L2: 'ذ',L3: 'ث',L4: '', title: 'الحروف اللثوية',)),
-                        FadeIn(child: letter(L1: 'ط',L2: 'ت',L3: 'د',L4: '', title: 'الحروف النطعية',)),
-                        FadeIn(child: letter(L1: 'ز',L2: 'س',L3: 'ص',L4: '', title: 'الحروف الأسلية',)),
+                        FadeIn(child: letter(L1: 'ظ',L2: 'ذ',L3: 'ث',L4: '', title: 'الحروف اللثوية',userId: widget.userId)),
+                        FadeIn(child: letter(L1: 'ط',L2: 'ت',L3: 'د',L4: '', title: 'الحروف النطعية',userId: widget.userId)),
+                        FadeIn(child: letter(L1: 'ز',L2: 'س',L3: 'ص',L4: '', title: 'الحروف الأسلية',userId: widget.userId)),
                       ],
                     ),
                     SizedBox(height: 17,),
@@ -69,9 +70,9 @@ class _letterexState extends State<letterex> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        FadeInLeftBig(child: letter(L1: 'ا',L2: 'و',L3: 'ي',L4: '', title: 'الحروف الهوائية',)),
-                        FadeInLeftBig(child: letter(L1: 'ف',L2: 'ب',L3: 'م',L4: '', title: 'الحروف الشفوية',)),
-                        FadeInLeftBig(child: letter(L1: 'ر',L2: 'ل',L3: 'ن',L4: '', title: 'الحروف اللهوية',)),
+                        FadeInLeftBig(child: letter(L1: 'ا',L2: 'و',L3: 'ي',L4: '', title: 'الحروف الهوائية',userId: widget.userId)),
+                        FadeInLeftBig(child: letter(L1: 'ف',L2: 'ب',L3: 'م',L4: '', title: 'الحروف الشفوية',userId: widget.userId)),
+                        FadeInLeftBig(child: letter(L1: 'ر',L2: 'ل',L3: 'ن',L4: '', title: 'الحروف اللهوية',userId: widget.userId)),
                       ],
                     ),
                   ],

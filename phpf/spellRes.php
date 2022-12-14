@@ -19,14 +19,15 @@ $val = isset($_POST["letter"]) && isset($_POST["result"]);
 
        $letter = $_POST["letter"]; //grabing the data from headers
        $result = $_POST["result"];
+       $id = $_POST["id"];
        //if there is no any error then ready for database write
        if($return["error"] == false){
             $letter = mysqli_real_escape_string($link, $letter);
             $result = mysqli_real_escape_string($link, $result);
 
             //escape inverted comma query conflict from string
-           
-            $sql = "UPDATE spelling_result SET result='$result' WHERE letter='$letter'";
+
+            $sql = "UPDATE spelling_result SET result='$result' WHERE letter='$letter' AND stuid='$id'";
 
             $res = mysqli_query($link, $sql);
             if($res){

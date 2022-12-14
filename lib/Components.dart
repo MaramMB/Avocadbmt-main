@@ -299,13 +299,14 @@ class _soundsWidgetState extends State<soundsWidget> {
 //       Letters Page
 
 class letter extends StatefulWidget {
-  late String L1,L2,L3,L4,title; // L = letter
+  late String L1,L2,L3,L4,title;
+  final String userId;// L = letter
   letter({
     required this.L1,
     required this.L2,
     required this.L3,
     required this.L4,
-    required this.title,
+    required this.title, required this.userId,
 });
   @override
   State<letter> createState() => _letterState();
@@ -320,7 +321,7 @@ class _letterState extends State<letter> {
           onTap: (){
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) {
-              return  letterss(L1: widget.L1,L2: widget.L2,L3: widget.L3,L4: widget.L4,title: widget.title,);
+              return  letterss(L1: widget.L1,L2: widget.L2,L3: widget.L3,L4: widget.L4,title: widget.title, userId: widget.userId,);
             }));
           },
           child: Stack(
