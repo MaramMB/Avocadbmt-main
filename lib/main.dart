@@ -49,7 +49,7 @@ class StartPoint extends StatelessWidget {
         tablet: (BuildContext context) => const HomemobailPage(
           uname: null,
         ),
-        desktop: (BuildContext context) => joinus(),
+        desktop: (BuildContext context) => mainpage(),
         // desktop: (BuildContext context) => game(),
         // desktop: (BuildContext context) => result(userId: '20',),
       ),

@@ -32,68 +32,68 @@ bool played=false;
 List<Map<String, String>> letters = const [
   {
     'letter': 'أ',
-    'word' : 'ارنب',
+    'word' : 'أرنب',
     'img' : 'img/rabbit.png',
 
   },
   {
     'letter': 'ب',
     'word' : 'بطيخ',
-    'img' : 'img/waterm.png',
+    'img' : 'img/dad.png',
 
   },
   {
     'letter': 'ت',
-    'word' : 'تفاحة',
-    'img' : 'img/apple.jpg',
+    'word' : 'توت',
+    'img' : 'img/berry.jpg',
 
   },
   {
     'letter': 'ث',
-    'word' : 'ثعلب',
-    'img' : 'img/fox.png',
+    'word' : 'ثوب',
+    'img' : 'img/dress.jpg',
 
   },
   {
     'letter': 'ج',
     'word' : 'جرس',
-    'img' : 'img/bell.png',
+    'img' : 'img/bell.jpg',
 
   },
   {
     'letter': 'ح',
-    'word' : 'حلزون',
-    'img' : 'img/snail.png',
+    'word' : 'حوت',
+    'img' : 'img/whale.jpg',
 
   },
   {
     'letter': 'خ',
-    'word' : 'خيار',
-    'img' : 'img/Cucumber.png',
+    'word' : 'خوخ',
+    'img' : 'img/peach.jpg',
 
   },
   {
     'letter': 'د',
-    'word' : 'دجاجة',
-    'img' : 'img/dag.png',
+    'word' : 'دب',
+    'img' : 'img/bear.png',
 
   },
   {
     'letter': 'ذ',
-    'word' : 'ذرة',
-    'img' : 'img/corn.jpg',
+    'word' : 'ذهب',
+    'img' : 'img/gold.png',
 
   },
   {
     'letter': 'ر',
-    'word' : 'رسالة',
-    'img' : 'img/envelope.png',
+    'word' : 'رز',
+    'img' : 'img/rice.jpg',
 
   },
   {
     'letter': 'ز',
-    'word' : 'زيت',
-    'img' : 'img/oil.jpg',
+    'word' : 'زر',
+    'img' : 'img/buttonpng.png',
 
   },
   {
@@ -104,32 +104,32 @@ List<Map<String, String>> letters = const [
   },
   {
     'letter': 'ش',
-    'word' : 'شجرة',
-    'img' : 'img/tree.jpg',
+    'word' : 'شاي',
+    'img' : 'img/tea.png',
 
   },
   {
     'letter': 'ص',
-    'word' : 'صندوق',
-    'img' : 'img/treas.png',
+    'word' : 'صوص',
+    'img' : 'img/little chicken.jpg',
 
   },
   {
     'letter': 'ض',
-    'word' : 'ضفدع',
-    'img' : 'img/frog.jpg',
+    'word' : 'ضوء',
+    'img' : 'img/bulb.jpg',
 
   },
   {
     'letter': 'ط',
-    'word' : 'طائرة',
-    'img' : 'img/airplane.png',
+    'word' : 'طفل',
+    'img' : 'img/baby.png',
 
   },
   {
     'letter': 'ظ',
-    'word' : 'ظبي',
-    'img' : 'img/antelope.jpg',
+    'word' : 'ظرف',
+    'img' : 'img/envelope.png',
 
   },
   {
@@ -146,51 +146,51 @@ List<Map<String, String>> letters = const [
   },
   {
     'letter': 'ف',
-    'word' : 'فأر',
-    'img' : 'img/mouse.png',
+    'word' : 'فيل',
+    'img' : 'img/elephant.jpg',
 
   },
   {
     'letter': 'ق',
-    'word' : 'قبعة',
-    'img' : 'img/hat.jpg',
+    'word' : 'قلم',
+    'img' : 'img/pencil.png',
 
   },
   {
     'letter': 'ك',
-    'word' : 'كأس',
-    'img' : 'img/leb.png',
+    'word' : 'كيك',
+    'img' : 'img/cake.jpg',
 
   },
 
   {
     'letter': 'ل',
-    'word' : 'لحمة',
-    'img' : 'img/meat.jpg',
+    'word' : 'ليمون',
+    'img' : 'img/lemon.png',
 
   },
   {
     'letter': 'م',
-    'word' : 'مذياع',
-    'img' : 'img/radio.jpg',
+    'word' : 'ماء',
+    'img' : 'img/Water.jpg',
 
   },
   {
     'letter': 'ن',
-    'word' : 'نملة',
-    'img' : 'img/ant.jpg',
+    'word' : 'نار',
+    'img' : 'img/fire.png',
 
   },
   {
     'letter': 'ه',
-    'word' : 'هدية',
-    'img' : 'img/gift.jpg',
+    'word' : 'هدهد',
+    'img' : 'img/hoopoe.jpg',
 
   },
   {
     'letter': 'و',
-    'word' : 'وسادة',
-    'img' : 'img/Pillow.jpg',
+    'word' : 'ورد',
+    'img' : 'img/flowers.png',
 
   },
   {
@@ -443,6 +443,18 @@ class _lettertestState extends State<lettertest> {
         _speech.listen(
             onResult: (val) => setState(() {
               _text = val.recognizedWords;
+              if(_text=='ارنب')
+                {
+                  setState((){
+                    _text = 'أرنب';
+                  });
+                }
+              if(_text=='ذره')
+              {
+                setState((){
+                  _text = 'ذرة';
+                });
+              }
               if (_text==letters[Lindex]['word']){
                 if(played==false){
                   AssetsAudioPlayer.playAndForget(Audio("audio/correct.mp3"));
@@ -458,6 +470,8 @@ class _lettertestState extends State<lettertest> {
                   _isListening = false;
                   _text='';
                   Cstop();
+                  setState(() => _isListening = false);
+                  _speech.stop();
 
                 });
               }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/loginpage.dart';
+import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,6 +29,27 @@ class _forgetpasswState extends State<forgetpassw> {
             // crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional.topEnd,
+                    child: GestureDetector(
+                        onTap: (){
+                          Navigator.push (
+                            context,
+                            MaterialPageRoute (
+                              builder: (BuildContext context) =>  testlog(  ),
+                            ),
+                          );
+                        },
+                        child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
+
+                  ),
+                ],
+              ),
+              Spacer(),
               Text("يرجى كتابة البريد الالكتروني الخاص بك هنا",
                   style: TextStyle(
                       color: Colors.white,
@@ -111,6 +134,7 @@ class _forgetpasswState extends State<forgetpassw> {
                   ],
                 ),
               ),
+              Spacer(flex: 2,),
             ],
           ),
         ),

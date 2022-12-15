@@ -650,6 +650,7 @@ class _personalState extends State<personal> {
                                                             onPressed: (){
                                                               setState(() {
                                                                 errCode = false;
+                                                                EcodeController.text='';
                                                               });
                                                               Navigator.pop(context);
 
@@ -664,6 +665,7 @@ class _personalState extends State<personal> {
                                                               {
                                                                 updateStudent();
                                                                 setState(() {
+                                                                  EcodeController.text='';
                                                                   errCode = false;
                                                                 });
                                                               }

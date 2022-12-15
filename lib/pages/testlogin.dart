@@ -5,6 +5,7 @@ import 'package:flutter_application_1/pages/widgets/societies.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../scroll.dart';
 import 'forgetpass.dart';
 import 'mainpage.dart';
 bool ShowMsg = false;
@@ -101,11 +102,7 @@ class _testlogState extends State<testlog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 50,
-        elevation: 0,
-        backgroundColor: const Color.fromRGBO(131, 190, 99, 1),
-      ),
+
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -122,6 +119,7 @@ class _testlogState extends State<testlog> {
               // crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
                 Visibility(
                   visible: _visible,
                   child: Container(
@@ -132,13 +130,29 @@ class _testlogState extends State<testlog> {
                     ),
                   ),
                 ),
-                const Text(
-                  "تسجيل الدخول",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "DroidKufi",
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold),
+                Row(
+                  children: [
+                    Spacer(),
+                    const Text(
+                      "تسجيل الدخول",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "DroidKufi",
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                        onTap: (){
+                          Navigator.push (
+                            context,
+                            MaterialPageRoute (
+                              builder: (BuildContext context) =>  scrollhome(),
+                            ),
+                          );
+                        },
+                        child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
+                  ],
                 ),
                 // Text("يرجى كتابة البريد الالكتروني الخاص بك هنا",style: TextStyle( fontFamily: "DroidKufi", fontSize: 20,fontWeight: FontWeight.bold)),
                 const SizedBox(height: 100,),
