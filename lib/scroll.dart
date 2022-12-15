@@ -237,7 +237,7 @@ class _scrollhomeState extends State<scrollhome> {
                                     fontSize: 25),
                               ),
                               const Text(
-                                "وللأطفال الدين يعانون من مشاكل بالسمع ",
+                                "وللأطفال الذين يعانون من مشاكل بالسمع ",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "DroidKufi",

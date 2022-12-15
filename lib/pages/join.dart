@@ -1,8 +1,15 @@
 import 'dart:convert';
+import 'dart:html';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/scroll.dart';
 import 'package:http/http.dart' as http;
 
+import '../scroll.dart';
+import '../scroll.dart';
+
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
+const blak = Color.fromRGBO(55, 53, 53, 1);
 
 class joinus extends StatefulWidget {
   const joinus({Key? key}) : super(key: key);
@@ -11,199 +18,163 @@ class joinus extends StatefulWidget {
   State<joinus> createState() => _joinusState();
 }
 
-final namecontroler = TextEditingController();
-final subjcontroler = TextEditingController();
-final emailcontroler = TextEditingController();
-final massgcontroler = TextEditingController();
-
-Future sendEmail() async {
-  final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
-  const servicedID = "service_f2q9eip";
-  const tempId = "template_nd74zk9";
-  const userid = "TrbWq7Sfjxj50rEl_";
-  final response = await http.post(url,
-      headers: {'Contact-Type': 'application/json'},
-      body: json.encode({
-        "service_id": servicedID,
-        "template_id": tempId,
-        "user_id": userid,
-        "template_params": {
-          "name": namecontroler.text,
-          "subject": subjcontroler.text,
-          "message": massgcontroler.text,
-          "user_email": emailcontroler.text,
-        }
-      }));
-  return response.statusCode;
-}
 
 class _joinusState extends State<joinus> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgreen,
-      appBar: AppBar(
-        toolbarHeight: 50,
-        elevation: 0,
-        backgroundColor: const Color.fromRGBO(131, 190, 99, 1),
-      ),
-      body: Container(
-        child: Center(
-          child: Container(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+           Row(
+             children: [
+               Spacer(flex: 2,),
+               SizedBox(width: 40,),
+               Text(
+                "انضم لنا",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "DroidKufi",
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold),
+          ),
+
+               Spacer(),
+               GestureDetector(
+                   onTap: (){
+                     Navigator.push (
+                       context,
+                       MaterialPageRoute (
+                         builder: (BuildContext context) =>  scrollhome(),
+                       ),
+                     );
+                   },
+                   child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
+               Spacer(),
+             ],
+           ),
+          Center(
             child: Container(
-              width: MediaQuery.of(context).size.width / 2.5,
-              height: MediaQuery.of(context).size.height,
-              child: Form(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              height: MediaQuery.of(context).size.height / 1.2,
+              width: MediaQuery.of(context).size.width / 1.8,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              // child: Stack(
+              //
+              // ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Stack(
+                  fit: StackFit.expand,
                   children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Center(
-                      child: Text(
-                        "انضم لنا",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Tajawal",
-                          fontSize: 55,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    // const SizedBox(height: 5,),
-                    const Center(
-                      child: Text(
-                        "ارسل لنا بياناتك وسنتواصل معك",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "DroidKufi",
-                            fontSize: 25),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Text("الاسم",
-                        style: TextStyle(
-                            fontFamily: "DroidKufi",
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
                     Container(
-                      decoration: const BoxDecoration(
-                        color: Color.fromRGBO(255, 255, 255, 0.85),
-                        // color:  Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                      ),
-                      child: TextFormField(
-                        controller: namecontroler,
-                        decoration: const InputDecoration(
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Text("الايميل",
-                        style: TextStyle(
-                            fontFamily: "DroidKufi",
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Color.fromRGBO(255, 255, 255, 0.85),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                      ),
-                      child: TextFormField(
-                        controller: emailcontroler,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Text("رقم الهاتف",
-                        style: TextStyle(
-                            fontFamily: "DroidKufi",
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Color.fromRGBO(255, 255, 255, 0.85),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                      ),
-                      child: TextFormField(
-                        controller: subjcontroler,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                        ),
-                      ),
-                    ),
-                    // const SizedBox(height: 15,),
-                    // const Text("الرسالة",style: TextStyle( fontFamily: "DroidKufi", fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white)),
-                    // Container(
-                    //   decoration: const BoxDecoration(
-                    //     color:  Color.fromRGBO(255, 255, 255, 0.85),
-                    //     borderRadius: BorderRadius.all(Radius.circular(15),
-                    //     ),),
-                    //   child: TextFormField(
-                    //     controller: massgcontroler,
-                    //     decoration:  const InputDecoration(
-                    //       fillColor: Colors.white,
-                    //       border: OutlineInputBorder(
-                    //           borderRadius: BorderRadius.all(Radius.circular(15))
-                    //       ),
-                    //       // icon: Icon(Icons.message),
-                    //       // hintText: 'Message',
-                    //       // labelText: 'Message',
-                    //     ),
-                    //   ),
-                    // ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                          onPressed: () {
-                            sendEmail();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          FadeIn(
+                            child: Center(
+                              child: Text("أهلاً وسهلاً بك",
+                                  style: TextStyle(
+                                      color: blak,
+                                      fontSize: 28,
+                                      fontFamily: "DroidKufi",
+                                      fontWeight: FontWeight.w700)),
+                            ),
                           ),
-                          child: const Text("ارسال",
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontFamily: "DroidKufi",
-                                fontSize: 22.0,
-                              ))),
+                          SizedBox(height: 10,),
+                          FadeIn(
+                            duration: Duration(milliseconds: 800),
+                            child: const Text(
+                              "منصة نبرة هي منصة تعليمية تأهيلية تعمل على تحويل عملية تأسيس الاطفال الصم والذين يعانون\n من مشاكل في النطق الى عملية الكترونية ترفيهية لتساند العملية التعليمية وتسهيلها عليهم. ",
+                              textDirection: TextDirection.rtl,
+
+                              style: TextStyle(fontFamily: "DroidKufi",)
+
+                              ,),
+                          ),
+
+                          FadeIn(
+                            child: const Text("لماذا نبرة ؟",
+                                style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 20,
+                                    fontFamily: "DroidKufi",
+                                    fontWeight: FontWeight.w700)),
+                          ),
+                          FadeIn(
+                            duration: Duration(milliseconds: 800),
+                            child: const Text(
+                                textDirection: TextDirection.rtl,
+                                "لأن منصة نبرة هي المنصة الوحيدة في فلسطين التي تهتم بفئة الصم والاطفال الذين\nيواجهون مشاكل عديدة في نطق الاحرف والكلمات وكما أن هنالك العديد من التدريبات\nالتي تنمي المهارات السمعية واللفظية وكذلك اختبارات لمعرفة مستوى الطفل وتقدمه. ",
+                                style: TextStyle(fontFamily: "DroidKufi")),
+                          ),
+
+                          FadeIn(
+                            child: const Text("كيف يمكنني الانضمام ؟",
+                                style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 20,
+                                    fontFamily: "DroidKufi",
+                                    fontWeight: FontWeight.w700)),
+                          ),
+                          FadeIn(
+                            duration: Duration(milliseconds: 800),
+                            child: const Text(
+                                textDirection: TextDirection.rtl,
+                                "منصة نبرة موجهة تحديداً الى المراكز والجمعيات أو المؤسسات التعليمية لمساندة \nالكوادر التأهيلية ، فإذا كنت مديراً لمؤسسة معينة وترغب بالانضمام إضغط على زر \nتعبئة طلب الإنضمام وثم سيتم نقلك الى صفحة جديدة تقوم بتعبئة معلومات التواصل\nالخاصة بك في الخانات المطلوبة ثم سيقوم فريقنا بالتواصل معك و إعلامك بتفاصيل \nالاشتراك والمعلومات التي تحتاجها. ",
+                                style: TextStyle(fontFamily: "DroidKufi")),
+                          ),
+
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Spacer(),
+                          Center(
+                            child: FadeInUp(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                 window.open('https://forms.gle/ko676roEYEQfFXek6', '');
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                                  elevation: 2.0,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 35, vertical: 10),
+                                ),
+                                child: const Text("تعبئة طلب الانضمام",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "DroidKufi",
+                                      fontSize: 17.0,
+                                    )),
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
                     ),
+                    Stack(alignment: Alignment.bottomLeft, children: [
+                      FadeInLeft(
+                        duration: Duration(milliseconds: 800),
+                        child: Image.asset("img/boywavecut.png",
+                            alignment: Alignment.bottomLeft,
+                            height: MediaQuery.of(context).size.height / 1.9),
+                      )
+                    ]),
                   ],
                 ),
               ),
             ),
-          ),
-        ),
+          )
+        ],
       ),
     );
   }

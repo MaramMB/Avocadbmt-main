@@ -7,6 +7,7 @@ import 'package:flutter_application_1/pages/Profile/teacher_profile.dart';
 import 'package:flutter_application_1/pages/expl.dart';
 import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/game/homp.dart';
+import 'package:flutter_application_1/pages/join.dart';
 import 'package:flutter_application_1/pages/mainpage.dart';
 import 'package:flutter_application_1/pages/mobile/homepagemobile.dart';
 import 'package:flutter_application_1/pages/result.dart';
@@ -48,7 +49,7 @@ class StartPoint extends StatelessWidget {
         tablet: (BuildContext context) => const HomemobailPage(
           uname: null,
         ),
-        desktop: (BuildContext context) => mainpage(),
+        desktop: (BuildContext context) => joinus(),
         // desktop: (BuildContext context) => game(),
         // desktop: (BuildContext context) => result(userId: '20',),
       ),
