@@ -12,6 +12,11 @@ if(isset($_POST['sid']) && isset($_POST['exid']))
     else
     $sql="UPDATE testsresult Set homeResult = '0',note = '' Where stuid = $sid AND testid = $exid";
     $result=$link->query($sql);
+    if ($exid == 6)
+    {
+        $sql="UPDATE spelling_result Set result = 'false'  Where stuid = $sid";
+        $result=$link->query($sql);
+    }
 
 }
 else

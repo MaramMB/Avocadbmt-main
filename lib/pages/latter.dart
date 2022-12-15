@@ -40,7 +40,17 @@ class _letterexState extends State<letterex> {
     setState(() {
 
     });
-    return data;
+    if(widget.userKind=='student')
+      {
+        var url2 = 'http://localhost/addTestResult.php';
+        final response2 = await http.post(Uri.parse(url2), body: {
+          'stuid': widget.userId,
+          'result': point.toString(),
+          'note': '-',
+          'testid' :'6',
+        });
+
+      }
 
   }
   @override

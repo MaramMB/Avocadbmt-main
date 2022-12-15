@@ -817,9 +817,6 @@ class _sptestState extends State<sptest> {
   }
   addTestResult() async {
     var url = 'http://localhost/addTestResult.php';
-    print (widget.person.id+ '  -  '+truee.length.toString()+ '   -   ');
-    print (errors);
-    // print (errors[index]);
     final response = await http.post(Uri.parse(url), body: {
       'stuid': (widget.person.id).toString(),
       'result': (truee.length).toString(),
