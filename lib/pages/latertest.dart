@@ -8,6 +8,7 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/pages/audio.dart';
+import 'package:flutter_application_1/pages/latter.dart';
 import 'package:http/http.dart' as http;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
@@ -206,7 +207,7 @@ late stt.SpeechToText _speech;
 late var locales =  _speech.locales();
 
 bool _isListening = false;
-String _text = 'Press the button and start speaking';
+String _text = '';
 double _confidence = 1.0;
 
 
@@ -231,8 +232,9 @@ int search (String s){
 class lettertest extends StatefulWidget {
  late String letter;
  final String userId;
+ final String? userKind;
   lettertest({
-    required this.letter, required this.userId,
+    required this.letter, required this.userId, required this.userKind,
 });
 
   @override
@@ -397,9 +399,7 @@ class _lettertestState extends State<lettertest> {
                     onPressed: () {
                       (context as Element).reassemble();
                       var count = 0;
-                      Navigator.popUntil(context, (route) {
-                        return count++ == 2;
-                      });
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> letterex(userId: widget.userId, userKind: widget.userKind) ));
                       setState(() {
                         isCorrect = false;
                       });

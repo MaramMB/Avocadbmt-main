@@ -209,8 +209,10 @@ var flickmanager;
 class lettervideo extends StatefulWidget {
   late String letter;
   final String userId;
+  final String? userKind;
+
   lettervideo({
-    required this.letter, required this.userId,
+    required this.letter, required this.userId, required this.userKind,
   });
   @override
 
@@ -297,7 +299,7 @@ class _lettervideoState extends State<lettervideo> {
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return  lettertest(letter: letters[Lindex]['letter']!, userId: widget.userId,);
+                          return  lettertest(letter: letters[Lindex]['letter']!, userId: widget.userId, userKind: widget.userKind,);
                         }));
                       },
                       style: ElevatedButton.styleFrom(

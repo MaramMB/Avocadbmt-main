@@ -20,6 +20,7 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 int point=0;
+int groupCount=0;
 class letterss extends StatefulWidget {
   late String L1,L2,L3,L4,title;
   final String userId;// L = letter
@@ -43,7 +44,19 @@ class _letterssState extends State<letterss> {
       'id':widget.userId,
     });
     var data = jsonDecode(response.body);
+    for ( var i=0 ; i<data.length;i++ )
+    {
+      if (data[i]['letter']==widget.L1 || data[i]['letter']==widget.L2|| data[i]['letter']==widget.L3|| data[i]['letter']==widget.L4)
+        {
+          groupCount++;
+         if (data[i]['result']=='true')
+           {
+             point++;
+           }
+         print(widget.L1+widget.L2+widget.L3+widget.L4);
+        }
 
+    }
     print(data.toString());
     return data;
 
@@ -58,6 +71,8 @@ class _letterssState extends State<letterss> {
   initState()
   {
   super.initState;
+  groupCount=0;
+  point=0;
   }
   late final check=getData();
   @override
@@ -135,14 +150,6 @@ class _letterssState extends State<letterss> {
                               fontWeight: FontWeight.w700)),
                       Spacer(),
                       Row(
-                        children: [
-                          SizedBox(width: 10,),
-                          Text('5'),
-                          Text(' / 4'),
-
-                        ],
-                      ),
-                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Visibility(
@@ -151,7 +158,7 @@ class _letterssState extends State<letterss> {
                               onTap: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return  lettervideo(letter : widget.L4,userId: widget.userId,);
+                                  return  lettervideo(letter : widget.L4,userId: widget.userId, userKind: widget.UserKind,);
                                 }));
                               },
                               child: Stack(
@@ -220,7 +227,7 @@ class _letterssState extends State<letterss> {
                               onTap: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return lettervideo(letter : widget.L3, userId: widget.userId,);
+                                  return lettervideo(letter : widget.L3, userId: widget.userId, userKind: widget.UserKind,);
                                 }));
                               },
                               child: Stack(
@@ -290,7 +297,7 @@ class _letterssState extends State<letterss> {
                               onTap: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return lettervideo(letter : widget.L2,userId: widget.userId);
+                                  return lettervideo(letter : widget.L2,userId: widget.userId, userKind: widget.UserKind,);
                                 }));
                               },
                               child: Stack(
@@ -362,7 +369,7 @@ class _letterssState extends State<letterss> {
                               onTap: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return lettervideo(letter : widget.L1,userId: widget.userId);
+                                  return lettervideo(letter : widget.L1,userId: widget.userId, userKind: widget.UserKind,);
                                 }));
                               },
                               child: Stack(
@@ -461,13 +468,6 @@ class _letterssState extends State<letterss> {
                 }
                 if (snapshot.data![x]['result']=='true')
                 {
-
-                 if (s!='')
-                   {
-                     point++;
-                     print (point.toString());
-                   }
-
                   return true;
                 }
                 else
@@ -521,6 +521,7 @@ class _letterssState extends State<letterss> {
                                       onTap: (){
                                         Navigator.pop(context);
                                         point=0;
+                                        groupCount=0;
 
 
                                       },
@@ -546,11 +547,12 @@ class _letterssState extends State<letterss> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+
                                   SizedBox(width: 50 , height: 50,child: Image.asset('img/star.png')),
                                   SizedBox(width: 10,),
                                   Text(point.toString(), style: TextStyle(color: Colors.white,fontFamily: 'DroidKufi' ,fontSize: 30, fontWeight: FontWeight.bold),),
-                                  Text(' / 4', style: TextStyle(color: Colors.white,fontFamily: 'DroidKufi' ,fontSize: 30, fontWeight: FontWeight.bold)),
-
+                                  Text(' / $groupCount', style: TextStyle(color: Colors.white,fontFamily: 'DroidKufi' ,fontSize: 30, fontWeight: FontWeight.bold)),
+                                  SizedBox(width: 35,),
                                 ],
                               ),
                               Spacer(),
@@ -563,7 +565,7 @@ class _letterssState extends State<letterss> {
                                       onTap: () {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(builder: (context) {
-                                          return  lettervideo(letter : widget.L4,userId: widget.userId,);
+                                          return  lettervideo(letter : widget.L4,userId: widget.userId, userKind: widget.UserKind,);
                                         }));
                                       },
                                       child: Stack(
@@ -632,7 +634,7 @@ class _letterssState extends State<letterss> {
                                       onTap: () {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(builder: (context) {
-                                          return lettervideo(letter : widget.L3, userId: widget.userId,);
+                                          return lettervideo(letter : widget.L3, userId: widget.userId, userKind: widget.UserKind,);
                                         }));
                                       },
                                       child: Stack(
@@ -702,7 +704,7 @@ class _letterssState extends State<letterss> {
                                       onTap: () {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(builder: (context) {
-                                          return lettervideo(letter : widget.L2,userId: widget.userId);
+                                          return lettervideo(letter : widget.L2,userId: widget.userId, userKind: widget.UserKind,);
                                         }));
                                       },
                                       child: Stack(
@@ -774,7 +776,7 @@ class _letterssState extends State<letterss> {
                                       onTap: () {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(builder: (context) {
-                                          return lettervideo(letter : widget.L1,userId: widget.userId);
+                                          return lettervideo(letter : widget.L1,userId: widget.userId, userKind: widget.UserKind,);
                                         }));
                                       },
                                       child: Stack(
@@ -870,5 +872,19 @@ class _letterssState extends State<letterss> {
       }
 
   }
+  /*String countCorrect (String a,String b,String c,String d, ){
+    int x;
 
+
+    if (a!='')
+      {
+        for ( var i=0 ; i<;i++ )
+          {
+
+          }
+
+      }
+
+  }
+*/
   }

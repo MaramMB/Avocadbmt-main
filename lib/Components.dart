@@ -393,8 +393,9 @@ class _letterState extends State<letter> {
             style: const TextStyle(
                 shadows:[
                   Shadow(
-                      color: Colors.black,
-                      blurRadius: 5
+                      color: Colors.black54,
+                      blurRadius: 10,
+                    offset: Offset(5, 5),
                   )
                 ],
                 color: Colors.white,
