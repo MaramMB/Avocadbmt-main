@@ -19,7 +19,10 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$address = $_POST['Address'];
 	$ptype = $_POST['ptype'];
 	$student_id = $_POST['Students_Id'];
-	$imgs = $_POST['img'];
+	// $imgs = $_POST['image'];
+	$teatcher_id = $_POST['teatcher_id'];
+	$Society_Id = $_POST['Society_Id'];
+
 
 	//for user account
 	$email = $_POST['email'];
@@ -27,37 +30,50 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 	$kind = $_POST['kind'] ?? 'student';
 	$active = $_POST['active'] ?? 'active';
 
+	//for parent table
+	$father_job = $_POST['father_job'];
+	$father_dob = $_POST['father_dob'];
+	$mother_name = $_POST['mother_name'];
 
+
+	$select = mysqli_query($db, "SELECT * FROM `usersacounts` WHERE `Email`= '$email'");
+
+	if(mysqli_num_rows($select)) {
+		echo json_encode("email");
+		exit();
+	}
 
 	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($student_id,'$email', '$pass', '$kind', '$active');";
 	$query_user = mysqli_query($db,$insert_user);
 
 
+		$insert="INSERT INTO `students`(`Id`, `firstname`, `secname`, `thirdname`, `familyname`, `Students_Id`, `phone`, `DOB`, `Gender`, `Address`, `tid`, `ptype`,`socid`) VALUES (Null,'$name','$father_name','$thirdname','$familyname',$student_id,$phone,'$dob','$gender','$address',$teatcher_id,'$ptype',$Society_Id)";
+		$query = mysqli_query($db,$insert);
+		$parent_query = "INSERT INTO `parent`(`idnum`, `name`, `work`, `dob`, `mothername`, `phone`) VALUES ($student_id,'$father_name','$father_job','$father_dob','$mother_name',$phone)";
+		$parent_result = mysqli_query($db,$parent_query);
+		$initResult1 = "INSERT INTO testsresult Values ($student_id , '1' , '0','0' ,' ')";
+	    $query_res1 = mysqli_query($db,$initResult1);
 
-	$insert="INSERT INTO `students`(`Id`, `firstname`, `secname`, `thirdname`, `familyname`, `Students_Id`, `phone`, `DOB`, `Gender`, `Address`, `ptype`, `image`)
-	 VALUES (Null,'$name','$familyname','$thirdname','$familyname',$student_id,'$phone','$dob','$gender','$address','$ptype','$imgs')";
+	   $initResult2 = "INSERT INTO testsresult Values ($student_id , '4' , '0','0' ,' ')";
+     	$query_res2 = mysqli_query($db,$initResult2);
 
-	$initResult1 = "INSERT INTO testsresult Values ($student_id , '1' , '0','0' ,' ')";
-	$query_res1 = mysqli_query($db,$initResult1);
+		$initResult3 = "INSERT INTO testsresult Values ($student_id , '5' , '0','0' ,' ')";
+		$query_res3 = mysqli_query($db,$initResult3);
 
-	$initResult2 = "INSERT INTO testsresult Values ($student_id , '4' , '0' ,'0',' ')";
-	$query_res2 = mysqli_query($db,$initResult2);
+		$initResult4 = "INSERT INTO testsresult Values ($student_id , '6' , '0', '0'  ,' ')";
+		$query_res4 = mysqli_query($db,$initResult4);
+		$lettersArr = ["أ" ,"ب" ,"ت" ,"ث" ,"ج" ,"ح", "خ", "د", "ذ", "ر" ,"ز", "س" ,"ش", "ص" ,"ض" ,"ط", "ظ", "ع" ,"غ" ,"ف" ,"ق" ,"ك" ,"ل" ,"م" ,"ن" ,"ه" ,"و","ي"];
 
-	$initResult3 = "INSERT INTO testsresult Values ($student_id , '5' , '0' ,'0',' ')";
-	$query_res3 = mysqli_query($db,$initResult3);
+		foreach ($lettersArr as $key => $value) {
+			$res = "INSERT INTO spelling_result Values ($key+1,'$student_id','$value','false',0)";
+			$query_spell = mysqli_query($db,$res);
+		}
 
-	$initResult4 = "INSERT INTO testsresult Values ($student_id , '6' , '0' ,' ')";
-	$query_res4 = mysqli_query($db,$initResult4);
-	$lettersArr = ["أ" ,"ب" ,"ت" ,"ث" ,"ج" ,"ح", "خ", "د", "ذ", "ر" ,"ز", "س" ,"ش", "ص" ,"ض" ,"ط", "ظ", "ع" ,"غ" ,"ف" ,"ق" ,"ك" ,"ل" ,"م" ,"ن" ,"ه" ,"و","ي"];
+		if ($query && $query_user && $query_res1 && $query_res2 && $query_res3 && $query_res4) {
+			echo json_encode("Success");
 
-	foreach ($lettersArr as $key => $value) {
-		print ($key.'----'.$value);
-		$res = "INSERT INTO spelling_result Values ($key+1,'$student_id','$value','false',0)";
-		$query_spell = mysqli_query($db,$res);
 	}
 
-	$query = mysqli_query($db,$insert);
-	if ($query && $query_user && $query_res1 && $query_res2 && $query_res3 && $query_res4 ) {
-		echo json_encode("Success");
-	}
+
+
 ?>

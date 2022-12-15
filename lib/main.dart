@@ -51,8 +51,8 @@ class StartPoint extends StatelessWidget {
           uname: null,
         ),
         // desktop: (BuildContext context) => reset(userId: '20',),
-        // desktop: (BuildContext context) => game(),
-        desktop: (BuildContext context) => result(userId: '20',),
+        desktop: (BuildContext context) => Socieites(),
+        // desktop: (BuildContext context) => result(userId: '20',),
       ),
     );
   }

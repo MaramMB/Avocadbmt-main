@@ -347,15 +347,43 @@ class _AddScocietyState extends State<AddScociety> {
                     ),
                   ),
                 ),
-                      customTextFieldWidget(
-                        type: TextInputType.name,
-                        ontap: () {},
-                        wid: 300,
-                        hei: 40,
-                        nameController: idController,
-                        text: "رقم الترخيص",
-                        readOnly: false,
+                Padding(
+                  padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
+                  child: Container(
+                    height: 45,
+                    width: 320,
+                    child: TextField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
+                      ],
+                      keyboardType: const TextInputType.numberWithOptions(
+                          signed: true, decimal: true),
+                      onTap: () {},
+                      textAlign: TextAlign.right,
+                      controller: idController,
+                      obscureText: false,
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'DroidKufi',
+                          fontSize: 15,
+                          color: Colors.black38,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.black38, width: 2.0),
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(15))),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(width: 1.5, color: Colors.black38),
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(15))),
+                        hintText: "رقم الترخيص",
                       ),
+                    ),
+                  ),
+                ),
                     ],
                   ),
           ],
@@ -378,6 +406,7 @@ class _AddScocietyState extends State<AddScociety> {
                     ),
                   ),
                 ),
+
                 customTextFieldWidget(
                   type: TextInputType.name,
                   ontap: () {},
@@ -407,8 +436,8 @@ class _AddScocietyState extends State<AddScociety> {
                 Padding(
                   padding: const EdgeInsets.only(right: 15, left: 15, top: 5),
                   child: Container(
-                    height: 40,
-                    width: 300,
+                    height: 45,
+                    width: 320,
                     child: TextField(
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
@@ -603,7 +632,7 @@ class _AddScocietyState extends State<AddScociety> {
                 type: TextInputType.name,
                 ontap: () {},
                 wid: 250,
-                hei: 40,
+                hei: 45,
                 hideShow: _passwordVisible,
                 nameController: passController,
                 text: "مكونة من 8 أحرف و أرقام",

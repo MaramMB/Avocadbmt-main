@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_society.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
+import 'package:flutter_application_1/scroll.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
@@ -56,24 +57,36 @@ class _SocieitesState extends State<Socieites> {
           
           child: Stack(
             children: [
-              InkWell(
-                onTap: (){
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (BuildContext ctx) {
-                      return testlog();
-                    }),
-                  );
-                },
-                child:Padding(
-                  padding: const EdgeInsets.only(top: 10,bottom: 15,right: 25),
-                  child: Icon(Icons.keyboard_backspace_sharp,color: Colors.white,size: 40,),
+              Padding(
+                padding: const EdgeInsets.only(top: 10,bottom: 35,right: 15.0),
+                child: OutlinedButton(
+                  style: ButtonStyle(
+
+                    backgroundColor:
+                    MaterialStateColor.resolveWith((states) => Colors.white),
+                    padding: MaterialStateProperty.all(
+                        const EdgeInsets.only(left: 22.0, right: 22.0,top: 10,bottom: 10)),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return  scrollhome();
+                    }));
+                  },
+                  child: const Text(
+                    "تسـجـيـل الخـروج",
+                    style: TextStyle(
+                        color: Colors.black, fontFamily: "DroidKufi"),
+                  ),
                 ),
               ),
               Center(
                 child: Column(children: [
                   // const SelectionButton(),
                   const SizedBox(
-                    height: 35,
+                    height: 40,
                   ),
                   buildTable(context),
                 ]),
@@ -239,8 +252,7 @@ class _SocieitesState extends State<Socieites> {
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 fontFamily: "DroidKufi",
-                                              ),
-                                            )));
+                                              ),)));
                                   }
                                 }
                               },
