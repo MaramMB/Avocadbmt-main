@@ -10,8 +10,9 @@ const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 class latterexp extends StatefulWidget {
-  const latterexp({Key? key, required this.userId}) : super(key: key);
+  const latterexp({Key? key, required this.userId, required this.userKind}) : super(key: key);
   final String userId;
+  final String? userKind;
 
   @override
   State<latterexp> createState() => _latterexpState();
@@ -78,7 +79,7 @@ class _latterexpState extends State<latterexp> {
                               onPressed: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return  letterex(userId: widget.userId,);
+                                  return  letterex(userId: widget.userId, userKind: widget.userKind,);
                                 }));
                               },
                               style: ElevatedButton.styleFrom(

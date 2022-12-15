@@ -233,7 +233,7 @@ var IDController = TextEditingController();
 
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return  latterexp(userId: userId,);
+                            return  latterexp(userId: userId, userKind: userKind,);
 
                           }));
                         }
