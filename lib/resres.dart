@@ -8,6 +8,7 @@ import 'package:flutter_application_1/pages/Characters/characters.dart';
 import 'package:flutter_application_1/pages/models/students.dart';
 import 'package:flutter_application_1/pages/result.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/pages/widgets/person_record.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -97,7 +98,6 @@ class _resultState extends State<result11> {
         child: Column(
           children: [
             SelectionButton(),
-
             const SizedBox(
               height: 30,
             ),

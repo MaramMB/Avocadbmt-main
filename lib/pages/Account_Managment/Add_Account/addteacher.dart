@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../widgets/manage_accounts.dart';
+
 enum SingingCharacterTeacher { Male, Female }
 
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
@@ -539,6 +541,10 @@ class _AddTeacheAccountState extends State<AddTeacheAccount> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => managepage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: backgreen,

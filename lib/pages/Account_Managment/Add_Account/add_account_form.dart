@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
+import 'package:flutter_application_1/pages/widgets/manage_accounts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
@@ -966,27 +967,27 @@ class _AddAccountFormState extends State<AddAccountForm> {
                               }),
                         ),
                       ),
-                      SizedBox(
-                        height: 50,
-                        width: 134,
-                        child: RadioListTile(
-                            activeColor: backgreen,
-                            title: const Text("كلاهما",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
-                                  color: Colors.black87,
-                                  fontFamily: 'DroidKufi',
-                                )),
-                            value: SingingCharacterProblem.both,
-                            groupValue: pro,
-                            selected: pro == SingingCharacterProblem.both,
-                            onChanged: (SingingCharacterProblem? value) {
-                              setState(() {
-                                pro = value;
-                              });
-                            }),
-                      ),
+                      // SizedBox(
+                      //   height: 50,
+                      //   width: 134,
+                      //   child: RadioListTile(
+                      //       activeColor: backgreen,
+                      //       title: const Text("كلاهما",
+                      //           style: TextStyle(
+                      //             fontWeight: FontWeight.w600,
+                      //             fontSize: 15,
+                      //             color: Colors.black87,
+                      //             fontFamily: 'DroidKufi',
+                      //           )),
+                      //       value: SingingCharacterProblem.both,
+                      //       groupValue: pro,
+                      //       selected: pro == SingingCharacterProblem.both,
+                      //       onChanged: (SingingCharacterProblem? value) {
+                      //         setState(() {
+                      //           pro = value;
+                      //         });
+                      //       }),
+                      // ),
                     ],
                   ),
                 ],
@@ -1116,6 +1117,10 @@ class _AddAccountFormState extends State<AddAccountForm> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => managepage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,

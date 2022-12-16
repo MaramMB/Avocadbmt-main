@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/models/person.dart';
 import 'package:flutter_application_1/pages/widgets/custom_text_field.dart';
+import 'package:flutter_application_1/pages/widgets/societies.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -559,6 +560,10 @@ class _AddScocietyState extends State<AddScociety> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Socieites()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,

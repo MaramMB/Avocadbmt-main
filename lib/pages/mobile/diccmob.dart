@@ -10,26 +10,23 @@ import 'package:flutter_application_1/pages/Videos/job.dart';
 import 'package:flutter_application_1/pages/Videos/nature.dart';
 import 'package:flutter_application_1/pages/Videos/numbers.dart';
 import 'package:flutter_application_1/pages/Videos/transport.dart';
-
 import 'package:flutter_application_1/pages/rowbar.dart';
-
-import 'Videos/videos.dart';
-import 'Videos/videos28..dart';
-import 'testlogin.dart';
+import '../Videos/videos.dart';
+import '../Videos/videos28..dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 
-class dic extends StatefulWidget {
-  const dic({Key? key}) : super(key: key);
+class dicmob extends StatefulWidget {
+  const dicmob({Key? key}) : super(key: key);
 
   @override
-  State<dic> createState() => _dicState();
+  State<dicmob> createState() => _dicmobState();
 }
 
-class _dicState extends State<dic> {
+class _dicmobState extends State<dicmob> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +37,6 @@ class _dicState extends State<dic> {
         radius: const Radius.circular(10),
         child: Column(
           children: [
-             SelectionButton(),
             const SizedBox(
               height: 30,
             ),
@@ -64,15 +60,15 @@ class _dicState extends State<dic> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                     FadeIn(
-                       child: Text("قاموس لغة الاشارة",
+                    FadeIn(
+                      child: Text("قاموس لغة الاشارة",
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "DroidKufi",
                             fontWeight: FontWeight.bold,
                             fontSize: 25.0,
                           )),
-                     ),
+                    ),
                     const SizedBox(
                       height: 5,
                     ),

@@ -4,6 +4,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
+import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/pages/voice.dart';
 import 'mainpage.dart';
 

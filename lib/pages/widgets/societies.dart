@@ -129,8 +129,8 @@ class _SocieitesState extends State<Socieites> {
               Center(
                 child: Container(
                   // color: Colors.black38,
-                  height: 504,
-                  width: 600,
+                  height: MediaQuery.of(context).size.height/1.28,
+                  width: MediaQuery.of(context).size.width/2.2,
                   padding: const EdgeInsets.all(18),
                   child: Column(
                     children: [
@@ -184,7 +184,7 @@ class _SocieitesState extends State<Socieites> {
                                 color: Colors.black12,
                               ),
                             ),
-                            height: 380,
+                            height:MediaQuery.of(context).size.height/1.695,
                             child: FutureBuilder(
                               future: search ? searchSociey() : getSocieties(),
                               builder: (BuildContext context,

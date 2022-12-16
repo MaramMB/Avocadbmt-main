@@ -6,8 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import '../models/person.dart';
 
-class PersonRecord extends StatefulWidget {
-  PersonRecord(
+class PersonmobRecord extends StatefulWidget {
+  PersonmobRecord(
       {Key? key, required this.person, this.ID, required this.isActive})
       : super(key: key);
   final Person person;
@@ -15,10 +15,10 @@ class PersonRecord extends StatefulWidget {
   late bool isActive;
 
   @override
-  State<PersonRecord> createState() => _PersonRecordState();
+  State<PersonmobRecord> createState() => _PersonmobRecordState();
 }
 
-class _PersonRecordState extends State<PersonRecord> {
+class _PersonmobRecordState extends State<PersonmobRecord> {
   String get gender {
     if (widget.person.gender == Gender.male) {
       return 'ذكر';
@@ -36,7 +36,6 @@ class _PersonRecordState extends State<PersonRecord> {
     }
     return "";
   }
-
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -45,15 +44,14 @@ class _PersonRecordState extends State<PersonRecord> {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(
-              horizontal: 13,
-              // vertical: 5,
+              horizontal: 2,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   child: SizedBox(
-                    width:MediaQuery.of(context).size.width/6 ,
+                    width:115 ,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 12.0),
                       child: Row(
@@ -70,20 +68,12 @@ class _PersonRecordState extends State<PersonRecord> {
                             },
                             style: ButtonStyle(
                               minimumSize:
-                                  MaterialStateProperty.all( Size(MediaQuery.of(context).size.width/11, 40)),
+                              MaterialStateProperty.all( Size(40, 45)),
                               backgroundColor: MaterialStateProperty.all(
                                 Colors.lightBlue,
                               ),
                             ),
-                            child: const Text(
-                              'الملف الشخصي',
-                              style: TextStyle(
-                                fontFamily: "Tajawal",
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            child: Icon(Icons.person_outline_rounded,color: Colors.white,size: 30,)
                           ),
                           widget.isActive
                               ? buildDisableButton()
@@ -97,14 +87,14 @@ class _PersonRecordState extends State<PersonRecord> {
                 // SizedBox(width: 20,),
                 Container(
                   height: 60,
-                  width: MediaQuery.of(context).size.width / 5.5,
+                  width: 250,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: ListTile(
                       trailing: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child:
-                              Image.memory(base64.decode(widget.person.image))),
+                          Image.memory(base64.decode(widget.person.image))),
                       title: Padding(
                         padding: const EdgeInsets.only(top: 12.0),
                         child: Text(
@@ -118,7 +108,7 @@ class _PersonRecordState extends State<PersonRecord> {
                         ),
                       ),
                       subtitle:
-                          Text(widget.person.id, textAlign: TextAlign.right),
+                      Text(widget.person.id, textAlign: TextAlign.right),
                     ),
                   ),
                 ),
@@ -174,10 +164,10 @@ class _PersonRecordState extends State<PersonRecord> {
                         width: 100,
                         child: const Center(
                             child: Text(
-                          "نعم",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                        )))),
+                              "نعم",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, color: Colors.white),
+                            )))),
                 InkWell(
                     onTap: () {
                       Navigator.of(context).pop();
@@ -190,10 +180,10 @@ class _PersonRecordState extends State<PersonRecord> {
                         width: 100,
                         child: const Center(
                             child: Text(
-                          "لا",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                        )))),
+                              "لا",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, color: Colors.white),
+                            )))),
               ],
             ),
           ],
@@ -232,20 +222,12 @@ class _PersonRecordState extends State<PersonRecord> {
         confirmDialog();
       },
       style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all(const Size(90, 40)),
+        minimumSize: MaterialStateProperty.all(const Size(40, 45)),
         backgroundColor: MaterialStateProperty.all(
           Colors.green,
         ),
       ),
-      child: const Text(
-        'تفعيل',
-        style: TextStyle(
-          fontFamily: "Tajawal",
-          fontSize: 12,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      child: Icon(Icons.person_add_alt_outlined,color: Colors.white,size: 30,)
     );
   }
 
@@ -255,20 +237,12 @@ class _PersonRecordState extends State<PersonRecord> {
         confirmDialog();
       },
       style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all(const Size(90, 40)),
+        minimumSize: MaterialStateProperty.all(const Size(40, 45)),
         backgroundColor: MaterialStateProperty.all(
           Colors.redAccent,
         ),
       ),
-      child: const Text(
-        'إلغاء التفعيل',
-        style: TextStyle(
-          fontFamily: "Tajawal",
-          fontSize: 12,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      child: Icon(Icons.person_off_outlined,color: Colors.white,size: 30,)
     );
   }
 }

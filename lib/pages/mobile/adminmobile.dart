@@ -2,33 +2,28 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_society.dart';
+import 'package:flutter_application_1/pages/mobile/homemob.dart';
+import 'package:flutter_application_1/pages/mobile/permobrec.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/pages/widgets/person_record.dart';
+import 'package:flutter_application_1/scroll.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
-import '../Account_Managment/Add_Account/add_account_form.dart';
 import '../models/person.dart';
 
-// import 'package:flutter_app_4/models/person.dart';
-// import 'package:flutter_app_4/screens/add_account_form.dart';
-// import 'package:flutter_app_4/widgets/person_record.dart';
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
-int _value = 1;
-
-// void main() => runApp(const MyApp());
-
-class Socieitesmobile extends StatefulWidget {
-  const Socieitesmobile({super.key});
+class adminmob extends StatefulWidget {
+  const adminmob({Key? key}) : super(key: key);
 
   @override
-  State<Socieitesmobile> createState() => _SocieitesmobileState();
+  State<adminmob> createState() => _adminmobState();
 }
 
-class _SocieitesmobileState extends State<Socieitesmobile> {
-  int _selectedAccountType = 1;
-
+class _adminmobState extends State<adminmob> {
   TextStyle unselectedAccountTypeTextStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
@@ -38,22 +33,66 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
-
+  bool search = false;
   var searchBarController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgreen,
-      body: Center(
-        child: Container(
-          child: Column(children: [
-            // const SelectionButton(),
-            const SizedBox(
-              height: 25,
-            ),
-            buildTable(context),
-          ]),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales
+      ],
+      locale: const Locale(
+          'ar', 'AE'), // OR Locale('ar', 'AE') OR Other RTL locales,
+      home: Scaffold(
+        backgroundColor: backgreen,
+
+        body: Container(
+
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 5,bottom: 25,right: 15.0),
+                child: OutlinedButton(
+                  style: ButtonStyle(
+
+                    backgroundColor:
+                    MaterialStateColor.resolveWith((states) => Colors.white),
+                    padding: MaterialStateProperty.all(
+                        const EdgeInsets.only(left: 22.0, right: 22.0,top: 10,bottom: 10)),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return  scrollmobile();
+                    }));
+                  },
+                  child: const Text(
+                    "تسـجـيـل الخـروج",
+                    style: TextStyle(
+                        color: Colors.black, fontFamily: "DroidKufi"),
+                  ),
+                ),
+              ),
+              Center(
+                child: Column(children: [
+                  // const SelectionButton(),
+                  const SizedBox(
+                    height: 45,
+                  ),
+                  buildTable(context),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -62,40 +101,40 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
   // this container contains the person list and search bar and buttons
   Container buildTable(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.1,
+      height: MediaQuery.of(context).size.height / 1.099,
       width: MediaQuery.of(context).size.width / 1.1,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(right: 10.0, top: 10,left: 10),
+        padding: const EdgeInsets.only(right: 1.0, top: 10),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Center(
-                child: const Text('اداره الجمعيات',
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 35,
-                        fontFamily: "DroidKufi",
-                        fontWeight: FontWeight.w700)),
-              ),
-              const Text(
-                'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
-                    ' من مولد النص العربي.',
-                style: TextStyle(
-                    fontFamily: "DroidKufi",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
+              const Text('اداره الجمعيات',
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 25,
+                      fontFamily: "DroidKufi",
+                      fontWeight: FontWeight.w700)),
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: const Text(
+                  'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
+                      ' من مولد النص العربي.',
+                  style: TextStyle(
+                      fontFamily: "DroidKufi",
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
               Center(
                 child: Container(
                   // color: Colors.black38,
-                  height: 500,
-                  width: 600,
-                  padding: const EdgeInsets.all(20),
+                  height: MediaQuery.of(context).size.height/1.322,
+                  width: MediaQuery.of(context).size.width/1.05,
+                  padding: const EdgeInsets.all(18),
                   child: Column(
                     children: [
                       Row(
@@ -105,7 +144,7 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
                             // flex: 1,
                             child: Container(
                               padding: const EdgeInsets.only(
-                                  right: 18, bottom: 5, top: 5, left: 5),
+                                  right: 18, bottom: 2, top: 5, left: 5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 border: Border.all(color: Colors.black38),
@@ -115,15 +154,21 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
                                 // width: MediaQuery.of(context).size.width/5,
                                 child: TextFormField(
                                   onChanged: (value) {
-                                    // setState(() {
-                                    //   updateListOnSearch(value);
-                                    // });
+                                    if (searchBarController.text == "") {
+                                      setState(() {
+                                        search = false;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        search = true;
+                                      });
+                                    }
                                   },
                                   controller: searchBarController,
                                   textAlign: TextAlign.right,
                                   decoration: const InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'أدخل اسم الجمعيه',
+                                    hintText: 'أدخل اسم الجمعية',
                                     prefixIcon: Icon(Icons.search),
                                   ),
                                 ),
@@ -142,18 +187,19 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
                                 color: Colors.black12,
                               ),
                             ),
-                            height: 310,
+                            height:MediaQuery.of(context).size.height/1.8,
                             child: FutureBuilder(
-                              future: getTeachers(),
+                              future: search ? searchSociey() : getSocieties(),
                               builder: (BuildContext context,
                                   AsyncSnapshot snapshot) {
                                 if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
+                                    ConnectionState.waiting ||
+                                    !snapshot.hasData) {
                                   return Container(
                                     width: double.infinity,
                                     height: MediaQuery.of(context).size.height *
                                         0.4,
-                                    child: SpinKitPulse(
+                                    child: const SpinKitPulse(
                                       color: Colors.green,
                                       size: 60,
                                     ),
@@ -165,9 +211,11 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
                                     return ListView.builder(
                                       itemCount: Customers.length,
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics:
+                                      const AlwaysScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
-                                        return PersonRecord(
+                                        return PersonmobRecord(
+                                          ID: Customers[index]["id"],
                                           person: Person(
                                             name: Customers[index]
                                             ["Society_Name"],
@@ -177,19 +225,37 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
                                             ["Society_Address"],
                                             phoneNumber: Customers[index]
                                             ["Society_Phone"],
-                                            type: AccountType.teacher, familyname: '', image: '',
+                                            type: AccountType.manager,
+                                            date: _remainingDays(
+                                                Customers[index]
+                                                ["Participation_Date"]),
+                                            email: Customers[index]["Email"],
+                                            managerName: Customers[index]
+                                            ["Society_Manager"],
+                                            password: Customers[index]
+                                            ["Password"],
+                                            familyname: '',
+                                            image: Customers[index]["image"],
                                           ),
-                                          isActive: true,
+                                          isActive: Customers[index]
+                                          ["active"] ==
+                                              "active"
+                                              ? true
+                                              : false,
                                         );
                                       },
                                     );
                                   } else {
-                                    return Center(
+                                    return const Center(
                                         child: SizedBox(
                                             height: 40,
                                             width: 40,
-                                            child:
-                                            CircularProgressIndicator()));
+                                            child: Text(
+                                              'لا يوجد حساب بهذا الاسم',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily: "DroidKufi",
+                                              ),)));
                                   }
                                 }
                               },
@@ -205,7 +271,7 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
                           ),
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.only(
-                                  top: 8, bottom: 10, right: 18, left: 20)),
+                                  top: 8, right: 18, left: 20)),
                           backgroundColor:
                           MaterialStateProperty.all(Colors.green),
                         ),
@@ -217,7 +283,7 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
                           );
                         },
                         child: const Text(
-                          'اضافه جمعيه',
+                          'اضافه جمعية',
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: "DroidKufi",
@@ -235,70 +301,32 @@ class _SocieitesmobileState extends State<Socieitesmobile> {
     );
   }
 
-  getTeachers() async {
-    var url = 'http://localhost/add_societis.php';
+  String _remainingDays(var days) {
+    DateTime date = DateTime.parse(days);
+    DateTime nextYear = DateTime((date.year + 1), date.month, date.day);
+    DateTime now= DateTime.now();
+
+    final difference = nextYear.toUtc().difference(now.toUtc()).inDays;
+
+    return '$difference';
+  }
+
+  getSocieties() async {
+    var url = 'http://localhost/get_societis.php';
     var response = await http.get(Uri.parse(url));
     var res = jsonDecode(response.body);
     return res;
   }
 
-  TextButton buildTeacherAccountButton() {
-    return TextButton(
-      onPressed: () {
-        setState(() {
-          teacher = true;
-        });
+  searchSociey() async {
+    var url = 'http://localhost/search_society.php';
+    var response = await http.post(
+      Uri.parse(url),
+      body: {
+        'name': searchBarController.text,
       },
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
-        minimumSize: MaterialStateProperty.all(const Size(85, 42)),
-        textStyle: MaterialStateProperty.all(
-            const TextStyle(fontFamily: "Tajawal", fontSize: 16)),
-        backgroundColor: MaterialStateProperty.all(
-          teacher ? Colors.green : Colors.grey,
-        ),
-      ),
-      child: Text(
-        'معلم',
-        style: teacher
-            ? selectedAccountTypeTextStyle
-            : unselectedAccountTypeTextStyle,
-      ),
     );
-  }
-
-  bool teacher = false;
-
-  TextButton buildStudentAccountButton() {
-    return TextButton(
-      onPressed: () {
-        setState(() {
-          teacher = false;
-        });
-      },
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        minimumSize: MaterialStateProperty.all(const Size(85, 42)),
-        textStyle: MaterialStateProperty.all(
-            const TextStyle(fontFamily: "Tajawal", fontSize: 16)),
-        backgroundColor: MaterialStateProperty.all(
-          teacher == false ? Colors.green : Colors.grey,
-        ),
-      ),
-      child: Text(
-        'طالب',
-        style: teacher == false
-            ? selectedAccountTypeTextStyle
-            : unselectedAccountTypeTextStyle,
-      ),
-    );
+    var res = jsonDecode(response.body);
+    return res;
   }
 }
