@@ -23,7 +23,7 @@ int _value = 1;
 int point=0;
 int groupCount=0;
 class letterss extends StatefulWidget {
-  late String L1,L2,L3,L4,title;
+  late String L1,L2,L3,L4,L5,title;
   final String userId;// L = letter
   final String? UserKind;
   letterss({
@@ -31,6 +31,7 @@ class letterss extends StatefulWidget {
     required this.L2,
     required this.L3,
     required this.L4,
+    required this.L5,
     required this.title, required this.userId,  required this.UserKind,
   });
   @override
@@ -47,7 +48,7 @@ class _letterssState extends State<letterss> {
     var data = jsonDecode(response.body);
     for ( var i=0 ; i<data.length;i++ )
     {
-      if (data[i]['letter']==widget.L1 || data[i]['letter']==widget.L2|| data[i]['letter']==widget.L3|| data[i]['letter']==widget.L4)
+      if (data[i]['letter']==widget.L1 || data[i]['letter']==widget.L2|| data[i]['letter']==widget.L3|| data[i]['letter']==widget.L4|| data[i]['letter']==widget.L5)
         {
           groupCount++;
          if (data[i]['result']=='true')
@@ -153,6 +154,74 @@ class _letterssState extends State<letterss> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Visibility(
+                            visible: widget.L5==''? false : true,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                  return  lettervideo(letter : widget.L5,userId: widget.userId, userKind: widget.UserKind,);
+                                }));
+                              },
+                              child: Stack(
+                                alignment: Alignment.bottomLeft,
+                                children:[
+                                  Container(
+
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color:  const Color(0xFF357AB0),
+                                    ),
+                                    child:  Padding(
+                                      padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                      child: Text( widget.L4,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 70,
+                                              fontFamily: "DroidKufi",
+                                              fontWeight: FontWeight.w700)),
+                                    ),
+                                  ),
+                                  Visibility(
+                                    visible: false,
+                                    child: Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Container(
+                                              height: 35,
+                                              width: 35,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.circular(100),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.indigo,
+                                                      spreadRadius: -5,
+                                                      blurStyle: BlurStyle.solid,
+                                                      blurRadius: 15,
+                                                      offset: Offset(0, 5),
+
+
+                                                    ),
+                                                  ]
+                                              ),
+
+                                            ),
+                                            Icon(
+                                              Icons.check_circle_rounded,
+                                              color: Colors.green[600],
+                                              size: 50,
+                                            ),
+                                          ]),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                           Visibility(
                             visible: widget.L4==''? false : true,
                             child: GestureDetector(
@@ -560,6 +629,7 @@ class _letterssState extends State<letterss> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+
                                   Visibility(
                                     visible: widget.L4==''? false : true,
                                     child: GestureDetector(
@@ -843,6 +913,81 @@ class _letterssState extends State<letterss> {
 
 
 
+                                ],
+                              ),
+                              SizedBox(height: 20,),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Visibility(
+                                    visible: widget.L5==''? false : true,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(builder: (context) {
+                                          return  lettervideo(letter : widget.L5,userId: widget.userId, userKind: widget.UserKind,);
+                                        }));
+                                      },
+                                      child: Stack(
+                                        alignment: Alignment.bottomLeft,
+                                        children:[
+                                          Container(
+
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(20),
+                                              color:  const Color(0xFF357AB0),
+                                            ),
+                                            child:  Padding(
+                                              padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                              child: Text( widget.L5,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 70,
+                                                      fontFamily: "DroidKufi",
+                                                      fontWeight: FontWeight.w700)),
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: searchRes(widget.L5),
+                                            child: Positioned(
+                                              bottom: 0,
+                                              right: 0,
+                                              child: Stack(
+                                                  alignment: Alignment.center,
+                                                  children: [
+                                                    Container(
+                                                      height: 35,
+                                                      width: 35,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius: BorderRadius.circular(100),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors.indigo,
+                                                              spreadRadius: -5,
+                                                              blurStyle: BlurStyle.solid,
+                                                              blurRadius: 15,
+                                                              offset: Offset(0, 5),
+
+
+                                                            ),
+                                                          ]
+                                                      ),
+
+                                                    ),
+                                                    Icon(
+                                                      Icons.check_circle_rounded,
+                                                      color: Colors.green[600],
+                                                      size: 50,
+                                                    ),
+                                                  ]),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
 

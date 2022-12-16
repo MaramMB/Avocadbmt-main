@@ -299,7 +299,7 @@ class _soundsWidgetState extends State<soundsWidget> {
 //       Letters Page
 
 class letter extends StatefulWidget {
-  late String L1,L2,L3,L4,title;
+  late String L1,L2,L3,L4,L5,title;
   final String userId;          // L = letter
   final String? userKind;          // L = letter
   letter({
@@ -307,6 +307,7 @@ class letter extends StatefulWidget {
     required this.L2,
     required this.L3,
     required this.L4,
+    required this.L5,
     required this.title, required this.userId, required this.userKind,
 });
   @override
@@ -322,7 +323,7 @@ class _letterState extends State<letter> {
           onTap: (){
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) {
-              return  letterss(L1: widget.L1,L2: widget.L2,L3: widget.L3,L4: widget.L4,title: widget.title, userId: widget.userId, UserKind: widget.userKind ,);
+              return  letterss(L1: widget.L1,L2: widget.L2,L3: widget.L3,L4: widget.L4,L5:widget.L5, title: widget.title, userId: widget.userId, UserKind: widget.userKind ,);
             }));
           },
           child: Stack(
@@ -347,6 +348,15 @@ class _letterState extends State<letter> {
               ),
               Row(
                 children: [
+                  Visibility(
+                    visible: widget.L5=='' ? false:true,
+                    child: Text("${widget.L5} ",
+                        style:  const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontFamily: "DroidKufi",
+                            fontWeight: FontWeight.w700)),
+                  ),
                   Visibility(
                     visible: widget.L4=='' ? false:true,
                     child: Text("${widget.L4} ",

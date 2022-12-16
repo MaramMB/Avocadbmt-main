@@ -156,13 +156,24 @@ class _betestState extends State<betest> {
         title: Container(
           width: 100,
           child: Center(
-            child: Text(
-              ' نتيجتك هي : $totalScore من ${testType.length} ',
-                style: TextStyle(
-                color: Colors.green,
-                fontSize: 20,
-                fontFamily: "DroidKufi",
-                fontWeight: FontWeight.w700),
+            child: Column(
+              children: [
+                Text(
+                  ' نتيجتك هي : $totalScore من ${testType.length} ',
+                    style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 20,
+                    fontFamily: "DroidKufi",
+                    fontWeight: FontWeight.w700),
+                ),
+                SizedBox(height: 20,),
+                SizedBox(
+                  height: 40,
+                  child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
+                    Navigator.pop(context);
+                  }, child: Text("العودة",style: TextStyle(fontFamily: "DroidKufi"),)),
+                ),
+              ],
             ),
           ),
         ) ,
