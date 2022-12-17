@@ -166,74 +166,7 @@ class _letterssState extends State<letterss> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Visibility(
-                            visible: widget.L5==''? false : true,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (context) {
-                                  return  lettervideo(letter : widget.L5,userId: widget.userId, userKind: widget.UserKind,);
-                                }));
-                              },
-                              child: Stack(
-                                alignment: Alignment.bottomLeft,
-                                children:[
-                                  Container(
 
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color:  const Color(0xFF357AB0),
-                                    ),
-                                    child:  Padding(
-                                      padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
-                                      child: Text( widget.L4,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 70,
-                                              fontFamily: "DroidKufi",
-                                              fontWeight: FontWeight.w700)),
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: false,
-                                    child: Positioned(
-                                      bottom: 0,
-                                      right: 0,
-                                      child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            Container(
-                                              height: 35,
-                                              width: 35,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.indigo,
-                                                      spreadRadius: -5,
-                                                      blurStyle: BlurStyle.solid,
-                                                      blurRadius: 15,
-                                                      offset: Offset(0, 5),
-
-
-                                                    ),
-                                                  ]
-                                              ),
-
-                                            ),
-                                            Icon(
-                                              Icons.check_circle_rounded,
-                                              color: Colors.green[600],
-                                              size: 50,
-                                            ),
-                                          ]),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
                           Visibility(
                             visible: widget.L4==''? false : true,
                             child: GestureDetector(
@@ -519,7 +452,75 @@ class _letterssState extends State<letterss> {
 
                         ],
                       ),
+                      SizedBox(height: 20,),
+                      Visibility(
+                        visible: widget.L5==''? false : true,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return  lettervideo(letter : widget.L5,userId: widget.userId, userKind: widget.UserKind,);
+                            }));
+                          },
+                          child: Stack(
+                            alignment: Alignment.bottomLeft,
+                            children:[
+                              Container(
 
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color:  const Color(0xFF357AB0),
+                                ),
+                                child:  Padding(
+                                  padding:EdgeInsets.only(bottom: 10,left: 55,right: 55) ,
+                                  child: Text( widget.L5,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 70,
+                                          fontFamily: "DroidKufi",
+                                          fontWeight: FontWeight.w700)),
+                                ),
+                              ),
+                              Visibility(
+                                visible: false,
+                                child: Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Container(
+                                          height: 35,
+                                          width: 35,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(100),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.indigo,
+                                                  spreadRadius: -5,
+                                                  blurStyle: BlurStyle.solid,
+                                                  blurRadius: 15,
+                                                  offset: Offset(0, 5),
+
+
+                                                ),
+                                              ]
+                                          ),
+
+                                        ),
+                                        Icon(
+                                          Icons.check_circle_rounded,
+                                          color: Colors.green[600],
+                                          size: 50,
+                                        ),
+                                      ]),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       Spacer(flex: 2,),
 
 

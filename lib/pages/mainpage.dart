@@ -40,7 +40,21 @@ class _mainpageState extends State<mainpage> {
   }
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+
+
+      setState(() {
+      });
+
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+
+
+      setState(() {
+      });
+
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -48,6 +62,7 @@ class _mainpageState extends State<mainpage> {
       backgroundColor: backgreen,
       body: Column(
         children: [
+
            SelectionButton(),
           const SizedBox(
             height: 30,
