@@ -29,7 +29,7 @@ var society;
 
 bool studentChoose = false;
 
-
+bool visa=true;
 List<Students> ulist = [];
 List<Students> userLists = [];
 
@@ -102,7 +102,10 @@ class _chatState extends State<chat> {
         body:Center(
             child: Column(
               children: [
-                SelectionButton(),
+                Visibility(
+                    visible: widget.userKind!='manager',
+                    child: SelectionButton()
+                ),
                 SizedBox(height: 30,),
                 Container(
                   height: MediaQuery.of(context).size.height / 1.2,
@@ -138,7 +141,10 @@ class _chatState extends State<chat> {
         backgroundColor: backgreen,
         body:  Column(
           children: [
-            SelectionButton(),
+            Visibility(
+                visible: widget.userKind!='manager',
+                child: SelectionButton()
+            ),
 
             const SizedBox(
               height: 30,
@@ -156,10 +162,8 @@ class _chatState extends State<chat> {
                     padding: const EdgeInsets.symmetric(horizontal: 70 ,vertical: 20),
                     child: Center(
                       child: Column(
-
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-
                           Center(
                             child: Text('المجتمع',
                                 style: TextStyle(
@@ -179,16 +183,13 @@ class _chatState extends State<chat> {
                                   fontWeight: FontWeight.w700)),
                           SizedBox(
                             height: 20.0,
-
                             child: Center(
                               child: Container(
-
                                 height: 1,
                                 color: Colors.black26,
                               ),
                             ),
                           ),
-
                           Container(
                             height: 60,
                             decoration: BoxDecoration(
@@ -201,7 +202,6 @@ class _chatState extends State<chat> {
                                   dense: true,
                                   mouseCursor: SystemMouseCursors.contextMenu,
                                   onTap: ()async{
-
                                   },
                                   leading: ClipRRect(borderRadius: BorderRadius.circular(50),child:Image.memory(base64Decode(society['image']), width: 50, height: 50, fit: BoxFit.fill,)),
                                   title: Text(society['Society_Name'], style: TextStyle(
@@ -212,8 +212,6 @@ class _chatState extends State<chat> {
                                   trailing: ElevatedButton(onPressed: (){
 
                                     html.window.open('https://mail.google.com/mail/u/1/?&to=${society['Email']}&tf=cm', '');
-
-
 
                                   }, child: Icon(Icons.email_outlined, size: 25,), style: ElevatedButton.styleFrom(backgroundColor: green),),
                                 ),
@@ -364,7 +362,7 @@ class _chatState extends State<chat> {
 
                           ),
                           SizedBox(
-                            height: 20.0,
+                            height: 10.0,
 
                             child: Center(
                               child: Container(
@@ -377,14 +375,12 @@ class _chatState extends State<chat> {
                           Container(
                             // color: Colors.black38,
                             width: MediaQuery.of(context).size.width / 1.8,
-
                             child: Column(
                               children: [
-
                                 SingleChildScrollView(
                                   child: SizedBox(
                                     width: 500,
-                                    height: 200,
+                                    height: 145,
                                     child: ListView.builder(itemCount: userLists.length,itemBuilder: (BuildContext context, int index)
                                     {
                                       String Fname =userLists[index].fname+' '+userLists[index].sname+' '+userLists[index].tname+' '+userLists[index].lname;
@@ -400,9 +396,7 @@ class _chatState extends State<chat> {
                                             child:ListTile(
                                               dense: true,
                                               mouseCursor: SystemMouseCursors.contextMenu,
-
                                               onTap: ()async{
-
                                               },
                                               leading: ClipRRect(borderRadius: BorderRadius.circular(50),child: Image.memory(base64Decode(userLists[index].image), width: 50, height: 50, fit: BoxFit.fill,)),
                                               title: Text(Fname, style: TextStyle(
@@ -413,11 +407,7 @@ class _chatState extends State<chat> {
                                               trailing: Visibility(
                                                 visible: widget.userKind!='student',
                                                 child: ElevatedButton(onPressed: (){
-
                                                   html.window.open('https://mail.google.com/mail/u/1/?&to=${userLists[index].email}&tf=cm', '');
-
-
-
                                                 }, child: Icon(Icons.email_outlined, size: 25,), style: ElevatedButton.styleFrom(backgroundColor: green),),
                                               ),
                                             ),
@@ -427,10 +417,6 @@ class _chatState extends State<chat> {
                                     },),
                                   ),
                                 ),
-
-
-
-
                               ],
 
                             ),

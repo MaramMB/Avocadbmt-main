@@ -18,7 +18,7 @@ class _scrollhomeState extends State<scrollhome> {
 
   @override
   Widget build(BuildContext context) {
-    final pages = List.generate( 2,
+    final pages = List.generate( 1,
             (index) => Container(
           child: SingleChildScrollView(
             // physics: ClampingScrollPhysics(),
@@ -253,10 +253,10 @@ class _scrollhomeState extends State<scrollhome> {
                               IconButton(
                                   padding: const EdgeInsets.only(right: 120, bottom: 50),
                                   onPressed: () {
-                                    // Navigator.of(context)
-                                    //     .push(MaterialPageRoute(builder: (context) {
-                                    //   return  scrollhome();
-                                    // }));
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(builder: (context) {
+                                      return  scrollhome();
+                                    }));
                                   },
                                   icon: const Icon(
                                     Icons.expand_less,
@@ -290,29 +290,29 @@ class _scrollhomeState extends State<scrollhome> {
                       controller: controller,
                       // itemCount: pages.length,
                       itemBuilder: (_, index) {
-                        return pages[index % pages.length];
+                        return pages[index % 1];
                       },
                     ),
                   ),
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 15,vertical:MediaQuery.of(context).size.height/2.4),
-                child: Container(
-                  child: SmoothPageIndicator(
-                    controller: controller,
-                    count: pages.length,
-                    axisDirection: Axis.vertical,
-                    // onDotClicked: (index) => ,
-                    effect: const JumpingDotEffect(
-                      dotHeight: 18,
-                      dotWidth: 18,
-                      jumpScale: .6,
-                      verticalOffset: 15,
-                      dotColor: Colors.grey,
-                      activeDotColor: Colors.green,
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding:  EdgeInsets.symmetric(horizontal: 15,vertical:MediaQuery.of(context).size.height/2.4),
+              //   child: Container(
+              //     child: SmoothPageIndicator(
+              //       controller: controller,
+              //       count: pages.length,
+              //       axisDirection: Axis.vertical,
+              //       // onDotClicked: (index) => ,
+              //       effect: const JumpingDotEffect(
+              //         dotHeight: 18,
+              //         dotWidth: 18,
+              //         jumpScale: .6,
+              //         verticalOffset: 15,
+              //         dotColor: Colors.grey,
+              //         activeDotColor: Colors.green,
+              //       ),
+              //     ),
+              //   ),
+              // ),
                 ],
               ),
             ],

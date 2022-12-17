@@ -12,33 +12,29 @@ import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
 import 'package:video_player/video_player.dart';
-
-
-
+import 'dart:html' as html;
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
 const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 class faceex extends StatefulWidget {
   const faceex({Key? key}) : super(key: key);
-
   @override
   State<faceex> createState() => _faceexState();
 }
-
 class _faceexState extends State<faceex> {
-  late FlickManager flickManager;
-  late FlickManager flickManager1;
-  late FlickManager flickManager2;
-  late FlickManager flickManager3;
-  late FlickManager flickManager4;
-  late FlickManager flickManager5;
-  late FlickManager flickManager6;
-  late FlickManager flickManager7;
-  late FlickManager flickManager8;
-  late FlickManager flickManager9;
-  late FlickManager flickManager10;
-  late FlickManager flickManager11;
+ var flickManager;
+  var flickManager1;
+  var flickManager2;
+  var flickManager3;
+  var flickManager4;
+  var flickManager5;
+  var flickManager6;
+  var flickManager7;
+  var flickManager8;
+  var flickManager9;
+  var flickManager10;
+  var flickManager11;
 
   late List<FlickManager> myfilk = [
     flickManager,
@@ -55,6 +51,7 @@ class _faceexState extends State<faceex> {
     flickManager11,
   ];
   @override
+
   void initState() {
     super.initState();
     flickManager = FlickManager(
@@ -240,5 +237,7 @@ class _faceexState extends State<faceex> {
         ),
       ),
     );
+
   }
+
 }

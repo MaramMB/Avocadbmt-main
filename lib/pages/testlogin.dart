@@ -78,8 +78,8 @@ class _testlogState extends State<testlog> {
     _focusNodes.forEach((node){
       node.addListener(() {
         setState(() {
-          name();
         });
+    name();
       });
     });
     super.initState();
@@ -152,7 +152,7 @@ class _testlogState extends State<testlog> {
     }
 
   }
-    name() async {
+  name() async {
 
       const url="http://localhost/log.php";
 
@@ -396,7 +396,7 @@ class _testlogState extends State<testlog> {
                                   _visible = false;
                                 }),
                                 login(),
-                              }
+    }
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -516,13 +516,17 @@ class SelectionButtonState extends State<SelectionButton> {
     // });
   }
   bool showbtn  (){
-    if (userKind == 'student'){
+    if (userKind == 'teacher'){
+      return true;
+    }
+    else if(userKind == 'student')
+    {
       return false;
     }
     else
-    {
-      return true;
-    }
+      {
+      return false;
+      }
   }
   @override
   void initState() {
