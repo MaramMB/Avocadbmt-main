@@ -70,6 +70,7 @@ class audioState extends State<audio>
                   child: GestureDetector(
                     onTap: () {
                       AnimateIcon();
+                      print(widget.path);
                     },
                     child: AnimatedIcon(
                       icon: AnimatedIcons.play_pause,
