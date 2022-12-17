@@ -29,7 +29,7 @@ const backgreen = Color.fromRGBO(131, 190, 99, 1);
 var bfile;
 var filename;
 var progress;
-final assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
+final assetsAudioPlayer = AssetsAudioPlayer();
 bool addAudio=false;
 int _value = 1;
 late var imageb;
@@ -103,6 +103,7 @@ class _voicexState extends State<voicex> {
   addSound(String x , String img,String type , String? tid)async{
     print (x);
     var url = 'http://localhost/imageStore.php';
+    print(x+' '+type+' '+tid!);
     var response = await http.post(Uri.parse(url), body :{
       'word': x,
       'imageByte': img,
@@ -421,7 +422,12 @@ class _voicexState extends State<voicex> {
                                                       children: [
                                                         FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.volume_up_rounded), onPressed: (){
                                                           if (addAudio){
-                                                            AssetsAudioPlayer.playAndForget(Audio("../audio/"+filename));
+                                                            //AssetsAudioPlayer.playAndForget(Audio("../audio/"+filename));
+                                                            assetsAudioPlayer!.open(Audio("../audio/"+filename),
+                                                                autoStart: true,
+                                                                showNotification: false,
+                                                                forceOpen: true);
+                                                            assetsAudioPlayer!.play();
                                                           }
                                                           else
                                                             {
@@ -566,6 +572,7 @@ class _voicexState extends State<voicex> {
                                                           child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
                                                             setState(() {
                                                               addCheck = false;
+                                                              assetsAudioPlayer!.stop();
                                                               addAudio=false;
                                                               SnameCont.clear();
                                                               imageb='';});
@@ -595,6 +602,7 @@ class _voicexState extends State<voicex> {
                                                             }
                                                             else{
                                                               setState(() {
+                                                                assetsAudioPlayer!.stop();
                                                                 isA=false;
                                                                 addAudio=false;
                                                                 imgUp=false;
@@ -1047,7 +1055,12 @@ class _voicexState extends State<voicex> {
                                                               children: [
                                                                 FloatingActionButton( backgroundColor: Colors.green , child: Icon(Icons.volume_up_rounded), onPressed: (){
                                                                   if (addAudio){
-                                                                    AssetsAudioPlayer.playAndForget(Audio("../audio/"+filename));
+                                                                    //AssetsAudioPlayer.playAndForget(Audio("../audio/"+filename));
+                                                                    assetsAudioPlayer!.open(Audio("../audio/"+filename),
+                                                                        autoStart: true,
+                                                                        showNotification: false,
+                                                                        forceOpen: true);
+                                                                    assetsAudioPlayer!.play();
                                                                   }
                                                                   else
                                                                   {
@@ -1180,6 +1193,8 @@ class _voicexState extends State<voicex> {
                                                                   height: 40,
                                                                   child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red), onPressed: () {
                                                                     setState(() {
+                                                                      assetsAudioPlayer!.stop();
+
                                                                       addCheck = false;
                                                                       addAudio=false;
                                                                       SnameCont.clear();
@@ -1210,6 +1225,7 @@ class _voicexState extends State<voicex> {
                                                                     }
                                                                     else{
                                                                       setState(() {
+                                                                        assetsAudioPlayer!.stop();
                                                                         isA=false;
                                                                         addAudio=false;
                                                                         imgUp=false;

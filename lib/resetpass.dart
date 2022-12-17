@@ -78,23 +78,25 @@ class _resetState extends State<reset> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top:8.0,left: 20),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return  mainpage();
-                    }));
-                  },
-            icon: const Icon(
-                  Icons.arrow_back_ios,
-                  size: 50,
-                  color: Colors.white,
-            )),
-                ),
+              Row(
+                children: [
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(top:15.0,right: 40,bottom: 15),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return  mainpage();
+                          }));
+                        },
+                        icon: const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 50,
+                          color: Colors.white,
+                        )),
+                  ),
+                ],
               ),
               Center(
                 child: Directionality(

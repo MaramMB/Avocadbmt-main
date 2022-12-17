@@ -11,7 +11,7 @@ include ('localConnection.php');
 	$testid = (int)$testid;
 	if(isset($_POST['stuid']) && isset($_POST['result']) && isset($_POST['note']) && isset($_POST['testid']))
 	{
-		if(isset($_POST['home'])&&$home = 1)
+		if(isset($_POST['home'])&&$home == 1)
 		{
 			$sql="UPDATE testsresult SET homeResult = $result Where stuid = $sid AND testid = $testid";
 			$sql2="UPDATE testsresult SET note = '$note' Where stuid = $sid AND testid = $testid";

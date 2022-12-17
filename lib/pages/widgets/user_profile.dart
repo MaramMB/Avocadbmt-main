@@ -79,8 +79,9 @@ class UserProfile extends StatelessWidget {
                             ? _societyFormat
                             : _teacherFormat,
                         const SizedBox(
-                          height: 15,
+                          height: 180,
                         ),
+
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Row(

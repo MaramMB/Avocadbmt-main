@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
+import 'package:voice_message_package/voice_message_package.dart';
 import 'mainpage.dart';
 
 
@@ -26,65 +27,375 @@ bool isEnd=false;
 int totalScore=0;
 int isCorrect = 0;
 final Ccontroller = ConfettiController();
+AssetsAudioPlayer? _Ap = AssetsAudioPlayer();
 late List<Map<String, Object>> testType;
 List<Map<String, Object>> as = const [
   {
-    'audio': 'audio/rain.mp3',
+    'audio': 'audio/Acar.mp3',
     'answers': [
-      {'image': 'img/rain.gif', 'score': true},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': false},
+      {'image': 'img/watch.jpg', 'score': false},
+      {'image': 'img/car.jpg', 'score': true},
+      {'image': 'img/bike.png', 'score': false},
 
     ],
   },
 
   {
-    'audio': 'audio/avocado.mp3',
+    'audio': 'audio/doc.mp3',
     'answers': [
-      {'image': 'img/rain.gif', 'score': true},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': false},
+      {'image': 'img/doc.jpg', 'score': true},
+      {'image': 'img/cop.jpg', 'score': false},
+      {'image': 'img/Aball.jpg', 'score': false},
 
     ],
   },
 
   {
-    'audio': 'audio/rain.mp3',
+    'audio': 'audio/chair.mp3',
     'answers': [
-      {'image': 'img/rain.gif', 'score': true},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': false},
+      {'image': 'img/Achair.jpg', 'score': true},
+      {'image': 'img/spoon.png', 'score': false},
+      {'image': 'img/plant.png', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/mama.mp3',
+    'answers': [
+      {'image': 'img/baba.jpg', 'score': false},
+      {'image': 'img/window.jpg', 'score': false},
+      {'image': 'img/mama.jpg', 'score': true},
+
+    ],
+  },
+  {
+    'audio': 'audio/spoon.mp3',
+    'answers': [
+      {'image': 'img/watch.jpg', 'score': false},
+      {'image': 'img/spoon.png', 'score': true},
+      {'image': 'img/fork.jpg', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Aball.mp3',
+    'answers': [
+      {'image': 'img/Aball.jpg', 'score': true},
+      {'image': 'img/teacher.jpg', 'score': false},
+      {'image': 'img/phone.jpg', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/clock.mp3',
+    'answers': [
+      {'image': 'img/watch.jpg', 'score': true},
+      {'image': 'img/board.jpg', 'score': false},
+      {'image': 'img/table.jpg', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/table.mp3',
+    'answers': [
+      {'image': 'img/plant.png', 'score': false},
+      {'image': 'img/table.jpg', 'score': true},
+      {'image': 'img/baba.jpg', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Ateacher.mp3',
+    'answers': [
+      {'image': 'img/curtain.png', 'score': false},
+      {'image': 'img/doc.jpg', 'score': false},
+      {'image': 'img/teacher.jpg', 'score': true},
+
+    ],
+  },
+  {
+    'audio': 'audio/fork.mp3',
+    'answers': [
+      {'image': 'img/fork.jpg', 'score': true},
+      {'image': 'img/sofa.jpg', 'score': false},
+      {'image': 'img/knife.png', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/police.mp3',
+    'answers': [
+      {'image': 'img/cop.jpg', 'score': true},
+      {'image': 'img/teacher.jpg', 'score': false},
+      {'image': 'img/bike.png', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/sofa.mp3',
+    'answers': [
+      {'image': 'img/window.jpg', 'score': false},
+      {'image': 'img/plant.png', 'score': false},
+      {'image': 'img/sofa.jpg', 'score': true},
+
+    ],
+  },
+  {
+    'audio': 'audio/knife.mp3',
+    'answers': [
+      {'image': 'img/board.jpg', 'score': false},
+      {'image': 'img/car.jpg', 'score': false},
+      {'image': 'img/knife.png', 'score': true},
+
+    ],
+  },
+  {
+    'audio': 'audio/curtain.mp3',
+    'answers': [
+      {'image': 'img/cop.jpg', 'score': false},
+      {'image': 'img/curtain.png', 'score': true},
+      {'image': 'img/table.jpg', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/baba.mp3',
+    'answers': [
+      {'image': 'img/baba.jpg', 'score': true},
+      {'image': 'img/knife.png', 'score': false},
+      {'image': 'img/phone.jpg', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Aboard.mp3',
+    'answers': [
+      {'image': 'img/window.jpg', 'score': false},
+      {'image': 'img/board.jpg', 'score': true},
+      {'image': 'img/Aball.jpg', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Amobile.mp3',
+    'answers': [
+      {'image': 'img/watch.jpg', 'score': false},
+      {'image': 'img/phone.jpg', 'score': true},
+      {'image': 'img/spoon.png', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/window.mp3',
+    'answers': [
+      {'image': 'img/window.jpg', 'score': true},
+      {'image': 'img/plant.png', 'score': false},
+      {'image': 'img/bike.png', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/bike.mp3',
+    'answers': [
+      {'image': 'img/bike.png', 'score': true},
+      {'image': 'img/curtain.png', 'score': false},
+      {'image': 'img/car.jpg', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/plant.mp3',
+    'answers': [
+      {'image': 'img/table.jpg', 'score': false},
+      {'image': 'img/plant.png', 'score': true},
+      {'image': 'img/board.jpg', 'score': false},
 
     ],
   },
 ];
+
+
+
 List<Map<String, Object>> be = const [
   {
-    'audio': 'audio/rain.mp3',
+    'audio': 'audio/piano.mp3',//
     'answers': [
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': true},
+      {'image': 'img/hammer.gif', 'score': false},
+      {'image': 'img/piano.gif', 'score': true},
+      {'image': 'img/bell.gif', 'score': false},
 
     ],
   },
 
   {
-    'audio': 'audio/avocado.mp3',
+    'audio': 'audio/Waterdrop.mp3',//
     'answers': [
-      {'image': 'img/rain.gif', 'score': true},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': false},
+      {'image': 'img/waterDrop.gif', 'score': true},
+      {'image': 'img/car.gif', 'score': false},
+      {'image': 'img/bird.gif', 'score': false},
 
     ],
   },
 
   {
+    'audio': 'audio/Door.mp3',//
+    'answers': [
+      {'image': 'img/door.gif', 'score': true},
+      {'image': 'img/clap.gif', 'score': false},
+      {'image': 'img/babycrying.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Policecar.mp3',//
+    'answers': [
+      {'image': 'img/plane.gif', 'score': false},
+      {'image': 'img/babyLaugh.gif', 'score': false},
+      {'image': 'img/copcar.gif', 'score': true},
+
+    ],
+  },
+  {
+    'audio': 'audio/Walking.mp3',//
+    'answers': [
+      {'image': 'img/bird.gif', 'score': false},
+      {'image': 'img/walking.gif', 'score': true},
+      {'image': 'img/ambalance.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Rooster.mp3',//
+    'answers': [
+      {'image': 'img/roaster.gif', 'score': true},
+      {'image': 'img/hammer.gif', 'score': false},
+      {'image': 'img/fireplace.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Airplane.mp3',//
+    'answers': [
+      {'image': 'img/plane.gif', 'score': true},
+      {'image': 'img/rain.gif', 'score': false},
+      {'image': 'img/telephone.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Telephone.mp3',//
+    'answers': [
+      {'image': 'img/babycrying.gif', 'score': false},
+      {'image': 'img/telephone.gif', 'score': true},
+      {'image': 'img/piano.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Clapping.mp3',//
+    'answers': [
+      {'image': 'img/bell.gif', 'score': false},
+      {'image': 'img/roaster.gif', 'score': false},
+      {'image': 'img/clap.gif', 'score': true},
+
+    ],
+  },
+  {
+    'audio': 'audio/Baby.mp3',//
+    'answers': [
+      {'image': 'img/babyLaugh.gif', 'score': true},
+      {'image': 'img/ambalance.gif', 'score': false},
+      {'image': 'img/copcar.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Car.mp3',//
+    'answers': [
+      {'image': 'img/car.gif', 'score': true},
+      {'image': 'img/cat.gif', 'score': false},
+      {'image': 'img/waterDrop.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Dog.mp3',//
+    'answers': [
+      {'image': 'img/door.gif', 'score': false},
+      {'image': 'img/bird.gif', 'score': false},
+      {'image': 'img/dog.gif', 'score': true},
+
+    ],
+  },
+  {
+    'audio': 'audio/BabyCrying.mp3',//
+    'answers': [
+      {'image': 'img/plane.gif', 'score': false},
+      {'image': 'img/roaster.gif', 'score': false},
+      {'image': 'img/babycrying.gif', 'score': true},
+
+    ],
+  },
+  {
+    'audio': 'audio/Bird.mp3',//
+    'answers': [
+      {'image': 'img/clap.gif', 'score': false},
+      {'image': 'img/bird.gif', 'score': true},
+      {'image': 'img/fireplace.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/bell.mp3',//
+    'answers': [
+      {'image': 'img/bell.gif', 'score': true},
+      {'image': 'img/copcar.gif', 'score': false},
+      {'image': 'img/dog.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Ambulance.mp3',//
+    'answers': [
+      {'image': 'img/plane.gif', 'score': false},
+      {'image': 'img/ambalance.gif', 'score': true},
+      {'image': 'img/car.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Cat.mp3',
+    'answers': [
+      {'image': 'img/bell.gif', 'score': false},
+      {'image': 'img/cat.gif', 'score': true},
+      {'image': 'img/hammer.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/hammering.mp3',
+    'answers': [
+      {'image': 'img/hammer.gif', 'score': true},
+      {'image': 'img/walking.gif', 'score': false},
+      {'image': 'img/fireplace.gif', 'score': false},
+
+    ],
+  },
+  {
+    'audio': 'audio/Fire.mp3',
+    'answers': [
+      {'image': 'img/fireplace.gif', 'score': true},
+      {'image': 'img/cat.gif', 'score': false},
+      {'image': 'img/clap.gif', 'score': false},
+
+    ],
+  },
+  {
     'audio': 'audio/rain.mp3',
     'answers': [
+      {'image': 'img/dog.gif', 'score': false},
       {'image': 'img/rain.gif', 'score': true},
-      {'image': 'img/bcross.png', 'score': false},
-      {'image': 'img/avocado.png', 'score': false},
+      {'image': 'img/roaster.gif', 'score': false},
 
     ],
   },
@@ -117,6 +428,8 @@ class _betestState extends State<betest> {
   void initState() {
     print('id : '+widget.sid);
     super.initState();
+
+
     _progressValue = 0.0;
   }
 
@@ -268,7 +581,19 @@ class _betestState extends State<betest> {
                                      fontFamily: "DroidKufi",
                                      fontWeight: FontWeight.w700)),
                                  const SizedBox(height: 35,),
-                                  audio(path: testType[index]['audio'] as String),
+                                  SizedBox(
+                                    height: 60,
+                                    width: 60,
+                                    child: FloatingActionButton(backgroundColor: Colors.green,onPressed: (){
+                                      _Ap!.open(Audio(testType[index]['audio'] as String),
+                                        autoStart: true,
+                                        showNotification: false,
+                                      forceOpen: true);
+                                      _Ap!.play();
+                                     // AssetsAudioPlayer.playAndForget(Audio(testType[index]['audio'] as String));
+                                    }, child: Icon(Icons.volume_up_rounded)),
+                                  ),
+                                  SizedBox(width: 10,),
                                  const SizedBox(height: 35,),
                                   Row(
                                     children: [
@@ -308,6 +633,7 @@ class _betestState extends State<betest> {
                                               child: Image.asset(
                                                 answer['image'] as String,
                                                 width: MediaQuery.of(context).size.width / 7,
+                                                height: MediaQuery.of(context).size.height / 3.8,
                                                 fit: BoxFit.fill,
                                               ),
                                             ),
@@ -336,8 +662,13 @@ class _betestState extends State<betest> {
                                             Navigator.pop(context);
                                           }
                                         else {
+                                          setState(() {
+
+                                          });
                                           nextquestion();
                                           isClicked = false;
+                                          _Ap!.stop();
+
                                         }
                                       });
 
