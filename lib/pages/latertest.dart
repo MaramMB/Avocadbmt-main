@@ -20,6 +20,7 @@ import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
@@ -243,6 +244,16 @@ class lettertest extends StatefulWidget {
 }
 
 class _lettertestState extends State<lettertest> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
   String phpurl = "http://localhost/spellRes.php";
   bool dberror = false;
   Future<void> sendData(String letter , String result) async {
@@ -277,6 +288,7 @@ class _lettertestState extends State<lettertest> {
   void initState() {
 
     super.initState();
+    getUserData();
     _speech = stt.SpeechToText();
     locales =  _speech.locales();
     played = false;

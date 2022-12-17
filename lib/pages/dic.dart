@@ -12,6 +12,7 @@ import 'package:flutter_application_1/pages/Videos/numbers.dart';
 import 'package:flutter_application_1/pages/Videos/transport.dart';
 
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Videos/videos.dart';
 import 'Videos/videos28..dart';
@@ -30,6 +31,20 @@ class dic extends StatefulWidget {
 }
 
 class _dicState extends State<dic> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
+  void initState() {
+    super.initState();
+    getUserData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -22,6 +22,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter_application_1/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -53,7 +54,16 @@ class voicex extends StatefulWidget {
 class _voicexState extends State<voicex> {
   File? image;
   var audio;
+  String? userKind;
+  String userId = '';
 
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
   Future<List<dynamic>?> getAllSound(String type) async {
 
     var url = 'http://localhost/getSound.php';
@@ -159,7 +169,7 @@ class _voicexState extends State<voicex> {
   );
  @override
   void initState() {
-
+getUserData();
    if(secT){
      setState((){
        isA=false;

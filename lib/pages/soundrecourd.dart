@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/audio.dart';
 import 'package:flutter_application_1/pages/soundtype.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class soundrecord extends StatefulWidget {
   // const soundrecord({Key? key}) : super(key: key);
   soundrecord({Key? key, required this.sounds})
@@ -22,6 +23,20 @@ class soundrecord extends StatefulWidget {
 }
 
 class _soundrecordState extends State<soundrecord> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
+  void initState() {
+    super.initState();
+    getUserData();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(

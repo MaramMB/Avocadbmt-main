@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -20,6 +21,17 @@ class SingleVideo extends StatefulWidget {
 }
 
 class _SingleVideoState extends State<SingleVideo> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

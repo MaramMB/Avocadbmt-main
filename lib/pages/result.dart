@@ -13,6 +13,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 var green = HexColor("#7BC155");
@@ -64,6 +65,17 @@ class Debouncer {
 }
 
 class _resultState extends State<result> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
+
   final _debouncer = Debouncer();
 
   List<Students> ulist = [];
@@ -83,6 +95,7 @@ class _resultState extends State<result> {
   late  Future <List<Students>?> list;
   void initState() {
     super.initState();
+    getUserData();
     print('init state');
     ulist = [];
     userLists = [];

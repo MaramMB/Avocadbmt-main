@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/face.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'mainpage.dart';
 import 'testlogin.dart';
 
@@ -18,6 +19,20 @@ class edit extends StatefulWidget {
 }
 
 class _editState extends State<edit> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
+  void initState() {
+    super.initState();
+    getUserData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

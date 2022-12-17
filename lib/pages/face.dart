@@ -11,6 +11,7 @@ import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:html' as html;
 const blak = Color.fromRGBO(55, 53, 53, 1);
@@ -23,6 +24,16 @@ class faceex extends StatefulWidget {
   State<faceex> createState() => _faceexState();
 }
 class _faceexState extends State<faceex> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
  var flickManager;
   var flickManager1;
   var flickManager2;
@@ -31,11 +42,11 @@ class _faceexState extends State<faceex> {
   var flickManager5;
   var flickManager6;
   var flickManager7;
-  var flickManager8;
   var flickManager9;
   var flickManager10;
   var flickManager11;
 
+  var flickManager8;
   late List<FlickManager> myfilk = [
     flickManager,
     flickManager1,
@@ -54,6 +65,7 @@ class _faceexState extends State<faceex> {
 
   void initState() {
     super.initState();
+    getUserData();
     flickManager = FlickManager(
       autoPlay: false,
       videoPlayerController:VideoPlayerController.network('https://st.depositphotos.com/2923991/56603/v/600/depositphotos_566038476-stock-video-boy-of-9-years-is.mp4'),

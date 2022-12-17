@@ -2,6 +2,7 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -21,6 +22,17 @@ class Videos extends StatefulWidget {
 }
 
 class _VideosState extends State<Videos> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,6 +204,7 @@ class _VideosState extends State<Videos> {
   @override
   void initState() {
     super.initState();
+    getUserData();
     flickManager = FlickManager(
       autoPlay: false,
       videoPlayerController:VideoPlayerController.asset('assets/dic/home/Bed.mp4'),

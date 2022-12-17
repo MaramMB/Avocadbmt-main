@@ -6,6 +6,7 @@ import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/pages/voice.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'mainpage.dart';
 
 import 'package:http/http.dart' as http;
@@ -25,11 +26,22 @@ class voiceexp extends StatefulWidget {
 }
 
 class _voiceexpState extends State<voiceexp> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
   @override
   void initState() {
-
     super.initState();
+    getUserData();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

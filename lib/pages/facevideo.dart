@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -13,6 +14,7 @@ const backgreen = Color.fromRGBO(131, 190, 99, 1);
 int _value = 1;
 
 class facevideo extends StatefulWidget {
+
   int index;
   facevideo({Key? key, required this.index}) : super(key: key);
 
@@ -21,6 +23,16 @@ class facevideo extends StatefulWidget {
 }
 
 class _facevideoState extends State<facevideo> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,6 +233,7 @@ class _facevideoState extends State<facevideo> {
   @override
   void initState() {
     super.initState();
+    getUserData();
     flickManager = FlickManager(
       autoPlay: false,
       videoPlayerController:VideoPlayerController.network('https://st.depositphotos.com/2923991/56603/v/600/depositphotos_566038476-stock-video-boy-of-9-years-is.mp4'),

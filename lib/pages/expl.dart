@@ -36,12 +36,15 @@ class _expageState extends State<expage> {
   );
   String userId = '';
   var searchBarController = TextEditingController();
+  String? userKind;
+
+
   Future<void> getUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
+      userKind = prefs.getString('userKind') ?? '';
       userId = prefs.getString('userId') ?? '';
     });
-    // print(userId);
   }
   void initState() {
     if (widget.exid=='1')

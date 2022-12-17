@@ -4,6 +4,7 @@ import 'package:flutter_application_1/pages/latter.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'mainpage.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
@@ -20,6 +21,20 @@ class latterexp extends StatefulWidget {
 }
 
 class _latterexpState extends State<latterexp> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
+  void initState() {
+    super.initState();
+    getUserData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:voice_message_package/voice_message_package.dart';
 import 'mainpage.dart';
 
@@ -423,13 +424,23 @@ class betest extends StatefulWidget {
 }
 
 class _betestState extends State<betest> {
+  String? userKind;
+  String userId = '';
 
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
 
   void initState() {
+
     print('id : '+widget.sid);
     super.initState();
 
-
+getUserData();
     _progressValue = 0.0;
   }
 

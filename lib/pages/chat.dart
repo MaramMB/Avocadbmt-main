@@ -14,6 +14,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:html' as html;
 
@@ -77,6 +78,7 @@ class _chatState extends State<chat> {
   late  Future <List<Students>?> list;
   void initState() {
     super.initState();
+    getUserData();
     print('init state');
     ulist = [];
     userLists = [];
@@ -88,11 +90,17 @@ class _chatState extends State<chat> {
       });
     });
   }
-
   String query='';
+  String? userKind;
+  String userId = '';
 
-
-
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
   @override
   Widget build(BuildContext context) {
     if (ulist.isEmpty)

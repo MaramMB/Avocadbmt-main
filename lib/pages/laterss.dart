@@ -14,6 +14,7 @@ import 'package:flutter_application_1/pages/latterexpl.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/voiceexpl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
@@ -39,6 +40,16 @@ class letterss extends StatefulWidget {
 }
 
 class _letterssState extends State<letterss> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
 
   Future<List<dynamic>?> getData() async{
     var url = 'http://localhost/getSpell.php';
@@ -73,6 +84,7 @@ class _letterssState extends State<letterss> {
   initState()
   {
   super.initState;
+  getUserData();
   groupCount=0;
   point=0;
   }

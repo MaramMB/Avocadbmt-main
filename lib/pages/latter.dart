@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Components.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,6 +21,17 @@ class letterex extends StatefulWidget {
   State<letterex> createState() => _letterexState();
 }
 class _letterexState extends State<letterex> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
+
   @override
   getData() async{
     point=0;
@@ -58,6 +70,7 @@ class _letterexState extends State<letterex> {
   void initState() {
     // TODO: implement initState
     getData();
+    getUserData();
   }
 
   Widget build(BuildContext context) {

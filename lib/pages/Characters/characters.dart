@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 const blak = Color.fromRGBO(55, 53, 53, 1);
 const gren = Color.fromRGBO(129, 188, 95, 1);
@@ -29,8 +30,19 @@ class sptest extends StatefulWidget {
 }
 
 class _sptestState extends State<sptest> {
+  String? userKind;
+  String userId = '';
+
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
   void initState() {
     super.initState();
+    getUserData();
     _loading = false;
     _progressValue = 0.0;
   }
