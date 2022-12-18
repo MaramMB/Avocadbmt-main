@@ -203,7 +203,15 @@ class _EatState extends State<Eat> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     flickManager = FlickManager(
 
       autoPlay: false,

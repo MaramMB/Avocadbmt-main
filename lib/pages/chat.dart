@@ -72,35 +72,42 @@ class _chatState extends State<chat> {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
+  String? userKind;
+  String userId = '';
 
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    // });
+  }
   var searchBarController = TextEditingController();
   @override
   late  Future <List<Students>?> list;
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
-    print('init state');
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     ulist = [];
     userLists = [];
     getStudents(widget.userId , widget.userKind).then((val) {
-
       setState(() {
         ulist = val;
         userLists = ulist;
       });
     });
   }
-  String query='';
-  String? userKind;
-  String userId = '';
 
-  Future<void> getUserData() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      userKind = prefs.getString('userKind') ?? '';
-      userId = prefs.getString('userId') ?? '';
-    });
-  }
+  String query='';
+
   @override
   Widget build(BuildContext context) {
     if (ulist.isEmpty)

@@ -65,7 +65,15 @@ class _faceexState extends State<faceex> {
 
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     flickManager = FlickManager(
       autoPlay: false,
       videoPlayerController:VideoPlayerController.network('https://st.depositphotos.com/2923991/56603/v/600/depositphotos_566038476-stock-video-boy-of-9-years-is.mp4'),

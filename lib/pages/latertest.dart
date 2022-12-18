@@ -41,7 +41,7 @@ List<Map<String, String>> letters = const [
   {
     'letter': 'ب',
     'word' : 'بطيخ',
-    'img' : 'img/dad.png',
+    'img' : 'img/waterm.png',
 
   },
   {
@@ -288,7 +288,15 @@ class _lettertestState extends State<lettertest> {
   void initState() {
 
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     _speech = stt.SpeechToText();
     locales =  _speech.locales();
     played = false;

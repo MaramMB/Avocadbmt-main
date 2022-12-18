@@ -216,7 +216,15 @@ class _FamilyState extends State<Family> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     flickManager = FlickManager(
 
       autoPlay: false,

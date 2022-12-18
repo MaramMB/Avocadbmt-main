@@ -65,7 +65,15 @@ class _expageState extends State<expage> {
     }
     // print('testt');
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });getUserData();
   }
 
   @override

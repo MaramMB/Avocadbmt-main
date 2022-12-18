@@ -50,7 +50,15 @@ class _testRecordState extends State<testRecord> {
   }
 
   void initState() {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     super.initState();
     getResult(widget.person.id, '1');
     testresult();

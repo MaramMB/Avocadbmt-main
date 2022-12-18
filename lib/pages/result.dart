@@ -95,7 +95,15 @@ class _resultState extends State<result> {
   late  Future <List<Students>?> list;
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     print('init state');
     ulist = [];
     userLists = [];

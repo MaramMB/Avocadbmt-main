@@ -41,19 +41,13 @@ class _mainpageState extends State<mainpage> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 500), () {
-
-
       setState(() {
       });
-
     });
     getUserData();
     Future.delayed(const Duration(milliseconds: 500), () {
-
-
       setState(() {
       });
-
     });
   }
   @override

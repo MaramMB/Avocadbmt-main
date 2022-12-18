@@ -35,8 +35,15 @@ class _soundrecordState extends State<soundrecord> {
   }
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
-  }
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });  }
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -30,7 +30,7 @@ class StartPoint extends StatelessWidget {
       theme: ThemeData.light(),
       home: ScreenTypeLayout.builder(
         // mobile: (BuildContext context) => const HomemobailPage(uname: null,),
-        mobile: (BuildContext context) =>  mobile(),
+        mobile: (BuildContext context) =>  scrollmobile(),
         tablet: (BuildContext context) => scrollmobile(),
         desktop: (BuildContext context) => scrollhome(),
         // desktop: (BuildContext context) => game(),

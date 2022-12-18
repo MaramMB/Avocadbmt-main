@@ -57,13 +57,7 @@ class _voicexState extends State<voicex> {
   String? userKind;
   String userId = '';
 
-  Future<void> getUserData() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      userKind = prefs.getString('userKind') ?? '';
-      userId = prefs.getString('userId') ?? '';
-    });
-  }
+
   Future<List<dynamic>?> getAllSound(String type) async {
 
     var url = 'http://localhost/getSound.php';
@@ -167,8 +161,16 @@ class _voicexState extends State<voicex> {
     color: Colors.white,
     fontWeight: FontWeight.bold,
   );
+  Future<void> getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userKind = prefs.getString('userKind') ?? '';
+      userId = prefs.getString('userId') ?? '';
+    });
+  }
  @override
   void initState() {
+super.initState();
 getUserData();
    if(secT){
      setState((){
@@ -186,8 +188,6 @@ getUserData();
        secT=true;
      });
    }
-
-    super.initState();
   }
 
   late final check=getData(1,(widget.tid).toString());

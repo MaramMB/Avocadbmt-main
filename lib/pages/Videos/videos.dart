@@ -204,7 +204,15 @@ class _VideosState extends State<Videos> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     getUserData();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+      });
+    });
     flickManager = FlickManager(
       autoPlay: false,
       videoPlayerController:VideoPlayerController.asset('assets/dic/home/Bed.mp4'),

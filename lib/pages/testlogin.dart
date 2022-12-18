@@ -77,9 +77,8 @@ class _testlogState extends State<testlog> {
   void initState() {
     _focusNodes.forEach((node){
       node.addListener(() {
-        setState(() {
-        });
-    name();
+       name();
+
       });
     });
     super.initState();
@@ -521,10 +520,10 @@ class SelectionButtonState extends State<SelectionButton> {
     if (userKind == 'teacher'){
       return true;
     }
-    else if(userKind == 'student')
-    {
-      return false;
-    }
+    // else if(userKind == 'student')
+    // {
+    //   return false;
+    // }
     else
       {
       return false;
@@ -585,7 +584,8 @@ class SelectionButtonState extends State<SelectionButton> {
             ),
           ),
           Visibility(
-            visible: showbtn(),
+            // visible: showbtn(),
+            visible : userKind=='teacher'?true:false,
             child: Container(
               decoration: const BoxDecoration(
                 border: Border(left: BorderSide(color: Colors.black12,width: 0.5),right: BorderSide(color: Colors.black12,width: 0.5)),
