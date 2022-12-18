@@ -48,69 +48,114 @@ class UserProfile extends StatelessWidget {
       home: Scaffold(
         backgroundColor: backgreen,
         body: Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height / 1.1,
-                width: MediaQuery.of(context).size.width / 1.8,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 15,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Center(
-                            child: Text("  ملف الشخصي ل ${person.name}",
-                                style: const TextStyle(
-                                    color: Colors.green,
-                                    fontSize: 30,
-                                    fontFamily: "DroidKufi",
-                                    fontWeight: FontWeight.w700))),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        person.type == AccountType.manager
-                            ? _societyFormat
-                            : _teacherFormat,
-                        const SizedBox(
-                          height: 180,
-                        ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional.topEnd,
+                        child: GestureDetector(
+                            onTap: (){
+                             Navigator.pop(context);
+                            },
+                            child: Icon(Icons.arrow_forward_ios_rounded, size: 40, color: Colors.white,)),
 
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Align(
-                          alignment: Alignment.bottomCenter,
-                                child: ElevatedButton(
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height / 1.1,
+                  width: MediaQuery.of(context).size.width / 1.8,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Center(
+                              child: Text("  ملف الشخصي ل ${person.name}",
+                                  style: const TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 30,
+                                      fontFamily: "DroidKufi",
+                                      fontWeight: FontWeight.w700))),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          person.type == AccountType.manager
+                              ? _societyFormat
+                              : _teacherFormat,
+                          const SizedBox(
+                            height: 180,
+                          ),
+
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                            alignment: Alignment.bottomCenter,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext ctx) {
+                                          return person.type == AccountType.manager
+                                              ? AddScociety(
+                                                  isUpdateForm: true,
+                                                  user: person,
+                                                )
+                                              : (person.type == AccountType.teacher
+                                                  ? AddTeacheAccount(
+                                                      isUpdateForm: true,
+                                                      user: person,
+                                                    )
+                                                  : AddAccountForm(
+                                                      isUpdateForm: true,
+                                                      user: person,
+                                                    ));
+                                        }),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.all(Radius.circular(10))),
+                                      elevation: 2.0,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 35, vertical: 10),
+                                    ),
+                                    child: const Text("تعديل البيانات",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "DroidKufi",
+                                          fontSize: 18.0,
+                                        )),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 5.0,
+                                ),
+                                ElevatedButton(
                                   onPressed: () {
-
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                          builder: (BuildContext ctx) {
-                                        return person.type == AccountType.manager
-                                            ? AddScociety(
-                                                isUpdateForm: true,
-                                                user: person,
-                                              )
-                                            : (person.type == AccountType.teacher
-                                                ? AddTeacheAccount(
-                                                    isUpdateForm: true,
-                                                    user: person,
-                                                  )
-                                                : AddAccountForm(
-                                                    isUpdateForm: true,
-                                                    user: person,
-                                                  ));
-                                      }),
-                                    );
+                                    Navigator.of(context).pop();
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.green,
@@ -121,46 +166,23 @@ class UserProfile extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 35, vertical: 10),
                                   ),
-                                  child: const Text("تعديل البيانات",
+                                  child: const Text("العودة",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "DroidKufi",
                                         fontSize: 18.0,
                                       )),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 5.0,
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10))),
-                                  elevation: 2.0,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 35, vertical: 10),
-                                ),
-                                child: const Text("العودة",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "DroidKufi",
-                                      fontSize: 18.0,
-                                    )),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -53,8 +53,22 @@ class _managepageState extends State<managepage> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(milliseconds: 300), () {
+
+
+      setState(() {
+      });
+
+    });
     getUserData();
     getstuname();
+    Future.delayed(const Duration(milliseconds: 300), () {
+
+
+      setState(() {
+      });
+
+    });
   }
 
   Widget build(BuildContext context) {
@@ -73,109 +87,114 @@ class _managepageState extends State<managepage> {
       home: Scaffold(
         backgroundColor: backgreen,
         body: Center(
-          child: Container(
-            child: Column(children: [
-              // const SelectionButton(),
-               Directionality(
-                 textDirection: TextDirection.ltr,
-                 child: Row(
-                   children: [
-                     Padding(
-                       padding: const EdgeInsets.only(top: 5,bottom: 5,left: 5),
-                       child: OutlinedButton(
-                         style: ButtonStyle(
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(children: [
+                // const SelectionButton(),
+                 Directionality(
+                   textDirection: TextDirection.ltr,
+                   child: Padding(
+                     padding: const EdgeInsets.all(15.0),
+                     child: Row(
+                       children: [
+                         Padding(
+                           padding: const EdgeInsets.only(top: 5,bottom: 5,left: 5),
+                           child: OutlinedButton(
+                             style: ButtonStyle(
 
-                           backgroundColor:
-                           MaterialStateColor.resolveWith((states) => Colors.white),
-                           padding: MaterialStateProperty.all(
-                               const EdgeInsets.all(10)),
-                           shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                               borderRadius: BorderRadius.circular(10))),
+                               backgroundColor:
+                               MaterialStateColor.resolveWith((states) => Colors.green),
+                               padding: MaterialStateProperty.all(
+                                   const EdgeInsets.all(10)),
+                               shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(10))),
+                             ),
+                             onPressed: () {
+                               Navigator.of(context)
+                                   .push(MaterialPageRoute(builder: (context) {
+                                 return  scrollhome();
+                               }));
+                             },
+                             child: const Text(
+                               "تسـجـيـل الخـروج",
+                               style: TextStyle(
+                                 fontSize: 15,
+                                   color: Colors.white,fontFamily: "DroidKufi"),
+                             ),
+                           ),
                          ),
-                         onPressed: () {
-                           Navigator.of(context)
-                               .push(MaterialPageRoute(builder: (context) {
-                             return  scrollhome();
-                           }));
-                         },
-                         child: const Text(
-                           "تسـجـيـل الخـروج",
-                           style: TextStyle(
-                             fontSize: 15,
-                               color: Colors.black, fontFamily: "DroidKufi"),
+                         Padding(
+                           padding: const EdgeInsets.only(top: 5,bottom: 5,left: 5),
+                           child: OutlinedButton(
+                             style: ButtonStyle(
+
+                               backgroundColor:
+                               MaterialStateColor.resolveWith((states) => Colors.green),
+                               padding: MaterialStateProperty.all(
+                                   const EdgeInsets.only(left: 22.0, right: 22.0,top: 10,bottom: 10)),
+                               shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(10))),
+                             ),
+                             onPressed: () {
+                               Navigator.of(context)
+                                   .push(MaterialPageRoute(builder: (context) {
+                                 return  chat(userId: userId, userKind: "manager");
+                               }));
+                             },
+                             child: const Text(
+                               "التواصل",
+                               style: TextStyle(
+                                 fontSize: 15,
+                                   color: Colors.white, fontFamily: "DroidKufi"),
+                             ),
+                           ),
                          ),
-                       ),
+                         Spacer(),
+                         SizedBox(
+                          width: 160,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children:  [
+
+                              Text(
+                                TeacherName,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontFamily: "DroidKufi"),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              CircleAvatar(
+                                // backgroundImage: Image.memory(base64Decode(base64Decode(list[0].['image']))),
+                                // child: Image.memory(base64Decode(list[0].image)),
+                                child: ClipRRect(child: Image.memory(base64.decode(image)),borderRadius: BorderRadius.circular(20)),
+                                // child: ClipRRect(child: Image.asset("avocado.png"),borderRadius: BorderRadius.circular(20)),
+                                radius: 20.7,
+                                backgroundColor: Colors.transparent,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  // vertical: 20
+                                ),
+                              ),
+                              // Image.asset("img/avocado.png",width: 30,)
+                            ],
+                          ),
+                ),
+                       ],
                      ),
-                     Padding(
-                       padding: const EdgeInsets.only(top: 5,bottom: 5,left: 5),
-                       child: OutlinedButton(
-                         style: ButtonStyle(
-
-                           backgroundColor:
-                           MaterialStateColor.resolveWith((states) => Colors.white),
-                           padding: MaterialStateProperty.all(
-                               const EdgeInsets.only(left: 22.0, right: 22.0,top: 10,bottom: 10)),
-                           shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                               borderRadius: BorderRadius.circular(10))),
-                         ),
-                         onPressed: () {
-                           Navigator.of(context)
-                               .push(MaterialPageRoute(builder: (context) {
-                             return  chat(userId: "100", userKind: "manager");
-                           }));
-                         },
-                         child: const Text(
-                           "التواصل",
-                           style: TextStyle(
-                             fontSize: 15,
-                               color: Colors.black, fontFamily: "DroidKufi"),
-                         ),
-                       ),
-                     ),
-                     Spacer(),
-                     SizedBox(
-                      width: 160,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children:  [
-
-                          Text(
-                            TeacherName,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontFamily: "DroidKufi"),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          CircleAvatar(
-                            // backgroundImage: Image.memory(base64Decode(base64Decode(list[0].['image']))),
-                            // child: Image.memory(base64Decode(list[0].image)),
-                            child: ClipRRect(child: Image.memory(base64.decode(image)),borderRadius: BorderRadius.circular(20)),
-                            // child: ClipRRect(child: Image.asset("avocado.png"),borderRadius: BorderRadius.circular(20)),
-                            radius: 17.7,
-                            backgroundColor: Colors.transparent,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 6,
-                              // vertical: 20
-                            ),
-                          ),
-                          // Image.asset("img/avocado.png",width: 30,)
-                        ],
-                      ),
-              ),
-                   ],
+                   ),
                  ),
-               ),
-              const SizedBox(
-                height: 2 ,
-              ),
-              buildTable(context),
-            ]),
+                const SizedBox(
+                  height: 2 ,
+                ),
+                buildTable(context),
+              ]),
+            ),
           ),
         ),
       ),
