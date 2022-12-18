@@ -40,7 +40,7 @@ class _mainpageState extends State<mainpage> {
   }
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
 
 
       setState(() {
@@ -48,7 +48,7 @@ class _mainpageState extends State<mainpage> {
 
     });
     getUserData();
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
 
 
       setState(() {

@@ -864,7 +864,7 @@ class SelectionButtonState extends State<SelectionButton> {
                       width: 5,
                     ),
                     Text(
-                      TeacherName,
+                      TeacherName!=''?TeacherName:'الاسم',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
@@ -876,7 +876,7 @@ class SelectionButtonState extends State<SelectionButton> {
                     CircleAvatar(
                       // backgroundImage: Image.memory(base64Decode(base64Decode(list[0].['image']))),
                       // child: Image.memory(base64Decode(list[0].image)),
-                      child: ClipRRect(child: Image.memory(base64.decode(image)),borderRadius: BorderRadius.circular(20)),
+                      child: image!=''?ClipRRect(child: Image.memory(base64.decode(image)),borderRadius: BorderRadius.circular(20)) : Icon(Icons.person),
                       radius: 17.7,
                       backgroundColor: Colors.transparent,
                     ),

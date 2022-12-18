@@ -900,6 +900,7 @@ Future<List<Students>> getStudents(String id) async {
   var url = 'http://localhost/getStudents.php';
   try{ var response = await http.post(Uri.parse(url), body: {
     'id':id,
+    'kind':'',
   });
   List<Students> res = parseAgents(response.body);
   return res;
