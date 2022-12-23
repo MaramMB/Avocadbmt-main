@@ -584,8 +584,8 @@ class SelectionButtonState extends State<SelectionButton> {
             ),
           ),
           Visibility(
-            // visible: showbtn(),
-            visible : userKind=='teacher'?true:false,
+            // visible: true,
+            visible : userKind=='student'?false:true,
             child: Container(
               decoration: const BoxDecoration(
                 border: Border(left: BorderSide(color: Colors.black12,width: 0.5),right: BorderSide(color: Colors.black12,width: 0.5)),

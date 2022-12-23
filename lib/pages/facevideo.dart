@@ -121,7 +121,7 @@ class _facevideoState extends State<facevideo> {
                           onPressed: () {
                               print(widget.index);
                             setState(() {
-                              if(widget.index != 11){
+                              if(widget.index != 5){
                                 widget.index ++;
                                 Navigator.pushReplacement(
                                     context,
@@ -209,12 +209,7 @@ class _facevideoState extends State<facevideo> {
   late FlickManager flickManager3;
   late FlickManager flickManager4;
   late FlickManager flickManager5;
-  late FlickManager flickManager6;
-  late FlickManager flickManager7;
-  late FlickManager flickManager8;
-  late FlickManager flickManager9;
-  late FlickManager flickManager10;
-  late FlickManager flickManager11;
+
 
   late List<FlickManager> myfilk = [
     flickManager,
@@ -223,12 +218,7 @@ class _facevideoState extends State<facevideo> {
     flickManager3,
     flickManager4,
     flickManager5,
-    flickManager6,
-    flickManager7,
-    flickManager8,
-    flickManager9,
-    flickManager10,
-    flickManager11,
+
   ];
   @override
   void initState() {
@@ -257,36 +247,7 @@ class _facevideoState extends State<facevideo> {
       videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56919/v/600/depositphotos_569198438-stock-video-boy-of-9-years-is.mp4'),
       autoPlay: false,
     );
-    flickManager6 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager7 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager8 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager9 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager10 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager11 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
+
   }
 
 

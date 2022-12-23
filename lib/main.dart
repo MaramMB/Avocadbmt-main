@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Characters/characters.dart';
 import 'package:flutter_application_1/pages/face.dart';
 import 'package:flutter_application_1/pages/mainpage.dart';
 import 'package:flutter_application_1/pages/mobile/adminmobile.dart';

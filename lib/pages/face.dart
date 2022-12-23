@@ -1,16 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/Videos/single_video.dart';
-import 'package:flutter_application_1/pages/expl.dart';
-import 'package:flutter_application_1/pages/faceexpl.dart';
 import 'package:flutter_application_1/pages/facevideo.dart';
-import 'package:flutter_application_1/pages/latterexpl.dart';
-import 'package:flutter_application_1/pages/mainpage.dart';
-import 'package:flutter_application_1/pages/rowbar.dart';
-import 'package:flutter_application_1/pages/speaktest.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
-import 'package:flutter_application_1/pages/voiceexpl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:html' as html;
@@ -40,13 +32,7 @@ class _faceexState extends State<faceex> {
   var flickManager3;
   var flickManager4;
   var flickManager5;
-  var flickManager6;
-  var flickManager7;
-  var flickManager9;
-  var flickManager10;
-  var flickManager11;
 
-  var flickManager8;
   late List<FlickManager> myfilk = [
     flickManager,
     flickManager1,
@@ -54,12 +40,7 @@ class _faceexState extends State<faceex> {
     flickManager3,
     flickManager4,
     flickManager5,
-    flickManager6,
-    flickManager7,
-    flickManager8,
-    flickManager9,
-    flickManager10,
-    flickManager11,
+
   ];
   @override
 
@@ -97,35 +78,7 @@ class _faceexState extends State<faceex> {
       videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56919/v/600/depositphotos_569198438-stock-video-boy-of-9-years-is.mp4'),
       autoPlay: false,
     );
-    flickManager6 = FlickManager(
-      videoPlayerController:VideoPlayerController.asset('dic/home/Bed.mp4'),
-      autoPlay: false,
-    );
-    flickManager7 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager8 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager9 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager10 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
-    flickManager11 = FlickManager(
-      // videoPlayerController: VideoPlayerController.network("https://www.youtube.com/watch?v=WpQZtRA9m94"),
-      videoPlayerController:VideoPlayerController.asset('img/spong.mp4'),
-      autoPlay: false,
-    );
+
   }
 
   @override
@@ -191,7 +144,7 @@ class _faceexState extends State<faceex> {
                                 mainAxisSpacing: 0,
                                 crossAxisCount: 3,
                               ),
-                              itemCount: 12,
+                              itemCount: 6,
                               itemBuilder: (BuildContext context, int index) {
                                 return FadeInUpBig(
                                   child: Padding(
