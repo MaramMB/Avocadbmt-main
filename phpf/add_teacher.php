@@ -83,6 +83,8 @@ $db = mysqli_connect('localhost','root','','bdmtproject');
 		} catch (Exception $e) {
 			echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 		}
+		ob_end_clean();
+		echo json_encode("Success");
 	}
 	// $mail->Subject = 'نبرة - انشاء حساب جديد';
 //$mail->Body    = "مرحباً\n تم انشاء حساب جديد خاص بك يمكنك تسجيل الدخول عبر البريد الالكتروني الخاص بك ".$email." وكلمة المرور هي : ".$pass."";

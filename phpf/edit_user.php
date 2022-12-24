@@ -41,7 +41,7 @@ $mail = new PHPMailer(true);
 					$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 					$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
 					$mail->Username   = 'nabraa.ps@gmail.com';                     //SMTP username
-					$mail->Password   = 'sdmigowhdciuiijl';                               //SMTP password
+					$mail->Password   = 'sdmigowhdciuiijl';                     //SMTP password
 					$mail->SMTPSecure = 'tls';
 					$mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 					$mail->CharSet = 'UTF-8';
@@ -103,7 +103,8 @@ $mail = new PHPMailer(true);
 
 
 			}
-			echo json_encode("Success");
+			ob_end_clean();
+		echo json_encode("Success");
 		}
 
 

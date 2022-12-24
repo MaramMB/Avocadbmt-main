@@ -80,7 +80,8 @@ $mail = new PHPMailer(true);
                                 } catch (Exception $e) {
                                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                                 }
-			echo json_encode("Success");
+								ob_end_clean();
+								echo json_encode("Success");
 		}
 	}
 
