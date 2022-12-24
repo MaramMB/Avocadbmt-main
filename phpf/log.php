@@ -15,7 +15,7 @@ echo "DB connection field";
 }
 
                $email=$_POST['Email'];
-               $pass=$_POST['pass'];
+               $pass=sha1($_POST['pass']);
                $userData = array();
 
 $result = $db->query("SELECT * FROM usersacounts WHERE Email='$email' and Passward='$pass'");

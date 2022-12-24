@@ -17,7 +17,7 @@
 	$address = $_POST['address'];
 
 	$email = $_POST['email'];
-	$pass = $_POST['pass'];
+	$pass =sha1($_POST['pass']);
 	$kind = $_POST['kind'] ?? 'manager';
 	$active = $_POST['active'] ?? 'active';
 

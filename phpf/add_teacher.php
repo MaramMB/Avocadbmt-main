@@ -23,7 +23,7 @@ $db = mysqli_connect('localhost','root','','bdmtproject');
 
 	//for user account
 	$email = $_POST['email'];
-	$pass = $_POST['password'];
+	$pass =sha1( $_POST['password']);
 	$kind = $_POST['kind'] ?? 'teacher';
 	$active = $_POST['active'] ?? 'active';
 

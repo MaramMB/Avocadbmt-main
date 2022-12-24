@@ -25,7 +25,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
 
 	//for user account
-	$email = $_POST['email'];
+	$email =sha1($_POST['email']);
 	$pass = $_POST['password'];
 	$kind = $_POST['kind'] ?? 'student';
 	$active = $_POST['active'] ?? 'active';

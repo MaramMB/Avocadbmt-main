@@ -243,7 +243,7 @@ class _AddScocietyState extends State<AddScociety> {
           "pass": passController.text,
           "phone": phoneController.text,
           "address": addressController.text,
-          "date": dateController.text,
+          "date": DateFormat('yyyy-MM-dd').format(DateTime.now()),
         },
       );
 
