@@ -17,7 +17,7 @@ $mail = new PHPMailer(true);
 		$id = $_POST['Id_Num'];
 		$active = $_POST['active'];
 		$insert="UPDATE `usersacounts` SET `active` = '$active' WHERE `usersacounts`.`Id_Num` = $id;";
-		$email = mysqli_query($db,"SELECT (usersacounts.Email) FROM usersacounts  WHERE usersacounts.Id_Num = 54343");
+		$email = mysqli_query($db,"SELECT (usersacounts.Email) FROM usersacounts  WHERE usersacounts.Id_Num = $id");
 		$query = mysqli_query($db,$insert);
 		$row =	$email->fetch_array()[0] ?? 'aa';
 
@@ -41,7 +41,7 @@ $mail = new PHPMailer(true);
 					$mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 					$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
 					$mail->Username   = 'nabraa.ps@gmail.com';                     //SMTP username
-					$mail->Password   = 'sdmigowhdciuiijl';                               //SMTP password
+					$mail->Password   = 'sdmigowhdciuiijl';                     //SMTP password
 					$mail->SMTPSecure = 'tls';
 					$mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 					$mail->CharSet = 'UTF-8';
@@ -103,7 +103,8 @@ $mail = new PHPMailer(true);
 
 
 			}
-			echo json_encode("Success");
+			ob_end_clean();
+		echo json_encode("Success");
 		}
 
 
