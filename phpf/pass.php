@@ -9,7 +9,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
         }
 
                        $Id_Num=$_POST['Id_Num'];
-                       $Passward=$_POST['Passward'];
+                       $Passward=sha1($_POST['Passward']);
                        $userData = array();
 
         $result = $db->query("SELECT * FROM usersacounts where Id_Num='$Id_Num'");

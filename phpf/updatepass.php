@@ -9,7 +9,7 @@
 		echo "Database connection faild";
 	}
    $Id_Num=$_POST['Id_Num'];
-   $Passward=$_POST['Passward'];
+   $Passward=sha1($_POST['Passward']);
 
 	$query_user ="UPDATE usersacounts SET Passward = '$Passward' WHERE Id_Num = '$Id_Num'";
 	$result_user = mysqli_query($conn,$query_user);

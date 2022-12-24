@@ -17,7 +17,7 @@ $mail = new PHPMailer(true);
 		$id = $_POST['Id_Num'];
 		$active = $_POST['active'];
 		$insert="UPDATE `usersacounts` SET `active` = '$active' WHERE `usersacounts`.`Id_Num` = $id;";
-		$email = mysqli_query($db,"SELECT (usersacounts.Email) FROM usersacounts  WHERE usersacounts.Id_Num = 54343");
+		$email = mysqli_query($db,"SELECT (usersacounts.Email) FROM usersacounts  WHERE usersacounts.Id_Num = $id");
 		$query = mysqli_query($db,$insert);
 		$row =	$email->fetch_array()[0] ?? 'aa';
 
