@@ -32,10 +32,11 @@ $mail = new PHPMailer(true);
 
 
 	//for user account
-	$email =sha1($_POST['email']);
+	$email =$_POST['email'];
 	$pass = $_POST['password'];
 	$kind = $_POST['kind'] ?? 'student';
 	$active = $_POST['active'] ?? 'active';
+	$hashpass=sha1($pass);
 
 	//for parent table
 	$father_job = $_POST['father_job'];
@@ -50,7 +51,7 @@ $mail = new PHPMailer(true);
 		exit();
 	}
 
-	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($student_id,'$email', '$pass', '$kind', '$active');";
+	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($student_id,'$email', '$hashpass', '$kind', '$active');";
 	$query_user = mysqli_query($db,$insert_user);
 
 

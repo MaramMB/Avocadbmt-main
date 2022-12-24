@@ -24,9 +24,10 @@ $mail = new PHPMailer(true);
 	$address = $_POST['address'];
 
 	$email = $_POST['email'];
-	$pass =sha1($_POST['pass']);
+	$pass =$_POST['pass'];
 	$kind = $_POST['kind'] ?? 'manager';
 	$active = $_POST['active'] ?? 'active';
+	$hashpass=sha1($pass);
 
 	$select = mysqli_query($db, "SELECT * FROM `usersacounts` WHERE `Email`= '$email'");
 
@@ -36,7 +37,7 @@ $mail = new PHPMailer(true);
 	}
 
 
-	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($sid,'$email', '$pass', '$kind', '$active');";
+	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($sid,'$email', '$hashpass', '$kind', '$active');";
 	$query_user = mysqli_query($db,$insert_user);
 
 	if ($query_user) {

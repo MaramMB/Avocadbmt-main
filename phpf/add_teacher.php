@@ -30,10 +30,10 @@ $db = mysqli_connect('localhost','root','','bdmtproject');
 
 	//for user account
 	$email = $_POST['email'];
-	$pass =sha1( $_POST['password']);
+	$pass =$_POST['password'];
 	$kind = $_POST['kind'] ?? 'teacher';
 	$active = $_POST['active'] ?? 'active';
-
+	$hashpass=sha1($pass);
 	$select = mysqli_query($db, "SELECT * FROM `usersacounts` WHERE `Email`= '$email'");
 
 	if(mysqli_num_rows($select)) {
@@ -41,7 +41,7 @@ $db = mysqli_connect('localhost','root','','bdmtproject');
 		exit();
 	}
 
-	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($Id_Num,'$email', '$pass', '$kind', '$active');";
+	$insert_user="INSERT INTO `usersacounts`(`Id_Num`,`Email`, `Passward`, `Kind`, `active`) VALUES ($Id_Num,'$email', '$hashpass', '$kind', '$active');";
 	$query_user = mysqli_query($db,$insert_user);
 
 	$insert="INSERT INTO `teachers` (`Id_Num`, `name`, `secname`, `thirdname`, `familyname`, `Phone_Num`, `accountnum`, `specialization`, `gender`, `Society_Id`) VALUES ($Id_Num, '$name','$father_name','$thirdname','$familyname', $phone, $accountnumber, '$spec', '$gender', $Society_Id);";
