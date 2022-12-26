@@ -784,6 +784,14 @@ class _sptestState extends State<sptest> {
                                                         // errors.add(later[index]+" حرف ال "+place[index]+" في ");
                                                         setState(() {
                                                           active = false;
+                                                          if(errors[0]==" حرف ال "+later[0]+" في ال"+place[0]&&errors[1]==" حرف ال "+later[1]+" في ال"+place[1]&&errors[2]==" حرف ال "+later[2]+" في ال"+place[2])
+                                                          {
+                                                            laterrors.add(" حرف ال "+later[0]);
+                                                          }
+                                                          else if(errors[3]==" حرف ال "+later[3]+" في ال"+place[3]&&errors[4]==" حرف ال "+later[4]+" في ال"+place[4]&&errors[5]==" حرف ال "+later[5]+" في ال"+place[5])
+                                                          {
+                                                            laterrors.add(" حرف ال "+later[1]);
+                                                          }
                                                         });
                                                         myDiealog();
                                                       } else {
@@ -793,17 +801,9 @@ class _sptestState extends State<sptest> {
                                                           _loading = !_loading;
                                                           index++;
                                                           // if(errors[0]==" حرف ال "+later[0]+" في ال"+place[0])
-
                                                           _updateProgress();
                                                         });
-                                                        if(errors[0]==" حرف ال "+later[0]+" في ال"+place[0]&&errors[1]==" حرف ال "+later[1]+" في ال"+place[1]&&errors[2]==" حرف ال "+later[2]+" في ال"+place[2])
-                                                        {
-                                                          laterrors.add(" حرف ال "+later[0]);
-                                                        }
-                                                        else if(errors[3]==" حرف ال "+later[3]+" في ال"+place[3]&&errors[4]==" حرف ال "+later[4]+" في ال"+place[4]&&errors[5]==" حرف ال "+later[5]+" في ال"+place[5])
-                                                        {
-                                                          laterrors.add(" حرف ال "+later[1]);
-                                                        }
+
                                                       }
                                                     },
                                                     iconSize: 82,

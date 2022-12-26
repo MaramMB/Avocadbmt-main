@@ -61,7 +61,7 @@ class _scrollhomeState extends State<scrollhome> {
                                 children: [
                                    Padding(
                                     padding: EdgeInsets.only(left: 1.0),
-                                    child: Image.asset('img/Nlogo.png',width: 80,height: 60,),
+                                    child: Image.asset('img/Nlogo.png',width: 70,height: 50,),
                                   ),
                                   const Spacer(),
                                   TextButton(
