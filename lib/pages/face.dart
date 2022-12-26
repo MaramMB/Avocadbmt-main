@@ -17,7 +17,7 @@ var tid;
 var bfile;
 var filename;
 bool addVideo = false;
-late final videos;
+bool errmsg = false;
 class faceex extends StatefulWidget {
   const faceex({Key? key}) : super(key: key);
   @override
@@ -34,22 +34,7 @@ class _faceexState extends State<faceex> {
       userId = prefs.getString('userId') ?? '';
     });
   }
- var flickManager;
-  var flickManager1;
-  var flickManager2;
-  var flickManager3;
-  var flickManager4;
-  var flickManager5;
 
-  late List<FlickManager> myfilk = [
-    flickManager,
-    flickManager1,
-    flickManager2,
-    flickManager3,
-    flickManager4,
-    flickManager5,
-
-  ];
   @override
 
   void initState() {
@@ -59,7 +44,7 @@ class _faceexState extends State<faceex> {
       });
     });
     getUserData();
-
+    tid =  getTid();
     Future.delayed(const Duration(milliseconds: 900), () {
       setState(() {
 
@@ -67,38 +52,16 @@ class _faceexState extends State<faceex> {
     });
     x();
 
-    flickManager = FlickManager(
-      autoPlay: false,
-      videoPlayerController:VideoPlayerController.asset('faceVideos/1.mp4'),
-    );
-    flickManager1 = FlickManager(
-      autoPlay: false,
-      videoPlayerController:VideoPlayerController.asset('faceVideos/2.mp4'),
-    );    flickManager2 = FlickManager(
-      autoPlay: false,
-      videoPlayerController: VideoPlayerController.asset('faceVideos/3.mp4'),
-    );
-    flickManager3 = FlickManager(
-      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56609/v/600/depositphotos_566092908-stock-video-boy-of-9-years-is.mp4'),
-      autoPlay: false,
-    );
-    flickManager4 = FlickManager(
-      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56710/v/600/depositphotos_567103784-stock-video-boy-of-9-years-is.mp4'),
-      autoPlay: false,
-    );
-    flickManager5 = FlickManager(
-      videoPlayerController: VideoPlayerController.network('https://st.depositphotos.com/2923991/56919/v/600/depositphotos_569198438-stock-video-boy-of-9-years-is.mp4'),
-      autoPlay: false,
-    );
+
 
 
   }
 
   @override
   void dispose() {
-    flickManager.dispose();
     super.dispose();
   }
+  late final videos = getData(tid);
 
   @override
   Widget build(BuildContext context) {
@@ -141,66 +104,121 @@ class _faceexState extends State<faceex> {
                                     child: FadeInDown(
                                       child: Row(
                                         children: [
-                                          FloatingActionButton(onPressed: (){
-                                            showDialog(context: context, builder: (_)=>AlertDialog(
-                                              title: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text("اضافة فيديو الى القائمة",
-                                                      style: TextStyle(
-                                                          color: Colors.green,
-                                                          fontSize: 17,
-                                                          fontFamily: "DroidKufi",
-                                                          fontWeight: FontWeight.w700)),
-                                                  SizedBox(height: 20,),
+                                          Visibility(
+                                            maintainState: true,
+                                            maintainAnimation: true,
+                                            maintainSize: true,
+                                            visible: userKind=='teacher',
+                                            child: FloatingActionButton(backgroundColor: Colors.green,onPressed: (){
+                                              showDialog(context: context, builder: (_)=>StatefulBuilder(builder: (context,setState)
+                                              {
+                                                return   AlertDialog(
+                                                  title: Container(
+                                                    width: addVideo ? 350:200,
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: [
+                                                        Text("اضافة فيديو الى القائمة",
+                                                            style: TextStyle(
+                                                                color: Colors.green,
+                                                                fontSize: 17,
+                                                                fontFamily: "DroidKufi",
+                                                                fontWeight: FontWeight.w700)),
+                                                        SizedBox(height: 20,),
 
-                                                  SizedBox(height: 20,),
-                                                  Visibility(
-                                                    visible: addVideo,
-                                                    child:addVideo ? SizedBox(
-                                                      height: 200,
-                                                      width: 200,
-                                                      child: FlickVideoPlayer(
-                                                        flickManager: FlickManager(
-                                                          autoPlay: false,
-                                                          videoPlayerController:VideoPlayerController.asset('../faceVideos/'+filename),
+                                                        SizedBox(height: 20,),
+                                                        Visibility(
+                                                          visible: addVideo,
+                                                          child:addVideo ? SizedBox(
+                                                            height: 200,
+                                                            width: 200,
+                                                            child: FlickVideoPlayer(
+                                                              flickManager: FlickManager(
+                                                                autoPlay: false,
+                                                                videoPlayerController:VideoPlayerController.asset('faceVideos/'+filename),
+                                                              ),
+
+                                                            ),
+                                                          ):Center(child: SizedBox( height: 100 ,width: 100,child: CircularProgressIndicator(color: Colors.green, backgroundColor: Colors.grey,))),
+                                                        ),
+                                                        SizedBox(height: 20,),
+                                                        Visibility(
+                                                          visible: errmsg,
+                                                          child: Text("لم يتم اضافة فيديو",
+                                                              style: TextStyle(
+                                                                  color: Colors.red,
+                                                                  fontSize: 14,
+                                                                  fontFamily: "DroidKufi",
+                                                                  fontWeight: FontWeight.w700)),
+                                                        ),
+                                                        SizedBox(height: 20,),
+
+
+                                                        SizedBox(
+                                                          height: 30,
+                                                          child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
+                                                            getVideo().then((value) => setState((){}));
+
+                                                          }, child: Text("إضافة فيديو",style: TextStyle(fontFamily: "DroidKufi"),)),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                          children: [
+                                                            SizedBox(
+                                                              height: 30,
+                                                              child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
+                                                                if(addVideo)
+                                                                  {
+                                                                    Videoadd(filename);
+                                                                    setState((){
+                                                                      addVideo=false;
+                                                                      errmsg=false;
+                                                                    });
+                                                                    Navigator.push (
+                                                                      context,
+                                                                      MaterialPageRoute (
+                                                                        builder: (BuildContext context) =>  faceex(),
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                else
+                                                                  {
+                                                                    setState((){
+                                                                      errmsg=true;
+                                                                    });
+                                                                  }
+
+                                                              }, child: Text("حفظ",style: TextStyle(fontFamily: "DroidKufi"),)),
+                                                            ),
+                                                            SizedBox(width: 20,),
+                                                            SizedBox(
+                                                              height: 30,
+                                                              child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
+                                                                setState((){
+                                                                  addVideo=false;
+                                                                  filename='';
+                                                                });
+                                                                Navigator.pop(context);
+
+                                                              }, child: Text("رجوع",style: TextStyle(fontFamily: "DroidKufi"),)),
+                                                            ),
+                                                          ],
                                                         ),
 
-                                                      ),
-                                                    ):Container(),
+
+
+                                                      ],
+                                                    ),
                                                   ),
+                                                );
+                                              }));
 
-
-                                                  ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
-                                                    getVideo();
-                                                  }, child: Text("إضافة فيديو",style: TextStyle(fontFamily: "DroidKufi"),)),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
-                                                        Videoadd(filename,tid);
-                                                        Navigator.push (
-                                                          context,
-                                                          MaterialPageRoute (
-                                                            builder: (BuildContext context) =>  faceex(),
-                                                          ),
-                                                        );
-                                                      }, child: Text("حفظ",style: TextStyle(fontFamily: "DroidKufi"),)),
-                                                      SizedBox(width: 20,),
-                                                      ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.green),onPressed: (){
-                                                        Navigator.pop(context);
-                                                      }, child: Text("رجوع",style: TextStyle(fontFamily: "DroidKufi"),)),
-                                                    ],
-                                                  ),
-
-
-
-                                                ],
-                                              ),
-                                            ));
-                                          },child: Icon(Icons.add),),
+                                            },child: Icon(Icons.add),),
+                                          ),
 
                                           Spacer(flex: 2,),
 
@@ -210,7 +228,7 @@ class _faceexState extends State<faceex> {
                                                   fontSize: 25,
                                                   fontFamily: "DroidKufi",
                                                   fontWeight: FontWeight.w700)),
-                                          Spacer(flex: 2,),
+                                          Spacer(flex: 3,),
                                         ],
 
                                       ),
@@ -251,7 +269,7 @@ class _faceexState extends State<faceex> {
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .push(MaterialPageRoute(builder: (context) {
-                                                        return  facevideo(index: index,);
+                                                        return  facevideo(index: index,id: userId,Kind: userKind,);
                                                       }));
                                                     },
                                                     style: ElevatedButton.styleFrom(
@@ -306,16 +324,16 @@ class _faceexState extends State<faceex> {
     );
 
   }
-  Videoadd(String path , String tid)async {
+  Videoadd(String path)async {
     print(filename+'---'+userId);
+    path = 'faceVideos/'+path;
     var url = 'http://localhost/addVideo.php';
-    var response = await http.post(Uri.parse(url), body: {
-      'path': path,
+    var response = await http.post(Uri.parse(url), body :{
+      'file':path,
       'tid': userId,
     });
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-    }
+
+
   }
   Future getVideo () async {
     FilePickerResult? file = await FilePicker.platform.pickFiles(type: FileType.video, allowMultiple: false);
@@ -338,21 +356,20 @@ class _faceexState extends State<faceex> {
     var response = await http.post(Uri.parse(url), body: {
       'file':base64Encode(bfile),
       'name':filename,
+      'type':'v',
     });
 
   }
    x() async {
-     tid = await getTid(userKind);
-     videos = getData(tid);
+     tid = await getTid();
      print('++'+tid+userKind!);
   }
-  getTid( String? userKind) async {
-
+  getTid() async {
     print ('get tid');
     if (userKind == 'student'){
       var url = 'http://localhost/getTid.php';
       var response = await http.post(Uri.parse(url), body :{
-        'id': userId,
+        'id':userId,
       });
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
@@ -369,7 +386,7 @@ class _faceexState extends State<faceex> {
   }
 
   Future<List<dynamic>?> getData(String? tid) async{
-
+    tid = await getTid();
 if (userKind == 'teacher')
   {
     print('object'+userId);
@@ -385,9 +402,10 @@ if (userKind == 'teacher')
   }
 else
   {
+    print(tid);
     var url = 'http://localhost/getVideos.php';
     var response = await http.post(Uri.parse(url), body :{
-      'tid': userId,
+      'tid': tid,
     });
     if (response.statusCode == 200) {
       var data = json.decode(response.body);

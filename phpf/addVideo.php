@@ -1,22 +1,23 @@
 <?php
+include ('localConnection.php');
+	$path = $_POST['file'];
+	$tid = (int)$_POST['tid'];
+	if(isset($_POST['file']) && isset($_POST['tid']))
+	{
 
-	header('Access-Control-Allow-Origin: *');
-	header('Access-Control-Allow-Methods: GET, POST');
-	header("Access-Control-Allow-Headers: X-Requested-With");
+			$sql="INSERT into facevideo values ('','".$_POST['file']."', $tid)";
 
-	$db = mysqli_connect('localhost','root','','bdmtproject');
-	if (!$db) {
-		echo "Database connection faild";
+
+		$result=$link->query($sql);
+		if($result){
+			echo'sadsaded';
+		}else{
+
+			$return["error"] = true;
+			$return["message"] = "Database error";
+		}
+		mysqli_close($link);
 	}
-	$path=$_POST['path'];
-    $tid=$_POST['tid'];
-
-	$insert="INSERT into facevideo (`path`, tid) values ($path , $tid)";
-	$query = mysqli_query($db,$insert);
-
-	if ($query) {
-		echo json_encode("Success");
-	}
-
-
+	else
+	echo 'no values';
 ?>

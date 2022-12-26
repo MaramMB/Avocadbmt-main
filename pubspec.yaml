@@ -120,7 +120,7 @@ flutter:
   assets:
     - img/
     - audio/
-    - faceVideos/
+    - assets/faceVideos/
     - assets/videos/
     - assets/dic/home/
     - assets/dic/color/
