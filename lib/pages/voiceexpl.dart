@@ -108,7 +108,7 @@ class _voiceexpState extends State<voiceexp> {
                         Center(
                           child: ElevatedButton(
                             onPressed: ()  async {
-                              x =await getTid(widget.UserID, widget.UserKind);
+                              x = await getTid(widget.UserID, widget.UserKind);
                               Navigator.of(context)
                                   .push(MaterialPageRoute(builder: (context) {
                                 return  voicex(UserID: widget.UserID, UserKind: widget.UserKind, tid: x,);

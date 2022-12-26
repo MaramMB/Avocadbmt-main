@@ -149,6 +149,8 @@ class _voicexState extends State<voicex> {
 
 
   }
+
+
   int _selectedType = 1;
   bool secT=false;
   bool imgUp = false;
