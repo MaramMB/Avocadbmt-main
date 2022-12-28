@@ -796,7 +796,7 @@ class _sptestState extends State<sptest> {
 
                                                           if(l==later[index]+later[index]+later[index])
                                                           {
-                                                            errors.add(" حرف ال "+later[index]);
+                                                            errors.add(" يعاني الطفل من حرف ال "+later[index]);
                                                             adderror();
                                                             print(l);
                                                            l="";

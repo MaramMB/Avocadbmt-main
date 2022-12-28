@@ -133,30 +133,30 @@ class _joinusState extends State<joinus> {
                             height: 10,
                           ),
                           Spacer(),
-                          Center(
-                            child: FadeInUp(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                 window.open('https://forms.gle/ko676roEYEQfFXek6', '');
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                                  elevation: 2.0,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 35, vertical: 10),
-                                ),
-                                child: const Text("تعبئة طلب الانضمام",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "DroidKufi",
-                                      fontSize: 17.0,
-                                    )),
-                              ),
-                            ),
-                          ),
+                          // Center(
+                          //   child: FadeInUp(
+                          //     child: ElevatedButton(
+                          //       onPressed: () {
+                          //        window.open('https://forms.gle/ko676roEYEQfFXek6', '');
+                          //       },
+                          //       style: ElevatedButton.styleFrom(
+                          //         backgroundColor: Colors.green,
+                          //         shape: const RoundedRectangleBorder(
+                          //             borderRadius:
+                          //             BorderRadius.all(Radius.circular(10))),
+                          //         elevation: 2.0,
+                          //         padding: const EdgeInsets.symmetric(
+                          //             horizontal: 35, vertical: 10),
+                          //       ),
+                          //       child: const Text("تعبئة طلب الانضمام",
+                          //           style: TextStyle(
+                          //             color: Colors.white,
+                          //             fontFamily: "DroidKufi",
+                          //             fontSize: 17.0,
+                          //           )),
+                          //     ),
+                          //   ),
+                          // ),
                           Spacer(),
                         ],
                       ),

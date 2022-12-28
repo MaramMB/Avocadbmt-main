@@ -590,7 +590,7 @@ getUserData();
                                                                    ],
                                                                  ),),
                                                              ),
-                                                             SizedBox(height: 20,),
+                                                             SizedBox(height: 15,),
                                                              Text('اضافة تدريب لطالب معين :',style: TextStyle(
                                                                fontFamily: "DroidKufi",
                                                                fontSize: 13,
@@ -1254,7 +1254,7 @@ getUserData();
                                                                     ],
                                                                   ),),
                                                               ),
-                                                              SizedBox(height: 20,),
+                                                              SizedBox(height: 10,),
                                                               Text('اضافة تدريب لطالب معين :',style: TextStyle(
                                                                 fontFamily: "DroidKufi",
                                                                 fontSize: 13,

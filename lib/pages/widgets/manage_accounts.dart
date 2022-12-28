@@ -94,11 +94,11 @@ class _managepageState extends State<managepage> {
                  Directionality(
                    textDirection: TextDirection.ltr,
                    child: Padding(
-                     padding: const EdgeInsets.all(15.0),
+                     padding: const EdgeInsets.all(2.0),
                      child: Row(
                        children: [
                          Padding(
-                           padding: const EdgeInsets.only(top: 5,bottom: 5,left: 5),
+                           padding: const EdgeInsets.only(left: 5),
                            child: OutlinedButton(
                              style: ButtonStyle(
 
@@ -124,7 +124,7 @@ class _managepageState extends State<managepage> {
                            ),
                          ),
                          Padding(
-                           padding: const EdgeInsets.only(top: 5,bottom: 5,left: 5),
+                           padding: const EdgeInsets.only(left: 5),
                            child: OutlinedButton(
                              style: ButtonStyle(
 
@@ -177,7 +177,7 @@ class _managepageState extends State<managepage> {
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 6,
+                                  horizontal: 1,
                                   // vertical: 20
                                 ),
                               ),
@@ -189,9 +189,9 @@ class _managepageState extends State<managepage> {
                      ),
                    ),
                  ),
-                const SizedBox(
-                  height: 2 ,
-                ),
+                // const SizedBox(
+                //   height: 2 ,
+                // ),
                 buildTable(context),
               ]),
             ),
@@ -204,7 +204,7 @@ class _managepageState extends State<managepage> {
   // this container contains the person list and search bar and buttons
   Container buildTable(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.1,
+      height: MediaQuery.of(context).size.height / 1.12,
       width: MediaQuery.of(context).size.width / 1.8,
       decoration: const BoxDecoration(
         color: Colors.white,

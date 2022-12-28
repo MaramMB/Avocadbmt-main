@@ -55,7 +55,7 @@ class _SocieitesState extends State<Socieites> {
         backgroundColor: backgreen,
 
         body: Container(
-          
+
           child: Stack(
             children: [
               Row(
@@ -106,7 +106,7 @@ class _SocieitesState extends State<Socieites> {
                       child: const Text(
                         "تعديل التدريبات",
                         style: TextStyle(
-                            color: Colors.white, fontFamily: "DroidKufi"),
+                            color: Colors.black, fontFamily: "DroidKufi"),
                       ),
                     ),
                   ),
@@ -135,7 +135,7 @@ class _SocieitesState extends State<Socieites> {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Container(
-        height: MediaQuery.of(context).size.height / 1.1,
+        height: MediaQuery.of(context).size.height / 1.12,
         width: MediaQuery.of(context).size.width / 1.8,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -154,7 +154,7 @@ class _SocieitesState extends State<Socieites> {
                         fontWeight: FontWeight.w700)),
                 const Text(
                   'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
-                  ' من مولد النص العربي.',
+                      ' من مولد النص العربي.',
                   style: TextStyle(
                       fontFamily: "DroidKufi",
                       fontSize: 12,
@@ -224,7 +224,7 @@ class _SocieitesState extends State<Socieites> {
                                 builder: (BuildContext context,
                                     AsyncSnapshot snapshot) {
                                   if (snapshot.connectionState ==
-                                          ConnectionState.waiting ||
+                                      ConnectionState.waiting ||
                                       !snapshot.hasData) {
                                     return Container(
                                       width: double.infinity,
@@ -243,34 +243,34 @@ class _SocieitesState extends State<Socieites> {
                                         itemCount: Customers.length,
                                         shrinkWrap: true,
                                         physics:
-                                            const AlwaysScrollableScrollPhysics(),
+                                        const AlwaysScrollableScrollPhysics(),
                                         itemBuilder: (context, index) {
                                           return PersonRecord(
                                             ID: Customers[index]["id"],
                                             person: Person(
                                               name: Customers[index]
-                                                  ["Society_Name"],
+                                              ["Society_Name"],
                                               id: Customers[index]["Society_Id"],
                                               gender: Gender.male,
                                               address: Customers[index]
-                                                  ["Society_Address"],
+                                              ["Society_Address"],
                                               phoneNumber: Customers[index]
-                                                  ["Society_Phone"],
+                                              ["Society_Phone"],
                                               type: AccountType.manager,
                                               date: _remainingDays(
                                                   Customers[index]
-                                                      ["Participation_Date"]),
+                                                  ["Participation_Date"]),
                                               email: Customers[index]["Email"],
                                               managerName: Customers[index]
-                                                  ["Society_Manager"],
+                                              ["Society_Manager"],
                                               password: Customers[index]
-                                                  ["Password"],
+                                              ["Password"],
                                               familyname: '',
                                               image: Customers[index]["image"],
                                             ),
                                             isActive: Customers[index]
-                                                        ["active"] ==
-                                                    "active"
+                                            ["active"] ==
+                                                "active"
                                                 ? true
                                                 : false,
                                           );
@@ -292,7 +292,7 @@ class _SocieitesState extends State<Socieites> {
                                 },
                               )),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 8),
                         ElevatedButton(
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all(
@@ -304,7 +304,7 @@ class _SocieitesState extends State<Socieites> {
                                 const EdgeInsets.only(
                                     top: 8, right: 18, left: 20)),
                             backgroundColor:
-                                MaterialStateProperty.all(Colors.green),
+                            MaterialStateProperty.all(Colors.green),
                           ),
                           onPressed: () {
                             Navigator.of(context).push(

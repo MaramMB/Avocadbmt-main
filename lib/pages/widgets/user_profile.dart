@@ -51,11 +51,11 @@ class UserProfile extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 15,
-                ),
+                // const SizedBox(
+                //   height: 15,
+                // ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -71,11 +71,11 @@ class UserProfile extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
                 Container(
-                  height: MediaQuery.of(context).size.height / 1.1,
+                  height: MediaQuery.of(context).size.height / 1.2,
                   width: MediaQuery.of(context).size.width / 1.8,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -94,13 +94,13 @@ class UserProfile extends StatelessWidget {
                                       fontFamily: "DroidKufi",
                                       fontWeight: FontWeight.w700))),
                           const SizedBox(
-                            height: 30,
+                            height: 15,
                           ),
                           person.type == AccountType.manager
                               ? _societyFormat
                               : _teacherFormat,
                           const SizedBox(
-                            height: 180,
+                            height: 40,
                           ),
 
                           Align(

@@ -150,23 +150,23 @@ class _mainpageState extends State<mainpage> {
                               "وهي تدريبات لتحسين حركة الفم والوجه والتي بدورها تساعد على نطق الحروف\nتكون هذه التدريبات على شكل مجموعة من الفيديوهات يقوم الطفل بتقليدها",
                               style: TextStyle(fontFamily: "DroidKufi")),
                         ),
-                        FadeIn(
-                          child: const Text("التدريبات الصوتية",
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 20,
-                                  fontFamily: "DroidKufi",
-                                  fontWeight: FontWeight.w700)),
-                        ),
-                        FadeIn(
-                          duration: Duration(milliseconds: 800),
-                          child: const Text(
-                              textDirection: TextDirection.rtl,
-                              "يتعرف الطفل على العديد من الاصوات مقسمة الى قسمين الاصوات البيئية\n والاصوات الاستيعابية ثم يقوم المعلم أو ولي الامر بعمل اختبار للطفل ",
-                              style: TextStyle(fontFamily: "DroidKufi")),
-                        ),
+                        // FadeIn(
+                        //   child: const Text("التدريبات الصوتية",
+                        //       style: TextStyle(
+                        //           color: Colors.green,
+                        //           fontSize: 20,
+                        //           fontFamily: "DroidKufi",
+                        //           fontWeight: FontWeight.w700)),
+                        // ),
+                        // FadeIn(
+                        //   duration: Duration(milliseconds: 800),
+                        //   child: const Text(
+                        //       textDirection: TextDirection.rtl,
+                        //       "يتعرف الطفل على العديد من الاصوات مقسمة الى قسمين الاصوات البيئية\n والاصوات الاستيعابية ثم يقوم المعلم أو ولي الامر بعمل اختبار للطفل ",
+                        //       style: TextStyle(fontFamily: "DroidKufi")),
+                        // ),
                         const SizedBox(
-                          height: 10,
+                          height: 60,
                         ),
                         Visibility(
                           visible: showbtn(),

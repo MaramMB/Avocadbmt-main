@@ -315,7 +315,7 @@ class _EeditState extends State<Eedit> {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Container(
-        height: MediaQuery.of(context).size.height / 1.1,
+        height: MediaQuery.of(context).size.height / 1.12,
         width: MediaQuery.of(context).size.width / 1.8,
         decoration: const BoxDecoration(
           color: Colors.white,
