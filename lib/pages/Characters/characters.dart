@@ -18,7 +18,8 @@ int _value = 0;
 int countr = 0;
 bool _loading = false;
 double _progressValue = 0;
-
+String l="";
+String b="";
 class sptest extends StatefulWidget {
   const sptest({Key? key, required this.person, required this.id}) : super(key: key);
   final Person person;
@@ -511,6 +512,7 @@ class _sptestState extends State<sptest> {
   var errors = [];
   var laterrors = [];
   var truee = [];
+  var placeerror = [];
   bool active = true;
   void addresult() async {
 
@@ -764,10 +766,9 @@ class _sptestState extends State<sptest> {
                                                         setState(() {
                                                           _value=0;
                                                           truee.add(1);
-                                                          _loading =
-                                                              !_loading;
+                                                          _loading = !_loading;
                                                           index++;
-
+                                                          l="";
                                                           _updateProgress();
                                                         });
                                                       }
@@ -781,34 +782,44 @@ class _sptestState extends State<sptest> {
                                                 IconButton(
                                                     onPressed: () {
                                                       if (index == 83) {
-                                                        // errors.add(later[index]+" حرف ال "+place[index]+" في ");
                                                         setState(() {
                                                           active = false;
-                                                          if(errors[0]==" حرف ال "+later[0]+" في ال"+place[0]&&errors[1]==" حرف ال "+later[1]+" في ال"+place[1]&&errors[2]==" حرف ال "+later[2]+" في ال"+place[2])
-                                                          {
-                                                            laterrors.add(" حرف ال "+later[0]);
-                                                          }
-                                                          else if(errors[3]==" حرف ال "+later[3]+" في ال"+place[3]&&errors[4]==" حرف ال "+later[4]+" في ال"+place[4]&&errors[5]==" حرف ال "+later[5]+" في ال"+place[5])
-                                                          {
-                                                            laterrors.add(" حرف ال "+later[1]);
-                                                          }
                                                         });
                                                         myDiealog();
                                                       } else {
                                                         setState(() {
                                                           _value=1;
-                                                          errors.add(" حرف ال "+later[index]+" في ال"+place[index]);
+                                                          laterrors.add(later[index]);
+                                                          placeerror.add(place[index]);
+                                                          l+=later[index];
+                                                          b+=place[index];
+
+                                                          if(l==later[index]+later[index]+later[index])
+                                                          {
+                                                            errors.add(" حرف ال "+later[index]);
+                                                            adderror();
+                                                            print(l);
+                                                           l="";
+                                                          }
+                                                          // if(b=="بدايةبدايةبدايةبدايةبدايةبدايةبداية")
+                                                          // {
+                                                          //   errors.add(" ال "+place[0]);
+                                                          //  b="";
+                                                          // }
+                                                          if(index!=0){
+                                                          if(l.length==3){
+                                                            print(l);
+                                                            l="";
+                                                          }}
+                                                            print(l);
                                                           _loading = !_loading;
                                                           index++;
-                                                          // if(errors[0]==" حرف ال "+later[0]+" في ال"+place[0])
                                                           _updateProgress();
                                                         });
-
                                                       }
                                                     },
                                                     iconSize: 82,
-                                                    icon: Image.asset(
-                                                        "img/bcross.png")),
+                                                    icon: Image.asset("img/bcross.png")),
                                               ],
                                             ),
                                           ],
@@ -832,7 +843,6 @@ class _sptestState extends State<sptest> {
       ),
     );
   }
-
   myDiealog() {
     return showDialog(
       context: context,
@@ -853,7 +863,6 @@ class _sptestState extends State<sptest> {
                       fontFamily: "DroidKufi",
                       fontSize: 24.0,
                       fontWeight: FontWeight.w600,
-
                     ),
                   ),
                   SizedBox(height: 10),
@@ -864,7 +873,6 @@ class _sptestState extends State<sptest> {
                         fontFamily: "DroidKufi",
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600,
-
                       )
                   ),
                   SizedBox(
@@ -877,7 +885,6 @@ class _sptestState extends State<sptest> {
                       fontFamily: "DroidKufi",
                       fontSize: 18.0,
                       fontWeight: FontWeight.w900,
-
                     ),
                   ),
                   SizedBox(
@@ -900,7 +907,6 @@ class _sptestState extends State<sptest> {
                                 fontFamily: "DroidKufi",
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w600,
-
                               )
                               ),
                             );
@@ -930,7 +936,6 @@ class _sptestState extends State<sptest> {
                                 fontFamily: "DroidKufi",
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w600,
-
                               )
                           ),
                         ),
@@ -944,7 +949,6 @@ class _sptestState extends State<sptest> {
       },
     );
   }
-
   void downloadData() {
     Timer.periodic(Duration(seconds: 1), (Timer timer) {
       setState(() {
@@ -956,7 +960,6 @@ class _sptestState extends State<sptest> {
       });
     });
   }
-
   void _updateProgress() {
     const oneSec = const Duration(seconds: 1);
     Timer.periodic(oneSec, (Timer t) {
@@ -980,15 +983,17 @@ class _sptestState extends State<sptest> {
       'note': errors.toString(),
       'testid' :'1',
     });
-    // var data = jsonDecode(response.body);
-    // print(data);
-  //   if (data == 'Success') {
-  //     // Navigator.of(context, rootNavigator: true).pop();
       Fluttertoast.showToast(msg: "تم اضافه بنجاح", timeInSecForIosWeb: 1);
-  //   }
-  //   else{ Fluttertoast.showToast(
-  //           msg: "لم يتم الاضافه بنجاح", timeInSecForIosWeb: 1);
-  // }
+      }
+      adderror() async {
+    var url = 'http://localhost/adderror.php';
+    final response = await http.post(Uri.parse(url), body: {
+      'stuid': (widget.person.id).toString(),
+      'id': index/3,
+      'let': laterrors.toString(),
+      'problem' :'1',
+    });
+      Fluttertoast.showToast(msg: "تم اضافه", timeInSecForIosWeb: 1);
       }
     }
 
