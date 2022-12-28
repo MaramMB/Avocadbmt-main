@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/Account_Managment/Add_Account/add_society.dart';
+import 'package:flutter_application_1/pages/EditExercises.dart';
 import 'package:flutter_application_1/pages/rowbar.dart';
 import 'package:flutter_application_1/pages/testlogin.dart';
 import 'package:flutter_application_1/scroll.dart';
@@ -57,31 +58,62 @@ class _SocieitesState extends State<Socieites> {
           
           child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 10,bottom: 35,right: 15.0),
-                child: OutlinedButton(
-                  style: ButtonStyle(
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10,bottom: 35,right: 15.0),
+                    child: OutlinedButton(
+                      style: ButtonStyle(
 
-                    backgroundColor:
-                    MaterialStateColor.resolveWith((states) => Colors.white),
-                    padding: MaterialStateProperty.all(
-                        const EdgeInsets.only(left: 22.0, right: 22.0,top: 10,bottom: 10)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
+                        backgroundColor:
+                        MaterialStateColor.resolveWith((states) => Colors.white),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.only(left: 22.0, right: 22.0,top: 10,bottom: 10)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return  scrollhome();
+                        }));
+                      },
+                      child: const Text(
+                        "تسـجـيـل الخـروج",
+                        style: TextStyle(
+                            color: Colors.black, fontFamily: "DroidKufi"),
+                      ),
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return  scrollhome();
-                    }));
-                  },
-                  child: const Text(
-                    "تسـجـيـل الخـروج",
-                    style: TextStyle(
-                        color: Colors.black, fontFamily: "DroidKufi"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10,bottom: 35,right: 15.0),
+                    child: OutlinedButton(
+                      style: ButtonStyle(
+
+                        backgroundColor:
+                        MaterialStateColor.resolveWith((states) => Colors.white),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.only(left: 22.0, right: 22.0,top: 10,bottom: 10)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return  Eedit();
+                        }));
+                      },
+                      child: const Text(
+                        "تعديل التدريبات",
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: "DroidKufi"),
+                      ),
+                    ),
                   ),
-                ),
+
+                ],
               ),
+
               Center(
                 child: Column(children: [
                   // const SelectionButton(),
@@ -99,199 +131,202 @@ class _SocieitesState extends State<Socieites> {
   }
 
   // this container contains the person list and search bar and buttons
-  Container buildTable(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 1.1,
-      width: MediaQuery.of(context).size.width / 1.8,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(25)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(right: 25.0, top: 10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Text('اداره الجمعيات',
+  Widget buildTable(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Container(
+        height: MediaQuery.of(context).size.height / 1.1,
+        width: MediaQuery.of(context).size.width / 1.8,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(25)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 25.0, top: 10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Text('اداره الجمعيات',
+                    style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 25,
+                        fontFamily: "DroidKufi",
+                        fontWeight: FontWeight.w700)),
+                const Text(
+                  'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
+                  ' من مولد النص العربي.',
                   style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 25,
                       fontFamily: "DroidKufi",
-                      fontWeight: FontWeight.w700)),
-              const Text(
-                'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة,لقد تم توليد هذا النص'
-                ' من مولد النص العربي.',
-                style: TextStyle(
-                    fontFamily: "DroidKufi",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
-              ),
-              Center(
-                child: Container(
-                  // color: Colors.black38,
-                  height: MediaQuery.of(context).size.height/1.28,
-                  width: MediaQuery.of(context).size.width/2.2,
-                  padding: const EdgeInsets.all(18),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          const SizedBox(width: 6),
-                          Expanded(
-                            // flex: 1,
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                  right: 18, bottom: 2, top: 5, left: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(color: Colors.black38),
-                              ),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
+                Center(
+                  child: Container(
+                    // color: Colors.black38,
+                    height: MediaQuery.of(context).size.height/1.28,
+                    width: MediaQuery.of(context).size.width/2.2,
+                    padding: const EdgeInsets.all(18),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            const SizedBox(width: 6),
+                            Expanded(
+                              // flex: 1,
                               child: Container(
-                                height: 28,
-                                // width: MediaQuery.of(context).size.width/5,
-                                child: TextFormField(
-                                  onChanged: (value) {
-                                    if (searchBarController.text == "") {
-                                      setState(() {
-                                        search = false;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        search = true;
-                                      });
-                                    }
-                                  },
-                                  controller: searchBarController,
-                                  textAlign: TextAlign.right,
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'أدخل اسم الجمعية',
-                                    prefixIcon: Icon(Icons.search),
+                                padding: const EdgeInsets.only(
+                                    right: 18, bottom: 2, top: 5, left: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  border: Border.all(color: Colors.black38),
+                                ),
+                                child: Container(
+                                  height: 28,
+                                  // width: MediaQuery.of(context).size.width/5,
+                                  child: TextFormField(
+                                    onChanged: (value) {
+                                      if (searchBarController.text == "") {
+                                        setState(() {
+                                          search = false;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          search = true;
+                                        });
+                                      }
+                                    },
+                                    controller: searchBarController,
+                                    textAlign: TextAlign.right,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'أدخل اسم الجمعية',
+                                      prefixIcon: Icon(Icons.search),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      SingleChildScrollView(
-                        child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        SingleChildScrollView(
+                          child: Container(
+                              decoration: BoxDecoration(
                                 color: Colors.black12,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: Colors.black12,
+                                ),
                               ),
-                            ),
-                            height:MediaQuery.of(context).size.height/1.695,
-                            child: FutureBuilder(
-                              future: search ? searchSociey() : getSocieties(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot snapshot) {
-                                if (snapshot.connectionState ==
-                                        ConnectionState.waiting ||
-                                    !snapshot.hasData) {
-                                  return Container(
-                                    width: double.infinity,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.4,
-                                    child: const SpinKitPulse(
-                                      color: Colors.green,
-                                      size: 60,
-                                    ),
-                                  );
-                                } else {
-                                  if (snapshot.data != null) {
-                                    var Customers = snapshot.data;
-
-                                    return ListView.builder(
-                                      itemCount: Customers.length,
-                                      shrinkWrap: true,
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(),
-                                      itemBuilder: (context, index) {
-                                        return PersonRecord(
-                                          ID: Customers[index]["id"],
-                                          person: Person(
-                                            name: Customers[index]
-                                                ["Society_Name"],
-                                            id: Customers[index]["Society_Id"],
-                                            gender: Gender.male,
-                                            address: Customers[index]
-                                                ["Society_Address"],
-                                            phoneNumber: Customers[index]
-                                                ["Society_Phone"],
-                                            type: AccountType.manager,
-                                            date: _remainingDays(
-                                                Customers[index]
-                                                    ["Participation_Date"]),
-                                            email: Customers[index]["Email"],
-                                            managerName: Customers[index]
-                                                ["Society_Manager"],
-                                            password: Customers[index]
-                                                ["Password"],
-                                            familyname: '',
-                                            image: Customers[index]["image"],
-                                          ),
-                                          isActive: Customers[index]
-                                                      ["active"] ==
-                                                  "active"
-                                              ? true
-                                              : false,
-                                        );
-                                      },
+                              height:MediaQuery.of(context).size.height/1.695,
+                              child: FutureBuilder(
+                                future: search ? searchSociey() : getSocieties(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  if (snapshot.connectionState ==
+                                          ConnectionState.waiting ||
+                                      !snapshot.hasData) {
+                                    return Container(
+                                      width: double.infinity,
+                                      height: MediaQuery.of(context).size.height *
+                                          0.4,
+                                      child: const SpinKitPulse(
+                                        color: Colors.green,
+                                        size: 60,
+                                      ),
                                     );
                                   } else {
-                                    return const Center(
-                                        child: SizedBox(
-                                            height: 40,
-                                            width: 40,
-                                            child: Text(
-                                              'لا يوجد حساب بهذا الاسم',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontFamily: "DroidKufi",
-                                              ),)));
+                                    if (snapshot.data != null) {
+                                      var Customers = snapshot.data;
+
+                                      return ListView.builder(
+                                        itemCount: Customers.length,
+                                        shrinkWrap: true,
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          return PersonRecord(
+                                            ID: Customers[index]["id"],
+                                            person: Person(
+                                              name: Customers[index]
+                                                  ["Society_Name"],
+                                              id: Customers[index]["Society_Id"],
+                                              gender: Gender.male,
+                                              address: Customers[index]
+                                                  ["Society_Address"],
+                                              phoneNumber: Customers[index]
+                                                  ["Society_Phone"],
+                                              type: AccountType.manager,
+                                              date: _remainingDays(
+                                                  Customers[index]
+                                                      ["Participation_Date"]),
+                                              email: Customers[index]["Email"],
+                                              managerName: Customers[index]
+                                                  ["Society_Manager"],
+                                              password: Customers[index]
+                                                  ["Password"],
+                                              familyname: '',
+                                              image: Customers[index]["image"],
+                                            ),
+                                            isActive: Customers[index]
+                                                        ["active"] ==
+                                                    "active"
+                                                ? true
+                                                : false,
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      return const Center(
+                                          child: SizedBox(
+                                              height: 40,
+                                              width: 40,
+                                              child: Text(
+                                                'لا يوجد حساب بهذا الاسم',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontFamily: "DroidKufi",
+                                                ),)));
+                                    }
                                   }
-                                }
-                              },
-                            )),
-                      ),
-                      const SizedBox(height: 10),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                                },
+                              )),
+                        ),
+                        const SizedBox(height: 10),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.only(
+                                    top: 8, right: 18, left: 20)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.green),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (BuildContext ctx) {
+                                return const AddScociety();
+                              }),
+                            );
+                          },
+                          child: const Text(
+                            'اضافه جمعية',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: "DroidKufi",
                             ),
                           ),
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.only(
-                                  top: 8, right: 18, left: 20)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext ctx) {
-                              return const AddScociety();
-                            }),
-                          );
-                        },
-                        child: const Text(
-                          'اضافه جمعية',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: "DroidKufi",
-                          ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

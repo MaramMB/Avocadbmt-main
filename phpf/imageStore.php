@@ -13,6 +13,7 @@ $img = $_POST["imageByte"];
 $type = $_POST["type"];
 $tid = $_POST["tid"];
 $audio = $_POST["audio"];
+$sid = $_POST["sid"];
 $new='1';
 if($_POST['isAdd']=='yes'){
     $new='2';
@@ -30,8 +31,8 @@ if($return["error"] == false){
     //escape inverted comma query conflict from string
 
 
-    $sql="INSERT into sounds(word,image,imageByte,audio,type,newsound,tid)
-    values ('$word','tetest','$img','$audio','$type','$new','$tid')";
+    $sql="INSERT into sounds(word,image,imageByte,audio,type,newsound,tid,sid)
+    values ('$word','tetest','$img','$audio','$type','$new','$tid','$sid')";
 
     $res = mysqli_query($link, $sql);
     if($res){
